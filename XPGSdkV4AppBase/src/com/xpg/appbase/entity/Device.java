@@ -8,10 +8,6 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 public class Device implements Serializable {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 3804192377294303698L;
 
 	/** The is online. */
 	private boolean isOnline;
@@ -25,9 +21,6 @@ public class Device implements Serializable {
 	/** 设备名字. */
 	private String name;
 
-	/** 是否没有passcode. */
-	private boolean isNew;
-
 	/** 设备did. */
 	private String did;
 
@@ -37,6 +30,8 @@ public class Device implements Serializable {
 	/** 设备的passcode. */
 	private String passcode;
 
+	/** 设备的id */
+	private int device_id;
 
 	/**
 	 * Instantiates a new device.
@@ -66,11 +61,7 @@ public class Device implements Serializable {
 			this.ip = device.GetIPAddress();
 			this.passcode = device.GetPasscode();
 			Log.i("passcode", passcode);
-			if (passcode != null && !passcode.equals("")) {
-				this.isNew = false;
-			} else {
-				this.isNew = true;
-			}
+
 		}
 		this.name = device.GetProductName();
 	}
@@ -113,24 +104,6 @@ public class Device implements Serializable {
 		this.passcode = passcode;
 	}
 
-	/**
-	 * Checks if is new.
-	 * 
-	 * @return true, if is new
-	 */
-	public boolean isNew() {
-		return isNew;
-	}
-
-	/**
-	 * Sets the new.
-	 * 
-	 * @param isNew
-	 *            the new new
-	 */
-	public void setNew(boolean isNew) {
-		this.isNew = isNew;
-	}
 
 	/**
 	 * Gets the mac.
@@ -226,5 +199,15 @@ public class Device implements Serializable {
 	public void setProductKey(String productKey) {
 		this.productKey = productKey;
 	}
+
+	public int getDevice_id() {
+		return device_id;
+	}
+
+	public void setDevice_id(int device_id) {
+		this.device_id = device_id;
+	}
+
+
 
 }

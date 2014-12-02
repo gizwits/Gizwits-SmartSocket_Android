@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/etName"
+        style="@style/EditTextTheme"
+        android:hint="手机号" />
+
+    <Button
+        android:id="@+id/btnGetCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="获取验证码" />
+
+    <LinearLayout
+        android:id="@+id/llInputCode"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etInputCode"
+            style="@style/EditTextTheme"
+            android:layout_weight="1"
+            android:hint="验证码" />
+
+        <Button
+            android:id="@+id/btnReGetCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重新获取\n验证码" />
+    </LinearLayout>
+     <LinearLayout
+        android:id="@+id/llInputPsw"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etInputPsw"
+            style="@style/EditTextTheme"
+            android:layout_weight="1"
+            android:hint="密码" />
+
+        <ToggleButton
+            android:id="@+id/tbPswFlag"
+            android:textOn="密码可见"
+            android:textOff="隐藏密码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnSure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="确定" />
+     <TextView
+        android:id="@+id/tvPhoneSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:text="邮箱注册"
+        android:textSize="14sp" />
+
+</LinearLayout>

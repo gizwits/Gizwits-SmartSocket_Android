@@ -54,7 +54,7 @@ public class BaseDao {
 	}
 
 	/**
-	 * 把进行数据的解析
+	 * 进行数据的解析
 	 * @param object
 	 * @param newValues
 	 * @param except
