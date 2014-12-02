@@ -2,15 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     android:gravity="center"
     android:orientation="vertical" >
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:src="@drawable/logo"
+        android:layout_marginBottom="20dp"
+        />
+
     <EditText
+        android:drawableLeft="@drawable/login_icon_name"
         android:id="@+id/etName"
         style="@style/EditTextTheme"
         android:hint="手机／邮箱" />
 
     <EditText
+         android:drawableLeft="@drawable/login_icon_key"
         android:id="@+id/etPsw"
         style="@style/EditTextTheme"
         android:hint="密码" />
@@ -21,22 +31,26 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="10dp"
-        android:text="忘记密码"
+        android:drawableLeft="@drawable/login_icon_lock"
+        android:text="忘记密码?"
+        android:textColor="@android:color/background_light"
         android:textSize="14sp" />
 
     <Button
-        android:layout_marginTop="30dp"
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/login_button_green"
         android:text="登陆" />
 
     <Button
-        android:layout_marginTop="30dp"
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/login_button_white"
         android:text="我是新用户" />
 
 </LinearLayout>
