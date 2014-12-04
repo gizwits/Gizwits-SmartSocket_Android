@@ -20,12 +20,14 @@ import android.view.SurfaceView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.xpg.appbase.R;
+import com.xpg.appbase.activity.BaseActivity;
+import com.xpg.appbase.activity.device.DeviceListActivity;
 import com.xpg.zxing.camera.CameraManager;
 import com.xpg.zxing.decoding.CaptureActivityHandler;
 import com.xpg.zxing.decoding.InactivityTimer;
 import com.xpg.zxing.view.ViewfinderView;
 
-public class CaptureActivity extends Activity implements Callback {
+public class CaptureActivity extends BaseActivity implements Callback {
 
 	private CaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
@@ -51,7 +53,7 @@ public class CaptureActivity extends Activity implements Callback {
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
@@ -69,12 +71,11 @@ public class CaptureActivity extends Activity implements Callback {
 		if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
 			playBeep = false;
 		}
-		initBeepSound();
 		vibrate = true;
 	}
 
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 		if (handler != null) {
 			handler.quitSynchronously();
@@ -144,22 +145,19 @@ public class CaptureActivity extends Activity implements Callback {
 			
 			inactivityTimer.onActivity();
 			viewfinderView.drawResultBitmap(barcode);
-			playBeepSoundAndVibrate();
 			String product_key = getParamFomeUrl(text,"product_key");
 			String did= getParamFomeUrl(text, "did");
 			String passcode = getParamFomeUrl(text, "passcode");
 			Log.i("passcode product_key did", passcode + " " + product_key + " " + did);
-//			Intent it = new Intent();
-//			it.setClass(this, NewDeviceControlActivity.class);
+			Intent it = new Intent();
+//			it.setClass(this, DeviceListActivity.class);
 //			it.putExtra("passcode", passcode);
 //			it.putExtra("product_key", product_key);
 //			it.putExtra("did", did);
 //			startActivity(it);
+			//TODO 执行绑定
+			
 			finish();
-			
-			
-			
-			
 			
 		}else{
 			handler = new CaptureActivityHandler(this, decodeFormats,
@@ -182,50 +180,5 @@ public class CaptureActivity extends Activity implements Callback {
 		}
 		return product_key;
 	}
-
-	private void initBeepSound() {
-//		if (playBeep && mediaPlayer == null) {
-//			// The volume on STREAM_SYSTEM is not adjustable, and users found it
-//			// too loud,
-//			// so we now play on the music stream.
-//			setVolumeControlStream(AudioManager.STREAM_MUSIC);
-//			mediaPlayer = new MediaPlayer();
-//			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//			mediaPlayer.setOnCompletionListener(beepListener);
-//
-//			AssetFileDescriptor file = getResources().openRawResourceFd(
-//					R.raw.beep);
-//			try {
-//				mediaPlayer.setDataSource(file.getFileDescriptor(),
-//						file.getStartOffset(), file.getLength());
-//				file.close();
-//				mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
-//				mediaPlayer.prepare();
-//			} catch (IOException e) {
-//				mediaPlayer = null;
-//			}
-//		}
-	}
-
-	private static final long VIBRATE_DURATION = 200L;
-
-	private void playBeepSoundAndVibrate() {
-//		if (playBeep && mediaPlayer != null) {
-//			mediaPlayer.start();
-//		}
-		if (vibrate) {
-			Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-			vibrator.vibrate(VIBRATE_DURATION);
-		}
-	}
-
-	/**
-	 * When the beep has finished playing, rewind to queue up another one.
-	 */
-	private final OnCompletionListener beepListener = new OnCompletionListener() {
-		public void onCompletion(MediaPlayer mediaPlayer) {
-			mediaPlayer.seekTo(0);
-		}
-	};
 
 }
