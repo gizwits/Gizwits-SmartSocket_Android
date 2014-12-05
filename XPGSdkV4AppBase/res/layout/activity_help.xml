@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/top_layout"
+        layout="@layout/include_title" />
+
+    <Button
+        android:id="@+id/AppHelp"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="#FFFFFF"
+        android:drawableRight="@drawable/arrow_right_gray"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="APP使用帮助" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#969696" />
+
+    <Button
+        android:id="@+id/DeviceHelp"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="#FFFFFF"
+        android:drawableRight="@drawable/arrow_right_gray"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="设备使用帮助" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#969696" />
+
+</LinearLayout>

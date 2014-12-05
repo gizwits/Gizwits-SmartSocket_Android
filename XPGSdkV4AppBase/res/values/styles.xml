@@ -17,16 +17,30 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
-    <style name="EditTextTheme">
+    <style name="EditTextTheme" parent="NoMarginEditTextTheme">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    
+    <style name="NoMarginEditTextTheme">
         <item name="android:textSize">16sp</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
         <item name="android:background">@drawable/login_input_box</item>
     </style>
     
     <style name="TopLayout">
          <item name="android:layout_height">60dp</item>
+         <item name="android:layout_width">fill_parent</item>
+         <item name="android:background">@drawable/top_tall</item>
+         <item name="android:orientation">horizontal</item>
+        
+    </style>
+    
+    <style name="TopLayoutSmall">
+         <item name="android:layout_height">40dp</item>
          <item name="android:layout_width">fill_parent</item>
          <item name="android:background">@drawable/top_tall</item>
          <item name="android:orientation">horizontal</item>
@@ -41,9 +55,22 @@
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
     
+    <style name="ButtonGray">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/button_blue_long</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    
     <style name="noBackgroundDialog" parent="android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
+    </style>
+    
+    <style name="TextViewGray">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
     </style>
 
 </resources>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/top_layout"
+        layout="@layout/include_title" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="150dp"
+    	android:background="#EFEFEF"
+    	android:gravity="center_vertical"
+    	android:paddingLeft="20dp"
+    	android:orientation="vertical">
+        <TextView 
+        	android:id="@+id/initDate"
+        	style="@style/TextViewGray"
+    		android:textColor="#969696"
+    		android:text="生产日期XXXX.XX.XX"/>
+        <TextView 
+        android:id="@+id/initPlace"
+        	style="@style/TextViewGray"
+    		android:layout_marginTop="8dp"
+    		android:textColor="#969696"
+    		android:text="生产地点XXXXX"/>
+        <TextView 
+        	android:id="@+id/DeviceType"
+        	style="@style/TextViewGray"
+    		android:layout_marginTop="8dp"
+    		android:textColor="#969696"
+    		android:text="设备型号XXXXX"/>
+        <TextView 
+        	android:id="@+id/DeviceCode"
+        	style="@style/TextViewGray"
+    		android:layout_marginTop="8dp"
+    		android:textColor="#969696"
+    		android:text="设备序列号XXXXXXXXXXXXXXXX"/>
+    </LinearLayout>
+
+    <TextView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="14dp"
+        android:textSize="16dp"
+        android:textColor="#9A9A9A"
+    	android:text="名称"/>
+    
+    <EditText
+        android:id="@+id/etName"
+        style="@style/EditTextTheme"
+        android:layout_marginTop="4dp"
+        android:hint="设备名" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/btnDelDevice"
+            style="@style/ButtonBlue"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp"
+            android:text="删除设备" />
+    </RelativeLayout>
+
+</LinearLayout>

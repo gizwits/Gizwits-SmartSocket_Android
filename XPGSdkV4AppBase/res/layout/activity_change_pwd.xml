@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/top_layout"
+        layout="@layout/include_title" />
+
+    <EditText
+        android:id="@+id/etNum"
+        style="@style/EditTextTheme"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="0dp"
+        android:hint="手机号/邮箱" />
+
+    <LinearLayout
+        android:id="@+id/llInputPsw"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/login_input_box"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etInputPsw"
+            style="@style/EditTextTheme"
+            android:layout_weight="1"
+            android:layout_marginLeft="0dp"
+            android:background="@android:color/transparent"
+            android:hint="密码" />
+
+        <ToggleButton
+            android:id="@+id/tbPswFlag"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:background="@drawable/toggle_selector"
+            android:textOff=""
+            android:textOn="" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnConfirm"
+        style="@style/ButtonBlue"
+        android:layout_marginTop="10dp"
+        android:text="确定" />
+
+</LinearLayout>
