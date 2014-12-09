@@ -19,25 +19,25 @@
         	android:id="@+id/initDate"
         	style="@style/TextViewGray"
     		android:textColor="#969696"
-    		android:text="生产日期XXXX.XX.XX"/>
+    		android:text="生产日期：XXXX.XX.XX"/>
         <TextView 
         android:id="@+id/initPlace"
         	style="@style/TextViewGray"
     		android:layout_marginTop="8dp"
     		android:textColor="#969696"
-    		android:text="生产地点XXXXX"/>
+    		android:text="生产地点：XXXXX"/>
         <TextView 
         	android:id="@+id/DeviceType"
         	style="@style/TextViewGray"
     		android:layout_marginTop="8dp"
     		android:textColor="#969696"
-    		android:text="设备型号XXXXX"/>
+    		android:text="设备型号：XXXXX"/>
         <TextView 
         	android:id="@+id/DeviceCode"
         	style="@style/TextViewGray"
     		android:layout_marginTop="8dp"
     		android:textColor="#969696"
-    		android:text="设备序列号XXXXXXXXXXXXXXXX"/>
+    		android:text="设备序列号：XXXXXXXXXXXXXXXX"/>
     </LinearLayout>
 
     <TextView 

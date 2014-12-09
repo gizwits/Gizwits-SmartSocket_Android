@@ -11,6 +11,15 @@ import android.widget.ToggleButton;
 import com.xpg.appbase.R;
 import com.xpg.appbase.activity.BaseActivity;
 
+//TODO: Auto-generated Javadoc
+/**
+* 
+* ClassName: Class ForgetPswActivity. <br/>
+* 忘记密码<br/>
+* date: 2014-12-09 17:27:10 <br/>
+* 
+* @author StephenC
+*/
 public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	
 	/** The iv TopBar leftBtn. */

@@ -5,6 +5,15 @@ import android.os.Bundle;
 import com.xpg.appbase.R;
 import com.xpg.appbase.activity.BaseActivity;
 
+//TODO: Auto-generated Javadoc
+/**
+* 
+* ClassName: Class AboutActivity. <br/>
+* 关于<br/>
+* date: 2014-12-09 17:27:10 <br/>
+* 
+* @author StephenC
+*/
 public class AboutActivity extends BaseActivity {
 
 	@Override
