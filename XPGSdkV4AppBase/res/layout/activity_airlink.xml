@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        style="@style/TopLayout" >
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/return_icon" />
+
+        <ImageView
+            android:id="@+id/ivStep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/step1" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llStartConfig"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:src="@drawable/airlink_button" />
+
+        <TextView
+            android:id="@+id/tvTips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="请按下设备按键,灯闪即表示设备已进入配置模式,\n点击开始配置"
+            android:textColor="@color/text_blue"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnConfig"
+            style="@style/ButtonBlue"
+            android:text="开始配置" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llConfiging"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvConfiging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="设备连接中，请耐心等待."
+            android:textColor="@color/text_blue"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:indeterminateDrawable="@drawable/image_progress" />
+
+            <TextView
+                android:id="@+id/tvTick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29"
+                android:textColor="@color/text_black"
+                android:textSize="50sp" />
+        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/llConfigFailed"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="配置失败了，让我们看看哪里可能出了错："
+            android:textColor="@color/text_blue"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="1.设备是否正常运行？\n2.Wi-Fi网络是否连接顺畅？"
+            android:textColor="@color/text_black"
+            android:textSize="14sp" />
+  
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="请拔下设备电源，再重新接通电源，再点击重试"
+            android:textColor="@color/text_blue"
+            android:textSize="14sp" />
+
+        <Button
+            android:layout_marginTop="30dp"
+            android:id="@+id/btnRetry"
+            style="@style/ButtonBlue"
+            android:text="已经重新拔插电源了，我要重试" />
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/btnSoftap"
+            style="@style/ButtonBlue"
+            android:text="手动配置" />
+    </LinearLayout>
+
+</LinearLayout>
