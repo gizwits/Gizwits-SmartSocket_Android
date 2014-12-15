@@ -27,10 +27,6 @@ public class SettingManager {
 	private final String USER_NAME = "username";
 	// 手机号码
 	private final String PHONE_NUM = "phonenumber";
-	// 匿名登录用户名
-	private final String HIDE_UID = "hideuid";
-	// 匿名登录密码
-	private final String HIDE_TOKEN = "hidetoken";
 	// 密码
 	private final String PASSWORD = "password";
 	//用户名
@@ -99,8 +95,6 @@ public class SettingManager {
 	 *
 	 * */
 	public void clean() {
-		setHideToken("");
-		setHideUid("");
 		setUid("");
 		setToken("");
 		setPhoneNumber("");
@@ -125,21 +119,6 @@ public class SettingManager {
 		return spf.getString(PHONE_NUM, "");
 	}
 
-	public void setHideUid(String uid) {
-		spf.edit().putString(HIDE_UID, uid).commit();
-	}
-
-	public String getHideUid() {
-		return spf.getString(HIDE_UID, "");
-	}
-
-	public void setHideToken(String token) {
-		spf.edit().putString(HIDE_TOKEN, token).commit();
-	}
-
-	public String getHideToken() {
-		return spf.getString(HIDE_TOKEN, "");
-	}
 
 	public void setPassword(String psw) {
 		spf.edit().putString(PASSWORD, psw).commit();

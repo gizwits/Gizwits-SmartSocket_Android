@@ -158,14 +158,17 @@ public final class R {
         public static final int activity_login=0x7f030009;
         public static final int activity_register=0x7f03000a;
         public static final int activity_searchdevice=0x7f03000b;
-        public static final int dialog_no_network=0x7f03000c;
-        public static final int include_title=0x7f03000d;
-        public static final int search_list_item=0x7f03000e;
-        public static final int update_user=0x7f03000f;
-        public static final int zxing_layout=0x7f030010;
+        public static final int activity_softap=0x7f03000c;
+        public static final int dialog_no_network=0x7f03000d;
+        public static final int include_title=0x7f03000e;
+        public static final int search_list_item=0x7f03000f;
+        public static final int update_user=0x7f030010;
+        public static final int zxing_layout=0x7f030011;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
+        public static final int wifi_first=0x7f060001;
+        public static final int wifi_name=0x7f060002;
     }
     public static final class style {
         /** 

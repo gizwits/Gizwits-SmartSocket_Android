@@ -1,29 +1,46 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:XpgApplication.java
+ * Package Name:com.xpg.appbase
+ * Date:2014-12-15 14:17:52
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.xpg.appbase;
 
 import android.app.Application;
 
 import com.xpg.appbase.config.Configs;
-import com.xtremeprog.xpgconnect.XPGWifiConfig;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;
 
+// TODO: Auto-generated Javadoc
+/**
+ *  
+ * ClassName: Class XpgApplication. <br/> 
+ * <br/>
+ * date: 2014-12-15 14:17:52 <br/> 
+ *
+ * @author Lien
+ */
 public class XpgApplication extends Application {
+	
+	/* (non-Javadoc)
+	 * @see android.app.Application#onCreate()
+	 */
 	public void onCreate() {
 		super.onCreate();
-		// 设定AppID，参数为机智云官网中查看产品信息得到的AppID
-		XPGWifiConfig.sharedInstance().SetAppID(Configs.APPID);
-		// 设定是否为debug版本
-		XPGWifiConfig.sharedInstance().SetDebug(Configs.DEBUG);
-		// 设置设备json下载路径（该路径必须存在，开发者自行创建文件夹,最好是手机内存）,sdk根据下载的json文件解析出相关的设备描述等信息
-		XPGWifiConfig.sharedInstance().SetProductPath(
-				this.getFilesDir() + Configs.PRODUCT_PATH);
-		// 指定该app对应设备的product_key，如果设定了过滤，会过滤出该peoduct_key对应的设备
-		XPGWifiConfig.sharedInstance().RegisterProductKey(Configs.PRODUCT_KEY);
-		// 是否过滤指定 PRODUCT_KEY 的设备，NO 表示不过滤，会列出所有发现到的设备
-		XPGWifiConfig.sharedInstance().EnableProductFilter(
-				Configs.PRODUCT_FILTER);
-		// 设定日志打印级别
-		XPGWifiSDK.SetLogLevel(Configs.LOG_LEVEL);
-		// 设定是否在后台输出收发包二进制数据
-		XPGWifiSDK.SetPrintDataLevel(Configs.DEBUG);
+		
+		XPGWifiSDK.sharedInstance().startWithAppID(getApplicationContext(), Configs.APPID);
+		
+		XPGWifiSDK.sharedInstance().setLogLevel(Configs.LOG_LEVEL,null, true);
 	}
 }

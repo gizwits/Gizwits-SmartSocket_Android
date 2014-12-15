@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:CmdCenter.java
+ * Package Name:com.xpg.appbase.sdk
+ * Date:2014-12-15 12:09:02
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.xpg.appbase.sdk;
 
 import org.json.JSONException;
@@ -5,20 +22,50 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.xpg.appbase.config.Configs;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;
+import com.xtremeprog.xpgconnect.XPGWifiSDK.XPGWifiConfigureMode;
 
+// TODO: Auto-generated Javadoc
+/**
+ * 
+ * ClassName: Class CmdCenter. <br/>
+ * <br/>
+ * date: 2014-12-15 12:09:02 <br/>
+ * 
+ * @author Lien
+ */
 public class CmdCenter {
-	private static XPGWifiSDK xpgWifiGCC;
+
+	/** The xpg wifi sdk. */
+	private static XPGWifiSDK xpgWifiSdk;
+
+	/** The m center. */
 	private static CmdCenter mCenter;
+
+	/** The m setting manager. */
 	private SettingManager mSettingManager;
 
+	/**
+	 * Instantiates a new cmd center.
+	 * 
+	 * @param c
+	 *            the c
+	 */
 	private CmdCenter(Context c) {
 		if (mCenter == null) {
 			init(c);
 		}
 	}
 
+	/**
+	 * Gets the single instance of CmdCenter.
+	 * 
+	 * @param c
+	 *            the c
+	 * @return single instance of CmdCenter
+	 */
 	public static CmdCenter getInstance(Context c) {
 		if (mCenter == null) {
 			mCenter = new CmdCenter(c);
@@ -26,10 +73,16 @@ public class CmdCenter {
 		return mCenter;
 	}
 
+	/**
+	 * Inits the.
+	 * 
+	 * @param c
+	 *            the c
+	 */
 	private void init(Context c) {
 		mSettingManager = new SettingManager(c);
 
-		xpgWifiGCC = XPGWifiSDK.sharedInstance();
+		xpgWifiSdk = XPGWifiSDK.sharedInstance();
 
 	}
 
@@ -39,7 +92,7 @@ public class CmdCenter {
 	 * @return the XPG wifi sdk
 	 */
 	public XPGWifiSDK getXPGWifiSDK() {
-		return xpgWifiGCC;
+		return xpgWifiSdk;
 	}
 
 	// =================================================================
@@ -58,7 +111,7 @@ public class CmdCenter {
 	 *            注册密码
 	 */
 	public void cRegisterPhoneUser(String phone, String code, String password) {
-		xpgWifiGCC.RegisterPhoneUser(phone, password, code);
+		xpgWifiSdk.registerUserByPhoneAndCode(phone, password, code);
 	}
 
 	/**
@@ -66,16 +119,15 @@ public class CmdCenter {
 	 * <P>
 	 * 如果一开始不需要直接注册账号，则需要进行匿名登录.
 	 */
-	public void cRegisterAnonymousUser() {
-		xpgWifiGCC.RegisterAnonymousUser(mSettingManager.getPhoneId());
+	public void cLoginAnonymousUser() {
+		xpgWifiSdk.userLoginAnonymous();
 	}
 
 	/**
 	 * 账号注销.
 	 */
 	public void cLogout() {
-		xpgWifiGCC.UserLogout(mSettingManager.getUid());
-		xpgWifiGCC.UserLogout(mSettingManager.getHideUid());
+		xpgWifiSdk.userLogout(mSettingManager.getUid());
 		mSettingManager.clean();
 	}
 
@@ -88,7 +140,7 @@ public class CmdCenter {
 	 *            密码
 	 */
 	public void cLogin(String name, String psw) {
-		xpgWifiGCC.UserLogin(name, psw);
+		xpgWifiSdk.userLoginWithUserName(name, psw);
 	}
 
 	/**
@@ -98,12 +150,12 @@ public class CmdCenter {
 	 *            手机号
 	 * @param code
 	 *            验证码
-	 * @param password
-	 *            密码
+	 * @param newPassword
+	 *            the new password
 	 */
 	public void cChangeUserPasswordWithCode(String phone, String code,
-			String password) {
-		xpgWifiGCC.changeUserPasswordWithCode(phone, code, password);
+			String newPassword) {
+		xpgWifiSdk.changeUserPasswordByCode(phone, code, newPassword);
 	}
 
 	/**
@@ -113,7 +165,7 @@ public class CmdCenter {
 	 *            手机号
 	 */
 	public void cRequestSendVerifyCode(String phone) {
-		xpgWifiGCC.RequestSendVerifyCode(phone);
+		xpgWifiSdk.requestSendVerifyCode(phone);
 	}
 
 	/**
@@ -125,26 +177,8 @@ public class CmdCenter {
 	 *            wifi密码
 	 */
 	public void cSetAirLink(String wifi, String password) {
-		xpgWifiGCC.SetAirLink(wifi, password);
-	}
-
-	/**
-	 * 设置SSID.
-	 * 
-	 * @param ssid
-	 *            the ssid
-	 * @param psw
-	 *            the psw
-	 */
-	public void cSetSSID(String ssid, String psw) {
-		xpgWifiGCC.SetSSID(ssid, psw);
-	}
-
-	/**
-	 * 发送发现设备广播
-	 * */
-	public void cDiscoverDevice() {
-		xpgWifiGCC.DiscoverDevices();
+		xpgWifiSdk.setDeviceWifi(wifi, password,
+				XPGWifiConfigureMode.XPGWifiConfigureModeAirLink, 60);
 	}
 
 	/**
@@ -156,7 +190,7 @@ public class CmdCenter {
 	 *            密码
 	 */
 	public void cGetBoundDevices(String uid, String token) {
-		xpgWifiGCC.GetBoundDevices(uid, token);
+		xpgWifiSdk.getBoundDevices(uid, token, Configs.PRODUCT_KEY);
 	}
 
 	/**
@@ -170,10 +204,12 @@ public class CmdCenter {
 	 *            did
 	 * @param passcode
 	 *            passcode
+	 * @param remark
+	 *            备注
 	 */
 	public void cBindDevice(String uid, String token, String did,
-			String passcode) {
-		xpgWifiGCC.BindDevice(uid, token, did, passcode);
+			String passcode, String remark) {
+		xpgWifiSdk.bindDevice(uid, token, did, passcode, remark);
 	}
 
 	// =================================================================
@@ -215,33 +251,24 @@ public class CmdCenter {
 	 *            the xpg wifi device
 	 */
 	public void cDisconnect(XPGWifiDevice xpgWifiDevice) {
-		xpgWifiDevice.Disconnect();
-	}
-
-	/**
-	 * 获取Passcode.
-	 * 
-	 * @param xpgWifiDevice
-	 *            the xpg wifi device
-	 * @return the string
-	 */
-	public String cGetPasscode(XPGWifiDevice xpgWifiDevice) {
-		return xpgWifiDevice.GetPasscode();
+		xpgWifiDevice.disconnect();
 	}
 
 	/**
 	 * 解除绑定.
 	 * 
-	 * @param xpgWifiDevice
-	 *            the xpg wifi device
 	 * @param uid
 	 *            the uid
 	 * @param token
 	 *            the token
+	 * @param did
+	 *            the did
+	 * @param passCode
+	 *            the pass code
 	 */
-	public void cUnbindDevice(XPGWifiDevice xpgWifiDevice, String uid,
-			String token) {
-		xpgWifiDevice.UnbindDevice(uid, token);
+	public void cUnbindDevice(String uid, String token, String did,
+			String passCode) {
+		xpgWifiSdk.unbindDevice(uid, token, did, passCode);
 	}
 
 }

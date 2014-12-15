@@ -190,15 +190,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.xpg.appbase.activity.BaseActivity#onUserLogin(int,
-	 * java.lang.String, java.lang.String, java.lang.String)
-	 */
+	
 	@Override
-	protected void onUserLogin(int error, String errorMessage, String uid,
+	protected void didUserLogin(int error, String errorMessage, String uid,
 			String token) {
 		if (!uid.isEmpty() && !token.isEmpty()) {// 登陆成功
 			setmanager.setUserName(etName.getText().toString().trim());
@@ -213,5 +207,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			handler.sendMessage(msg);
 		}
 	}
+
 
 }

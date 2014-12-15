@@ -18,6 +18,7 @@
 package com.xpg.appbase.activity.onboarding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -43,12 +44,12 @@ import android.widget.TextView;
 import com.xpg.appbase.R;
 import com.xpg.appbase.activity.BaseActivity;
 import com.xpg.appbase.adapter.SearchListAdapter;
+import com.xpg.appbase.sdk.SettingManager;
 import com.xpg.appbase.utils.DialogManager;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.NetworkUtils;
 import com.xpg.zxing.CaptureActivity;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
-import com.xtremeprog.xpgconnect.XPGWifiDeviceList;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -157,7 +158,7 @@ public class SearchDeviceActivity extends BaseActivity implements
 	@Override
 	public void onResume() {
 		loadingDialog.show();
-		mCenter.cDiscoverDevice();
+		mCenter.cGetBoundDevices(setmanager.getUid(), setmanager.getToken());
 		handler.sendEmptyMessageDelayed(handler_key.FOUND_FINISH.ordinal(),
 				5000);
 		IntentFilter filter = new IntentFilter();
@@ -187,11 +188,11 @@ public class SearchDeviceActivity extends BaseActivity implements
 		lvDevices.setAdapter(adapter);
 		noNetworkDialog = DialogManager.getNoNetworkDialog(this);
 		noNetworkDialog.setOnCancelListener(new OnCancelListener() {
-			
+
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				isWaitingWifi = false;
-				
+
 			}
 		});
 	}
@@ -234,22 +235,13 @@ public class SearchDeviceActivity extends BaseActivity implements
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.xpg.appbase.activity.BaseActivity#onDiscovered(int,
-	 * com.xtremeprog.xpgconnect.XPGWifiDeviceList)
-	 */
 	@Override
-	protected void onDiscovered(int result, XPGWifiDeviceList devices) {
+	protected void didDiscovered(int error, List<XPGWifiDevice> devicesList) {
 		deviceList = new ArrayList<XPGWifiDevice>();
-		if (devices.GetCount() > 0) {
-			for (int i = 0; i < devices.GetCount(); i++) {
-				deviceslist.add(devices.GetItem(i));
-			}
+		if (devicesList.size() > 0) {
+			deviceList.addAll(devicesList);
 			handler.sendEmptyMessage(handler_key.FOUND_SUCCESS.ordinal());
 		}
-
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 <resources>
 
     <string name="app_name">XPGSdkV4AppBase</string>
+    <string name="wifi_first">请先连上Wi-Fi网络</string>
+    <string name="wifi_name">Wi-Fi名称</string>
 
 </resources>

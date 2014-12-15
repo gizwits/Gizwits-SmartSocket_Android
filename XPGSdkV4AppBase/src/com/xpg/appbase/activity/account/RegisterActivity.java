@@ -356,7 +356,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	 * 用户注册结果回调接口.
 	 */
 	@Override
-	protected void onRegisterUser(int error, String errorMessage, String uid,
+	protected void didRegisterUser(int error, String errorMessage, String uid,
 			String token) {
 		Log.i("error message uid token", error + " " + errorMessage + " " + uid
 				+ " " + token);
@@ -374,16 +374,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			msg.obj = errorMessage;
 			handler.sendMessage(msg);
 		}
-	};
+	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.xpg.appbase.activity.BaseActivity#onRequestSendVerifyCode(int,
-	 * java.lang.String)
-	 */
 	@Override
-	protected void onRequestSendVerifyCode(int error, String errorMessage) {
+	protected void didRequestSendVerifyCode(int error, String errorMessage) {
 		Log.i("error message ", error + " " + errorMessage);
 		if (error == 0) {// 发送成功
 			Message msg = new Message();
@@ -397,4 +391,5 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			handler.sendMessage(msg);
 		}
 	}
+
 }

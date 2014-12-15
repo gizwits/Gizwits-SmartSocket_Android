@@ -94,7 +94,7 @@ public class SearchListAdapter extends BaseAdapter {
 		}
 		if (i == 0) {
 			XPGWifiDevice device = devicelist.get(position);
-			holder.tvName.setText("智能空调" + device.GetMacAddress());
+			holder.tvName.setText("智能空调" + device.getMacAddress());
 		}else{
 			Device device = devices.get(position);
 			holder.tvName.setText(device.getName());

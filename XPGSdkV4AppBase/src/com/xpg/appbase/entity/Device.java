@@ -53,17 +53,17 @@ public class Device implements Serializable {
 	 */
 	public Device(String name, XPGWifiDevice device) {
 		if (device != null) {
-			this.mac = device.GetMacAddress();
-			this.did = device.GetDid();
-			this.productKey = device.GetProductKey();
+			this.mac = device.getMacAddress();
+			this.did = device.getDid();
+			this.productKey = device.getProductKey();
 			isOnline = true;
-			this.isOnline = device.IsOnline();
-			this.ip = device.GetIPAddress();
-			this.passcode = device.GetPasscode();
+			this.isOnline = device.isOnline();
+			this.ip = device.getIPAddress();
+			this.passcode = device.getPasscode();
 			Log.i("passcode", passcode);
 
 		}
-		this.name = device.GetProductName();
+		this.name = device.getProductName();
 	}
 
 	/**

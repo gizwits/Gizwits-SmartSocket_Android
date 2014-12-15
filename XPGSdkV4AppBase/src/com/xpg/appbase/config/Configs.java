@@ -1,7 +1,6 @@
 package com.xpg.appbase.config;
 
-import com.xpg.appbase.XpgApplication;
-import com.xtremeprog.xpgconnect.XPGWifiLogLevel;
+import com.xtremeprog.xpgconnect.XPGWifiSDK.XPGWifiLogLevel;
 /**
  * app配置参数
  * @author Lien

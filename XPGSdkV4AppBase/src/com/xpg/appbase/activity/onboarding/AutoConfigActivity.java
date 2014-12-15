@@ -37,7 +37,6 @@ import android.widget.ToggleButton;
 
 import com.xpg.appbase.R;
 import com.xpg.appbase.activity.BaseActivity;
-import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.NetworkUtils;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
@@ -100,7 +99,7 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 			case CHANGE_WIFI:
 				strSsid = NetworkUtils
 						.getCurentWifiSSID(AutoConfigActivity.this);
-				tvSsid.setText("Wi-Fi名称" + strSsid);
+				tvSsid.setText(getString(R.string.wifi_name) + strSsid);
 				break;
 
 			}
@@ -170,10 +169,10 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 					}
 					startActivity(intent);
 				}else{
-					ToastUtils.showShort(this, "请先连上Wi-Fi网络");
+					ToastUtils.showShort(this, getString(R.string.wifi_first));
 				}
 			} else {
-				ToastUtils.showShort(this, "请先连上Wi-Fi网络");
+				ToastUtils.showShort(this, getString(R.string.wifi_first));
 			}
 
 			break;

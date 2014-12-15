@@ -1,8 +1,8 @@
 /**
- * Project Name:Gokit
+ * Project Name:XPGSdkV4AppBase
  * File Name:BaseActivity.java
- * Package Name:com.xpg.gokit.activity
- * Date:2014-11-18 10:04:05
+ * Package Name:com.xpg.appbase.activity
+ * Date:2014-12-15 10:38:39
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -19,6 +19,7 @@ package com.xpg.appbase.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -28,11 +29,10 @@ import android.util.Log;
 import com.xpg.appbase.sdk.CmdCenter;
 import com.xpg.appbase.sdk.SettingManager;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
-import com.xtremeprog.xpgconnect.XPGWifiDeviceList;
 import com.xtremeprog.xpgconnect.XPGWifiDeviceListener;
-import com.xtremeprog.xpgconnect.XPGWifiQueryHardwareInfoStruct;
+import com.xtremeprog.xpgconnect.XPGWifiSDK;
 import com.xtremeprog.xpgconnect.XPGWifiSDKListener;
-import com.xtremeprog.xpgconnect.XPGWifiSSIDList;
+import com.xtremeprog.xpgconnect.XPGWifiSSID;
 
 /**
  * 所有activity的基类。该基类实现了XPGWifiDeviceListener和XPGWifiSDKListener两个监听器，并提供全局的回调方法。
@@ -45,19 +45,16 @@ public class BaseActivity extends Activity {
 	/** The action bar. */
 	protected ActionBar actionBar;
 
-	/** xpg设备列表 */
-	protected static XPGWifiDeviceList xpgwifidevicelist;
-
-	/** 设备列表 */
+	/** 设备列表. */
 	protected static List<XPGWifiDevice> deviceslist = new ArrayList<XPGWifiDevice>();
 
 	/** The is init. */
 	static boolean isInit = false;
 
-	/** 指令管理器 */
+	/** 指令管理器. */
 	protected CmdCenter mCenter;
 
-	/** SharePreference处理类 */
+	/** SharePreference处理类. */
 	protected SettingManager setmanager;
 
 	/**
@@ -66,67 +63,26 @@ public class BaseActivity extends Activity {
 	 * 设备属性监听器。 设备连接断开、获取绑定参数、获取设备信息、控制和接受设备信息相关.
 	 */
 	protected XPGWifiDeviceListener deviceListener = new XPGWifiDeviceListener() {
-		@Override
-		public void onBindDevice(int error, String errorMessage) {
-			BaseActivity.this.onBindDevice(error, errorMessage);
-		};
 
 		@Override
-		public void onUnbindDevice(int error, String errorMessage) {
-			BaseActivity.this.onUnbindDevice(error, errorMessage);
-		};
-
-		@Override
-		public void onConnectFailed() {
-			BaseActivity.this.onConnectFailed();
-		};
-
-		@Override
-		public void onLogin(int result) {
-			BaseActivity.this.onLogin(result);
-		};
-
-		@Override
-		public void onReceiveAlertsAndFaultsInfo(
-				com.xtremeprog.xpgconnect.Vector_XPGWifiReceiveInfo alerts,
-				com.xtremeprog.xpgconnect.Vector_XPGWifiReceiveInfo faults) {
-			BaseActivity.this.onReceiveAlertsAndFaultsInfo(alerts, faults);
-		};
-
-		@Override
-		public void onDeviceOnline(boolean isOnline) {
-			BaseActivity.this.onDeviceOnline(isOnline);
-		};
-
-		@Override
-		public void onGetPasscode(int result) {
-			BaseActivity.this.onGetPasscode(result);
-		};
-
-		@Override
-		public void onDisconnected() {
-			BaseActivity.this.onDisconnected();
+		public void didDeviceOnline(XPGWifiDevice device, boolean isOnline) {
+			BaseActivity.this.didDeviceOnline(device, isOnline);
 		}
 
 		@Override
-		public boolean onReceiveData(String data) {
-			return BaseActivity.this.onReceiveData(data);
-		};
-
-		@Override
-		public void onConnected() {
-			BaseActivity.this.onConnected();
+		public void didDisconnected(XPGWifiDevice device) {
+			BaseActivity.this.didDisconnected(device);
 		}
 
 		@Override
-		public void onLoginMQTT(int result) {
-			BaseActivity.this.onLoginMQTT(result);
+		public void didLogin(XPGWifiDevice device, int result) {
+			BaseActivity.this.didLogin(device, result);
 		}
 
 		@Override
-		public void onQueryHardwareInfo(int error,
-				XPGWifiQueryHardwareInfoStruct pInfo) {
-			BaseActivity.this.onQueryHardwareInfo(error, pInfo);
+		public void didReceiveData(XPGWifiDevice device, String jsonData,
+				int result) {
+			BaseActivity.this.didReceiveData(device, jsonData, result);
 		}
 
 	};
@@ -139,53 +95,74 @@ public class BaseActivity extends Activity {
 	private XPGWifiSDKListener sdkListener = new XPGWifiSDKListener() {
 
 		@Override
-		public void onChangeUserPassword(int error, String errorMessage) {
-			BaseActivity.this.onChangeUserPassword(error, errorMessage);
-		};
-
-		@Override
-		public void onRequestSendVerifyCode(int error, String errorMessage) {
-			BaseActivity.this.onRequestSendVerifyCode(error, errorMessage);
-		};
-
-		@Override
-		public void onDiscovered(int result, XPGWifiDeviceList devices) {
-			BaseActivity.this.onDiscovered(result, devices);
+		public void didBindDevice(int error, String errorMessage, String did) {
+			BaseActivity.this.didBindDevice(error, errorMessage, did);
 		}
 
 		@Override
-		public void onGetDeviceInfo(int error, String errorMessage,
-				String productKey, String did, String mac, String passCode,
-				String host, int port, int isOnline) {
-			BaseActivity.this.onGetDeviceInfo(error, errorMessage, productKey,
-					did, mac, passCode, host, port, isOnline);
-		};
-
-		@Override
-		public void onRegisterUser(int error, String errorMessage, String uid,
-				String token) {
-			BaseActivity.this.onRegisterUser(error, errorMessage, uid, token);
-		};
-
-		@Override
-		public void onUserLogin(int error, String errorMessage, String uid,
-				String token) {
-			BaseActivity.this.onUserLogin(error, errorMessage, uid, token);
-		};
-
-		@Override
-		public void onSetAirLink(XPGWifiDevice device) {
-			Log.e("airlink", "success");
-			BaseActivity.this.onSetAirLink(device);
+		public void didChangeUserEmail(int error, String errorMessage) {
+			BaseActivity.this.didChangeUserEmail(error, errorMessage);
 		}
 
 		@Override
-		public void onGetSSIDList(XPGWifiSSIDList list, int result) {
-			BaseActivity.this.onGetSSIDList(list, result);
-		};
+		public void didChangeUserPassword(int error, String errorMessage) {
+			BaseActivity.this.didChangeUserPassword(error, errorMessage);
+		}
+
+		@Override
+		public void didChangeUserPhone(int error, String errorMessage) {
+			BaseActivity.this.didChangeUserPhone(error, errorMessage);
+		}
+
+		@Override
+		public void didDiscovered(int error, List<XPGWifiDevice> devicesList) {
+			BaseActivity.this.didDiscovered(error, devicesList);
+		}
+
+		@Override
+		public void didGetSSIDList(int error, List<XPGWifiSSID> ssidInfoList) {
+			BaseActivity.this.didGetSSIDList(error, ssidInfoList);
+		}
+
+		@Override
+		public void didRegisterUser(int error, String errorMessage, String uid,
+				String token) {
+			BaseActivity.this.didRegisterUser(error, errorMessage, uid, token);
+		}
+
+		@Override
+		public void didRequestSendVerifyCode(int error, String errorMessage) {
+			BaseActivity.this.didRequestSendVerifyCode(error, errorMessage);
+		}
+
+		@Override
+		public void didSetDeviceWifi(int error, XPGWifiDevice device) {
+			BaseActivity.this.didSetDeviceWifi(error, device);
+		}
+
+		@Override
+		public void didUnbindDevice(int error, String errorMessage, String did) {
+			BaseActivity.this.didUnbindDevice(error, errorMessage, did);
+		}
+
+		@Override
+		public void didUserLogin(int error, String errorMessage, String uid,
+				String token) {
+			BaseActivity.this.didUserLogin(error, errorMessage, uid, token);
+		}
+
+		@Override
+		public void didUserLogout(int error, String errorMessage) {
+			BaseActivity.this.didUserLogout(error, errorMessage);
+		}
 
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -194,6 +171,231 @@ public class BaseActivity extends Activity {
 		actionBar.setDisplayShowHomeEnabled(false);
 		mCenter = CmdCenter.getInstance(this.getApplicationContext());
 		mCenter.getXPGWifiSDK().setListener(sdkListener);
+	}
+
+	/**
+	 * 用户登出回调借口.
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 */
+	protected void didUserLogout(int error, String errorMessage) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 用户登陆回调接口.
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 * @param uid
+	 *            用户id
+	 * @param token
+	 *            授权令牌
+	 */
+	protected void didUserLogin(int error, String errorMessage, String uid,
+			String token) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 设备解除绑定回调接口.
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 * @param did
+	 *            设备注册id
+	 */
+	protected void didUnbindDevice(int error, String errorMessage, String did) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 设备配置结果回调
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param device
+	 *            设备对象
+	 */
+	protected void didSetDeviceWifi(int error, XPGWifiDevice device) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 请求手机验证码回调接口
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 */
+	protected void didRequestSendVerifyCode(int error, String errorMessage) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 注册用户结果回调接口
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 * @param uid
+	 *            the 用户id
+	 * @param token
+	 *            the 授权令牌
+	 */
+	protected void didRegisterUser(int error, String errorMessage, String uid,
+			String token) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 获取ssid列表回调接口
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param ssidInfoList
+	 *            ssid列表
+	 */
+	protected void didGetSSIDList(int error, List<XPGWifiSSID> ssidInfoList) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 搜索设备回调接口
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param devicesList
+	 *            设备列表
+	 */
+	protected void didDiscovered(int error, List<XPGWifiDevice> devicesList) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 更换注册手机号码回调接口
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 */
+	protected void didChangeUserPhone(int error, String errorMessage) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 更换密码回调接口
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 */
+	protected void didChangeUserPassword(int error, String errorMessage) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 更换注册邮箱
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 */
+	protected void didChangeUserEmail(int error, String errorMessage) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 绑定设备结果回调
+	 * 
+	 * @param error
+	 *            结果代码
+	 * @param errorMessage
+	 *            错误信息
+	 * @param did
+	 *            设备注册id
+	 */
+	protected void didBindDevice(int error, String errorMessage, String did) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 接收指令回调
+	 * <P>
+	 * sdk接收到模块传入的数据回调该接口
+	 * 
+	 * @param device
+	 *            设备对象
+	 * @param jsonData
+	 *            json数据
+	 * @param result
+	 *            状态代码
+	 */
+	protected void didReceiveData(XPGWifiDevice device, String jsonData,
+			int result) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 登陆设备结果回调接口
+	 * 
+	 * @param device
+	 *            设备对象
+	 * @param result
+	 *            状态代码
+	 */
+	protected void didLogin(XPGWifiDevice device, int result) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 断开连接回调接口
+	 * 
+	 * @param device
+	 *            设备对象
+	 */
+	protected void didDisconnected(XPGWifiDevice device) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 设备上下线通知
+	 * 
+	 * @param device
+	 *            设备对象
+	 * @param isOnline
+	 *            上下线状态
+	 */
+	protected void didDeviceOnline(XPGWifiDevice device, boolean isOnline) {
+		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -211,9 +413,9 @@ public class BaseActivity extends Activity {
 		for (int i = 0; i < BaseActivity.deviceslist.size(); i++) {
 			XPGWifiDevice device = deviceslist.get(i);
 			if (device != null) {
-				Log.i("deivcemac", device.GetMacAddress());
-				if (device != null && device.GetMacAddress().equals(mac)
-						&& device.GetDid().equals(did)) {
+				Log.i("deivcemac", device.getMacAddress());
+				if (device != null && device.getMacAddress().equals(mac)
+						&& device.getDid().equals(did)) {
 					xpgdevice = device;
 					break;
 				}
@@ -224,242 +426,24 @@ public class BaseActivity extends Activity {
 		return xpgdevice;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onResume()
+	 */
 	public void onResume() {
 		super.onResume();
-
+		XPGWifiSDK.sharedInstance().setListener(sdkListener);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onPause()
+	 */
 	public void onPause() {
 		super.onPause();
 
-	}
-
-	/**
-	 * 修改用户名密码回调接口.
-	 * 
-	 * @param error
-	 *            结果代码
-	 * @param errorMessage
-	 *            结果信息
-	 */
-	protected void onChangeUserPassword(int error, String errorMessage) {
-	};
-
-	/**
-	 * 发送验证码结果回调接口.
-	 * 
-	 * @param error
-	 *            结果代码
-	 * @param errorMessage
-	 *            结果信息
-	 */
-	protected void onRequestSendVerifyCode(int error, String errorMessage) {
-	};
-
-	/**
-	 * On discovered.
-	 * 
-	 * @param result
-	 *            the result
-	 * @param devices
-	 *            the devices
-	 */
-	protected void onDiscovered(int result, XPGWifiDeviceList devices) {
-
-	}
-
-	/**
-	 * On get device info.
-	 * 
-	 * @param error
-	 *            the error
-	 * @param errorMessage
-	 *            the error message
-	 * @param productKey
-	 *            the product key
-	 * @param did
-	 *            the did
-	 * @param mac
-	 *            the mac
-	 * @param passCode
-	 *            the pass code
-	 * @param host
-	 *            the host
-	 * @param port
-	 *            the port
-	 * @param isOnline
-	 *            the is online
-	 */
-	protected void onGetDeviceInfo(int error, String errorMessage,
-			String productKey, String did, String mac, String passCode,
-			String host, int port, int isOnline) {
-	};
-
-	/**
-	 * 用户注册结果回调接口.
-	 * 
-	 * @param error
-	 *            注册结果码
-	 * @param errorMessage
-	 *            注册结果信息
-	 * @param uid
-	 *            用户id
-	 * @param token
-	 *            用户令牌
-	 */
-	protected void onRegisterUser(int error, String errorMessage, String uid,
-			String token) {
-	};
-
-	/**
-	 * 用户登陆结果回调接口
-	 * <P>
-	 * 用户登录后，使用返回的uid和token控制设备.
-	 * 
-	 * @param error
-	 *            登陆结果码
-	 * @param errorMessage
-	 *            登陆结果信息
-	 * @param uid
-	 *            用户id
-	 * @param token
-	 *            用户令牌
-	 */
-	protected void onUserLogin(int error, String errorMessage, String uid,
-			String token) {
-	};
-
-
-	/**
-	 * 通过airlink成功配置模块后，回调该函数。.
-	 * 
-	 * @param device
-	 *            成功配置的设备实体
-	 */
-	protected void onSetAirLink(XPGWifiDevice device) {
-	}
-
-	/**
-	 * On get ssid list.
-	 * 
-	 * @param list
-	 *            the list
-	 * @param result
-	 *            the result
-	 */
-	protected void onGetSSIDList(XPGWifiSSIDList list, int result) {
-	};
-
-	/**
-	 * 绑定设备结果回调.
-	 * 
-	 * @param error
-	 *            错误码
-	 * @param errorMessage
-	 *            错误信息
-	 */
-	public void onBindDevice(int error, String errorMessage) {
-	};
-
-	/**
-	 * 解绑设备结果回调.
-	 * 
-	 * @param error
-	 *            错误码
-	 * @param errorMessage
-	 *            错误信息
-	 */
-	public void onUnbindDevice(int error, String errorMessage) {
-	};
-
-	/**
-	 * socket 连接失败.
-	 */
-	public void onConnectFailed() {
-	};
-
-	/**
-	 * 小循环授权登陆设备.
-	 * 
-	 * @param result
-	 *            返回结果 0＝成功
-	 */
-	public void onLogin(int result) {
-	};
-
-	/**
-	 * 获取模块和mcu协议版本等属性.
-	 * 
-	 * @param error
-	 *            the error
-	 * @param pInfo
-	 *            the info
-	 */
-	public void onQueryHardwareInfo(int error,
-			com.xtremeprog.xpgconnect.XPGWifiQueryHardwareInfoStruct pInfo) {
-	};
-
-	/**
-	 * 设备报警回调.
-	 * 
-	 * @param alerts
-	 *            the alerts
-	 * @param faults
-	 *            the faults
-	 */
-	public void onReceiveAlertsAndFaultsInfo(
-			com.xtremeprog.xpgconnect.Vector_XPGWifiReceiveInfo alerts,
-			com.xtremeprog.xpgconnect.Vector_XPGWifiReceiveInfo faults) {
-	};
-
-	/**
-	 * 设备上下线通知.
-	 * 
-	 * @param isOnline
-	 *            the is online
-	 */
-	public void onDeviceOnline(boolean isOnline) {
-	};
-
-	/**
-	 * 获取Passcode.
-	 * 
-	 * @param result
-	 *            the result
-	 */
-	public void onGetPasscode(int result) {
-	};;
-
-	/**
-	 * socket 连接被断开.
-	 */
-	public void onDisconnected() {
-	}
-
-	/**
-	 * 收到设备数据.
-	 * 
-	 * @param data
-	 *            the data
-	 * @return true, if successful
-	 */
-	public boolean onReceiveData(String data) {
-		return true;
-	};
-
-	/**
-	 * socket 连接成功.
-	 */
-	public void onConnected() {
-	}
-
-	/**
-	 * 大循环授权登陆结果.
-	 * 
-	 * @param result
-	 *            结果码
-	 */
-	public void onLoginMQTT(int result) {
 	}
 
 }
