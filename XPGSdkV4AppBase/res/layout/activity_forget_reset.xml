@@ -2,33 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <include
-        android:id="@+id/top_layout"
-        layout="@layout/include_title" />
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        style="@style/TopLayout">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/return_icon" />
+
+        <TextView
+            android:id="@+id/ivStep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="忘记密码"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <EditText
-        android:id="@+id/etNum"
+        android:id="@+id/etName"
         style="@style/EditTextTheme"
-        android:layout_width="match_parent"
-        android:layout_marginTop="60dp"
-        android:hint="手机号/邮箱" />
+        android:layout_marginTop="30dp"
+        android:hint="手机号" />
 
-    
+    <Button
+        android:id="@+id/btnGetCode"
+        style="@style/ButtonBlue"
+        android:text="获取验证码" />
+
     <LinearLayout
         android:id="@+id/llInputCode"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/etInputCode"
             style="@style/EditTextTheme"
             android:layout_weight="1"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
             android:hint="验证码" />
 
         <Button
@@ -48,13 +68,13 @@
         android:layout_margin="10dp"
         android:background="@drawable/login_input_box"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/etInputPsw"
             style="@style/EditTextTheme"
             android:layout_weight="1"
-            android:layout_marginLeft="0dp"
             android:background="@android:color/transparent"
             android:hint="密码" />
 
@@ -68,8 +88,9 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnConfirm"
+        android:id="@+id/btnSure"
         style="@style/ButtonBlue"
         android:text="确定" />
+
 
 </LinearLayout>

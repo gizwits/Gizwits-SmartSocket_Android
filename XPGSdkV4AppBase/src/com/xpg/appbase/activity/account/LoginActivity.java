@@ -130,14 +130,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	 * Inits the events.
 	 */
 	private void initEvents() {
-		etName = (EditText) findViewById(R.id.etName);
-		etPsw = (EditText) findViewById(R.id.etPsw);
-		tvForgot = (TextView) findViewById(R.id.tvForgot);
-		btnLogin = (Button) findViewById(R.id.btnLogin);
-		btnRegister = (Button) findViewById(R.id.btnRegister);
 
-		dialog = new ProgressDialog(this);
-		dialog.setMessage("登录中，请稍候...");
+
+        tvForgot.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
 
 	}
 
@@ -145,9 +142,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	 * Inits the views.
 	 */
 	private void initViews() {
-		tvForgot.setOnClickListener(this);
-		btnLogin.setOnClickListener(this);
-		btnRegister.setOnClickListener(this);
+        etName = (EditText) findViewById(R.id.etName);
+        etPsw = (EditText) findViewById(R.id.etPsw);
+        tvForgot = (TextView) findViewById(R.id.tvForgot);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("登录中，请稍候...");
 
 	}
 

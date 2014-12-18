@@ -2,7 +2,233 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        style="@style/TopLayout">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/return_icon" />
+
+        <ImageView
+            android:id="@+id/ivStep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/step1" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llConnectAp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:gravity="left"
+                android:text="1.请复制以下密码:"
+                android:textColor="@color/text_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvpsw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:text="123456789"
+                android:textColor="@color/text_black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:gravity="left"
+            android:padding="20dp"
+            android:text="2.请进入设置>Wi-Fi，选择XPG-GAGENT-XXXX(XXXX为本模块mac的后四位),输入刚刚复制的密码;"
+            android:textColor="@color/text_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:gravity="left"
+            android:padding="20dp"
+            android:text="3.完成后请返回此界面,将自动跳转到下一步."
+            android:textColor="@color/text_black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/softap_icon" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llInsertPsw"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <TextView
+            android:id="@+id/tvSsid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Wi-Fi名称:home"
+            android:textColor="@color/text_blue"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:background="@drawable/login_input_box"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etInputPsw"
+                style="@style/EditTextTheme"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Wi-Fi密码"
+                android:textSize="14sp" />
+
+            <ToggleButton
+                android:id="@+id/tbPswFlag"
+                android:layout_width="50dp"
+                android:layout_height="24dp"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn="" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/ButtonBlue"
+            android:text="连接网络" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llConfiging"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvConfiging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="设备连接中，请耐心等待."
+            android:textColor="@color/text_blue"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:indeterminateDrawable="@drawable/image_progress" />
+
+            <TextView
+                android:id="@+id/tvTick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29"
+                android:textColor="@color/text_black"
+                android:textSize="50sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llConfigSuccess"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/success" />
+
+        <TextView
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="配置成功，记得切换回Wi-Fi网络哦！" />
+
+        <Button
+            android:layout_margin="20dp"
+            android:id="@+id/btnOK"
+            style="@style/ButtonBlue"
+            android:text="切换好了" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llConfigFailed"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/failure" />
+
+        <TextView
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="配置失败了,请拔下设备电源,再重新接通电源，再点击重试。" />
+
+        <Button
+            android:layout_margin="20dp"
+            android:id="@+id/btnRetry"
+            style="@style/ButtonBlue"
+            android:text="我已经重新拔插电源了，我要重试" />
+
+    </LinearLayout>
 </LinearLayout>

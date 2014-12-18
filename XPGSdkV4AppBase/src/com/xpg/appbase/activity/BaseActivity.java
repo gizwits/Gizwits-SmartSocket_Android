@@ -25,6 +25,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
 
 import com.xpg.appbase.sdk.CmdCenter;
 import com.xpg.appbase.sdk.SettingManager;
@@ -167,8 +168,6 @@ public class BaseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setmanager = new SettingManager(this);
-		actionBar = getActionBar();
-		actionBar.setDisplayShowHomeEnabled(false);
 		mCenter = CmdCenter.getInstance(this.getApplicationContext());
 		mCenter.getXPGWifiSDK().setListener(sdkListener);
 	}

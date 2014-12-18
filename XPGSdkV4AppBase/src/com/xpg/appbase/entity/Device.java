@@ -51,7 +51,7 @@ public class Device implements Serializable {
 	 * @param device
 	 *            the device
 	 */
-	public Device(String name, XPGWifiDevice device) {
+	public Device(XPGWifiDevice device) {
 		if (device != null) {
 			this.mac = device.getMacAddress();
 			this.did = device.getDid();

@@ -15,6 +15,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="libs" level="project" />
     <orderEntry type="library" name="xpgcommonapi" level="project" />
+    <orderEntry type="library" name="XPGWiFiSDK" level="project" />
   </component>
 </module>
 

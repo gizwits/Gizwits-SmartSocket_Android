@@ -53,6 +53,7 @@
         android:orientation="horizontal" >
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/etInputPsw"
             style="@style/EditTextTheme"
             android:layout_weight="1"

@@ -113,7 +113,6 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_autoconfig);
 		initViews();
@@ -157,7 +156,7 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 		switch (v.getId()) {
 		case R.id.btnNext:
 			if (NetworkUtils.isWifiConnected(this)) {
-				// TODO 切换至发送airlink Activity
+				// 切换至发送airlink Activity
 				if(!StringUtils.isEmpty(strSsid)){
 					Intent intent = new Intent(AutoConfigActivity.this,AirlinkActivity.class);
 					intent.putExtra("ssid", strSsid);

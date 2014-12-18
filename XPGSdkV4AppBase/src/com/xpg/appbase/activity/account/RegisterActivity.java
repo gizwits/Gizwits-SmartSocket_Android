@@ -386,7 +386,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			handler.sendMessage(msg);
 		} else {// 发送失败
 			Message msg = new Message();
-			msg.what = msg.what = handler_key.TOAST.ordinal();
+			msg.what = handler_key.TOAST.ordinal();
 			msg.obj = errorMessage;
 			handler.sendMessage(msg);
 		}
