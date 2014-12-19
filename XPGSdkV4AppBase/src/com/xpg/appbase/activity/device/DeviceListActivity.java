@@ -42,10 +42,12 @@ public class DeviceListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_devicelist);
+
         initUI();
     }
 
     private void initUI() {
+
         leftBtn = (ImageView) findViewById(R.id.ivLeftBtn);
         lvDevices = (ListView) findViewById(R.id.lvDevices);
         devices = new ArrayList<Device>();
