@@ -41,6 +41,6 @@ public class XpgApplication extends Application {
 		
 		XPGWifiSDK.sharedInstance().startWithAppID(getApplicationContext(), Configs.APPID);
 		
-		XPGWifiSDK.sharedInstance().setLogLevel(Configs.LOG_LEVEL,null, true);
+		XPGWifiSDK.sharedInstance().setLogLevel(Configs.LOG_LEVEL,"BassApp.log", true);
 	}
 }

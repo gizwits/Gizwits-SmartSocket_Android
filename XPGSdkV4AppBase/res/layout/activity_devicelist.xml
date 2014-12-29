@@ -2,23 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/top_layout"
-        layout="@layout/include_title" />
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        style="@style/TopLayout" >
 
-    <LinearLayout
+        <ImageView
+            android:id="@+id/ivLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/logout_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="设备列表"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/ivAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/add_icon" />
+    </RelativeLayout>
+
+    <com.xpg.appbase.widget.RefreshableListView
+        android:id="@+id/lvDevices"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/top_layout"
-        android:orientation="vertical" >
-        <ListView
-            android:id="@+id/lvDevices"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="1dp" />
-    </LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rlTop"
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="1dip"
+        android:drawSelectorOnTop="false"
+        android:fadingEdgeLength="0.0sp"
+        android:scrollbars="none" />
 
 </RelativeLayout>

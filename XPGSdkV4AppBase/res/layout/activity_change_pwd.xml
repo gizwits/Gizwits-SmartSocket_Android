@@ -12,8 +12,8 @@
         android:id="@+id/etNum"
         style="@style/EditTextTheme"
         android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
         android:layout_marginBottom="0dp"
+        android:layout_marginTop="40dp"
         android:hint="手机号/邮箱" />
 
     <LinearLayout
@@ -28,8 +28,8 @@
         <EditText
             android:id="@+id/etInputPsw"
             style="@style/EditTextTheme"
-            android:layout_weight="1"
             android:layout_marginLeft="0dp"
+            android:layout_weight="1"
             android:background="@android:color/transparent"
             android:hint="密码" />
 

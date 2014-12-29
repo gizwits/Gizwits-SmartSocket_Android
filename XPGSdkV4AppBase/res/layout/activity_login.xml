@@ -25,6 +25,7 @@
         style="@style/EditTextTheme"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
+        android:inputType="textPassword"
         android:drawableLeft="@drawable/login_icon_key"
         android:hint="密码" />
 

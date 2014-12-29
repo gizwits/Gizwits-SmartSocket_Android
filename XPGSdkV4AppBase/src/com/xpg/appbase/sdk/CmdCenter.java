@@ -21,8 +21,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.xpg.appbase.config.Configs;
+import com.xpg.appbase.config.JsonKeys;
 import com.xpg.common.useful.StringUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;
@@ -42,7 +44,7 @@ public class CmdCenter {
     /**
      * The xpg wifi sdk.
      */
-    private static XPGWifiSDK xpgWifiSdk;
+    private static XPGWifiSDK xpgWifiGCC;
 
     /**
      * The m center.
@@ -86,7 +88,7 @@ public class CmdCenter {
     private void init(Context c) {
         mSettingManager = new SettingManager(c);
 
-        xpgWifiSdk = XPGWifiSDK.sharedInstance();
+        xpgWifiGCC = XPGWifiSDK.sharedInstance();
 
     }
 
@@ -96,7 +98,7 @@ public class CmdCenter {
      * @return the XPG wifi sdk
      */
     public XPGWifiSDK getXPGWifiSDK() {
-        return xpgWifiSdk;
+        return xpgWifiGCC;
     }
 
     // =================================================================
@@ -113,7 +115,7 @@ public class CmdCenter {
      * @param password 注册密码
      */
     public void cRegisterPhoneUser(String phone, String code, String password) {
-        xpgWifiSdk.registerUserByPhoneAndCode(phone, password, code);
+    	xpgWifiGCC.registerUserByPhoneAndCode(phone, password, code);
     }
 
     /**
@@ -122,14 +124,14 @@ public class CmdCenter {
      * 如果一开始不需要直接注册账号，则需要进行匿名登录.
      */
     public void cLoginAnonymousUser() {
-        xpgWifiSdk.userLoginAnonymous();
+    	xpgWifiGCC.userLoginAnonymous();
     }
 
     /**
      * 账号注销.
      */
     public void cLogout() {
-        xpgWifiSdk.userLogout(mSettingManager.getUid());
+    	xpgWifiGCC.userLogout(mSettingManager.getUid());
         mSettingManager.clean();
     }
 
@@ -140,7 +142,7 @@ public class CmdCenter {
      * @param psw  密码
      */
     public void cLogin(String name, String psw) {
-        xpgWifiSdk.userLoginWithUserName(name, psw);
+    	xpgWifiGCC.userLoginWithUserName(name, psw);
     }
 
     /**
@@ -152,7 +154,7 @@ public class CmdCenter {
      */
     public void cChangeUserPasswordWithCode(String phone, String code,
                                             String newPassword) {
-        xpgWifiSdk.changeUserPasswordByCode(phone, code, newPassword);
+    	xpgWifiGCC.changeUserPasswordByCode(phone, code, newPassword);
     }
 
     /**
@@ -161,7 +163,7 @@ public class CmdCenter {
      * @param phone 手机号
      */
     public void cRequestSendVerifyCode(String phone) {
-        xpgWifiSdk.requestSendVerifyCode(phone);
+    	xpgWifiGCC.requestSendVerifyCode(phone);
     }
 
     /**
@@ -171,7 +173,7 @@ public class CmdCenter {
      * @param password wifi密码
      */
     public void cSetAirLink(String wifi, String password) {
-        xpgWifiSdk.setDeviceWifi(wifi, password,
+    	xpgWifiGCC.setDeviceWifi(wifi, password,
                 XPGWifiConfigureMode.XPGWifiConfigureModeAirLink, 60);
     }
 
@@ -182,7 +184,7 @@ public class CmdCenter {
      * @param password wifi密码
      */
     public void cSetSoftAp(String wifi, String password) {
-        xpgWifiSdk.setDeviceWifi(wifi, password,
+    	xpgWifiGCC.setDeviceWifi(wifi, password,
                 XPGWifiConfigureMode.XPGWifiConfigureModeSoftAP, 30);
     }
 
@@ -190,10 +192,12 @@ public class CmdCenter {
      * 绑定后刷新设备列表，该方法会同时获取本地设备以及远程设备列表.
      *
      * @param uid   用户名
-     * @param token 密码
+     * @param token 令牌
      */
     public void cGetBoundDevices(String uid, String token) {
-        xpgWifiSdk.getBoundDevices(uid, token, Configs.PRODUCT_KEY);
+    	xpgWifiGCC.getBoundDevices(uid, token, "e3cf7332b7834a03a92d9e14a3f6d352");
+//    	xpgWifiGCC.getBoundDevices(uid, token, Configs.PRODUCT_KEY);
+//        xpgWifiSdk.getBoundDevices(uid, token);
     }
 
     /**
@@ -208,7 +212,7 @@ public class CmdCenter {
     public void cBindDevice(String uid, String token, String did,
                             String passcode, String remark) {
 
-        xpgWifiSdk.bindDevice(uid, token, did, passcode, remark);
+    	xpgWifiGCC.bindDevice(uid, token, did, passcode, remark);
 
     }
 
@@ -223,10 +227,21 @@ public class CmdCenter {
      * 发送指令.
      *
      * @param xpgWifiDevice the xpg wifi device
-     * @param jsonsend      the jsonsend
      */
-    public void cWrite(XPGWifiDevice xpgWifiDevice, JSONObject jsonsend) {
-        xpgWifiDevice.write(jsonsend.toString());
+    public void cWrite(XPGWifiDevice xpgWifiDevice, String key,Object value){
+
+        try {
+            final JSONObject jsonsend = new JSONObject();
+            JSONObject jsonparam = new JSONObject();
+            jsonsend.put("cmd", 1);
+            jsonparam.put(key, value);
+            jsonsend.put(JsonKeys.KEY_ACTION, jsonparam);
+            Log.i("sendjson", jsonsend.toString());
+            xpgWifiDevice.write(jsonsend.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -235,9 +250,13 @@ public class CmdCenter {
      * @param xpgWifiDevice the xpg wifi device
      * @throws JSONException the JSON exception
      */
-    public void cGetStatus(XPGWifiDevice xpgWifiDevice) throws JSONException {
+    public void cGetStatus(XPGWifiDevice xpgWifiDevice)  {
         JSONObject json = new JSONObject();
-        json.put("cmd", 2);
+        try {
+            json.put("cmd", 2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         xpgWifiDevice.write(json.toString());
     }
 
@@ -260,7 +279,37 @@ public class CmdCenter {
      */
     public void cUnbindDevice(String uid, String token, String did,
                               String passCode) {
-        xpgWifiSdk.unbindDevice(uid, token, did, passCode);
+    	xpgWifiGCC.unbindDevice(uid, token, did, passCode);
     }
+
+
+    // =================================================================
+    //
+    // 智能云空调控制相关
+    //
+    // =================================================================
+    public void cSwitchOn(XPGWifiDevice xpgWifiDevice,boolean isOn){
+        cWrite(xpgWifiDevice,JsonKeys.ON_OFF,isOn);
+    }
+    public void cSetShake(XPGWifiDevice xpgWifiDevice,boolean isOn){
+        cWrite(xpgWifiDevice,JsonKeys.FAN_SHAKE,isOn);
+    }
+
+    public void cMode(XPGWifiDevice xpgWifiDevice,int mode){
+        cWrite(xpgWifiDevice,JsonKeys.MODE,mode);
+    }
+    public void cFanSpeed(XPGWifiDevice xpgWifiDevice,int fanSpeed){
+        cWrite(xpgWifiDevice,JsonKeys.FAN_SPEED,fanSpeed);
+    }
+    public void cTimeOn(XPGWifiDevice xpgWifiDevice,int time){
+        cWrite(xpgWifiDevice,JsonKeys.TIME_ON,time);
+    }
+    public void cTimeOff(XPGWifiDevice xpgWifiDevice,int time){
+        cWrite(xpgWifiDevice,JsonKeys.TIME_OFF,time);
+    }
+    public void cSetTemp(XPGWifiDevice xpgWifiDevice,int templature){
+        cWrite(xpgWifiDevice,JsonKeys.SET_TEMP,templature);
+    }
+
 
 }

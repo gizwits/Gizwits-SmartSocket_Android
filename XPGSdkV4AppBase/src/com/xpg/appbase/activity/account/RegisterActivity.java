@@ -320,6 +320,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				return;
 			}
 			mCenter.cRegisterPhoneUser(phone, code, password);
+            Log.e("Register","phone="+phone+";code="+code+";password="+password);
 			dialog.show();
 		} else {
 			// TODO 邮箱注册

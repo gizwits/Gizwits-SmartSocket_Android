@@ -3,25 +3,24 @@ package com.xpg.zxing;
 import java.io.IOException;
 import java.util.Vector;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Vibrator;
+import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.xpg.appbase.R;
 import com.xpg.appbase.activity.BaseActivity;
 import com.xpg.appbase.activity.device.DeviceListActivity;
+import com.xpg.common.system.IntentUtils;
+import com.xpg.ui.utils.ToastUtils;
 import com.xpg.zxing.camera.CameraManager;
 import com.xpg.zxing.decoding.CaptureActivityHandler;
 import com.xpg.zxing.decoding.InactivityTimer;
@@ -35,18 +34,63 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
 	private InactivityTimer inactivityTimer;
-//	private MediaPlayer mediaPlayer;
+	// private MediaPlayer mediaPlayer;
 	private boolean playBeep;
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
+	private String product_key, passcode, did;
 
-	/** Called when the activity is first created. */
+	/**
+	 * ClassName: Enum handler_key. <br/>
+	 * <br/>
+	 * date: 2014-11-26 17:51:10 <br/>
+	 * 
+	 * @author Lien
+	 */
+	private enum handler_key {
+
+		START_BIND,
+
+		SUCCESS,
+
+		FAILED,
+
+	}
+
+	/**
+	 * The handler.
+	 */
+	Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			handler_key key = handler_key.values()[msg.what];
+			switch (key) {
+
+			case START_BIND:
+				startBind(passcode, did);
+				break;
+
+			case SUCCESS:
+				ToastUtils.showShort(CaptureActivity.this, "添加成功");
+				IntentUtils.getInstance().startActivity(CaptureActivity.this,
+						DeviceListActivity.class);
+				finish();
+				break;
+			case FAILED:
+				ToastUtils.showShort(CaptureActivity.this, "添加失败，请返回重试");
+				finish();
+			}
+		}
+	};
+
+	/**
+	 * Called when the activity is first created.
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.zxing_layout);
 		CameraManager.init(getApplication());
-		getActionBar().hide();
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
@@ -141,44 +185,65 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	public void handleDecode(Result obj, Bitmap barcode) {
 		String text = obj.getText();
 		Log.i("test", text);
-		if(text.contains("product_key=")&text.contains("did=")&&text.contains("passcode=")){
-			
+		if (text.contains("product_key=") & text.contains("did=")
+				&& text.contains("passcode=")) {
+
 			inactivityTimer.onActivity();
-			viewfinderView.drawResultBitmap(barcode);
-			String product_key = getParamFomeUrl(text,"product_key");
-			String did= getParamFomeUrl(text, "did");
-			String passcode = getParamFomeUrl(text, "passcode");
-			Log.i("passcode product_key did", passcode + " " + product_key + " " + did);
-			Intent it = new Intent();
-//			it.setClass(this, DeviceListActivity.class);
-//			it.putExtra("passcode", passcode);
-//			it.putExtra("product_key", product_key);
-//			it.putExtra("did", did);
-//			startActivity(it);
-			//TODO 执行绑定
-			
-			finish();
-			
-		}else{
+			// viewfinderView.drawResultBitmap(barcode);
+			product_key = getParamFomeUrl(text, "product_key");
+			did = getParamFomeUrl(text, "did");
+			passcode = getParamFomeUrl(text, "passcode");
+			Log.i("passcode product_key did", passcode + " " + product_key
+					+ " " + did);
+			ToastUtils.showShort(this, "扫码成功");
+			mHandler.sendEmptyMessage(handler_key.START_BIND.ordinal());
+
+			// Intent it = new Intent();
+			// it.setClass(this, DeviceListActivity.class);
+			// it.putExtra("passcode", passcode);
+			// it.putExtra("product_key", product_key);
+			// it.putExtra("did", did);
+			// startActivity(it);
+			// TODO 执行绑定
+
+			// finish();
+
+		} else {
 			handler = new CaptureActivityHandler(this, decodeFormats,
 					characterSet);
 		}
-		
-		 
+
 	}
 
-	private String getParamFomeUrl(String url,String param) {
+	private String getParamFomeUrl(String url, String param) {
 		String product_key = "";
-		int startindex = url.indexOf(param+"=");
-		startindex+=(param.length()+1);
+		int startindex = url.indexOf(param + "=");
+		startindex += (param.length() + 1);
 		String subString = url.substring(startindex);
 		int endindex = subString.indexOf("&");
-		if(endindex==-1){
+		if (endindex == -1) {
 			product_key = subString;
-		}else{
-			product_key = subString.substring(0,endindex);
+		} else {
+			product_key = subString.substring(0, endindex);
 		}
 		return product_key;
 	}
 
+	private void startBind(String passcode, String did) {
+		mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(), did,
+				passcode, "");
+	}
+
+	@Override
+	protected void didBindDevice(int error, String errorMessage, String did) {
+		if (error == 0) {
+			ToastUtils.showShort(this, "绑定成功");
+			mHandler.sendEmptyMessage(handler_key.SUCCESS.ordinal());
+		} else {
+			Message message = new Message();
+			message.what = handler_key.FAILED.ordinal();
+			message.obj = errorMessage;
+			mHandler.sendMessage(message);
+		}
+	}
 }

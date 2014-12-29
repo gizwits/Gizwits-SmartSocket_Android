@@ -177,8 +177,10 @@ public class SearchDeviceActivity extends BaseActivity implements
         initEvents();
     }
 
+
     @Override
     public void onResume() {
+        super.onResume();
         loadingDialog.show();
         mCenter.cGetBoundDevices(setmanager.getUid(), setmanager.getToken());
         handler.sendEmptyMessageDelayed(handler_key.FOUND_FINISH.ordinal(),
@@ -262,6 +264,7 @@ public class SearchDeviceActivity extends BaseActivity implements
 
     @Override
     protected void didDiscovered(int error, List<XPGWifiDevice> devicesList) {
+        Log.e("SearchDevice", devicesList.get(0).getPasscode());
         if (devicesList.size() > 0) {
             allDeviceList.clear();
             allDeviceList.addAll(devicesList);

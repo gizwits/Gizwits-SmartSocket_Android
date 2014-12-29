@@ -7,48 +7,52 @@
     <include
         android:id="@+id/top_layout"
         layout="@layout/include_title" />
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
-    	android:layout_height="150dp"
-    	android:background="#EFEFEF"
-    	android:gravity="center_vertical"
-    	android:paddingLeft="20dp"
-    	android:orientation="vertical">
-        <TextView 
-        	android:id="@+id/initDate"
-        	style="@style/TextViewGray"
-    		android:textColor="#969696"
-    		android:text="生产日期：XXXX.XX.XX"/>
-        <TextView 
-        android:id="@+id/initPlace"
-        	style="@style/TextViewGray"
-    		android:layout_marginTop="8dp"
-    		android:textColor="#969696"
-    		android:text="生产地点：XXXXX"/>
-        <TextView 
-        	android:id="@+id/DeviceType"
-        	style="@style/TextViewGray"
-    		android:layout_marginTop="8dp"
-    		android:textColor="#969696"
-    		android:text="设备型号：XXXXX"/>
-        <TextView 
-        	android:id="@+id/DeviceCode"
-        	style="@style/TextViewGray"
-    		android:layout_marginTop="8dp"
-    		android:textColor="#969696"
-    		android:text="设备序列号：XXXXXXXXXXXXXXXX"/>
+        android:layout_height="150dp"
+        android:background="#EFEFEF"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="20dp" >
+
+        <TextView
+            android:id="@+id/initDate"
+            style="@style/TextViewGray"
+            android:text="生产日期：XXXX.XX.XX"
+            android:textColor="#969696" />
+
+        <TextView
+            android:id="@+id/initPlace"
+            style="@style/TextViewGray"
+            android:layout_marginTop="8dp"
+            android:text="生产地点：XXXXX"
+            android:textColor="#969696" />
+
+        <TextView
+            android:id="@+id/DeviceType"
+            style="@style/TextViewGray"
+            android:layout_marginTop="8dp"
+            android:text="设备型号：XXXXX"
+            android:textColor="#969696" />
+
+        <TextView
+            android:id="@+id/DeviceCode"
+            style="@style/TextViewGray"
+            android:layout_marginTop="8dp"
+            android:text="设备序列号：XXXXXXXXXXXXXXXX"
+            android:textColor="#969696" />
     </LinearLayout>
 
-    <TextView 
+    <TextView
         android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
-        android:textSize="16dp"
+        android:layout_marginTop="12dp"
+        android:text="名称"
         android:textColor="#9A9A9A"
-    	android:text="名称"/>
-    
+        android:textSize="16dp" />
+
     <EditText
         android:id="@+id/etName"
         style="@style/EditTextTheme"
