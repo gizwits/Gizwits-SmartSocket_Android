@@ -16,14 +16,15 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/return_icon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="设备管理"
-            android:textSize="18sp"
             android:textColor="@android:color/white"
-            />
+            android:textSize="22sp" />
+
         <ImageView
             android:id="@+id/ivAdd"
             android:layout_width="wrap_content"
@@ -32,7 +33,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:src="@drawable/add_icon" />
-
     </RelativeLayout>
 
     <LinearLayout
@@ -40,6 +40,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/rlTop"
         android:orientation="vertical" >
+
         <ListView
             android:id="@+id/lvDevices"
             android:layout_width="fill_parent"

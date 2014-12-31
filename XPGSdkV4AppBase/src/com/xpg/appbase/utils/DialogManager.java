@@ -49,6 +49,40 @@ public class DialogManager {
 		dialog.setContentView(contentView);
 		return dialog;
 	}
+	
+
+	/**
+	 * 注销对话框
+	 * 
+	 * @param ctx
+	 * @param contentStr
+	 *            对话框内容
+	 * @param r
+	 *            右按钮监听器
+	 * @return
+	 */
+	public static Dialog getLogoutDialog(final Activity ctx, OnClickListener r) {
+		final Dialog dialog = new Dialog(ctx, R.style.noBackgroundDialog) {
+		};
+		LayoutInflater layoutInflater = LayoutInflater.from(ctx);
+		View v = layoutInflater.inflate(R.layout.dialog_logout, null);
+		Button leftBtn = (Button) v.findViewById(R.id.left_btn);
+		Button rightBtn = (Button) v.findViewById(R.id.right_btn);
+		leftBtn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				dismissDialog(ctx, dialog);
+			}
+		});
+		rightBtn.setOnClickListener(r);
+
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.setCancelable(false);
+		dialog.setContentView(v);
+		return dialog;
+	}
 
 	/**
 	 * 设备故障无法使用,拨打客服热线 对话框
@@ -62,13 +96,9 @@ public class DialogManager {
 	 *            右按钮监听器
 	 * @return
 	 */
-	public static Dialog getDeviceErrirDialog(final Context ctx,
-			String contentStr,  OnClickListener r) {
+	public static Dialog getDeviceErrirDialog(final Activity ctx,
+			String contentStr, OnClickListener r) {
 		final Dialog dialog = new Dialog(ctx, R.style.noBackgroundDialog) {
-			@Override
-			public void dismiss() {
-				super.dismiss();
-			}
 		};
 		LayoutInflater layoutInflater = LayoutInflater.from(ctx);
 		View v = layoutInflater.inflate(R.layout.dialog_alarm_for_conditioner,
@@ -82,7 +112,7 @@ public class DialogManager {
 
 			@Override
 			public void onClick(View arg0) {
-				dialog.dismiss();
+				dismissDialog(ctx, dialog);
 			}
 		});
 		rightBtn.setOnClickListener(r);
@@ -109,10 +139,6 @@ public class DialogManager {
 		final int[] hour = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
 				16, 17, 18, 19, 20, 21, 22, 23, 24, 0 };
 		final Dialog dialog = new Dialog(ctx, R.style.noBackgroundDialog) {
-			@Override
-			public void dismiss() {
-				super.dismiss();
-			}
 		};
 		LayoutInflater layoutInflater = LayoutInflater.from(ctx);
 		View v = layoutInflater.inflate(
@@ -132,7 +158,7 @@ public class DialogManager {
 
 			@Override
 			public void onClick(View arg0) {
-				dialog.dismiss();
+				dismissDialog(ctx, dialog);
 			}
 		});
 		confi_btn.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +167,7 @@ public class DialogManager {
 			public void onClick(View arg0) {
 				int index = wheelveiew.getCurrentItem();
 				l.timingChosen(hour[index]);
-				dialog.dismiss();
+				dismissDialog(ctx, dialog);
 			}
 		});
 

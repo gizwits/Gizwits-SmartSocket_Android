@@ -6,39 +6,35 @@ public class DeviceAlarm implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public int Id;
-
-	/** @Fields did : 物理地址 */
-
-	// 错误信息
-	private String msg;
-
 	private String time;
+	private String desc;
 
-	public String getMsg() {
-		return msg;
-	}
+	/**
+	 * Instantiates a new control device.
+	 * 
+	 * @param titleName
+	 *            the title name
+	 */
+	public DeviceAlarm(String time, String desc) {
+		this.time = time;
+		this.desc = desc;
 
-	public void setMsg(String msg) {
-		this.msg = msg;
 	}
 
 	public String getTime() {
 		return time;
 	}
 
-	/**
-	 * DateUtil.getDateCN(new Date())
-	 * 
-	 * @author Administrator
-	 * @Title: setTime
-	 * @Description: TODO
-	 * @param @param time
-	 * @return void
-	 * @throws
-	 */
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 }

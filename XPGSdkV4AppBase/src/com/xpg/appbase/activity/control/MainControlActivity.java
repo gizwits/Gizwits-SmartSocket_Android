@@ -97,7 +97,7 @@ public class MainControlActivity extends BaseActivity implements
 
 	private ConcurrentHashMap<String, Object> deviceDataMap;
 	private ConcurrentHashMap<String, Object> statuMap;
-	private ConcurrentHashMap<String, Object> alarmMap;
+	private ArrayList<DeviceAlarm> alarmList;
 
 	private int timingOn, timingOff;
 	private Dialog mFaultDialog;
@@ -134,25 +134,21 @@ public class MainControlActivity extends BaseActivity implements
 						Log.i("info", (String) deviceDataMap.get("data"));
 						inputDataToMaps(statuMap,
 								(String) deviceDataMap.get("data"));
-						// 返回主线程处理P0数据刷新
-						handler.sendEmptyMessage(handler_key.UPDATE_UI
-								.ordinal());
-					}
 
+					}
+					alarmList.clear();
 					if (deviceDataMap.get("alters") != null) {
 						Log.i("info", (String) deviceDataMap.get("alters"));
 						// 返回主线程处理报警数据刷新
-						inputDataToMaps(alarmMap,
-								(String) deviceDataMap.get("alters"));
-					} else if (deviceDataMap.get("faults") != null) {
+						inputAlarmToList((String) deviceDataMap.get("alters"));
+					}
+					if (deviceDataMap.get("faults") != null) {
 						Log.i("info", (String) deviceDataMap.get("faults"));
 						// 返回主线程处理错误数据刷新
-						inputDataToMaps(alarmMap,
-								(String) deviceDataMap.get("faults"));
-					} else {
-						alarmMap.clear();
-
+						inputAlarmToList((String) deviceDataMap.get("faults"));
 					}
+					// 返回主线程处理P0数据刷新
+					handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
 					handler.sendEmptyMessage(handler_key.ALARM.ordinal());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -168,7 +164,7 @@ public class MainControlActivity extends BaseActivity implements
 				updateFanSpeed((String) statuMap.get(JsonKeys.FAN_SPEED));
 				break;
 			case ALARM:
-				if (alarmMap != null && alarmMap.size() > 0) {
+				if (alarmList != null && alarmList.size() > 0) {
 					if (mFaultDialog == null) {
 						mFaultDialog = DialogManager.getDeviceErrirDialog(
 								MainControlActivity.this, "设备故障",
@@ -184,9 +180,10 @@ public class MainControlActivity extends BaseActivity implements
 										mFaultDialog = null;
 									}
 								});
-						mFaultDialog.show();
+
 					}
-					setTipsLayoutVisiblity(true, alarmMap.size());
+					mFaultDialog.show();
+					setTipsLayoutVisiblity(true, alarmList.size());
 				} else {
 					setTipsLayoutVisiblity(false, 0);
 				}
@@ -234,7 +231,7 @@ public class MainControlActivity extends BaseActivity implements
 
 	private void initParams() {
 		statuMap = new ConcurrentHashMap<String, Object>();
-		alarmMap = new ConcurrentHashMap<String, Object>();
+		alarmList = new ArrayList<DeviceAlarm>();
 		height = llBottom.getHeight();
 	}
 
@@ -316,6 +313,8 @@ public class MainControlActivity extends BaseActivity implements
 		tvAdvanture.setOnClickListener(this);
 		tvPowerOnStr.setOnClickListener(this);
 		ivMenu.setOnClickListener(this);
+		rlAlarmTips.setOnClickListener(this);
+		tvTitle.setOnClickListener(this);
 	}
 
 	@Override
@@ -443,6 +442,15 @@ public class MainControlActivity extends BaseActivity implements
 						}
 					}, " 定时开机", timingOn == 0 ? 24 : timingOn - 1).show();
 			break;
+		case R.id.rlAlarmTips:
+		case R.id.tvTitle:
+			if (alarmList != null && alarmList.size() > 0) {
+				Intent intent = new Intent(MainControlActivity.this,
+						AlarmListActicity.class);
+				intent.putExtra("alarm_list", alarmList);
+				startActivity(intent);
+			}
+			break;
 		}
 	}
 
@@ -457,10 +465,11 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private void updateModeState(String pos) {
 		modePos = Integer.parseInt(pos);
-		if (modePos == 3)
+		if (modePos == 3) {
 			seekBar.hideSeekBar();
-		else
+		} else {
 			seekBar.ShowSeekBar();
+		}
 		tvMode.setCompoundDrawablesWithIntrinsicBounds(0, modeImages[modePos],
 				0, 0);
 		tvMode.setText(modeStrs[modePos]);
@@ -499,7 +508,7 @@ public class MainControlActivity extends BaseActivity implements
 	 * @false 隐藏
 	 */
 	private void setTipsLayoutVisiblity(boolean isShow, int count) {
-		tvAlarmTipsCount.setVisibility(isShow ? View.VISIBLE : View.GONE);
+		rlAlarmTips.setVisibility(isShow ? View.VISIBLE : View.GONE);
 		tvAlarmTipsCount.setText(count + "");
 	}
 
@@ -567,24 +576,41 @@ public class MainControlActivity extends BaseActivity implements
 		super.didDisconnected(device);
 	}
 
+	private void inputAlarmToList(String json) throws JSONException {
+		Log.i("revjson", json);
+		JSONObject receive = new JSONObject(json);
+		Iterator actions = receive.keys();
+		while (actions.hasNext()) {
+
+			String action = actions.next().toString();
+			Log.i("revjson", "action=" + action);
+			DeviceAlarm alarm = new DeviceAlarm(getDateCN(new Date()), action);
+			alarmList.add(alarm);
+		}
+		handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
+	}
+
 	private void inputDataToMaps(ConcurrentHashMap<String, Object> map,
 			String json) throws JSONException {
 		Log.i("revjson", json);
 		JSONObject receive = new JSONObject(json);
 		Iterator actions = receive.keys();
 		while (actions.hasNext()) {
+
 			String action = actions.next().toString();
+			Log.i("revjson", "action=" + action);
 			// 忽略特殊部分
 			if (action.equals("cmd") || action.equals("qos")
 					|| action.equals("seq") || action.equals("version")) {
 				continue;
 			}
 			JSONObject params = receive.getJSONObject(action);
+			Log.i("revjson", "params=" + params);
 			Iterator it_params = params.keys();
 			while (it_params.hasNext()) {
 				String param = it_params.next().toString();
 				Object value = params.get(param);
-				statuMap.put(param, value);
+				map.put(param, value);
 				Log.i(TAG, "Key:" + param + ";value" + value);
 			}
 		}
@@ -604,6 +630,24 @@ public class MainControlActivity extends BaseActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		isClick = false;
+	}
+
+	/**
+	 * 获取格式：2014年6月24日 17:23
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String getDateCN(Date date) {
+		int y = date.getYear();
+		int m = date.getMonth() + 1;
+		int d = date.getDate();
+
+		int h = date.getHours();
+		int mt = date.getMinutes();
+
+		return (y + 1900) + "年" + m + "月" + d + "日  " + h + ":" + mt;
+
 	}
 
 }

@@ -200,6 +200,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                     Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                dialog.show();
                 final String psw = etPsw.getText().toString().trim();
                 final String name = etName.getText().toString().trim();
                 mCenter.cLogin(name, psw);

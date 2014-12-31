@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="xpgc" />
+        <option name="name" value="xpgc" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
   <component name="AndroidLayouts">
     <shared>
       <config>
@@ -29,6 +41,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_register.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_softap.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -42,98 +59,17 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="xpgc" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04e8215c-330c-4190-acf0-797d944c4f29" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/add_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/device_icon_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/device_icon_gray.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/fault_tips.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_changetemp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_curve.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_function.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_high.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_high_selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_low.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_low_selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_menu.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_mid.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_mid_selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_model_auto.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_model_cool.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_model_water.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_model_wind.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_power.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_regulate.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_shake.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_shake_selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/icon_time.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/logout_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/maincontrol_bottom_bg_blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/power_big.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/slib_about.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/slib_account.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/slib_arrow_down.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/slib_deviceicon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/slib_help.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/slib_tick.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/start_time.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/widget/CircularSeekBar.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/control/MainControlActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/slipbar/SlipBarActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_main_control.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_manage_device_list.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_slibbar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/device_list_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/device_list_item_header.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/slibbar_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable/wing_high_selector.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable/wing_low_selector.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable/wing_mid_selector.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable/wing_shake_selector.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable/wing_text_selector.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/gen/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/libs/XPGWiFiSDK.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/libs/armeabi/libXPGConnect.so" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/AlarmDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/BaseDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/DBConstants.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/DBOpenHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/DaoCenter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/DeviceDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/StringFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/database/UserDao.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/adapter/deviceListAdapter.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/adapter/DeviceListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/AndroidManifest.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/bin/AndroidManifest.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/bin/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/BaseActivity.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/camera/CameraConfigurationManager.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/camera/CameraConfigurationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/camera/CameraManager.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/camera/CameraManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/CaptureActivity.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/CaptureActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/sdk/CmdCenter.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/sdk/CmdCenter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/config/Configs.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/config/Configs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/decoding/DecodeHandler.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/zxing/decoding/DecodeHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/device/DeviceListActivity.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/device/DeviceListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/device/DeviceManageListActivity.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/device/DeviceManageListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/utils/DialogManager.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/utils/DialogManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/config/JsonKeys.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/config/JsonKeys.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/account/LoginActivity.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/account/LoginActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/libs/XPGWiFiSDK.jar" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/libs/XPGWiFiSDK.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/libs/armeabi/libXPGConnect.so" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/libs/armeabi/libXPGConnect.so" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/gen/com/xpg/appbase/R.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/gen/com/xpg/appbase/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/account/RegisterActivity.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/account/RegisterActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/onboarding/SearchDeviceActivity.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/onboarding/SearchDeviceActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/adapter/SearchListAdapter.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/adapter/SearchListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/sdk/SettingManager.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/sdk/SettingManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/XpgApplication.java" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/XpgApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_change_pwd.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_change_pwd.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_devicelist.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_devicelist.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_devices_info.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_devices_info.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_login.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/values/colors.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/project.properties" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_airlink.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_airlink.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_register.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_register.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_searchdevice.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_searchdevice.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_softap.xml" afterPath="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_softap.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xpgsdkv4appbase.iws" />
@@ -161,102 +97,7 @@
     <favorites_list name="xpgsdkv4appbase" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CmdCenter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/sdk/CmdCenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4410" max-vertical-offset="4815">
-              <caret line="294" column="47" selection-start-line="294" selection-start-column="47" selection-end-line="294" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JsonKeys.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/config/JsonKeys.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="975">
-              <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainControlActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/control/MainControlActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5367" max-vertical-offset="9210">
-              <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3461#5658#0" expanded="true" />
-                <element signature="e#5153#5464#0" expanded="true" />
-                <element signature="e#5453#5454#0" expanded="true" />
-                <element signature="e#5654#5655#0" expanded="true" />
-                <element signature="e#8862#9053#0" expanded="true" />
-                <element signature="e#9048#9049#0" expanded="true" />
-                <element signature="e#9096#9514#0" expanded="true" />
-                <element signature="e#9509#9510#0" expanded="true" />
-                <element signature="e#9780#9958#0" expanded="true" />
-                <element signature="e#9953#9954#0" expanded="true" />
-                <element signature="e#12456#12734#0" expanded="true" />
-                <element signature="e#12726#12727#0" expanded="true" />
-                <element signature="e#12875#13152#0" expanded="true" />
-                <element signature="e#13144#13145#0" expanded="true" />
-                <element signature="e#13978#13979#0" expanded="true" />
-                <element signature="e#14028#14029#0" expanded="true" />
-                <element signature="e#14950#14951#0" expanded="true" />
-                <element signature="e#14994#14995#0" expanded="true" />
-                <element signature="e#15519#15520#0" expanded="true" />
-                <element signature="e#15555#15556#0" expanded="true" />
-                <element signature="e#16789#16790#0" expanded="true" />
-                <element signature="e#16811#16812#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SlipBarActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/slipbar/SlipBarActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44690266" vertical-offset="1977" max-vertical-offset="4350">
-              <caret line="152" column="32" selection-start-line="152" selection-start-column="32" selection-end-line="152" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4500#4501#0" expanded="true" />
-                <element signature="e#4553#4554#0" expanded="true" />
-                <element signature="e#5941#5942#0" expanded="true" />
-                <element signature="e#5981#5982#0" expanded="true" />
-                <element signature="e#6150#6151#0" expanded="true" />
-                <element signature="e#6191#6192#0" expanded="true" />
-                <element signature="e#6488#6520#0" expanded="true" />
-                <element signature="e#6846#6847#0" expanded="true" />
-                <element signature="e#6887#6888#0" expanded="true" />
-                <element signature="e#7534#7535#0" expanded="true" />
-                <element signature="e#7575#7576#0" expanded="true" />
-                <element signature="e#7761#7762#0" expanded="true" />
-                <element signature="e#7802#7803#0" expanded="true" />
-                <element signature="e#7855#7856#0" expanded="true" />
-                <element signature="e#7907#7908#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_slibbar.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_slibbar.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.888889" vertical-offset="894" max-vertical-offset="2865">
-              <caret line="81" column="52" selection-start-line="81" selection-start-column="47" selection-end-line="81" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -269,13 +110,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_forget_reset.xml" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/account/ForgetPswActivity.java" />
-        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_register.xml" />
-        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_searchdevice.xml" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/onboarding/AutoConfigActivity.java" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_autoconfig.xml" />
-        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_softap.xml" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/onboarding/SoftApConfigActivity.java" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/onboarding/AirlinkActivity.java" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/entity/Device.java" />
@@ -320,6 +157,10 @@
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/control/MainControlActivity.java" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/slipbar/SlipBarActivity.java" />
+        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_register.xml" />
+        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_searchdevice.xml" />
+        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_airlink.xml" />
+        <option value="$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_softap.xml" />
       </list>
     </option>
   </component>
@@ -356,166 +197,7 @@
       <sortByType ProjectPane="false" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XPGSdkV4AppBase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XPGSdkV4AppBase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XPGSdkV4AppBase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XPGSdkV4AppBase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XPGSdkV4AppBase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="slipbar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XPGSdkV4AppBase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="onboarding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xpgsdkv4appbase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="XPGSdkV4AppBase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -712,7 +394,92 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpgsdkv4appbase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpgsdkv4appbase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XPGSdkV4AppBase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpgsdkv4appbase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XPGSdkV4AppBase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpgsdkv4appbase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XPGSdkV4AppBase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appbase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpgsdkv4appbase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XPGSdkV4AppBase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xpg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appbase" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -759,11 +526,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/XPGSdkV4AppBase/libs/armeabi" />
+      <recent name="$PROJECT_DIR$/XPGSdkV4AppBase/libs" />
       <recent name="$PROJECT_DIR$/XPGSdkV4AppBase/src" />
       <recent name="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable" />
       <recent name="$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi" />
-      <recent name="$PROJECT_DIR$/XPGSdkV4AppBase/libs/armeabi" />
-      <recent name="$PROJECT_DIR$/XPGSdkV4AppBase/libs" />
     </key>
   </component>
   <component name="RunManager" selected="Android Tests.All Tests">
@@ -983,7 +750,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1002,7 +769,7 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.58498585" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26009694" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26009694" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286119" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1039,62 +806,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/account/UserManageActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6238938" vertical-offset="27" max-vertical-offset="705">
-          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_change_pwd.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14746544" vertical-offset="189" max-vertical-offset="840">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/device_list_item_header.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="375">
-          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/sdk/SettingManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1635">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/adapter/SearchListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40265486" vertical-offset="897" max-vertical-offset="1575">
-          <caret line="90" column="39" selection-start-line="90" selection-start-column="39" selection-end-line="90" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/adapter/DeviceListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="4410">
-          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/activity/device/DeviceManageListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="930">
-          <caret line="33" column="51" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_about.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -1174,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3004" max-vertical-offset="3750">
           <caret line="281" column="5" selection-start-line="281" selection-start-column="5" selection-end-line="281" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1207,17 +917,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="1245">
           <caret line="37" column="59" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_devicelist.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56426334" vertical-offset="45" max-vertical-offset="840">
-          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="34" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -1259,59 +958,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_airlink.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47021943" vertical-offset="75" max-vertical-offset="2160">
-          <caret line="25" column="21" selection-start-line="6" selection-start-column="4" selection-end-line="25" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/src/com/xpg/appbase/widget/CircularSeekBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1825" max-vertical-offset="11010">
           <caret line="191" column="7" selection-start-line="191" selection-start-column="7" selection-end-line="191" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#9400#9401#0" expanded="false" />
-            <element signature="e#9428#9429#0" expanded="false" />
-            <element signature="e#10070#10071#0" expanded="false" />
-            <element signature="e#10106#10107#0" expanded="false" />
-            <element signature="e#10277#10278#0" expanded="false" />
-            <element signature="e#10309#10310#0" expanded="false" />
-            <element signature="e#10728#10729#0" expanded="false" />
-            <element signature="e#10759#10760#0" expanded="false" />
-            <element signature="e#10895#10896#0" expanded="false" />
-            <element signature="e#10935#10936#0" expanded="false" />
-            <element signature="e#12087#12088#0" expanded="false" />
-            <element signature="e#12121#12122#0" expanded="false" />
-            <element signature="e#12272#12273#0" expanded="false" />
-            <element signature="e#12318#12319#0" expanded="false" />
-            <element signature="e#12427#12428#0" expanded="false" />
-            <element signature="e#12458#12459#0" expanded="false" />
-            <element signature="e#13779#13780#0" expanded="false" />
-            <element signature="e#13817#13818#0" expanded="false" />
-            <element signature="e#13988#13989#0" expanded="false" />
-            <element signature="e#14042#14043#0" expanded="false" />
-            <element signature="e#14207#14208#0" expanded="false" />
-            <element signature="e#14249#14250#0" expanded="false" />
-            <element signature="e#14402#14403#0" expanded="false" />
-            <element signature="e#14444#14445#0" expanded="false" />
-            <element signature="e#14589#14590#0" expanded="false" />
-            <element signature="e#14632#14633#0" expanded="false" />
-            <element signature="e#17419#17420#0" expanded="false" />
-            <element signature="e#17458#17459#0" expanded="false" />
-            <element signature="e#18164#18165#0" expanded="false" />
-            <element signature="e#18199#18200#0" expanded="false" />
-            <element signature="e#18271#18272#0" expanded="false" />
-            <element signature="e#18307#18308#0" expanded="false" />
-            <element signature="e#18400#18401#0" expanded="false" />
-            <element signature="e#18432#18433#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1384,7 +1034,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7522124" vertical-offset="1575" max-vertical-offset="8280">
           <caret line="159" column="12" selection-start-line="159" selection-start-column="12" selection-end-line="159" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1392,7 +1041,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
           <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1400,7 +1048,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
           <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1408,26 +1055,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.5840708" vertical-offset="5496" max-vertical-offset="14985">
           <caret line="438" column="84" selection-start-line="438" selection-start-column="84" selection-end-line="438" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#27892#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4021#4045#0" expanded="false" />
-            <element signature="e#4124#4147#0" expanded="false" />
-            <element signature="e#5156#5157#0" expanded="false" />
-            <element signature="e#5186#5187#0" expanded="false" />
-            <element signature="e#5842#5843#0" expanded="false" />
-            <element signature="e#5877#5878#0" expanded="false" />
-            <element signature="e#6171#6172#0" expanded="false" />
-            <element signature="e#6199#6200#0" expanded="false" />
-            <element signature="e#8351#8352#0" expanded="false" />
-            <element signature="e#8385#8386#0" expanded="false" />
-            <element signature="e#9610#9611#0" expanded="false" />
-            <element signature="e#9654#9655#0" expanded="false" />
-            <element signature="e#9841#9842#0" expanded="false" />
-            <element signature="e#9872#9873#0" expanded="false" />
-            <element signature="e#25195#26067#0" expanded="false" />
-            <element signature="e#26060#26061#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1446,10 +1073,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.72030073" vertical-offset="1141" max-vertical-offset="2565">
           <caret line="118" column="45" selection-start-line="118" selection-start-column="45" selection-end-line="118" selection-end-column="45" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1476,41 +1099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5367" max-vertical-offset="9210">
           <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3461#5658#0" expanded="true" />
-            <element signature="e#5153#5464#0" expanded="true" />
-            <element signature="e#5453#5454#0" expanded="true" />
-            <element signature="e#5654#5655#0" expanded="true" />
-            <element signature="e#8862#9053#0" expanded="true" />
-            <element signature="e#9048#9049#0" expanded="true" />
-            <element signature="e#9096#9514#0" expanded="true" />
-            <element signature="e#9509#9510#0" expanded="true" />
-            <element signature="e#9780#9958#0" expanded="true" />
-            <element signature="e#9953#9954#0" expanded="true" />
-            <element signature="e#12456#12734#0" expanded="true" />
-            <element signature="e#12726#12727#0" expanded="true" />
-            <element signature="e#12875#13152#0" expanded="true" />
-            <element signature="e#13144#13145#0" expanded="true" />
-            <element signature="e#13978#13979#0" expanded="true" />
-            <element signature="e#14028#14029#0" expanded="true" />
-            <element signature="e#14950#14951#0" expanded="true" />
-            <element signature="e#14994#14995#0" expanded="true" />
-            <element signature="e#15519#15520#0" expanded="true" />
-            <element signature="e#15555#15556#0" expanded="true" />
-            <element signature="e#16789#16790#0" expanded="true" />
-            <element signature="e#16811#16812#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_slibbar.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.888889" vertical-offset="894" max-vertical-offset="2865">
-          <caret line="81" column="52" selection-start-line="81" selection-start-column="47" selection-end-line="81" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -1520,23 +1108,112 @@
         <state vertical-scroll-proportion="0.44690266" vertical-offset="1977" max-vertical-offset="4350">
           <caret line="152" column="32" selection-start-line="152" selection-start-column="32" selection-end-line="152" selection-end-column="32" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4500#4501#0" expanded="true" />
-            <element signature="e#4553#4554#0" expanded="true" />
-            <element signature="e#5941#5942#0" expanded="true" />
-            <element signature="e#5981#5982#0" expanded="true" />
-            <element signature="e#6150#6151#0" expanded="true" />
-            <element signature="e#6191#6192#0" expanded="true" />
-            <element signature="e#6488#6520#0" expanded="true" />
-            <element signature="e#6846#6847#0" expanded="true" />
-            <element signature="e#6887#6888#0" expanded="true" />
-            <element signature="e#7534#7535#0" expanded="true" />
-            <element signature="e#7575#7576#0" expanded="true" />
-            <element signature="e#7761#7762#0" expanded="true" />
-            <element signature="e#7802#7803#0" expanded="true" />
-            <element signature="e#7855#7856#0" expanded="true" />
-            <element signature="e#7907#7908#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_slibbar.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49308756" vertical-offset="894" max-vertical-offset="2865">
+          <caret line="81" column="52" selection-start-line="81" selection-start-column="47" selection-end-line="81" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/drawable-xhdpi/step_register.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_register.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14106584" vertical-offset="0" max-vertical-offset="1590">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_devicelist.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="174" max-vertical-offset="825">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="34" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_change_pwd.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_binding.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_searchdevice.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5877743" vertical-offset="0" max-vertical-offset="1500">
+          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_airlink.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5877743" vertical-offset="75" max-vertical-offset="2160">
+          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_autoconfig.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XPGSdkV4AppBase/res/layout/activity_softap.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2192118" vertical-offset="660" max-vertical-offset="3600">
+          <caret line="77" column="34" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

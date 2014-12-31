@@ -40,11 +40,9 @@
         <activity android:name=".activity.account.ChangePswActivity" />
         <activity android:name=".activity.account.ForgetPswActivity" />
         <activity android:name=".activity.account.UserManageActivity" />
-
         <activity android:name=".activity.device.DeviceListActivity" />
         <activity android:name=".activity.device.DeviceManageListActivity" />
         <activity android:name=".activity.device.DeviceManageDetailActivity" />
-
         <activity android:name=".activity.onboarding.AirlinkActivity" />
         <activity android:name=".activity.onboarding.AutoConfigActivity" />
         <activity android:name=".activity.onboarding.BindingDeviceActivity" />
@@ -52,16 +50,12 @@
         <activity android:name=".activity.onboarding.GetPassAndBind" />
         <activity android:name=".activity.onboarding.SearchDeviceActivity" />
         <activity android:name=".activity.onboarding.SoftApConfigActivity" />
-
         <activity android:name=".activity.help.AboutActivity" />
         <activity android:name=".activity.help.HelpActivity" />
-
-
         <activity android:name="com.xpg.zxing.CaptureActivity" />
         <activity android:name=".activity.slipbar.SlipBarActivity" />
-
-        <activity android:name=".activity.control.MainControlActivity" >
-        </activity>
+        <activity android:name=".activity.control.MainControlActivity" />
+        <activity android:name=".activity.control.AlarmListActicity" />
     </application>
 
 </manifest>

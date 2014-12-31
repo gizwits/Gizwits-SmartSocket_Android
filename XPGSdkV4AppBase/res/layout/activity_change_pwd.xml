@@ -4,43 +4,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/top_layout"
-        layout="@layout/include_title" />
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        style="@style/TopLayout" >
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/return_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="修改密码"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+    </RelativeLayout>
 
     <EditText
-        android:id="@+id/etNum"
+        android:id="@+id/etPswOld"
         style="@style/EditTextTheme"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="40dp"
-        android:hint="手机号/邮箱" />
-
-    <LinearLayout
-        android:id="@+id/llInputPsw"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/login_input_box"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:hint="旧密码"
+        android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/etInputPsw"
-            style="@style/EditTextTheme"
-            android:layout_marginLeft="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="密码" />
+    <EditText
+        android:id="@+id/etPswNew"
+        style="@style/EditTextTheme"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_input_box"
+        android:hint="新密码"
+        android:inputType="textPassword" />
 
-        <ToggleButton
-            android:id="@+id/tbPswFlag"
-            android:layout_width="50dp"
-            android:layout_height="24dp"
-            android:background="@drawable/toggle_selector"
-            android:textOff=""
-            android:textOn="" />
-    </LinearLayout>
+    <ToggleButton
+        android:id="@+id/tbPswFlag"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn="" />
 
     <Button
         android:id="@+id/btnConfirm"

@@ -189,7 +189,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 				&& text.contains("passcode=")) {
 
 			inactivityTimer.onActivity();
-			// viewfinderView.drawResultBitmap(barcode);
+//			 viewfinderView.drawResultBitmap(barcode);
 			product_key = getParamFomeUrl(text, "product_key");
 			did = getParamFomeUrl(text, "did");
 			passcode = getParamFomeUrl(text, "passcode");
@@ -237,7 +237,6 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
 		if (error == 0) {
-			ToastUtils.showShort(this, "绑定成功");
 			mHandler.sendEmptyMessage(handler_key.SUCCESS.ordinal());
 		} else {
 			Message message = new Message();

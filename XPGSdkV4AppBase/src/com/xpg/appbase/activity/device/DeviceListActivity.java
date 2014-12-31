@@ -3,6 +3,7 @@ package com.xpg.appbase.activity.device;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,12 +18,16 @@ import android.widget.ListView;
 
 import com.xpg.appbase.R;
 import com.xpg.appbase.activity.BaseActivity;
+import com.xpg.appbase.activity.account.LoginActivity;
+import com.xpg.appbase.activity.account.UserManageActivity;
 import com.xpg.appbase.activity.control.MainControlActivity;
 import com.xpg.appbase.activity.onboarding.SearchDeviceActivity;
 import com.xpg.appbase.adapter.DeviceListAdapter;
+import com.xpg.appbase.utils.DialogManager;
 import com.xpg.appbase.widget.RefreshableListView;
 import com.xpg.appbase.widget.RefreshableListView.OnRefreshListener;
 import com.xpg.common.system.IntentUtils;
+import com.xpg.ui.utils.ToastUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 //TODO: Auto-generated Javadoc
@@ -52,6 +57,8 @@ public class DeviceListActivity extends BaseActivity implements
 	private DeviceListAdapter deviceListAdapter;
 	private ProgressDialog progressDialog;
 
+	private Dialog dialog;
+
 	/**
 	 * ClassName: Enum handler_key. <br/>
 	 * <br/>
@@ -77,7 +84,7 @@ public class DeviceListActivity extends BaseActivity implements
 		 * The login timeout.
 		 */
 		LOGIN_TIMEOUT,
-		
+
 		FOUND,
 
 	}
@@ -92,7 +99,7 @@ public class DeviceListActivity extends BaseActivity implements
 			case FOUND:
 				lvDevices.completeRefreshing();
 				break;
-			
+
 			case LOGIN_SUCCESS:
 				progressDialog.cancel();
 				IntentUtils.getInstance().startActivity(
@@ -157,6 +164,20 @@ public class DeviceListActivity extends BaseActivity implements
 		case R.id.ivAdd:
 			IntentUtils.getInstance().startActivity(DeviceListActivity.this,
 					SearchDeviceActivity.class);
+			break;
+		case R.id.ivLogout:
+			if (dialog == null) {
+				dialog = DialogManager.getLogoutDialog(DeviceListActivity.this,
+						new OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								mCenter.cLogout();
+							}
+						});
+			}
+
+			DialogManager.showDialog(DeviceListActivity.this, dialog);
 			break;
 		}
 
@@ -231,8 +252,20 @@ public class DeviceListActivity extends BaseActivity implements
 	protected void didDiscovered(int error, List<XPGWifiDevice> devicesList) {
 		Log.d("onDiscovered", "Device count:" + devicesList.size());
 		this.deviceList = devicesList;
-		 handler.sendEmptyMessage(handler_key.FOUND.ordinal());
-		// deviceListAdapter.changeDatas(devicesList);
-		
+		handler.sendEmptyMessage(handler_key.FOUND.ordinal());
+
+	}
+
+	@Override
+	protected void didUserLogout(int error, String errorMessage) {
+		if (error == 1) {
+			DialogManager.dismissDialog(DeviceListActivity.this, dialog);
+			ToastUtils.showShort(DeviceListActivity.this, "注销成功");
+			IntentUtils.getInstance().startActivity(DeviceListActivity.this,
+					LoginActivity.class);
+			finish();
+		} else {
+			ToastUtils.showShort(DeviceListActivity.this, "注销失败");
+		}
 	}
 }

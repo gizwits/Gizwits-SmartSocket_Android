@@ -1,56 +1,90 @@
 package com.xpg.appbase.activity.device;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.xpg.appbase.R;
 import com.xpg.appbase.activity.BaseActivity;
+import com.xpg.appbase.adapter.ManageListAdapter;
 import com.xpg.appbase.adapter.SearchListAdapter;
 import com.xpg.appbase.entity.Device;
+import com.xpg.common.system.IntentUtils;
+import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeviceManageListActivity extends BaseActivity{
-    /**
-     * The iv TopBar leftBtn.
-     */
-    private ImageView leftBtn;
+public class DeviceManageListActivity extends BaseActivity {
+	/**
+	 * The iv TopBar leftBtn.
+	 */
+	private ImageView ivBack;
 
-    /**
-     * The tv init date
-     */
-    private ListView lvDevices;
+	/**
+	 * The tv init date
+	 */
+	private ListView lvDevices;
 
-    /**
-     * The Device device list
-     */
-    private List<Device> devices;
+	/**
+	 * The Device device list
+	 */
+	private List<XPGWifiDevice> devices;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_devicelist);
+	ManageListAdapter mAdapter;
 
-        initUI();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_manage_device_list);
 
-    private void initUI() {
+		initViews();
+		initEvents();
+	}
 
-        leftBtn = (ImageView) findViewById(R.id.ivLeftBtn);
-        lvDevices = (ListView) findViewById(R.id.lvDevices);
-        devices = new ArrayList<Device>();
-        Device device = new Device();
-        device.setName("111");
-        devices.add(device);
-        device.setName("222");
-        devices.add(device);
-        device.setName("333");
-        devices.add(device);
-        device.setName("444");
-        devices.add(device);
-        lvDevices.setAdapter(new SearchListAdapter(this, devices, null));
-    }
+	private void initEvents() {
+		lvDevices.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				XPGWifiDevice device = bindlist.get(position);
+				if (device.isLAN() || device.isOnline()) {
+					Intent intent = new Intent(DeviceManageListActivity.this,
+							DeviceManageDetailActivity.class);
+					intent.putExtra("mac", device.getMacAddress());
+					startActivity(intent);
+				}
+			}
+		});
+		ivBack.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+				
+			}
+		});
+	}
+
+	private void initViews() {
+
+		ivBack = (ImageView) findViewById(R.id.ivBack);
+		lvDevices = (ListView) findViewById(R.id.lvDevices);
+		mAdapter = new ManageListAdapter(DeviceManageListActivity.this,
+				bindlist);
+		lvDevices.setAdapter(mAdapter);
+		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		finish();
+	}
 
 }

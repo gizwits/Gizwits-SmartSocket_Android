@@ -701,6 +701,7 @@ public class CircularSeekBar extends View {
      */
     public void ShowSeekBar() {
         SHOW_SEEKBAR = true;
+        postInvalidate();
     }
 
     /**
@@ -708,6 +709,7 @@ public class CircularSeekBar extends View {
      */
     public void hideSeekBar() {
         SHOW_SEEKBAR = false;
+        postInvalidate();
     }
 
     private ScrollView mScrollView;
