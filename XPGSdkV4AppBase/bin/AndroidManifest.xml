@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xpg.appbase"
+    package="com.gizwits.aircondition"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -20,15 +20,15 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name="com.xpg.appbase.XpgApplication"
+        android:name="com.gizwits.aircondition.XpgApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
-        <activity android:name=".activity.FlushActivity" />
-        <activity android:name=".activity.BaseActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.FlushActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.BaseActivity" />
         <activity
-            android:name=".activity.account.LoginActivity"
+            android:name="com.gizwits.aircondition.activity.account.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,26 +36,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.account.RegisterActivity" />
-        <activity android:name=".activity.account.ChangePswActivity" />
-        <activity android:name=".activity.account.ForgetPswActivity" />
-        <activity android:name=".activity.account.UserManageActivity" />
-        <activity android:name=".activity.device.DeviceListActivity" />
-        <activity android:name=".activity.device.DeviceManageListActivity" />
-        <activity android:name=".activity.device.DeviceManageDetailActivity" />
-        <activity android:name=".activity.onboarding.AirlinkActivity" />
-        <activity android:name=".activity.onboarding.AutoConfigActivity" />
-        <activity android:name=".activity.onboarding.BindingDeviceActivity" />
-        <activity android:name=".activity.onboarding.ConfigFailedActivity" />
-        <activity android:name=".activity.onboarding.GetPassAndBind" />
-        <activity android:name=".activity.onboarding.SearchDeviceActivity" />
-        <activity android:name=".activity.onboarding.SoftApConfigActivity" />
-        <activity android:name=".activity.help.AboutActivity" />
-        <activity android:name=".activity.help.HelpActivity" />
-        <activity android:name="com.xpg.zxing.CaptureActivity" />
-        <activity android:name=".activity.slipbar.SlipBarActivity" />
-        <activity android:name=".activity.control.MainControlActivity" />
-        <activity android:name=".activity.control.AlarmListActicity" />
+        <activity android:name="com.gizwits.aircondition.activity.account.RegisterActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.account.ChangePswActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.account.ForgetPswActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.account.UserManageActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.device.DeviceListActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.device.DeviceManageListActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.device.DeviceManageDetailActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.onboarding.AirlinkActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.onboarding.AutoConfigActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.onboarding.BindingDeviceActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.onboarding.ConfigFailedActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.onboarding.GetPassAndBind" />
+        <activity android:name="com.gizwits.aircondition.activity.onboarding.SearchDeviceActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.onboarding.SoftApConfigActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.help.AboutActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.help.HelpActivity" />
+        <activity android:name="com.gizwits.zxing.CaptureActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.slipbar.SlipBarActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.control.MainControlActivity" />
+        <activity android:name="com.gizwits.aircondition.activity.control.AlarmListActicity" />
     </application>
 
 </manifest>

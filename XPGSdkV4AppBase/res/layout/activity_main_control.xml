@@ -265,7 +265,7 @@
                         android:layout_gravity="center_horizontal"
                         android:gravity="center">
 
-                        <com.xpg.appbase.widget.CircularSeekBar
+                        <com.gizwits.aircondition.widget.CircularSeekBar
                             android:id="@+id/csbSeekbar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

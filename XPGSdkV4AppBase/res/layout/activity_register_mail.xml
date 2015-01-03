@@ -25,48 +25,13 @@
             android:src="@drawable/step_register" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tvTips"
-        android:gravity="center"
-        android:layout_margin="10dp"
-        android:textColor="@color/text_blue"
-        android:text="请输入您的真实邮箱，确保日后可找回密码。\n注册成功后会向您发送邮件"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
     <EditText
         android:id="@+id/etName"
         style="@style/EditTextTheme"
         android:layout_marginTop="30dp"
-        android:hint="手机号" />
+        android:hint="邮箱" />
 
-    <Button
-        android:id="@+id/btnGetCode"
-        style="@style/ButtonBlue"
-        android:text="获取验证码" />
 
-    <LinearLayout
-        android:id="@+id/llInputCode"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/etInputCode"
-            style="@style/EditTextTheme"
-            android:layout_weight="1"
-            android:hint="验证码" />
-
-        <Button
-            android:id="@+id/btnReGetCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_blue_short"
-            android:text="重新获取\n验证码"
-            android:textColor="@android:color/background_light"
-            android:textSize="14sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llInputPsw"
@@ -104,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:text="邮箱注册"
+        android:text="手机注册"
         android:textSize="14sp" />
 
 </LinearLayout>

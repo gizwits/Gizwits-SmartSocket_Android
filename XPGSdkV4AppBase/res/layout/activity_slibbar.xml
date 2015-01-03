@@ -55,6 +55,7 @@
 
         <ListView
             android:id="@+id/lvDevice"
+            android:visibility="gone"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:cacheColorHint="#00000000" />
@@ -174,6 +175,12 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/text_black" />
+
+        <Button
+            android:layout_marginTop="50dp"
+            android:id="@+id/btnDeviceList"
+            style="@style/ButtonBlue"
+            android:text="返回设备列表" />
     </LinearLayout>
 
     <ImageView
