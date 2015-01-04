@@ -18,6 +18,7 @@
 package com.gizwits.aircondition.activity.account;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 
 import com.gizwits.aircondition.activity.BaseActivity;
 import com.gizwits.aircondition.activity.device.DeviceListActivity;
+import com.gizwits.aircondition.utils.Historys;
 import com.gizwits.aircondition.R;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.NetworkUtils;
@@ -75,6 +77,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
      * The dialog.
      */
     private ProgressDialog dialog;
+    
+    /**
+     * The boolean isExit.
+     */
+    private boolean isExit =false;
 
     /**
      * ClassName: Enum handler_key. <br/>
@@ -99,6 +106,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
          * The login timeout.
          */
         LOGIN_TIMEOUT,
+        
+        /**
+         *  Exit the app.
+         */
+        EXIT,
     }
 
     /**
@@ -129,6 +141,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                             .show();
                     dialog.cancel();
                     break;
+                case EXIT:
+                	isExit=false;
+                	break;
 
             }
         }
@@ -235,5 +250,25 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         }
     }
 
+	@Override
+	public void onBackPressed() {
+		exit();
+	}
 
+	public void exit() {
+		if (!isExit) {
+			isExit = true;
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.tip_exit), Toast.LENGTH_SHORT).show();
+			handler.sendEmptyMessageDelayed(0, 2000);
+		} else {
+
+			Intent intent = new Intent(Intent.ACTION_MAIN);
+			intent.addCategory(Intent.CATEGORY_HOME);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			this.startActivity(intent);
+			Historys.exit();
+		}
+	}
+    
 }

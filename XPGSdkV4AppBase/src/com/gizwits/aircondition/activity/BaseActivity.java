@@ -30,6 +30,7 @@ import android.view.Window;
 import com.gizwits.aircondition.entity.Device;
 import com.gizwits.aircondition.sdk.CmdCenter;
 import com.gizwits.aircondition.sdk.SettingManager;
+import com.gizwits.aircondition.utils.Historys;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import com.xtremeprog.xpgconnect.XPGWifiDeviceListener;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;
@@ -180,6 +181,7 @@ public class BaseActivity extends Activity {
 		setmanager = new SettingManager(this);
 		mCenter = CmdCenter.getInstance(this.getApplicationContext());
 
+		Historys.put(this);
 	}
 
 	/**
