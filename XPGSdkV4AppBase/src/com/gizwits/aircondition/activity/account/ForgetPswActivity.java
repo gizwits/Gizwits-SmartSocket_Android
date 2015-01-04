@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +40,7 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
     /**
      * The tv phone switch.
      */
-    private TextView tvPhoneSwitch;
+//    private TextView tvPhoneSwitch;
 
     /**
      * The et name.
@@ -187,8 +188,8 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
                     break;
 
                 case CHANGE_SUCCESS:
-                    IntentUtils.getInstance().startActivity(ForgetPswActivity.this,
-                            LoginActivity.class);
+//                    IntentUtils.getInstance().startActivity(ForgetPswActivity.this,
+//                            LoginActivity.class);
                     finish();
                     break;
 
@@ -212,7 +213,7 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
      * Inits the views.
      */
     private void initViews() {
-        tvPhoneSwitch = (TextView) findViewById(R.id.tvPhoneSwitch);
+//        tvPhoneSwitch = (TextView) findViewById(R.id.tvPhoneSwitch);
         etName = (EditText) findViewById(R.id.etName);
         etInputCode = (EditText) findViewById(R.id.etInputCode);
         etInputPsw = (EditText) findViewById(R.id.etInputPsw);
@@ -235,15 +236,20 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
         btnGetCode.setOnClickListener(this);
         btnReGetCode.setOnClickListener(this);
         btnSure.setOnClickListener(this);
-        tvPhoneSwitch.setOnClickListener(this);
+//        tvPhoneSwitch.setOnClickListener(this);
         ivBack.setOnClickListener(this);
         tbPswFlag.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-                // TODO Auto-generated method stub
-
+            	if (isChecked) {
+					etInputPsw.setInputType(InputType.TYPE_CLASS_TEXT
+							| InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+				} else {
+					etInputPsw.setInputType(InputType.TYPE_CLASS_TEXT
+							| InputType.TYPE_TEXT_VARIATION_PASSWORD);
+				}
             }
 
         });
