@@ -140,7 +140,7 @@
                     android:background="#dbf3fc"
                     android:orientation="vertical"
                     android:padding="18dp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -160,19 +160,20 @@
                             android:text="温度曲线"
                             android:textColor="@color/text_gray"
                             android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/tvCHangeTemp"
+                        <CheckedTextView
+                            android:id="@+id/tvUnit"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="fill_parent"
                             android:layout_weight="1"
                             android:button="@null"
                             android:drawablePadding="5dp"
-                            android:drawableTop="@drawable/icon_changetemp"
+                            android:drawableTop="@drawable/unit_selector"
                             android:gravity="center"
-                            android:text="摄氏/华氏"
-                            android:textColor="@color/text_gray"
-                            android:textSize="12sp" />
+                            android:text="摄氏"
+                            android:textSize="12sp"
+                            android:textColor="@drawable/wing_text_selector"
+                             />
+
 
                         <TextView
                             android:layout_width="0dp"

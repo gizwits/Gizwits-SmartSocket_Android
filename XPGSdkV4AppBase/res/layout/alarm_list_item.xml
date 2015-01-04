@@ -17,7 +17,7 @@
         android:id="@+id/tvDesc"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_blue"
+        android:textColor="@color/text_red"
         android:textSize="20sp" />
 
 </LinearLayout>

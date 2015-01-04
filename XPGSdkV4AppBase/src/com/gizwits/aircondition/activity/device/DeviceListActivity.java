@@ -269,19 +269,4 @@ public class DeviceListActivity extends BaseActivity implements
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (dialog == null) {
-            dialog = DialogManager.getLogoutDialog(DeviceListActivity.this,
-                    new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            mCenter.cLogout();
-                        }
-                    });
-        }
-
-        DialogManager.showDialog(DeviceListActivity.this, dialog);
-    }
 }

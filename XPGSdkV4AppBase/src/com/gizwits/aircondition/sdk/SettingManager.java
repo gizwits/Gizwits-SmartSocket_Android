@@ -95,7 +95,7 @@ public class SettingManager {
 		return spf.getString(UID, "");
 	}
 
-	public void getUnit(boolean isC) {
+	public void setUnit(boolean isC) {
 		spf.edit().putBoolean(UNIT, isC).commit();
 	}
 

@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -73,7 +74,7 @@ public class MainControlActivity extends BaseActivity implements
 	private TextView tvTimeOff;
 	private TextView tvAdvanture;
 	private TextView tvCurve;
-	private TextView tvCHangeTemp;
+	private CheckedTextView ctvUnit;
 	private TextView tvMode;
 	private TextView tvInnerTemperature;
 	private TextView tvInnerUnit;
@@ -227,6 +228,8 @@ public class MainControlActivity extends BaseActivity implements
 		super.onResume();
 		mXpgWifiDevice.setListener(deviceListener);
 		mCenter.cGetStatus(mXpgWifiDevice);
+		isCentigrade = setmanager.getUnit();
+		updateTemperatureUnit(isCentigrade);
 	}
 
 	private void initParams() {
@@ -251,7 +254,7 @@ public class MainControlActivity extends BaseActivity implements
 		tvTimeOff = (TextView) findViewById(R.id.tvTimeOff);
 		tvAdvanture = (TextView) findViewById(R.id.tvAdvanture);
 		tvCurve = (TextView) findViewById(R.id.tvCurve);
-		tvCHangeTemp = (TextView) findViewById(R.id.tvCHangeTemp);
+		ctvUnit = (CheckedTextView) findViewById(R.id.tvUnit);
 		tvMode = (TextView) findViewById(R.id.tvMode);
 		tvInnerTemperature = (TextView) findViewById(R.id.tvInnerTemperature);
 		tvInnerUnit = (TextView) findViewById(R.id.tvInnerUnit);
@@ -337,9 +340,6 @@ public class MainControlActivity extends BaseActivity implements
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		switch (buttonView.getId()) {
-		case R.id.tvCHangeTemp:// 摄氏 /华氏
-			updateTemperatureUnit(isCentigrade);
-			break;
 		case R.id.cbWindShake:// 摆风
 			mCenter.cSetShake(mXpgWifiDevice, cbWindShake.isChecked());
 			break;
@@ -351,7 +351,10 @@ public class MainControlActivity extends BaseActivity implements
 	private void updateTemperatureUnit(boolean centigrade) {
 		tvInnerTemperature.setText((centigrade ? temperatureC : temperatureF)
 				+ "");
+		ctvUnit.setText(centigrade ? "摄氏" : "华氏");
 		tvInnerUnit.setText(centigrade ? "℃" : "℉");
+		ctvUnit.setChecked(centigrade);
+		setmanager.setUnit(centigrade);
 	}
 
 	/**
@@ -450,6 +453,11 @@ public class MainControlActivity extends BaseActivity implements
 				intent.putExtra("alarm_list", alarmList);
 				startActivity(intent);
 			}
+			break;
+		case R.id.tvUnit:
+			updateTemperatureUnit(isCentigrade);
+			llBottom.setVisibility(View.GONE);
+			isShow = false;
 			break;
 		}
 	}

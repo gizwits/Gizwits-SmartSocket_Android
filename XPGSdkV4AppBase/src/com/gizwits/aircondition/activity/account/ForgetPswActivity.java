@@ -86,10 +86,6 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
      */
     private ImageView ivBack;
 
-    /**
-     * The iv step.
-     */
-    private ImageView ivStep;
 
     /**
      * The tb psw flag.
@@ -226,7 +222,6 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
         llInputCode = (LinearLayout) findViewById(R.id.llInputCode);
         llInputPsw = (LinearLayout) findViewById(R.id.llInputPsw);
         ivBack = (ImageView) findViewById(R.id.ivBack);
-        ivStep = (ImageView) findViewById(R.id.ivStep);
         tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
         toogleUI(ui_statu.DEFAULT);
         dialog = new ProgressDialog(this);

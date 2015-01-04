@@ -181,7 +181,7 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 
 	@Override
 	public void onResume() {
-
+		super.onResume();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 		registerReceiver(mChangeBroadcast, filter);

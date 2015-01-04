@@ -136,7 +136,6 @@ public class CmdCenter {
      */
     public void cLogout() {
         xpgWifiGCC.userLogout(mSettingManager.getUid());
-        mSettingManager.clean();
     }
 
     /**
