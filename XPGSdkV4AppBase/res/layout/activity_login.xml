@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@android:color/black"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo2" />
 
     <EditText
         android:id="@+id/etName"
@@ -38,7 +38,7 @@
         android:layout_marginRight="50dp"
         android:drawableLeft="@drawable/login_icon_lock"
         android:text="忘记密码?"
-        android:textColor="@android:color/background_light"
+        android:textColor="@android:color/holo_orange_light"
         android:textSize="14sp" />
 
     <Button
