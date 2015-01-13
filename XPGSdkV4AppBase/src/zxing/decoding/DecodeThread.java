@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.gizwits.zxing.decoding;
-
-import com.gizwits.zxing.CaptureActivity;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.ResultPointCallback;
-
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.os.Looper;
-import android.preference.PreferenceManager;
+package zxing.decoding;
 
 import java.util.Hashtable;
 import java.util.Vector;
 import java.util.concurrent.CountDownLatch;
+
+import zxing.CaptureActivity;
+import android.os.Handler;
+import android.os.Looper;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.DecodeHintType;
+import com.google.zxing.ResultPointCallback;
 
 /**
  * This thread does all the heavy lifting of decoding the images.

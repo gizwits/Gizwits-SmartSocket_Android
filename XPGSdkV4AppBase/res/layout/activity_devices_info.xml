@@ -24,6 +24,15 @@
             android:text="设备管理"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/ivTick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/confirm_icon" />
     </RelativeLayout>
 
     <LinearLayout
@@ -35,27 +44,27 @@
         android:paddingLeft="20dp" >
 
         <TextView
-            android:id="@+id/initDate"
+            android:id="@+id/tvDate"
             style="@style/TextViewGray"
             android:text="生产日期：XXXX.XX.XX"
             android:textColor="#969696" />
 
         <TextView
-            android:id="@+id/initPlace"
+            android:id="@+id/tvPlace"
             style="@style/TextViewGray"
             android:layout_marginTop="8dp"
             android:text="生产地点：XXXXX"
             android:textColor="#969696" />
 
         <TextView
-            android:id="@+id/DeviceType"
+            android:id="@+id/tvDeviceType"
             style="@style/TextViewGray"
             android:layout_marginTop="8dp"
             android:text="设备型号：XXXXX"
             android:textColor="#969696" />
 
         <TextView
-            android:id="@+id/DeviceCode"
+            android:id="@+id/tvDeviceCode"
             style="@style/TextViewGray"
             android:layout_marginTop="8dp"
             android:text="设备序列号：XXXXXXXXXXXXXXXX"
@@ -65,7 +74,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="12dp"
         android:text="名称"
         android:textColor="#9A9A9A"
@@ -74,8 +83,11 @@
     <EditText
         android:id="@+id/etName"
         style="@style/EditTextTheme"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="4dp"
-        android:hint="设备名" />
+        android:hint="设备名称"
+        android:textColor="@color/background_blue" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -87,7 +99,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="18dp"
-            android:text="删除设备" />
+            android:text="删除空调" />
     </RelativeLayout>
 
 </LinearLayout>

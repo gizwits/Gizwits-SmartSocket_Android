@@ -1,28 +1,31 @@
-package com.gizwits.zxing;
+package zxing;
 
 import java.io.IOException;
 import java.util.Vector;
 
+import zxing.camera.CameraManager;
+import zxing.decoding.CaptureActivityHandler;
+import zxing.decoding.InactivityTimer;
+import zxing.view.ViewfinderView;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
+import com.gizwits.aircondition.R;
 import com.gizwits.aircondition.activity.BaseActivity;
 import com.gizwits.aircondition.activity.device.DeviceListActivity;
-import com.gizwits.zxing.camera.CameraManager;
-import com.gizwits.zxing.decoding.CaptureActivityHandler;
-import com.gizwits.zxing.decoding.InactivityTimer;
-import com.gizwits.zxing.view.ViewfinderView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.gizwits.aircondition.R;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.ui.utils.ToastUtils;
 
@@ -83,9 +86,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		}
 	};
 
-	/**
-	 * Called when the activity is first created.
-	 */
+	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -115,6 +116,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
 			playBeep = false;
 		}
+		initBeepSound();
 		vibrate = true;
 	}
 
@@ -173,6 +175,11 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		return viewfinderView;
 	}
 
+	private void startBind(String passcode, String did) {
+		mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(), did,
+				passcode, "");
+	}
+
 	public Handler getHandler() {
 		return handler;
 	}
@@ -189,24 +196,22 @@ public class CaptureActivity extends BaseActivity implements Callback {
 				&& text.contains("passcode=")) {
 
 			inactivityTimer.onActivity();
-//			 viewfinderView.drawResultBitmap(barcode);
+			viewfinderView.drawResultBitmap(barcode);
+//			playBeepSoundAndVibrate();
 			product_key = getParamFomeUrl(text, "product_key");
 			did = getParamFomeUrl(text, "did");
-			passcode = getParamFomeUrl(text, "passcode");
+//			passcode = getParamFomeUrl(text, "passcode");
 			Log.i("passcode product_key did", passcode + " " + product_key
 					+ " " + did);
 			ToastUtils.showShort(this, "扫码成功");
 			mHandler.sendEmptyMessage(handler_key.START_BIND.ordinal());
-
-			// Intent it = new Intent();
-			// it.setClass(this, DeviceListActivity.class);
+//			Intent it = new Intent();
+			// it.setClass(this, NewDeviceControlActivity.class);
 			// it.putExtra("passcode", passcode);
 			// it.putExtra("product_key", product_key);
 			// it.putExtra("did", did);
-			// startActivity(it);
-			// TODO 执行绑定
-
-			// finish();
+//			startActivity(it);
+//			finish();
 
 		} else {
 			handler = new CaptureActivityHandler(this, decodeFormats,
@@ -229,10 +234,50 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		return product_key;
 	}
 
-	private void startBind(String passcode, String did) {
-		mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(), did,
-				passcode, "");
+	private void initBeepSound() {
+		// if (playBeep && mediaPlayer == null) {
+		// // The volume on STREAM_SYSTEM is not adjustable, and users found it
+		// // too loud,
+		// // so we now play on the music stream.
+		// setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		// mediaPlayer = new MediaPlayer();
+		// mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+		// mediaPlayer.setOnCompletionListener(beepListener);
+		//
+		// AssetFileDescriptor file = getResources().openRawResourceFd(
+		// R.raw.beep);
+		// try {
+		// mediaPlayer.setDataSource(file.getFileDescriptor(),
+		// file.getStartOffset(), file.getLength());
+		// file.close();
+		// mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
+		// mediaPlayer.prepare();
+		// } catch (IOException e) {
+		// mediaPlayer = null;
+		// }
+		// }
 	}
+
+	private static final long VIBRATE_DURATION = 200L;
+
+//	private void playBeepSoundAndVibrate() {
+//		// if (playBeep && mediaPlayer != null) {
+//		// mediaPlayer.start();
+//		// }
+//		if (vibrate) {
+//			Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+//			vibrator.vibrate(VIBRATE_DURATION);
+//		}
+//	}
+
+	/**
+	 * When the beep has finished playing, rewind to queue up another one.
+	 */
+	private final OnCompletionListener beepListener = new OnCompletionListener() {
+		public void onCompletion(MediaPlayer mediaPlayer) {
+			mediaPlayer.seekTo(0);
+		}
+	};
 
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
@@ -245,4 +290,5 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			mHandler.sendMessage(message);
 		}
 	}
+
 }

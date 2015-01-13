@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gizwits.zxing.view;
+package zxing.view;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;

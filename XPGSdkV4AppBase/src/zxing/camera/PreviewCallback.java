@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gizwits.zxing.camera;
+package zxing.camera;
 
 import android.graphics.Point;
 import android.hardware.Camera;

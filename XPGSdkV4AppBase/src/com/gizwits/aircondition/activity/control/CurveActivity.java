@@ -1,8 +1,8 @@
 /**
  * Project Name:XPGSdkV4AppBase
- * File Name:FlushActivity.java
- * Package Name:com.gizwits.aircondition.activity
- * Date:2015-1-8 11:18:46
+ * File Name:CurveActivity.java
+ * Package Name:com.gizwits.aircondition.activity.control
+ * Date:2015-1-8 14:38:41
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -15,52 +15,55 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gizwits.aircondition.activity;
+package com.gizwits.aircondition.activity.control;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 
 import com.gizwits.aircondition.R;
-import com.gizwits.aircondition.activity.account.LoginActivity;
-import com.gizwits.aircondition.activity.device.DeviceListActivity;
-import com.gizwits.aircondition.utils.StringUtils;
-import com.xpg.common.system.IntentUtils;
+import com.gizwits.aircondition.activity.BaseActivity;
 
 // TODO: Auto-generated Javadoc
 /**
- * Created by Lien on 14/12/16.
+ * 
+ * ClassName: Class CurveActivity. <br/>
+ * <br/>
+ * date: 2015-1-8 14:38:41 <br/>
  * 
  * @author Lien
  */
-public class FlushActivity extends BaseActivity {
+public class CurveActivity extends BaseActivity {
+
+	/** The iv back. */
+	private ImageView ivBack;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#onCreate(android.os.Bundle
+	 * )
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_flush);
-		new Handler().postDelayed(new Runnable() {
+		setContentView(R.layout.activity_curve);
+		ivBack = (ImageView) findViewById(R.id.ivBack);
+		ivBack.setOnClickListener(new OnClickListener() {
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see java.lang.Runnable#run()
-			 */
 			@Override
-			public void run() {
+			public void onClick(View v) {
+				onBackPressed();
 
-				if (StringUtils.isEmpty(setmanager.getToken())) {
-					IntentUtils.getInstance().startActivity(FlushActivity.this,
-							LoginActivity.class);
-				} else {
-					Intent intent = new Intent(FlushActivity.this,
-							DeviceListActivity.class);
-					intent.putExtra("autoLogin", true);
-					startActivity(intent);
-				}
-
-				finish();
 			}
-		}, 1000);
+		});
+	}
+
+	@Override
+	public void onBackPressed() {
+		finish();
 	}
 
 }

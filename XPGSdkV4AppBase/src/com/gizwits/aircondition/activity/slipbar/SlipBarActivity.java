@@ -164,7 +164,6 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         mCover = (ImageView) findViewById(R.id.slidedout_cover);
         initBindList();
         mAdapter = new DeviceAdapter(this, bindlist);
-
         lvDevice.setAdapter(mAdapter);
         progressDialog = new ProgressDialog(SlipBarActivity.this);
         progressDialog.setMessage("设备连接中，请稍候。");

@@ -260,7 +260,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			isExit = true;
 			Toast.makeText(getApplicationContext(),
 					getString(R.string.tip_exit), Toast.LENGTH_SHORT).show();
-			handler.sendEmptyMessageDelayed(0, 2000);
+			handler.sendEmptyMessageDelayed(handler_key.EXIT.ordinal(), 2000);
 		} else {
 
 			Intent intent = new Intent(Intent.ACTION_MAIN);

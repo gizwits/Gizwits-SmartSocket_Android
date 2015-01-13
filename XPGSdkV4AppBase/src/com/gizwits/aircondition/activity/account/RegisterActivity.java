@@ -350,12 +350,14 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			llInputPsw.setVisibility(View.GONE);
 			btnSure.setVisibility(View.GONE);
 			btnGetCode.setVisibility(View.VISIBLE);
+			etName.setHint("手机号");
 			tvTips.setVisibility(View.GONE);
 		} else if (statue == ui_statue.PHONE) {
 			llInputCode.setVisibility(View.VISIBLE);
 			llInputPsw.setVisibility(View.VISIBLE);
 			btnSure.setVisibility(View.VISIBLE);
 			btnGetCode.setVisibility(View.GONE);
+			etName.setHint("手机号");
 			tvPhoneSwitch.setText("邮箱注册");
 			tvTips.setVisibility(View.GONE);
 		} else {
@@ -363,6 +365,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			btnGetCode.setVisibility(View.GONE);
 			llInputPsw.setVisibility(View.VISIBLE);
 			btnSure.setVisibility(View.VISIBLE);
+			etName.setHint("邮箱");
 			tvPhoneSwitch.setText("手机注册");
 			tvTips.setVisibility(View.VISIBLE);
 		}
@@ -397,7 +400,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			// TODO 邮箱注册
 			String mail = etName.getText().toString().trim();
 			String password = etInputPsw.getText().toString().trim();
-			if (mail.contains("@")) {
+			if (!mail.contains("@")) {
 				Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
 				return;
 			}

@@ -140,7 +140,7 @@
                     android:background="#dbf3fc"
                     android:orientation="vertical"
                     android:padding="18dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"

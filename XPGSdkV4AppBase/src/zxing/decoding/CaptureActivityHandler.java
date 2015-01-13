@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.gizwits.zxing.decoding;
+package zxing.decoding;
 
-import com.gizwits.zxing.CaptureActivity;
-import com.gizwits.zxing.camera.CameraManager;
-import com.gizwits.zxing.view.*;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
-import com.gizwits.aircondition.R;
+import java.util.Vector;
 
+import zxing.CaptureActivity;
+import zxing.camera.CameraManager;
+import zxing.view.ViewfinderResultPointCallback;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,7 +30,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import java.util.Vector;
+import com.gizwits.aircondition.R;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.

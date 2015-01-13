@@ -82,7 +82,15 @@ public class UserManageActivity extends BaseActivity implements OnClickListener 
 
 							@Override
 							public void onClick(View v) {
-								mCenter.cLogout();
+								setmanager.setToken("");
+								DialogManager.dismissDialog(
+										UserManageActivity.this, dialog);
+								ToastUtils.showShort(UserManageActivity.this,
+										"注销成功");
+								IntentUtils.getInstance().startActivity(
+										UserManageActivity.this,
+										LoginActivity.class);
+								finish();
 							}
 						});
 			}
@@ -98,16 +106,4 @@ public class UserManageActivity extends BaseActivity implements OnClickListener 
 		finish();
 	}
 
-	@Override
-	protected void didUserLogout(int error, String errorMessage) {
-		if (error == 1) {
-			DialogManager.dismissDialog(UserManageActivity.this, dialog);
-			ToastUtils.showShort(UserManageActivity.this, "注销成功");
-			IntentUtils.getInstance().startActivity(UserManageActivity.this,
-					LoginActivity.class);
-			finish();
-		} else {
-			ToastUtils.showShort(UserManageActivity.this, "注销失败");
-		}
-	}
 }

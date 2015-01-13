@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gizwits.zxing.decoding;
+package zxing.decoding;
 
 import android.app.Activity;
 import android.content.DialogInterface;

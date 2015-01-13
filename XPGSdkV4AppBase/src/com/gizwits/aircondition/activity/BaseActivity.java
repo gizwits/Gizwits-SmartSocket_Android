@@ -73,7 +73,7 @@ public class BaseActivity extends Activity {
 	 * <p/>
 	 * 设备属性监听器。 设备连接断开、获取绑定参数、获取设备信息、控制和接受设备信息相关.
 	 */
-	protected XPGWifiDeviceListener deviceListener = new XPGWifiDeviceListener() {
+	protected XPGWifiDeviceListener deviceListener= new XPGWifiDeviceListener() {
 
 		@Override
 		public void didDeviceOnline(XPGWifiDevice device, boolean isOnline) {
@@ -103,10 +103,12 @@ public class BaseActivity extends Activity {
 	 * <p/>
 	 * sdk监听器。 配置设备上线、注册登录用户、搜索发现设备、用户绑定和解绑设备相关.
 	 */
-	protected XPGWifiSDKListener sdkListener = new XPGWifiSDKListener() {
+	protected XPGWifiSDKListener sdkListener= new XPGWifiSDKListener() {
 
 		@Override
 		public void didBindDevice(int error, String errorMessage, String did) {
+			 Log.d("Base扫描结果",
+			 "error="+error+";errorMessage="+errorMessage+";did="+did);
 			BaseActivity.this.didBindDevice(error, errorMessage, did);
 		}
 
@@ -117,6 +119,7 @@ public class BaseActivity extends Activity {
 
 		@Override
 		public void didChangeUserPassword(int error, String errorMessage) {
+			// Log.d("BaseActivity", "didChangeUserPassword");
 			BaseActivity.this.didChangeUserPassword(error, errorMessage);
 		}
 
@@ -127,7 +130,7 @@ public class BaseActivity extends Activity {
 
 		@Override
 		public void didDiscovered(int error, List<XPGWifiDevice> devicesList) {
-			// Log.d("BaseActivity", "count:"+devicesList.size());
+
 			BaseActivity.this.didDiscovered(error, devicesList);
 		}
 
@@ -137,9 +140,10 @@ public class BaseActivity extends Activity {
 		}
 
 		@Override
-		public void didRegisterUser(int error, String errorMessage, String uid,
-				String token) {
-			BaseActivity.this.didRegisterUser(error, errorMessage, uid, token);
+		public void didRegisterUser(int error, String errorMessage,
+				String uid, String token) {
+			BaseActivity.this.didRegisterUser(error, errorMessage, uid,
+					token);
 		}
 
 		@Override
@@ -153,13 +157,14 @@ public class BaseActivity extends Activity {
 		}
 
 		@Override
-		public void didUnbindDevice(int error, String errorMessage, String did) {
+		public void didUnbindDevice(int error, String errorMessage,
+				String did) {
 			BaseActivity.this.didUnbindDevice(error, errorMessage, did);
 		}
 
 		@Override
-		public void didUserLogin(int error, String errorMessage, String uid,
-				String token) {
+		public void didUserLogin(int error, String errorMessage,
+				String uid, String token) {
 			BaseActivity.this.didUserLogin(error, errorMessage, uid, token);
 		}
 
@@ -168,7 +173,7 @@ public class BaseActivity extends Activity {
 			BaseActivity.this.didUserLogout(error, errorMessage);
 		}
 
-	};
+	};;
 
 	/*
 	 * (non-Javadoc)
@@ -180,8 +185,8 @@ public class BaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setmanager = new SettingManager(this);
 		mCenter = CmdCenter.getInstance(this.getApplicationContext());
-
 		Historys.put(this);
+		
 	}
 
 	/**
@@ -444,6 +449,8 @@ public class BaseActivity extends Activity {
 	 */
 	public void onResume() {
 		super.onResume();
+		Log.i("Base", this.getClass().getSimpleName()+"***sdkListener="+sdkListener.toString());
+		
 		mCenter.getXPGWifiSDK().setListener(sdkListener);
 	}
 
@@ -463,6 +470,8 @@ public class BaseActivity extends Activity {
 	 * @return the online list
 	 */
 	protected void initBindList() {
+		if (bindlist != null && bindlist.size() > 0)
+			bindlist.clear();
 		for (XPGWifiDevice xpgDevice : deviceslist) {
 			if (xpgDevice.isBind(setmanager.getUid())) {
 				bindlist.add(xpgDevice);

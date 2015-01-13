@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gizwits.zxing.camera;
+package zxing.camera;
 
 import com.google.zxing.LuminanceSource;
 

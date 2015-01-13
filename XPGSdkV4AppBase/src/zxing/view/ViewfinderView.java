@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.gizwits.zxing.view;
+package zxing.view;
 
 import java.util.Collection;
 import java.util.HashSet;
 
+import zxing.camera.CameraManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -28,9 +29,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.gizwits.zxing.camera.CameraManager;
-import com.google.zxing.ResultPoint;
 import com.gizwits.aircondition.R;
+import com.google.zxing.ResultPoint;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder rectangle and partial

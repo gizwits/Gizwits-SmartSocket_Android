@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:MainControlActivity.java
+ * Package Name:com.gizwits.aircondition.activity.control
+ * Date:2015-1-12 11:05:42
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.aircondition.activity.control;
 
 import java.util.ArrayList;
@@ -9,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -45,62 +63,144 @@ import com.gizwits.aircondition.utils.DialogManager;
 import com.gizwits.aircondition.utils.DialogManager.OnTimingChosenListener;
 import com.gizwits.aircondition.widget.CircularSeekBar;
 import com.gizwits.aircondition.R;
+import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.DateUtil;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Lien on 14/12/21.
+ * 
+ * @author Lien
  */
 public class MainControlActivity extends BaseActivity implements
 		OnClickListener, OnCheckedChangeListener,
 		CompoundButton.OnCheckedChangeListener {
+
+	/** The tag. */
 	private final String TAG = "MainControlActivity";
 	// private XPGWifiDevice device;
+	/** The seek bar. */
 	private CircularSeekBar seekBar;
+
+	/** The scl content. */
 	private ScrollView sclContent;
+
+	/** The m view. */
 	private static View mView;
 
-	private RelativeLayout rlControlMainPage;
-	private RelativeLayout rlHeader;
+//	/** The rl control main page. */
+//	private RelativeLayout rlControlMainPage;
+//
+//	/** The rl header. */
+//	private RelativeLayout rlHeader;
+
+	/** The rl alarm tips. */
 	private RelativeLayout rlAlarmTips;
+
+	/** The rl power off. */
 	private RelativeLayout rlPowerOff;
-	private LinearLayout llFooter;
+
+//	/** The ll footer. */
+//	private LinearLayout llFooter;
+
+	/** The ll bottom. */
 	private LinearLayout llBottom;
+
+	/** The iv menu. */
 	private ImageView ivMenu;
+
+	/** The tv title. */
 	private TextView tvTitle;
+
+	/** The iv power. */
 	private ImageView ivPower;
+
+	/** The iv back. */
 	private ImageView ivBack;
+
+	/** The tv alarm tips count. */
 	private TextView tvAlarmTipsCount;
+
+	/** The tv time off. */
 	private TextView tvTimeOff;
+
+	/** The tv advanture. */
 	private TextView tvAdvanture;
+
+	/** The tv curve. */
 	private TextView tvCurve;
+
+	/** The ctv unit. */
 	private CheckedTextView ctvUnit;
+
+	/** The tv mode. */
 	private TextView tvMode;
+
+	/** The tv inner temperature. */
 	private TextView tvInnerTemperature;
+
+	/** The tv inner unit. */
 	private TextView tvInnerUnit;
+
+	/** The tv setting temerature. */
 	private TextView tvSettingTemerature;
+
+	/** The tv setting unit. */
 	private TextView tvSettingUnit;
-	private TextView tvTitleOff;
+
+//	/** The tv title off. */
+//	private TextView tvTitleOff;
+
+	/** The tv power on. */
 	private TextView tvPowerOn;
+
+	/** The tv power on str. */
 	private TextView tvPowerOnStr;
+
+	/** The ib left arrow. */
 	private ImageButton ibLeftArrow;
+
+	/** The ib right arrow. */
 	private ImageButton ibRightArrow;
+
+	/** The rg wing. */
 	private RadioGroup rgWing;
+
+	/** The rb wind low. */
 	private RadioButton rbWindLow;
+
+	/** The rb wind min. */
 	private RadioButton rbWindMin;
+
+	/** The rb wind high. */
 	private RadioButton rbWindHigh;
+
+	/** The cb wind shake. */
 	private CheckBox cbWindShake;
+
+	/** The is show. */
 	private boolean isShow;
 
+	/** The mode pos. */
 	private int modePos;
 
+	/** The height. */
 	private int height;
 
+	/** The device data map. */
 	private ConcurrentHashMap<String, Object> deviceDataMap;
+
+	/** The statu map. */
 	private ConcurrentHashMap<String, Object> statuMap;
+
+	/** The alarm list. */
 	private ArrayList<DeviceAlarm> alarmList;
 
+	/** The timing off. */
 	private int timingOn, timingOff;
+
+	/** The m fault dialog. */
 	private Dialog mFaultDialog;
 
 	/**
@@ -112,13 +212,20 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private enum handler_key {
 
+		/** The update ui. */
 		UPDATE_UI,
 
+		/** The alarm. */
 		ALARM,
 
+		/** The disconnected. */
 		DISCONNECTED,
 
+		/** The received. */
 		RECEIVED,
+
+		/** The get statue. */
+		GET_STATUE,
 	}
 
 	/**
@@ -156,13 +263,21 @@ public class MainControlActivity extends BaseActivity implements
 					e.printStackTrace();
 				}
 			case UPDATE_UI:
-				switchOnOff((Boolean) statuMap.get(JsonKeys.ON_OFF));
-				tvInnerTemperature.setText((String) statuMap
-						.get(JsonKeys.ROOM_TEMP));
+				setListenNull(true);
+				updateTemperatureUnit(isCentigrade);
+				updatePowerSwitch((Boolean) statuMap.get(JsonKeys.ON_OFF));
 				updateModeState((String) statuMap.get(JsonKeys.MODE));
-				refreshSeekBar(Short.parseShort((String) statuMap
+				ubdateSeekBar(Short.parseShort((String) statuMap
 						.get(JsonKeys.SET_TEMP)));
+				updateInnerTemp(Short.parseShort((String) statuMap
+						.get(JsonKeys.ROOM_TEMP)));
 				updateFanSpeed((String) statuMap.get(JsonKeys.FAN_SPEED));
+				updateShakeSwitch((Boolean) statuMap.get(JsonKeys.FAN_SHAKE));
+				updateOnTime(Integer.parseInt((String) statuMap
+						.get(JsonKeys.TIME_ON)));
+				updateOffTime(Integer.parseInt((String) statuMap
+						.get(JsonKeys.TIME_OFF)));
+				setListenNull(false);
 				break;
 			case ALARM:
 				if (alarmList != null && alarmList.size() > 0) {
@@ -192,28 +307,45 @@ public class MainControlActivity extends BaseActivity implements
 			case DISCONNECTED:
 
 				break;
-
+			case GET_STATUE:
+				mCenter.cGetStatus(mXpgWifiDevice);
+				break;
 			}
 		}
 	};
 
 	// 0.制冷, 1.送风, 2.除湿, 3.自动,4.制热
+	/** The mode images. */
 	private int[] modeImages = { R.drawable.icon_model_cool,
 			R.drawable.icon_model_wind, R.drawable.icon_model_water,
 			R.drawable.icon_model_auto, R.drawable.icon_model_hot };
 
 	// 0.制冷, 1.送风, 2.除湿, 3.自动,4.制热
+	/** The mode req. */
 	private short[] modeReq = { 0, 1, 2, 3, 4 };
 
+	/** The mode strs. */
 	private String[] modeStrs = { "制冷", "送风", "除湿", "自动", "制热" };
 
+	/** The temperature f. */
 	short temperatureC, temperatureF;
 
+	/** The inner temperature f. */
 	short innerTemperatureC, innerTemperatureF;
 
+	/** The is centigrade. */
 	private boolean isCentigrade = true;
+
+	/** The is click. */
 	private boolean isClick;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#onCreate(android.os.Bundle
+	 * )
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -223,28 +355,38 @@ public class MainControlActivity extends BaseActivity implements
 		initParams();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gizwits.aircondition.activity.BaseActivity#onResume()
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
 		mXpgWifiDevice.setListener(deviceListener);
-		mCenter.cGetStatus(mXpgWifiDevice);
 		isCentigrade = setmanager.getUnit();
-		updateTemperatureUnit(isCentigrade);
+		handler.sendEmptyMessage(handler_key.GET_STATUE.ordinal());
 	}
 
+	/**
+	 * Inits the params.
+	 */
 	private void initParams() {
 		statuMap = new ConcurrentHashMap<String, Object>();
 		alarmList = new ArrayList<DeviceAlarm>();
 		height = llBottom.getHeight();
 	}
 
+	/**
+	 * Inits the views.
+	 */
 	private void initViews() {
 		mView = findViewById(R.id.main_layout);
-		rlControlMainPage = (RelativeLayout) findViewById(R.id.rlControlMainPage);
-		rlHeader = (RelativeLayout) findViewById(R.id.rlHeader);
+//		rlControlMainPage = (RelativeLayout) findViewById(R.id.rlControlMainPage);
+//		rlHeader = (RelativeLayout) findViewById(R.id.rlHeader);
 		rlAlarmTips = (RelativeLayout) findViewById(R.id.rlAlarmTips);
 		rlPowerOff = (RelativeLayout) findViewById(R.id.rlPowerOff);
-		llFooter = (LinearLayout) findViewById(R.id.llFooter);
+//		llFooter = (LinearLayout) findViewById(R.id.llFooter);
 		llBottom = (LinearLayout) findViewById(R.id.llBottom);
 		ivMenu = (ImageView) findViewById(R.id.ivMenu);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
@@ -297,10 +439,13 @@ public class MainControlActivity extends BaseActivity implements
 		});
 	}
 
+	/**
+	 * Inits the events.
+	 */
 	private void initEvents() {
 		ibLeftArrow.setOnClickListener(this);
 		ibRightArrow.setOnClickListener(this);
-		rgWing.setOnCheckedChangeListener(this);
+
 		tvPowerOn.setOnClickListener(this);
 		ivPower.setOnClickListener(this);
 		sclContent.setOnTouchListener(new OnTouchListener() {
@@ -318,8 +463,34 @@ public class MainControlActivity extends BaseActivity implements
 		ivMenu.setOnClickListener(this);
 		rlAlarmTips.setOnClickListener(this);
 		tvTitle.setOnClickListener(this);
+		ctvUnit.setOnClickListener(this);
+		cbWindShake.setOnCheckedChangeListener(this);
+		rgWing.setOnCheckedChangeListener(this);
+		tvCurve.setOnClickListener(this);
 	}
 
+	/**
+	 * 防止循环调用.
+	 * 
+	 * @author Administrator
+	 * @param on
+	 *            the new listen null
+	 * @return void
+	 * @Title: setListenNull
+	 * @Description: TODO
+	 */
+	private void setListenNull(boolean on) {
+		cbWindShake.setOnCheckedChangeListener(on ? null : this);
+		rgWing.setOnCheckedChangeListener(on ? null : this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.widget.RadioGroup.OnCheckedChangeListener#onCheckedChanged(android
+	 * .widget.RadioGroup, int)
+	 */
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
@@ -337,6 +508,13 @@ public class MainControlActivity extends BaseActivity implements
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.widget.CompoundButton.OnCheckedChangeListener#onCheckedChanged
+	 * (android.widget.CompoundButton, boolean)
+	 */
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		switch (buttonView.getId()) {
@@ -348,21 +526,31 @@ public class MainControlActivity extends BaseActivity implements
 		}
 	}
 
+	/**
+	 * 更新温度单位
+	 * 
+	 * @param centigrade
+	 *            the centigrade
+	 */
 	private void updateTemperatureUnit(boolean centigrade) {
-		tvInnerTemperature.setText((centigrade ? temperatureC : temperatureF)
+		setmanager.setUnit(centigrade);
+		tvInnerTemperature.setText((centigrade ? innerTemperatureC
+				: innerTemperatureF) + "");
+		tvSettingTemerature.setText((centigrade ? temperatureC : temperatureF)
 				+ "");
 		ctvUnit.setText(centigrade ? "摄氏" : "华氏");
 		tvInnerUnit.setText(centigrade ? "℃" : "℉");
+		tvSettingUnit.setText(centigrade ? "℃" : "℉");
 		ctvUnit.setChecked(centigrade);
-		setmanager.setUnit(centigrade);
 	}
 
 	/**
-	 * 更新环状进度
+	 * 更新环状进度.
 	 * 
 	 * @param temperature
+	 *            the temperature
 	 */
-	private void refreshSeekBar(short temperature) {
+	private void ubdateSeekBar(short temperature) {
 		if (temperatureC == temperature) {
 			return;
 		}
@@ -373,11 +561,33 @@ public class MainControlActivity extends BaseActivity implements
 			seekBar.setMProgress(progress);
 			seekBar.postInvalidateDelayed(1000);
 		}
+		temperatureF = (short) getCelToFah(temperatureC);
 		tvSettingTemerature
 				.setText((isCentigrade ? temperatureC : temperatureF) + "");
 
 	}
 
+	/**
+	 * Refresh inner temp.
+	 * 
+	 * @param temperature
+	 *            the temperature
+	 */
+	private void updateInnerTemp(short temperature) {
+		if (innerTemperatureC == temperature) {
+			return;
+		}
+		innerTemperatureC = temperature;
+		innerTemperatureF = (short) getCelToFah(innerTemperatureC);
+		tvInnerTemperature.setText((isCentigrade ? innerTemperatureC
+				: innerTemperatureF) + "");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -455,17 +665,23 @@ public class MainControlActivity extends BaseActivity implements
 			}
 			break;
 		case R.id.tvUnit:
+			isCentigrade = !isCentigrade;
 			updateTemperatureUnit(isCentigrade);
 			llBottom.setVisibility(View.GONE);
 			isShow = false;
+			break;
+		case R.id.tvCurve:
+			IntentUtils.getInstance().startActivity(MainControlActivity.this,
+					CurveActivity.class);
 			break;
 		}
 	}
 
 	/**
-	 * 转换模式更新UI
+	 * 转换模式更新UI.
 	 * 
 	 * @param pos
+	 *            the pos
 	 * @when pos = 0 制冷
 	 * @when pos = 1送风
 	 * @when pos = 2 除湿
@@ -483,6 +699,12 @@ public class MainControlActivity extends BaseActivity implements
 		tvMode.setText(modeStrs[modePos]);
 	}
 
+	/**
+	 * Update fan speed.
+	 * 
+	 * @param speedStr
+	 *            the speed str
+	 */
 	private void updateFanSpeed(String speedStr) {
 		int speed = Integer.parseInt(speedStr);
 		switch (speed) {
@@ -498,20 +720,31 @@ public class MainControlActivity extends BaseActivity implements
 		}
 	}
 
+	private void updateOffTime(int timingOff) {
+		tvTimeOff.setText(timingOff > 0 ? timingOff + "小时后关机" : "定时关机");
+	}
+
+	private void updateOnTime(int timingOn) {
+		tvPowerOnStr.setText(timingOn > 0 ? timingOn + "小时后开机" : "定时开机");
+	}
+
 	/**
-	 * 发送命令
+	 * 发送命令.
 	 * 
 	 * @param pos
+	 *            the pos
 	 */
 	private void sendModeReq(int pos) {
 		mCenter.cMode(mXpgWifiDevice, modeReq[pos]);
 	}
 
 	/**
-	 * 设置提示框显示与隐藏,设置故障数量
+	 * 设置提示框显示与隐藏,设置故障数量.
 	 * 
 	 * @param isShow
-	 * 
+	 *            the is show
+	 * @param count
+	 *            the count
 	 * @true 显示
 	 * @false 隐藏
 	 */
@@ -521,11 +754,12 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * 开关切换
+	 * 开关切换.
 	 * 
 	 * @param isOn
+	 *            the is on
 	 */
-	public void switchOnOff(boolean isOn) {// 开机页面和主页面切换
+	public void updatePowerSwitch(boolean isOn) {// 开机页面和主页面切换
 		if (!isOn) {
 			llBottom.setVisibility(View.GONE);
 			isShow = false;
@@ -534,12 +768,22 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * 摄氏转华氏温度
+	 * Shake on off.
 	 * 
-	 * @param @return
-	 * @return int
-	 * @throws
+	 * @param isOn
+	 *            the is on
+	 */
+	public void updateShakeSwitch(boolean isOn) {
+		cbWindShake.setChecked(isOn);
+	}
+
+	/**
+	 * 摄氏转华氏温度.
+	 * 
 	 * @author Administrator
+	 * @param cel
+	 *            the cel
+	 * @return int
 	 * @Title: getCelToFah
 	 * @Description: TODO
 	 */
@@ -549,12 +793,12 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * 华氏转摄氏温度
+	 * 华氏转摄氏温度.
 	 * 
-	 * @param @return
-	 * @return int
-	 * @throws
 	 * @author Administrator
+	 * @param fah
+	 *            the fah
+	 * @return int
 	 * @Title: getFahToCel
 	 * @Description: TODO
 	 */
@@ -562,6 +806,13 @@ public class MainControlActivity extends BaseActivity implements
 		return (int) ((5 / 9.0) * (fah - 32));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#didReceiveData(com.xtremeprog
+	 * .xpgconnect.XPGWifiDevice, java.util.concurrent.ConcurrentHashMap, int)
+	 */
 	@Override
 	protected void didReceiveData(XPGWifiDevice device,
 			ConcurrentHashMap<String, Object> dataMap, int result) {
@@ -570,6 +821,11 @@ public class MainControlActivity extends BaseActivity implements
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
@@ -579,11 +835,26 @@ public class MainControlActivity extends BaseActivity implements
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#didDisconnected(com.xtremeprog
+	 * .xpgconnect.XPGWifiDevice)
+	 */
 	@Override
 	protected void didDisconnected(XPGWifiDevice device) {
 		super.didDisconnected(device);
 	}
 
+	/**
+	 * Input alarm to list.
+	 * 
+	 * @param json
+	 *            the json
+	 * @throws JSONException
+	 *             the JSON exception
+	 */
 	private void inputAlarmToList(String json) throws JSONException {
 		Log.i("revjson", json);
 		JSONObject receive = new JSONObject(json);
@@ -598,6 +869,16 @@ public class MainControlActivity extends BaseActivity implements
 		handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
 	}
 
+	/**
+	 * Input data to maps.
+	 * 
+	 * @param map
+	 *            the map
+	 * @param json
+	 *            the json
+	 * @throws JSONException
+	 *             the JSON exception
+	 */
 	private void inputDataToMaps(ConcurrentHashMap<String, Object> map,
 			String json) throws JSONException {
 		Log.i("revjson", json);
@@ -625,6 +906,11 @@ public class MainControlActivity extends BaseActivity implements
 		handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
 	}
 
+	/**
+	 * Gets the view.
+	 * 
+	 * @return the view
+	 */
 	public static Bitmap getView() {
 		// 用指定大小生成一张透明的32位位图，并用它构建一张canvas画布
 		Bitmap mBitmap = Bitmap.createBitmap(mView.getWidth(),
@@ -635,16 +921,23 @@ public class MainControlActivity extends BaseActivity implements
 		return mBitmap;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onActivityResult(int, int,
+	 * android.content.Intent)
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		isClick = false;
 	}
 
 	/**
-	 * 获取格式：2014年6月24日 17:23
+	 * 获取格式：2014年6月24日 17:23.
 	 * 
 	 * @param date
-	 * @return
+	 *            the date
+	 * @return the date cn
 	 */
 	public static String getDateCN(Date date) {
 		int y = date.getYear();

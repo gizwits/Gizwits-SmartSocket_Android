@@ -21,20 +21,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="关于"
+            android:text="室内温度曲线"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>
 
-    <ScrollView
+    <ImageView
         android:layout_width="fill_parent"
-        android:scrollbars="vertical"
-        android:layout_height="fill_parent" >
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/about" />
-    </ScrollView>
+        android:layout_height="fill_parent"
+        android:background="@drawable/curve" />
 
 </LinearLayout>

@@ -58,6 +58,7 @@ public class DeviceManageListActivity extends BaseActivity {
 					Intent intent = new Intent(DeviceManageListActivity.this,
 							DeviceManageDetailActivity.class);
 					intent.putExtra("mac", device.getMacAddress());
+					intent.putExtra("did", device.getDid());
 					startActivity(intent);
 				}
 			}

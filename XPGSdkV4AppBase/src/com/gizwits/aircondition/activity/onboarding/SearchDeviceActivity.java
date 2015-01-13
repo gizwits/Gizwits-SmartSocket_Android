@@ -20,6 +20,7 @@ package com.gizwits.aircondition.activity.onboarding;
 import java.util.ArrayList;
 import java.util.List;
 
+import zxing.CaptureActivity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -41,13 +42,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gizwits.aircondition.R;
 import com.gizwits.aircondition.activity.BaseActivity;
 import com.gizwits.aircondition.adapter.SearchListAdapter;
 import com.gizwits.aircondition.entity.Device;
-import com.gizwits.aircondition.sdk.SettingManager;
 import com.gizwits.aircondition.utils.DialogManager;
-import com.gizwits.zxing.CaptureActivity;
-import com.gizwits.aircondition.R;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.NetworkUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
