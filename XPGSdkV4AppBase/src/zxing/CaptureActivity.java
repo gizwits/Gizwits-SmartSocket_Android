@@ -175,9 +175,17 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		return viewfinderView;
 	}
 
-	private void startBind(String passcode, String did) {
-		mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(), did,
-				passcode, "");
+	private void startBind(final String passcode, final String did) {
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(),
+						did, passcode, "");
+
+			}
+		});
+
 	}
 
 	public Handler getHandler() {
@@ -197,21 +205,21 @@ public class CaptureActivity extends BaseActivity implements Callback {
 
 			inactivityTimer.onActivity();
 			viewfinderView.drawResultBitmap(barcode);
-//			playBeepSoundAndVibrate();
+			// playBeepSoundAndVibrate();
 			product_key = getParamFomeUrl(text, "product_key");
 			did = getParamFomeUrl(text, "did");
-//			passcode = getParamFomeUrl(text, "passcode");
+			passcode = getParamFomeUrl(text, "passcode");
 			Log.i("passcode product_key did", passcode + " " + product_key
 					+ " " + did);
 			ToastUtils.showShort(this, "扫码成功");
 			mHandler.sendEmptyMessage(handler_key.START_BIND.ordinal());
-//			Intent it = new Intent();
+			// Intent it = new Intent();
 			// it.setClass(this, NewDeviceControlActivity.class);
 			// it.putExtra("passcode", passcode);
 			// it.putExtra("product_key", product_key);
 			// it.putExtra("did", did);
-//			startActivity(it);
-//			finish();
+			// startActivity(it);
+			// finish();
 
 		} else {
 			handler = new CaptureActivityHandler(this, decodeFormats,
@@ -260,15 +268,15 @@ public class CaptureActivity extends BaseActivity implements Callback {
 
 	private static final long VIBRATE_DURATION = 200L;
 
-//	private void playBeepSoundAndVibrate() {
-//		// if (playBeep && mediaPlayer != null) {
-//		// mediaPlayer.start();
-//		// }
-//		if (vibrate) {
-//			Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-//			vibrator.vibrate(VIBRATE_DURATION);
-//		}
-//	}
+	// private void playBeepSoundAndVibrate() {
+	// // if (playBeep && mediaPlayer != null) {
+	// // mediaPlayer.start();
+	// // }
+	// if (vibrate) {
+	// Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+	// vibrator.vibrate(VIBRATE_DURATION);
+	// }
+	// }
 
 	/**
 	 * When the beep has finished playing, rewind to queue up another one.
@@ -281,6 +289,8 @@ public class CaptureActivity extends BaseActivity implements Callback {
 
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
+		Log.d("扫描结果", "error=" + error + ";errorMessage=" + errorMessage
+				+ ";did=" + did);
 		if (error == 0) {
 			mHandler.sendEmptyMessage(handler_key.SUCCESS.ordinal());
 		} else {
