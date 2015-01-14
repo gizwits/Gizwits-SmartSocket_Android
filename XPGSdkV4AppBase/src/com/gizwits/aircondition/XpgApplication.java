@@ -18,6 +18,7 @@
 package com.gizwits.aircondition;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.gizwits.aircondition.config.Configs;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;
