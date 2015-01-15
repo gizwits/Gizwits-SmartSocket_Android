@@ -29,6 +29,8 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 
 	/** The iv TopBar leftBtn. */
 	private ImageView ivBack;
+	
+	
 
 	/** The et user name. */
 	private EditText etPswOld;
