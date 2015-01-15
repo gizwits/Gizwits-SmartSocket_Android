@@ -38,6 +38,8 @@ public class CurveActivity extends BaseActivity {
 
 	/** The iv back. */
 	private ImageView ivBack;
+	
+	
 
 	/*
 	 * (non-Javadoc)
