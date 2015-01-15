@@ -3,7 +3,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff">
+    android:background="#ffffff" >
 
     <!-- id starts with @+id/split_conditioner_control_ -->
 
@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:visibility="visible">
+        android:visibility="visible" >
 
         <RelativeLayout
             android:id="@+id/rlHeader"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentTop="true"
-            android:background="@drawable/top_tall">
+            android:background="@drawable/top_tall" >
 
             <ImageView
                 android:id="@+id/ivMenu"
@@ -29,7 +29,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/icon_menu" />
-
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -58,7 +57,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/tvTitle"
                 android:gravity="center"
-                android:visibility="gone">
+                android:visibility="gone" >
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -81,26 +80,26 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlHeader">
+            android:layout_below="@+id/rlHeader" >
 
             <LinearLayout
                 android:id="@+id/llFooter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:orientation="vertical">
+                android:orientation="vertical" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/maincontrol_bottom_bg_blue"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal" >
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1" >
 
                         <TextView
                             android:id="@+id/tvTimeOff"
@@ -114,11 +113,10 @@
                             android:textSize="12sp" />
                     </RelativeLayout>
 
-
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1" >
 
                         <TextView
                             android:id="@+id/tvAdvanture"
@@ -140,13 +138,13 @@
                     android:background="#dbf3fc"
                     android:orientation="vertical"
                     android:padding="18dp"
-                    android:visibility="gone">
+                    android:visibility="gone" >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="22dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal" >
 
                         <TextView
                             android:id="@+id/tvCurve"
@@ -160,6 +158,7 @@
                             android:text="温度曲线"
                             android:textColor="@color/text_gray"
                             android:textSize="12sp" />
+
                         <CheckedTextView
                             android:id="@+id/tvUnit"
                             android:layout_width="0dp"
@@ -170,10 +169,8 @@
                             android:drawableTop="@drawable/unit_selector"
                             android:gravity="center"
                             android:text="摄氏"
-                            android:textSize="12sp"
                             android:textColor="@drawable/wing_text_selector"
-                             />
-
+                            android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -203,8 +200,6 @@
                             android:textSize="12sp"
                             android:visibility="invisible" />
                     </LinearLayout>
-
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -214,12 +209,12 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/llFooter"
                 android:layout_alignParentTop="true"
-                android:scrollbars="none">
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical" >
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -227,7 +222,7 @@
                         android:layout_marginBottom="20dp"
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
-                        android:layout_marginTop="5dp">
+                        android:layout_marginTop="5dp" >
 
                         <ImageButton
                             android:id="@+id/ibLeftArrow"
@@ -264,9 +259,9 @@
                         android:layout_width="290dp"
                         android:layout_height="290dp"
                         android:layout_gravity="center_horizontal"
-                        android:gravity="center">
+                        android:gravity="center" >
 
-                        <com.gizwits.aircondition.widget.CircularSeekBar
+                        <com.gizwits.framework.widget.CircularSeekBar
                             android:id="@+id/csbSeekbar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -278,13 +273,12 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:gravity="center"
-                            android:orientation="vertical">
-
+                            android:orientation="vertical" >
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal" >
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -314,7 +308,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="top"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal" >
 
                                 <TextView
                                     android:id="@+id/tvSettingTemerature"
@@ -347,22 +341,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="23dp"
                         android:orientation="horizontal"
-                        android:visibility="visible">
+                        android:visibility="visible" >
 
                         <RadioGroup
                             android:id="@+id/rgWing"
-                            android:layout_weight="3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="3"
                             android:gravity="center_horizontal"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal" >
 
                             <RadioButton
                                 android:id="@+id/rbWindLow"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_margin="10dp"
+                                android:layout_weight="1"
                                 android:button="@null"
                                 android:drawableTop="@drawable/wing_low_selector"
                                 android:gravity="center"
@@ -370,11 +364,11 @@
                                 android:textColor="@drawable/wing_text_selector" />
 
                             <RadioButton
-                                android:layout_weight="1"
                                 android:id="@+id/rbWindMin"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
+                                android:layout_weight="1"
                                 android:button="@null"
                                 android:drawableTop="@drawable/wing_mid_selector"
                                 android:gravity="center"
@@ -382,31 +376,29 @@
                                 android:textColor="@drawable/wing_text_selector" />
 
                             <RadioButton
-                                android:layout_weight="1"
                                 android:id="@+id/rbWindHigh"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
+                                android:layout_weight="1"
                                 android:button="@null"
                                 android:drawableTop="@drawable/wing_high_selector"
                                 android:gravity="center"
                                 android:text="高风"
                                 android:textColor="@drawable/wing_text_selector" />
-
-
                         </RadioGroup>
+
                         <CheckBox
                             android:id="@+id/cbWindShake"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_margin="10dp"
+                            android:layout_weight="1"
                             android:button="@null"
                             android:drawableTop="@drawable/wing_shake_selector"
                             android:gravity="center"
                             android:text="摆风"
-                            android:textColor="@drawable/wing_text_selector"
-                             />
+                            android:textColor="@drawable/wing_text_selector" />
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>
@@ -418,12 +410,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#0f6cea"
-        android:visibility="gone">
+        android:visibility="gone" >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true" >
 
             <ImageView
                 android:id="@+id/ivBack"

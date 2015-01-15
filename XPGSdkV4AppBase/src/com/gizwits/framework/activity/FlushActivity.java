@@ -1,8 +1,8 @@
 /**
  * Project Name:XPGSdkV4AppBase
- * File Name:CurveActivity.java
- * Package Name:com.gizwits.aircondition.activity.control
- * Date:2015-1-8 14:38:41
+ * File Name:FlushActivity.java
+ * Package Name:com.gizwits.aircondition.activity
+ * Date:2015-1-8 11:18:46
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -15,55 +15,52 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gizwits.aircondition.activity.control;
+package com.gizwits.framework.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
+import android.os.Handler;
 
 import com.gizwits.aircondition.R;
-import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.framework.activity.account.LoginActivity;
+import com.gizwits.framework.activity.device.DeviceListActivity;
+import com.gizwits.framework.utils.StringUtils;
+import com.xpg.common.system.IntentUtils;
 
 // TODO: Auto-generated Javadoc
 /**
- * 
- * ClassName: Class CurveActivity. <br/>
- * <br/>
- * date: 2015-1-8 14:38:41 <br/>
+ * Created by Lien on 14/12/16.
  * 
  * @author Lien
  */
-public class CurveActivity extends BaseActivity {
-
-	/** The iv back. */
-	private ImageView ivBack;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.gizwits.aircondition.activity.BaseActivity#onCreate(android.os.Bundle
-	 * )
-	 */
+public class FlushActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_curve);
-		ivBack = (ImageView) findViewById(R.id.ivBack);
-		ivBack.setOnClickListener(new OnClickListener() {
+		setContentView(R.layout.activity_flush);
+		new Handler().postDelayed(new Runnable() {
 
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see java.lang.Runnable#run()
+			 */
 			@Override
-			public void onClick(View v) {
-				onBackPressed();
+			public void run() {
 
+				if (StringUtils.isEmpty(setmanager.getToken())) {
+					IntentUtils.getInstance().startActivity(FlushActivity.this,
+							LoginActivity.class);
+				} else {
+					Intent intent = new Intent(FlushActivity.this,
+							DeviceListActivity.class);
+					intent.putExtra("autoLogin", true);
+					startActivity(intent);
+				}
+
+				finish();
 			}
-		});
-	}
-
-	@Override
-	public void onBackPressed() {
-		finish();
+		}, 1000);
 	}
 
 }

@@ -1,8 +1,8 @@
 /**
  * Project Name:XPGSdkV4AppBase
- * File Name:CurveActivity.java
- * Package Name:com.gizwits.aircondition.activity.control
- * Date:2015-1-8 14:38:41
+ * File Name:XpgApplication.java
+ * Package Name:com.gizwits.aircondition
+ * Date:2014-12-15 14:17:52
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -15,55 +15,33 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gizwits.aircondition.activity.control;
+package com.gizwits.framework;
 
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
+import android.app.Application;
+import android.util.Log;
 
-import com.gizwits.aircondition.R;
-import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.framework.config.Configs;
+import com.xtremeprog.xpgconnect.XPGWifiSDK;
 
 // TODO: Auto-generated Javadoc
 /**
- * 
- * ClassName: Class CurveActivity. <br/>
+ *  
+ * ClassName: Class XpgApplication. <br/> 
  * <br/>
- * date: 2015-1-8 14:38:41 <br/>
- * 
+ * date: 2014-12-15 14:17:52 <br/> 
+ *
  * @author Lien
  */
-public class CurveActivity extends BaseActivity {
-
-	/** The iv back. */
-	private ImageView ivBack;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.gizwits.aircondition.activity.BaseActivity#onCreate(android.os.Bundle
-	 * )
+public class XpgApplication extends Application {
+	
+	/* (non-Javadoc)
+	 * @see android.app.Application#onCreate()
 	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_curve);
-		ivBack = (ImageView) findViewById(R.id.ivBack);
-		ivBack.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				onBackPressed();
-
-			}
-		});
+	public void onCreate() {
+		super.onCreate();
+		
+		XPGWifiSDK.sharedInstance().startWithAppID(getApplicationContext(), Configs.APPID);
+		
+		XPGWifiSDK.sharedInstance().setLogLevel(Configs.LOG_LEVEL,"BassApp.log", true);
 	}
-
-	@Override
-	public void onBackPressed() {
-		finish();
-	}
-
 }

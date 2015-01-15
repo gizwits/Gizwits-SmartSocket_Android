@@ -28,14 +28,14 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.gizwits.aircondition.activity.BaseActivity;
-import com.gizwits.aircondition.activity.account.UserManageActivity;
 import com.gizwits.aircondition.activity.control.MainControlActivity;
-import com.gizwits.aircondition.activity.device.DeviceListActivity;
-import com.gizwits.aircondition.activity.device.DeviceManageListActivity;
-import com.gizwits.aircondition.activity.help.AboutActivity;
-import com.gizwits.aircondition.activity.help.HelpActivity;
 import com.gizwits.aircondition.R;
+import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.framework.activity.account.UserManageActivity;
+import com.gizwits.framework.activity.device.DeviceListActivity;
+import com.gizwits.framework.activity.device.DeviceManageListActivity;
+import com.gizwits.framework.activity.help.AboutActivity;
+import com.gizwits.framework.activity.help.HelpActivity;
 import com.xpg.common.system.IntentUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 

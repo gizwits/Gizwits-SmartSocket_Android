@@ -36,7 +36,7 @@
             android:src="@drawable/add_icon" />
     </RelativeLayout>
 
-    <com.gizwits.aircondition.widget.RefreshableListView
+    <com.gizwits.framework.widget.RefreshableListView
         android:id="@+id/lvDevices"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

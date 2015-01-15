@@ -22,8 +22,8 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
 import com.gizwits.aircondition.R;
-import com.gizwits.aircondition.activity.BaseActivity;
-import com.gizwits.aircondition.activity.device.DeviceListActivity;
+import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.framework.activity.device.DeviceListActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.xpg.common.system.IntentUtils;
@@ -38,9 +38,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	private String characterSet;
 	private InactivityTimer inactivityTimer;
 	// private MediaPlayer mediaPlayer;
-	private boolean playBeep;
-	private static final float BEEP_VOLUME = 0.10f;
-	private boolean vibrate;
+//	private boolean playBeep;
+//	private static final float BEEP_VOLUME = 0.10f;
+//	private boolean vibrate;
 	private String product_key, passcode, did;
 
 	/**
@@ -111,13 +111,13 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		decodeFormats = null;
 		characterSet = null;
 
-		playBeep = true;
-		AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
-		if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
-			playBeep = false;
-		}
-		initBeepSound();
-		vibrate = true;
+//		playBeep = true;
+//		AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
+//		if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
+//			playBeep = false;
+//		}
+//		initBeepSound();
+//		vibrate = true;
 	}
 
 	@Override
@@ -176,15 +176,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	}
 
 	private void startBind(final String passcode, final String did) {
-		runOnUiThread(new Runnable() {
 
-			@Override
-			public void run() {
-				mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(),
-						did, passcode, "");
-
-			}
-		});
+		mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(), did,
+				passcode, "");
 
 	}
 
@@ -242,31 +236,31 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		return product_key;
 	}
 
-	private void initBeepSound() {
-		// if (playBeep && mediaPlayer == null) {
-		// // The volume on STREAM_SYSTEM is not adjustable, and users found it
-		// // too loud,
-		// // so we now play on the music stream.
-		// setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		// mediaPlayer = new MediaPlayer();
-		// mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-		// mediaPlayer.setOnCompletionListener(beepListener);
-		//
-		// AssetFileDescriptor file = getResources().openRawResourceFd(
-		// R.raw.beep);
-		// try {
-		// mediaPlayer.setDataSource(file.getFileDescriptor(),
-		// file.getStartOffset(), file.getLength());
-		// file.close();
-		// mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
-		// mediaPlayer.prepare();
-		// } catch (IOException e) {
-		// mediaPlayer = null;
-		// }
-		// }
-	}
+//	private void initBeepSound() {
+//		 if (playBeep && mediaPlayer == null) {
+//		 // The volume on STREAM_SYSTEM is not adjustable, and users found it
+//		 // too loud,
+//		 // so we now play on the music stream.
+//		 setVolumeControlStream(AudioManager.STREAM_MUSIC);
+//		 mediaPlayer = new MediaPlayer();
+//		 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//		 mediaPlayer.setOnCompletionListener(beepListener);
+//		
+//		 AssetFileDescriptor file = getResources().openRawResourceFd(
+//		 R.raw.beep);
+//		 try {
+//		 mediaPlayer.setDataSource(file.getFileDescriptor(),
+//		 file.getStartOffset(), file.getLength());
+//		 file.close();
+//		 mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
+//		 mediaPlayer.prepare();
+//		 } catch (IOException e) {
+//		 mediaPlayer = null;
+//		 }
+//		 }
+//	}
 
-	private static final long VIBRATE_DURATION = 200L;
+//	private static final long VIBRATE_DURATION = 200L;
 
 	// private void playBeepSoundAndVibrate() {
 	// // if (playBeep && mediaPlayer != null) {
@@ -281,11 +275,11 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	/**
 	 * When the beep has finished playing, rewind to queue up another one.
 	 */
-	private final OnCompletionListener beepListener = new OnCompletionListener() {
-		public void onCompletion(MediaPlayer mediaPlayer) {
-			mediaPlayer.seekTo(0);
-		}
-	};
+//	private final OnCompletionListener beepListener = new OnCompletionListener() {
+//		public void onCompletion(MediaPlayer mediaPlayer) {
+//			mediaPlayer.seekTo(0);
+//		}
+//	};
 
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {

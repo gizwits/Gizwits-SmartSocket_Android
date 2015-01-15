@@ -14,7 +14,7 @@
         android:textColor="@color/white"
         android:textSize="20sp" />
 
-    <com.gizwits.aircondition.widget.WheelView
+    <com.gizwits.framework.widget.WheelView
         android:id="@+id/wheel_view_timing"
         android:layout_width="300dp"
         android:layout_height="fill_parent"

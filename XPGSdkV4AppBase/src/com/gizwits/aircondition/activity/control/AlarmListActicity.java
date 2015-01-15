@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.gizwits.aircondition.activity.BaseActivity;
-import com.gizwits.aircondition.adapter.AlarmListAdapter;
-import com.gizwits.aircondition.entity.DeviceAlarm;
 import com.gizwits.aircondition.R;
+import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.framework.adapter.AlarmListAdapter;
+import com.gizwits.framework.entity.DeviceAlarm;
 
 public class AlarmListActicity extends BaseActivity implements OnClickListener {
 	private ListView lvList;
