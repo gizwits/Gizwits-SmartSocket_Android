@@ -24,6 +24,7 @@ public class AlarmListActicity extends BaseActivity implements OnClickListener {
 	private AlarmListAdapter mAdapter;
 	private ImageView ivBack;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
