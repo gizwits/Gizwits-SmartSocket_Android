@@ -351,6 +351,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			btnSure.setVisibility(View.GONE);
 			btnGetCode.setVisibility(View.VISIBLE);
 			etName.setHint("手机号");
+			etName.setText("");
 			tvTips.setVisibility(View.GONE);
 		} else if (statue == ui_statue.PHONE) {
 			llInputCode.setVisibility(View.VISIBLE);
@@ -358,6 +359,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			btnSure.setVisibility(View.VISIBLE);
 			btnGetCode.setVisibility(View.GONE);
 			etName.setHint("手机号");
+			etName.setText("");
 			tvPhoneSwitch.setText("邮箱注册");
 			tvTips.setVisibility(View.GONE);
 		} else {
@@ -366,6 +368,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			llInputPsw.setVisibility(View.VISIBLE);
 			btnSure.setVisibility(View.VISIBLE);
 			etName.setHint("邮箱");
+			etName.setText("");
 			tvPhoneSwitch.setText("手机注册");
 			tvTips.setVisibility(View.VISIBLE);
 		}
