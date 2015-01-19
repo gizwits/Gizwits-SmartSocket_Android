@@ -79,7 +79,7 @@
         <Button
             android:id="@+id/btnAddQR"
             style="@style/ButtonBlue"
-            android:text="二维码添加虚拟设备"
+            android:text="二维码扫描添加虚拟设备"
             android:textSize="14sp" />
 
         <Button
