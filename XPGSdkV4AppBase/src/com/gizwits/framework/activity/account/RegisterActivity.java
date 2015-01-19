@@ -379,7 +379,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 			String phone = etName.getText().toString().trim();
 			String code = etInputCode.getText().toString().trim();
-			String password = etInputPsw.getText().toString().trim();
+			String password = etInputPsw.getText().toString();
 			if (phone.length() != 11) {
 				Toast.makeText(this, "电话号码格式不正确", Toast.LENGTH_SHORT).show();
 				return;
@@ -388,8 +388,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				Toast.makeText(this, "请输入验证码", Toast.LENGTH_SHORT).show();
 				return;
 			}
-			if (password.length() < 6) {
-				Toast.makeText(this, "密码小于6位", Toast.LENGTH_SHORT).show();
+			if (password.contains(" ")) {
+				Toast.makeText(this, "密码不能有空格", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (password.length() < 6 || password.length() > 16) {
+				Toast.makeText(this, "密码长度应为6~16", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			mCenter.cRegisterPhoneUser(phone, code, password);
@@ -399,13 +403,17 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		} else {
 			// TODO 邮箱注册
 			String mail = etName.getText().toString().trim();
-			String password = etInputPsw.getText().toString().trim();
+			String password = etInputPsw.getText().toString();
 			if (!mail.contains("@")) {
 				Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
 				return;
 			}
-			if (password.length() < 6) {
-				Toast.makeText(this, "密码小于6位", Toast.LENGTH_SHORT).show();
+			if (password.contains(" ")) {
+				Toast.makeText(this, "密码不能有空格", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (password.length() < 6 || password.length() > 16) {
+				Toast.makeText(this, "密码长度应为6~16", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			mCenter.cRegisterMailUser(mail, password);
