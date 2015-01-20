@@ -306,6 +306,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         private LayoutInflater inflater;
 
         private int choosedPos = 0;
+        private Context ctx;
 
         public int getChoosedPos() {
             return choosedPos;
@@ -317,6 +318,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
         public DeviceAdapter(Context context, List<XPGWifiDevice> objects) {
             super(context, 0, objects);
+            ctx=context;
             inflater = LayoutInflater.from(context);
         }
 
@@ -347,6 +349,11 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
                 holder.deviceName_tv.setSelected(false);
                 holder.device_checked_tv.setSelected(false);
             }
+            
+            if(device.isOnline())
+            	holder.deviceName_tv.setTextColor(ctx.getResources().getColor(R.color.text_blue));
+            else
+            	holder.deviceName_tv.setTextColor(ctx.getResources().getColor(R.color.text_gray));
 
             return convertView;
 
