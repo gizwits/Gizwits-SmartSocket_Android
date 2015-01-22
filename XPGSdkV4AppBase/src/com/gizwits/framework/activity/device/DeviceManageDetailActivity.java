@@ -19,8 +19,10 @@ package com.gizwits.framework.activity.device;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -77,6 +79,59 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	private ProgressDialog progressDialog;
 
+	/**
+	 * ClassName: Enum handler_key. <br/>
+	 * <br/>
+	 * date: 2014-11-26 17:51:10 <br/>
+	 * 
+	 * @author Lien
+	 */
+	private enum handler_key {
+
+		CHANGE_SUCCESS,
+
+		CHANGE_FAIL,
+
+		DELETE_SUCCESS,
+
+		DELETE_FAIL,
+
+	}
+
+	Handler handler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			handler_key key = handler_key.values()[msg.what];
+			switch (key) {
+			case CHANGE_SUCCESS:
+				ToastUtils.showShort(DeviceManageDetailActivity.this, "修改成功！");
+				break;
+
+			case CHANGE_FAIL:
+				ToastUtils.showShort(DeviceManageDetailActivity.this, "修改失败:"
+						+ msg.obj.toString());
+				break;
+
+			case DELETE_SUCCESS:
+				ToastUtils.showShort(DeviceManageDetailActivity.this, "删除成功！");
+				IntentUtils.getInstance().startActivity(
+						DeviceManageDetailActivity.this,
+						DeviceListActivity.class);
+				finish();
+				break;
+
+			case DELETE_FAIL:
+				ToastUtils.showShort(DeviceManageDetailActivity.this, "删除失败:"
+						+ msg.obj.toString());
+				break;
+
+			}
+		}
+
+	};
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -99,6 +154,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 			String mac = getIntent().getStringExtra("mac");
 			String did = getIntent().getStringExtra("did");
 			xpgWifiDevice = findDeviceByMac(mac, did);
+			xpgWifiDevice.setListener(deviceListener);
 		}
 
 	}
@@ -175,10 +231,15 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
+		Log.d("Device扫描结果", "error=" + error + ";errorMessage=" + errorMessage
+				+ ";did=" + did);
 		if (error == 0) {
-			ToastUtils.showShort(this, "修改成功！");
+			handler.sendEmptyMessage(handler_key.CHANGE_SUCCESS.ordinal());
 		} else {
-			ToastUtils.showShort(this, "修改失败:" + errorMessage);
+			Message msg = new Message();
+			msg.what = handler_key.CHANGE_FAIL.ordinal();
+			msg.obj = errorMessage;
+			handler.sendMessage(msg);
 		}
 	}
 
@@ -186,12 +247,13 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	protected void didUnbindDevice(int error, String errorMessage, String did) {
 		DialogManager.dismissDialog(this, progressDialog);
 		if (error == 0) {
-			ToastUtils.showShort(this, "删除成功！");
-			IntentUtils.getInstance().startActivity(this,
-					DeviceListActivity.class);
-			finish();
+			handler.sendEmptyMessage(handler_key.DELETE_SUCCESS.ordinal());
+			
 		} else {
-			ToastUtils.showShort(this, "删除失败:" + errorMessage);
+			Message msg = new Message();
+			msg.what = handler_key.DELETE_FAIL.ordinal();
+			msg.obj = errorMessage;
+			handler.sendMessage(msg);
 		}
 	}
 }

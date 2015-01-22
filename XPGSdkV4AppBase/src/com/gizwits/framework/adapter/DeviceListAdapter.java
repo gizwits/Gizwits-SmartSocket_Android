@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:DeviceListAdapter.java
+ * Package Name:com.gizwits.framework.adapter
+ * Date:2015-1-22 15:23:42
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.adapter;
 
 import android.content.Context;
@@ -15,300 +32,573 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+
+/**
+ * ClassName: Class DeviceListAdapter. <br/>
+ * <br/>
+ * date: 2015-1-22 15:23:42 <br/>
+ *
+ * @author Lien
+ */
 public class DeviceListAdapter extends BaseAdapter {
 
-	private static final int VIEW_TYPE_COUNT = 5;
-	public static final int VIEW_TYPE_LAN = 0;
-	public static final int VIEW_TYPE_WAN = 1;
-	public static final int VIEW_TYPE_OFFLINE = 2;
-	public static final int VIEW_TYPE_UNBIND = 3;
-	public static final int VIEW_TYPE_HEADER = 4;
-	private SettingManager setManager;
-	List<XPGWifiDevice> onlineDevices;
-	List<XPGWifiDevice> offlineDevices;
-	List<XPGWifiDevice> unBindDevices;
+    /**
+     * The Constant VIEW_TYPE_COUNT.
+     */
+    private static final int VIEW_TYPE_COUNT = 6;
 
-	private LayoutInflater mInflater;
-	private List<XPGWifiDevice> currentDevices;
-	private List<TypeItem> items;
-	private Context context;
+    /**
+     * The Constant VIEW_TYPE_LAN.
+     */
+    public static final int VIEW_TYPE_LAN = 0;
 
-	public DeviceListAdapter(Context context, List<XPGWifiDevice> devices) {
-		this.context = context;
-		mInflater = LayoutInflater.from(context);
-		setManager = new SettingManager(context);
-		onlineDevices = new ArrayList<XPGWifiDevice>();
-		offlineDevices = new ArrayList<XPGWifiDevice>();
-		unBindDevices = new ArrayList<XPGWifiDevice>();
-		changeDatas(devices);
-	}
+    /**
+     * The Constant VIEW_TYPE_WAN.
+     */
+    public static final int VIEW_TYPE_WAN = 1;
 
-	class TypeItem {
-		int itemType;
+    /**
+     * The Constant VIEW_TYPE_OFFLINE.
+     */
+    public static final int VIEW_TYPE_OFFLINE = 2;
 
-		private TypeItem(int itemType) {
-			this.itemType = itemType;
-		}
-	}
+    /**
+     * The Constant VIEW_TYPE_UNBIND.
+     */
+    public static final int VIEW_TYPE_UNBIND = 3;
 
-	class DeviceTypeItem extends TypeItem {
-		XPGWifiDevice xpgWifiDevice;
+    /**
+     * The Constant VIEW_TYPE_HEADER.
+     */
+    public static final int VIEW_TYPE_HEADER = 4;
 
-		public DeviceTypeItem(int type, XPGWifiDevice xpgWifiDevice) {
-			super(type);
-			this.xpgWifiDevice = xpgWifiDevice;
-		}
-	}
+    public static final int VIEW_TYPE_EMPTY = 5;
 
-	class HeaderTypeItem extends TypeItem {
-		String label;
+    /**
+     * The set manager.
+     */
+    private SettingManager setManager;
 
-		public HeaderTypeItem(String label) {
-			super(VIEW_TYPE_HEADER);
-			this.label = label;
-		}
-	}
+    /**
+     * The lan devices.
+     */
+    List<XPGWifiDevice> lanDevices;
 
-	/**
-	 * ViewHolder基类，itemView用于查找子view
-	 */
-	class ViewHolder {
-		View itemView;
+    /**
+     * The wan devices.
+     */
+    List<XPGWifiDevice> wanDevices;
 
-		public ViewHolder(View itemView) {
-			if (itemView == null) {
-				throw new IllegalArgumentException("itemView can not be null!");
-			}
-			this.itemView = itemView;
-		}
-	}
+    /**
+     * The offline devices.
+     */
+    List<XPGWifiDevice> offlineDevices;
 
-	/**
-	 * 设备列表ViewHolder
-	 */
-	class DeviceViewHolder extends ViewHolder {
-		ImageView icon;
-		TextView name;
-		TextView statue;
-		ImageView arrow;
+    /**
+     * The un bind devices.
+     */
+    List<XPGWifiDevice> unBindDevices;
 
-		public DeviceViewHolder(View view) {
-			super(view);
-			icon = (ImageView) view.findViewById(R.id.icon);
-			arrow = (ImageView) view.findViewById(R.id.arrow);
-			name = (TextView) view.findViewById(R.id.name);
-			statue = (TextView) view.findViewById(R.id.statue);
-		}
-	}
+    /**
+     * The m inflater.
+     */
+    private LayoutInflater mInflater;
 
-	/**
-	 * 头部ViewHolder
-	 */
-	class HeaderViewHolder extends ViewHolder {
-		TextView label;
+//	/** The current devices. */
+//	private List<XPGWifiDevice> currentDevices;
 
-		public HeaderViewHolder(View view) {
-			super(view);
-			label = (TextView) view.findViewById(R.id.label);
-		}
-	}
+    /**
+     * The items.
+     */
+    private List<TypeItem> items;
 
-	private List<TypeItem> generateItems(List<XPGWifiDevice> devices) {
-		List<TypeItem> items = new ArrayList<TypeItem>();
-		int size = devices == null ? 0 : devices.size();
-		String currLabel;
-		String preLabel = "{";
-		XPGWifiDevice device;
-		for (int i = 0; i < size; i++) {
-			device = devices.get(i);
-			if (device.isBind(setManager.getUid()) && device.isLAN()) {
-				currLabel = "在线设备";
-				if (i == 0 || !currLabel.equals(preLabel)) {
-					items.add(new HeaderTypeItem("在线设备"));
-					preLabel = currLabel;
-				}
-				items.add(new DeviceTypeItem(VIEW_TYPE_LAN, device));
-			} else if (device.isBind(setManager.getUid()) && device.isOnline()) {
-				currLabel = "在线设备";
-				if (i == 0 || !currLabel.equals(preLabel)) {
-					items.add(new HeaderTypeItem("在线设备"));
-					preLabel = currLabel;
-				}
-				items.add(new DeviceTypeItem(VIEW_TYPE_WAN, device));
-			} else if (device.isBind(setManager.getUid()) && !device.isOnline()) {
-				currLabel = "离线设备";
-				if (i == 0 || !currLabel.equals(preLabel)) {
-					items.add(new HeaderTypeItem("离线设备"));
-					preLabel = currLabel;
-				}
-				items.add(new DeviceTypeItem(VIEW_TYPE_OFFLINE, device));
-			} else {
-				currLabel = "未绑定设备";
-				if (i == 0 || !currLabel.equals(preLabel)) {
-					items.add(new HeaderTypeItem("未绑定设备"));
-					preLabel = currLabel;
-				}
-				items.add(new DeviceTypeItem(VIEW_TYPE_UNBIND, device));
-			}
-		}
-		return items;
-	}
+    /**
+     * The context.
+     */
+    private Context context;
 
-	public void changeDatas(List<XPGWifiDevice> devices) {
-		onlineDevices.clear();
-		offlineDevices.clear();
-		unBindDevices.clear();
-		if (currentDevices != null && currentDevices.size() > 0) {
-			currentDevices.clear();
-		} else {
-			currentDevices = new ArrayList<XPGWifiDevice>();
-		}
-		for (XPGWifiDevice device : devices) {
+    /**
+     * Instantiates a new device list adapter.
+     *
+     * @param context the context
+     * @param devices the devices
+     */
+    public DeviceListAdapter(Context context, List<XPGWifiDevice> devices) {
+        this.context = context;
+        mInflater = LayoutInflater.from(context);
+        setManager = new SettingManager(context);
+        lanDevices = new ArrayList<XPGWifiDevice>();
+        wanDevices = new ArrayList<XPGWifiDevice>();
+        offlineDevices = new ArrayList<XPGWifiDevice>();
+        unBindDevices = new ArrayList<XPGWifiDevice>();
+        changeDatas(devices);
+    }
 
-			if (device.isLAN()) {
-				if (device.isBind(setManager.getUid())) {
-					onlineDevices.add(device);
-				} else {
-					unBindDevices.add(device);
-				}
-			} else {
-				if (!device.isOnline()) {
-					offlineDevices.add(device);
-				} else {
-					onlineDevices.add(device);
-				}
-			}
-		}
-		currentDevices.addAll(onlineDevices);
-		currentDevices.addAll(offlineDevices);
-		currentDevices.addAll(unBindDevices);
-		this.items = generateItems(currentDevices);
-		notifyDataSetChanged();
-	}
+    /**
+     * ClassName: Class TypeItem. <br/>
+     * <br/>
+     * date: 2015-1-22 15:23:42 <br/>
+     *
+     * @author Lien
+     */
+    class TypeItem {
 
-	@Override
-	public int getItemViewType(int position) {
-		if (items.get(position) != null) {
-			return items.get(position).itemType;
-		}
-		return super.getItemViewType(position);
-	}
+        /**
+         * The item type.
+         */
+        int itemType;
 
-	@Override
-	public int getViewTypeCount() {
-		return VIEW_TYPE_COUNT;
-	}
+        /**
+         * Instantiates a new type item.
+         *
+         * @param itemType the item type
+         */
+        private TypeItem(int itemType) {
+            this.itemType = itemType;
+        }
+    }
 
-	@Override
-	public int getCount() {
-		return items != null ? items.size() : 0;
-	}
+    /**
+     * ClassName: Class DeviceTypeItem. <br/>
+     * <br/>
+     * date: 2015-1-22 15:23:42 <br/>
+     *
+     * @author Lien
+     */
+    class DeviceTypeItem extends TypeItem {
 
-	@Override
-	public Object getItem(int position) {
-		if (items != null && position > 0 && position < items.size()) {
-			return items.get(position);
-		}
-		return null;
-	}
+        /**
+         * The xpg wifi device.
+         */
+        XPGWifiDevice xpgWifiDevice;
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+        /**
+         * Instantiates a new device type item.
+         *
+         * @param type          the type
+         * @param xpgWifiDevice the xpg wifi device
+         */
+        public DeviceTypeItem(int type, XPGWifiDevice xpgWifiDevice) {
+            super(type);
+            this.xpgWifiDevice = xpgWifiDevice;
+        }
+    }
 
-	public XPGWifiDevice getDeviceByPosition(int position) {
-		if (items.get(position).itemType == VIEW_TYPE_HEADER) {
-			return null;
-		} else {
-			DeviceTypeItem deviceTypeItem = (DeviceTypeItem) items
-					.get(position);
-			return deviceTypeItem.xpgWifiDevice;
-		}
-	}
+    class EmptyTypeItem extends TypeItem {
+        public EmptyTypeItem(int type) {
+            super(type);
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		TypeItem item = items.get(position);
-		ViewHolder viewHolder;
-		if (convertView == null) {
-			// 根据不同的viewType，初始化不同的布局
-			switch (getItemViewType(position)) {
-			case VIEW_TYPE_HEADER:
-				viewHolder = new HeaderViewHolder(mInflater.inflate(
-						R.layout.device_list_item_header, null));
-				break;
+        }
+    }
 
-			case VIEW_TYPE_LAN:
-			case VIEW_TYPE_WAN:
-			case VIEW_TYPE_OFFLINE:
-			case VIEW_TYPE_UNBIND:
-				viewHolder = new DeviceViewHolder(mInflater.inflate(
-						R.layout.device_list_item, null));
-				break;
+    /**
+     * ClassName: Class HeaderTypeItem. <br/>
+     * <br/>
+     * date: 2015-1-22 15:23:42 <br/>
+     *
+     * @author Lien
+     */
+    class HeaderTypeItem extends TypeItem {
 
-			default:
-				throw new IllegalArgumentException("invalid view type : "
-						+ getItemViewType(position));
-			}
+        /**
+         * The label.
+         */
+        String label;
 
-			// 缓存header与item视图
-			convertView = viewHolder.itemView;
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}
+        /**
+         * Instantiates a new header type item.
+         *
+         * @param label the label
+         */
+        public HeaderTypeItem(String label) {
+            super(VIEW_TYPE_HEADER);
+            this.label = label;
+        }
+    }
 
-		// 根据初始化的不同布局，绑定数据
-		if (viewHolder instanceof HeaderViewHolder) {
-			((HeaderViewHolder) viewHolder).label.setText(String
-					.valueOf(((HeaderTypeItem) item).label));
-		} else if (viewHolder instanceof DeviceViewHolder) {
-			onBindDeviceItem((DeviceViewHolder) viewHolder,
-					((DeviceTypeItem) item).xpgWifiDevice);
-		}
-		return convertView;
-	}
+    /**
+     * ViewHolder基类，itemView用于查找子view.
+     *
+     * @author Lien
+     */
+    class ViewHolder {
 
-	private void onBindDeviceItem(DeviceViewHolder viewHolder,
-			XPGWifiDevice device) {
-		if (device.isLAN()) {
-			if (device.isBind(setManager.getUid())) {
-				viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
-				viewHolder.name.setText(device.getProductName());
-				viewHolder.name.setTextColor(context.getResources().getColor(
-						R.color.text_blue));
-				viewHolder.statue.setText("局域网在线");
-				viewHolder.arrow.setVisibility(View.VISIBLE);
-				viewHolder.arrow.setImageResource(R.drawable.arrow_right_blue);
-			} else {
-				viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
-				viewHolder.name.setText(device.getProductName());
-				viewHolder.name.setTextColor(context.getResources().getColor(
-						R.color.text_gray));
-				viewHolder.statue.setText("未绑定");
-				viewHolder.arrow.setVisibility(View.VISIBLE);
-				viewHolder.arrow.setImageResource(R.drawable.arrow_right_gray);
-			}
-		} else {
-			if (!device.isOnline()) {
-				viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
-				viewHolder.name.setText(device.getProductName());
-				viewHolder.name.setTextColor(context.getResources().getColor(
-						R.color.text_gray));
-				viewHolder.statue.setText("离线");
-				viewHolder.arrow.setVisibility(View.GONE);
-				viewHolder.arrow.setImageResource(R.drawable.arrow_right_gray);
-			} else {
-				viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
-				viewHolder.name.setText(device.getProductName());
-				viewHolder.name.setTextColor(context.getResources().getColor(
-						R.color.text_blue));
-				viewHolder.statue.setText("远程在线");
-				viewHolder.arrow.setVisibility(View.VISIBLE);
-				viewHolder.arrow.setImageResource(R.drawable.arrow_right_blue);
-			}
-		}
-	}
+        /**
+         * The item view.
+         */
+        View itemView;
+
+        /**
+         * Instantiates a new view holder.
+         *
+         * @param itemView the item view
+         */
+        public ViewHolder(View itemView) {
+            if (itemView == null) {
+                throw new IllegalArgumentException("itemView can not be null!");
+            }
+            this.itemView = itemView;
+        }
+    }
+
+    /**
+     * 设备列表ViewHolder.
+     *
+     * @author Lien
+     */
+    class DeviceViewHolder extends ViewHolder {
+
+        /**
+         * The icon.
+         */
+        ImageView icon;
+
+        /**
+         * The name.
+         */
+        TextView name;
+
+        /**
+         * The statue.
+         */
+        TextView statue;
+
+        /**
+         * The arrow.
+         */
+        ImageView arrow;
+
+        /**
+         * Instantiates a new device view holder.
+         *
+         * @param view the view
+         */
+        public DeviceViewHolder(View view) {
+            super(view);
+            icon = (ImageView) view.findViewById(R.id.icon);
+            arrow = (ImageView) view.findViewById(R.id.arrow);
+            name = (TextView) view.findViewById(R.id.name);
+            statue = (TextView) view.findViewById(R.id.statue);
+        }
+    }
+
+    class DeviceEmptyHolder extends ViewHolder {
+        public DeviceEmptyHolder(View view) {
+            super(view);
+        }
+    }
+
+
+    /**
+     * 头部ViewHolder.
+     *
+     * @author Lien
+     */
+    class HeaderViewHolder extends ViewHolder {
+
+        /**
+         * The label.
+         */
+        TextView label;
+
+        /**
+         * Instantiates a new header view holder.
+         *
+         * @param view the view
+         */
+        public HeaderViewHolder(View view) {
+            super(view);
+            label = (TextView) view.findViewById(R.id.label);
+        }
+    }
+
+
+
+    /**
+     * Generate items.
+     */
+    private List<TypeItem> generateItems() {
+        List<TypeItem> items = new ArrayList<TypeItem>();
+        items.add(new HeaderTypeItem("在线设备"));
+        if (lanDevices.size() > 0) {
+            for (XPGWifiDevice device : lanDevices) {
+                items.add(new DeviceTypeItem(VIEW_TYPE_LAN, device));
+            }
+        } else if (wanDevices.size() > 0) {
+            for (XPGWifiDevice device : wanDevices) {
+                items.add(new DeviceTypeItem(VIEW_TYPE_WAN, device));
+            }
+        } else {
+            items.add(new EmptyTypeItem(VIEW_TYPE_EMPTY));
+        }
+        items.add(new HeaderTypeItem("离线设备"));
+        if (offlineDevices.size() > 0) {
+            for (XPGWifiDevice device : offlineDevices) {
+                items.add(new DeviceTypeItem(VIEW_TYPE_OFFLINE, device));
+            }
+        } else {
+            items.add(new EmptyTypeItem(VIEW_TYPE_EMPTY));
+        }
+        items.add(new HeaderTypeItem("未绑定设备"));
+        if (unBindDevices.size() > 0) {
+            for (XPGWifiDevice device : unBindDevices) {
+                items.add(new DeviceTypeItem(VIEW_TYPE_UNBIND, device));
+            }
+        } else {
+            items.add(new EmptyTypeItem(VIEW_TYPE_EMPTY));
+        }
+        return items;
+    }
+
+//    /**
+//     * Generate items.
+//     *
+//     * @param devices the devices
+//     * @return the list
+//     */
+//    private List<TypeItem> generateItems(List<XPGWifiDevice> devices) {
+//        List<TypeItem> items = new ArrayList<TypeItem>();
+//        int size = devices == null ? 0 : devices.size();
+//        String currLabel;
+//        String preLabel = "{";
+//        XPGWifiDevice device;
+//        for (int i = 0; i < size; i++) {
+//            device = devices.get(i);
+//            if (device.isBind(setManager.getUid()) && device.isLAN()) {
+//                currLabel = "在线设备";
+//                if (i == 0 || !currLabel.equals(preLabel)) {
+//                    items.add(new HeaderTypeItem("在线设备"));
+//                    preLabel = currLabel;
+//                }
+//                items.add(new DeviceTypeItem(VIEW_TYPE_LAN, device));
+//            } else if (device.isBind(setManager.getUid()) && device.isOnline()) {
+//                currLabel = "在线设备";
+//                if (i == 0 || !currLabel.equals(preLabel)) {
+//                    items.add(new HeaderTypeItem("在线设备"));
+//                    preLabel = currLabel;
+//                }
+//                items.add(new DeviceTypeItem(VIEW_TYPE_WAN, device));
+//            } else if (device.isBind(setManager.getUid()) && !device.isOnline()) {
+//                currLabel = "离线设备";
+//                if (i == 0 || !currLabel.equals(preLabel)) {
+//                    items.add(new HeaderTypeItem("离线设备"));
+//                    preLabel = currLabel;
+//                }
+//                items.add(new DeviceTypeItem(VIEW_TYPE_OFFLINE, device));
+//            } else {
+//                currLabel = "未绑定设备";
+//                if (i == 0 || !currLabel.equals(preLabel)) {
+//                    items.add(new HeaderTypeItem("未绑定设备"));
+//                    preLabel = currLabel;
+//                }
+//                items.add(new DeviceTypeItem(VIEW_TYPE_UNBIND, device));
+//            }
+//        }
+//        return items;
+//    }
+
+
+    /**
+     * Change datas.
+     *
+     * @param devices the devices
+     */
+    public void changeDatas(List<XPGWifiDevice> devices) {
+        lanDevices.clear();
+        wanDevices.clear();
+        offlineDevices.clear();
+        unBindDevices.clear();
+//		if (currentDevices != null && currentDevices.size() > 0) {
+//			currentDevices.clear();
+//		} else {
+//			currentDevices = new ArrayList<XPGWifiDevice>();
+//		}
+        for (XPGWifiDevice device : devices) {
+
+            if (device.isLAN()) {
+                if (device.isBind(setManager.getUid())) {
+                    lanDevices.add(device);
+                } else {
+                    unBindDevices.add(device);
+                }
+            } else {
+                if (!device.isOnline()) {
+                    offlineDevices.add(device);
+                } else {
+                    wanDevices.add(device);
+                }
+            }
+        }
+//		currentDevices.addAll(onlineDevices);
+//		currentDevices.addAll(offlineDevices);
+//		currentDevices.addAll(unBindDevices);
+//		this.items = generateItems(currentDevices);
+        this.items = generateItems();
+
+        notifyDataSetChanged();
+    }
+
+
+    /* (non-Javadoc)
+     * @see android.widget.BaseAdapter#getItemViewType(int)
+     */
+    @Override
+    public int getItemViewType(int position) {
+        if (items.get(position) != null) {
+            return items.get(position).itemType;
+        }
+        return super.getItemViewType(position);
+    }
+
+    /* (non-Javadoc)
+     * @see android.widget.BaseAdapter#getViewTypeCount()
+     */
+    @Override
+    public int getViewTypeCount() {
+        return VIEW_TYPE_COUNT;
+    }
+
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getCount()
+     */
+    @Override
+    public int getCount() {
+        return items != null ? items.size() : 0;
+    }
+
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItem(int)
+     */
+    @Override
+    public Object getItem(int position) {
+        if (items != null && position > 0 && position < items.size()) {
+            return items.get(position);
+        }
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItemId(int)
+     */
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    /**
+     * Gets the device by position.
+     *
+     * @param position the position
+     * @return the device by position
+     */
+    public XPGWifiDevice getDeviceByPosition(int position) {
+        if (items.get(position).itemType == VIEW_TYPE_HEADER||items.get(position).itemType == VIEW_TYPE_EMPTY) {
+            return null;
+        } else {
+            DeviceTypeItem deviceTypeItem = (DeviceTypeItem) items
+                    .get(position);
+            return deviceTypeItem.xpgWifiDevice;
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+     */
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TypeItem item = items.get(position);
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            // 根据不同的viewType，初始化不同的布局
+            switch (getItemViewType(position)) {
+                case VIEW_TYPE_HEADER:
+                    viewHolder = new HeaderViewHolder(mInflater.inflate(
+                            R.layout.device_list_item_header, null));
+                    break;
+
+                case VIEW_TYPE_LAN:
+                case VIEW_TYPE_WAN:
+                case VIEW_TYPE_OFFLINE:
+                case VIEW_TYPE_UNBIND:
+                    viewHolder = new DeviceViewHolder(mInflater.inflate(
+                            R.layout.device_list_item, null));
+                    
+                    break;
+                case VIEW_TYPE_EMPTY:
+                    viewHolder = new DeviceEmptyHolder(mInflater.inflate(
+                            R.layout.device_list_item_empty, null));
+                    break;
+
+                default:
+                    throw new IllegalArgumentException("invalid view type : "
+                            + getItemViewType(position));
+            }
+
+            // 缓存header与item视图
+            convertView = viewHolder.itemView;
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        // 根据初始化的不同布局，绑定数据
+        if (viewHolder instanceof HeaderViewHolder) {
+            ((HeaderViewHolder) viewHolder).label.setText(String
+                    .valueOf(((HeaderTypeItem) item).label));
+        } else if (viewHolder instanceof DeviceViewHolder) {
+            onBindDeviceItem((DeviceViewHolder) viewHolder,
+                    ((DeviceTypeItem) item).xpgWifiDevice);
+        }
+        return convertView;
+    }
+
+
+    /**
+     * On bind device item.
+     *
+     * @param viewHolder the view holder
+     * @param device     the device
+     */
+    private void onBindDeviceItem(DeviceViewHolder viewHolder,
+                                  XPGWifiDevice device) {
+        if (device.isLAN()) {
+            if (device.isBind(setManager.getUid())) {
+                viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
+                viewHolder.name.setText(device.getProductName());
+                viewHolder.name.setTextColor(context.getResources().getColor(
+                        R.color.text_blue));
+                viewHolder.statue.setText("局域网在线");
+                viewHolder.arrow.setVisibility(View.VISIBLE);
+                viewHolder.arrow.setImageResource(R.drawable.arrow_right_blue);
+            } else {
+                viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
+                viewHolder.name.setText(device.getProductName());
+                viewHolder.name.setTextColor(context.getResources().getColor(
+                        R.color.text_gray));
+                viewHolder.statue.setText("未绑定");
+                viewHolder.arrow.setVisibility(View.VISIBLE);
+                viewHolder.arrow.setImageResource(R.drawable.arrow_right_gray);
+            }
+        } else {
+            if (!device.isOnline()) {
+                viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
+                viewHolder.name.setText(device.getProductName());
+                viewHolder.name.setTextColor(context.getResources().getColor(
+                        R.color.text_gray));
+                viewHolder.statue.setText("离线");
+                viewHolder.arrow.setVisibility(View.GONE);
+                viewHolder.arrow.setImageResource(R.drawable.arrow_right_gray);
+            } else {
+                viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
+                viewHolder.name.setText(device.getProductName());
+                viewHolder.name.setTextColor(context.getResources().getColor(
+                        R.color.text_blue));
+                viewHolder.statue.setText("远程在线");
+                viewHolder.arrow.setVisibility(View.VISIBLE);
+                viewHolder.arrow.setImageResource(R.drawable.arrow_right_blue);
+            }
+        }
+    }
 
 }

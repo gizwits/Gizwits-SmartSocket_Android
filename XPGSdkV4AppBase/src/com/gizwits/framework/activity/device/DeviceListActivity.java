@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:DeviceListActivity.java
+ * Package Name:com.gizwits.framework.activity.device
+ * Date:2015-1-22 15:23:20
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.activity.device;
 
 import java.util.List;
@@ -31,6 +48,7 @@ import com.xpg.common.system.IntentUtils;
 import com.xpg.ui.utils.ToastUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
+// TODO: Auto-generated Javadoc
 //TODO: Auto-generated Javadoc
 
 /**
@@ -42,22 +60,28 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
  */
 public class DeviceListActivity extends BaseActivity implements
 		OnClickListener, OnItemClickListener {
+	
+	/** The Constant TAG. */
 	private static final String TAG = "DeviceListActivity";
 
 	/**
 	 * The iv TopBar leftBtn.
 	 */
 	private ImageView ivLogout;
+	
+	/** The iv add. */
 	private ImageView ivAdd;
 
-	/**
-	 * The tv init date
-	 */
+	/** The tv init date. */
 	private RefreshableListView lvDevices;
 	// private List<XPGWifiDevice> deviceList;
+	/** The device list adapter. */
 	private DeviceListAdapter deviceListAdapter;
+	
+	/** The progress dialog. */
 	private ProgressDialog progressDialog;
 
+	/** The dialog. */
 	private Dialog dialog;
 
 	/**
@@ -74,6 +98,7 @@ public class DeviceListActivity extends BaseActivity implements
 	 */
 	private enum handler_key {
 
+		/** The login start. */
 		LOGIN_START,
 
 		/**
@@ -91,6 +116,7 @@ public class DeviceListActivity extends BaseActivity implements
 		 */
 		LOGIN_TIMEOUT,
 
+		/** The found. */
 		FOUND,
 
 		/**
@@ -100,6 +126,7 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
+	/** The handler. */
 	Handler handler = new Handler() {
 
 		@Override
@@ -132,6 +159,9 @@ public class DeviceListActivity extends BaseActivity implements
 
 	};
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -146,6 +176,9 @@ public class DeviceListActivity extends BaseActivity implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#onResume()
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -160,6 +193,9 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * Inits the views.
+	 */
 	private void initViews() {
 		ivLogout = (ImageView) findViewById(R.id.ivLogout);
 		ivAdd = (ImageView) findViewById(R.id.ivAdd);
@@ -180,12 +216,18 @@ public class DeviceListActivity extends BaseActivity implements
 		progressDialog.setMessage("连接中，请稍候。");
 	}
 
+	/**
+	 * Inits the events.
+	 */
 	private void initEvents() {
 		ivLogout.setOnClickListener(this);
 		ivAdd.setOnClickListener(this);
 		lvDevices.setOnItemClickListener(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -219,11 +261,17 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		XPGWifiDevice tempDevice = deviceListAdapter
 				.getDeviceByPosition(position);
+		if(tempDevice==null){
+			return;
+		}
 		if (tempDevice.isLAN()) {
 			if (tempDevice.isBind(setmanager.getUid())) {
 				// TODO 登陆设备
@@ -268,6 +316,11 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * Login device.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 */
 	private void loginDevice(XPGWifiDevice xpgWifiDevice) {
 		mXpgWifiDevice = xpgWifiDevice;
 		mXpgWifiDevice.setListener(deviceListener);
@@ -276,6 +329,9 @@ public class DeviceListActivity extends BaseActivity implements
 
 
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didLogin(com.xtremeprog.xpgconnect.XPGWifiDevice, int)
+	 */
 	@Override
 	protected void didLogin(XPGWifiDevice device, int result) {
 		if (result == 0) {
@@ -287,12 +343,20 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * Gets the list.
+	 *
+	 * @return the list
+	 */
 	private void getList() {
 		String uid = setmanager.getUid();
 		String token = setmanager.getToken();
 		mCenter.cGetBoundDevices(uid, token);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didDiscovered(int, java.util.List)
+	 */
 	@Override
 	protected void didDiscovered(int error, List<XPGWifiDevice> deviceList) {
 		Log.d("onDiscovered", "Device count:" + deviceList.size());
@@ -301,6 +365,9 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didUserLogin(int, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	protected void didUserLogin(int error, String errorMessage, String uid,
 			String token) {
@@ -310,11 +377,17 @@ public class DeviceListActivity extends BaseActivity implements
 		}
 	}
 
+    /* (non-Javadoc)
+     * @see android.app.Activity#onBackPressed()
+     */
     @Override
     public void onBackPressed() {
         exit();
     }
 
+    /**
+     * Exit.
+     */
     public void exit() {
 		if (!isExit) {
 			isExit = true;

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -10,7 +10,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/login_input_box"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/icon"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/statue"
