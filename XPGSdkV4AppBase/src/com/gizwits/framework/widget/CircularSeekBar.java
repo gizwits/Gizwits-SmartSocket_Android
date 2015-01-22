@@ -193,6 +193,12 @@ public class CircularSeekBar extends View {
     private boolean CALLED_FROM_ANGLE = false;
 
     private boolean SHOW_SEEKBAR = true;
+    
+	enum lockX {
+		UnLock, LockLeft, LockRight;
+	}
+
+	private lockX myLock = lockX.LockLeft;
 
     /**
      * The rectangle containing our circles and arcs.
@@ -606,6 +612,28 @@ public class CircularSeekBar extends View {
         float markRange = DensityUtils.dp2px(getContext(), 60);
         float x = event.getX();
         float y = event.getY();
+        
+        if (y >= cy)
+			myLock = lockX.UnLock;
+		
+		switch (myLock) 
+		{
+			case UnLock:
+				if (x > cx)
+					myLock = lockX.LockLeft;
+				if (x < cx)
+					myLock = lockX.LockRight;
+				break;
+			case LockLeft:
+				if (x <= cx)
+					x = cx;
+				break;
+			case LockRight:
+				if (x > cx)
+					x = cx-1;
+				break;
+		}
+		
         boolean up = false;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
