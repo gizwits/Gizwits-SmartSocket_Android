@@ -4,5 +4,13 @@
     <string name="wifi_first">请先连上Wi-Fi网络</string>
     <string name="wifi_name">Wi-Fi名称</string>
     <string name="tip_exit">再按一次退出程序</string>
+    <string name="title_about">关于</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="dialog_sure_to_delete">确定要删除设备吗？</string>
+    <string name="dialog_btn_back">返回</string>
+    <string name="dialog_btn_logout">注销</string>
+    <string name="dialog_btn_delete">删除</string>
+    <string name="dialog_nonet_msg">手机还未连上Wi-Fi，请连接上您希望设备接入的Wi-Fi（如您家里的Wi-Fi），连接后请返回APP，将自动跳转到下一步</string>
+    <string name="dialog_logout_msg">确定要注销，返回登陆界面吗？</string>
 
 </resources>

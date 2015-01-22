@@ -20,6 +20,7 @@ import com.gizwits.aircondition.R;
 import com.gizwits.aircondition.activity.control.MainControlActivity;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.activity.account.LoginActivity;
+import com.gizwits.framework.activity.onboarding.BindingDeviceActivity;
 import com.gizwits.framework.activity.onboarding.SearchDeviceActivity;
 import com.gizwits.framework.adapter.DeviceListAdapter;
 import com.gizwits.framework.utils.DialogManager;
@@ -231,6 +232,8 @@ public class DeviceListActivity extends BaseActivity implements
 								+ tempDevice.getIPAddress() + ";did="
 								+ tempDevice.getDid() + ";passcode="
 								+ tempDevice.getPasscode());
+                loginDevice(tempDevice);
+                progressDialog.show();
 			} else {
 				// TODO 绑定设备
 				Log.i(TAG,
@@ -238,6 +241,10 @@ public class DeviceListActivity extends BaseActivity implements
 								+ tempDevice.getIPAddress() + ";did="
 								+ tempDevice.getDid() + ";passcode="
 								+ tempDevice.getPasscode());
+                Intent intent = new Intent(DeviceListActivity.this, BindingDeviceActivity.class);
+                intent.putExtra("mac", tempDevice.getMacAddress());
+                intent.putExtra("did", tempDevice.getDid());
+                startActivity(intent);
 			}
 		} else {
 			if (!tempDevice.isOnline()) {
@@ -266,6 +273,8 @@ public class DeviceListActivity extends BaseActivity implements
 		mXpgWifiDevice.setListener(deviceListener);
 		mXpgWifiDevice.login(setmanager.getUid(), setmanager.getToken());
 	}
+
+
 
 	@Override
 	protected void didLogin(XPGWifiDevice device, int result) {
@@ -301,8 +310,12 @@ public class DeviceListActivity extends BaseActivity implements
 		}
 	}
 
+    @Override
+    public void onBackPressed() {
+        exit();
+    }
 
-	public void exit() {
+    public void exit() {
 		if (!isExit) {
 			isExit = true;
 			Toast.makeText(getApplicationContext(),

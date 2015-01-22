@@ -7,9 +7,9 @@
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
  * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
@@ -36,7 +36,7 @@ import com.xtremeprog.xpgconnect.XPGWifiSDK.XPGWifiConfigureMode;
  * ClassName: Class CmdCenter. <br/>
  * <br/>
  * date: 2014-12-15 12:09:02 <br/>
- * 
+ *
  * @author Lien
  */
 public class CmdCenter {
@@ -59,7 +59,7 @@ public class CmdCenter {
 
 	/**
 	 * Instantiates a new cmd center.
-	 * 
+	 *
 	 * @param c
 	 *            the c
 	 */
@@ -71,7 +71,7 @@ public class CmdCenter {
 
 	/**
 	 * Gets the single instance of CmdCenter.
-	 * 
+	 *
 	 * @param c
 	 *            the c
 	 * @return single instance of CmdCenter
@@ -85,7 +85,7 @@ public class CmdCenter {
 
 	/**
 	 * Inits the.
-	 * 
+	 *
 	 * @param c
 	 *            the c
 	 */
@@ -98,7 +98,7 @@ public class CmdCenter {
 
 	/**
 	 * Gets the XPG wifi sdk.
-	 * 
+	 *
 	 * @return the XPG wifi sdk
 	 */
 	public XPGWifiSDK getXPGWifiSDK() {
@@ -113,7 +113,7 @@ public class CmdCenter {
 
 	/**
 	 * 注册账号.
-	 * 
+	 *
 	 * @param phone
 	 *            注册手机号
 	 * @param code
@@ -148,7 +148,7 @@ public class CmdCenter {
 
 	/**
 	 * 账号登陆.
-	 * 
+	 *
 	 * @param name
 	 *            用户名
 	 * @param psw
@@ -160,7 +160,7 @@ public class CmdCenter {
 
 	/**
 	 * 忘记密码.
-	 * 
+	 *
 	 * @param phone
 	 *            手机号
 	 * @param code
@@ -175,7 +175,7 @@ public class CmdCenter {
 
 	/**
 	 * 修改密码.
-	 * 
+	 *
 	 * @param token
 	 *            令牌
 	 * @param oldPsw
@@ -189,7 +189,7 @@ public class CmdCenter {
 
 	/**
 	 * 请求向手机发送验证码.
-	 * 
+	 *
 	 * @param phone
 	 *            手机号
 	 */
@@ -199,7 +199,7 @@ public class CmdCenter {
 
 	/**
 	 * 发送airlink广播，把需要连接的wifi的ssid和password发给模块。.
-	 * 
+	 *
 	 * @param wifi
 	 *            wifi名字
 	 * @param password
@@ -212,7 +212,7 @@ public class CmdCenter {
 
 	/**
 	 * softap，把需要连接的wifi的ssid和password发给模块。.
-	 * 
+	 *
 	 * @param wifi
 	 *            wifi名字
 	 * @param password
@@ -225,7 +225,7 @@ public class CmdCenter {
 
 	/**
 	 * 绑定后刷新设备列表，该方法会同时获取本地设备以及远程设备列表.
-	 * 
+	 *
 	 * @param uid
 	 *            用户名
 	 * @param token
@@ -238,7 +238,7 @@ public class CmdCenter {
 
 	/**
 	 * 绑定设备.
-	 * 
+	 *
 	 * @param uid
 	 *            用户名
 	 * @param token
@@ -265,7 +265,7 @@ public class CmdCenter {
 
 	/**
 	 * 发送指令.
-	 * 
+	 *
 	 * @param xpgWifiDevice
 	 *            the xpg wifi device
 	 */
@@ -287,7 +287,7 @@ public class CmdCenter {
 
 	/**
 	 * 获取设备状态.
-	 * 
+	 *
 	 * @param xpgWifiDevice
 	 *            the xpg wifi device
 	 * @throws JSONException
@@ -305,7 +305,7 @@ public class CmdCenter {
 
 	/**
 	 * 断开连接.
-	 * 
+	 *
 	 * @param xpgWifiDevice
 	 *            the xpg wifi device
 	 */
@@ -315,7 +315,7 @@ public class CmdCenter {
 
 	/**
 	 * 解除绑定.
-	 * 
+	 *
 	 * @param uid
 	 *            the uid
 	 * @param token
@@ -332,7 +332,7 @@ public class CmdCenter {
 
 	/**
 	 * 更新备注.
-	 * 
+	 *
 	 * @param uid
 	 *            the uid
 	 * @param token

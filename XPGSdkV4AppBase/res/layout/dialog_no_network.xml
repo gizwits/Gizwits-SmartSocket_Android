@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
-            android:text="手机还未连上Wi-Fi，请连接上您希望设备接入的Wi-Fi（如您家里的Wi-Fi），连接后请返回APP，将自动跳转到下一步" />
+            android:text="@string/dialog_nonet_msg" />
     </LinearLayout>
 
 </FrameLayout>

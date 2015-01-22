@@ -229,6 +229,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
             case R.id.btnDeviceList:
                 IntentUtils.getInstance().startActivity(SlipBarActivity.this,
                         DeviceListActivity.class);
+                mCenter.cDisconnect(mXpgWifiDevice);
                 break;
         }
 

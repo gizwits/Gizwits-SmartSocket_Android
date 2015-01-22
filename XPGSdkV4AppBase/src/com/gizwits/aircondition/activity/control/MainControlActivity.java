@@ -61,6 +61,7 @@ import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.config.JsonKeys;
 import com.gizwits.framework.entity.DeviceAlarm;
 import com.gizwits.framework.utils.DialogManager;
+import com.gizwits.framework.utils.StringUtils;
 import com.gizwits.framework.utils.DialogManager.OnTimingChosenListener;
 import com.gizwits.framework.widget.CircularSeekBar;
 import com.xpg.common.system.IntentUtils;
@@ -89,11 +90,11 @@ public class MainControlActivity extends BaseActivity implements
 	/** The m view. */
 	private static View mView;
 
-//	/** The rl control main page. */
-//	private RelativeLayout rlControlMainPage;
-//
-//	/** The rl header. */
-//	private RelativeLayout rlHeader;
+	// /** The rl control main page. */
+	// private RelativeLayout rlControlMainPage;
+	//
+	// /** The rl header. */
+	// private RelativeLayout rlHeader;
 
 	/** The rl alarm tips. */
 	private RelativeLayout rlAlarmTips;
@@ -101,8 +102,8 @@ public class MainControlActivity extends BaseActivity implements
 	/** The rl power off. */
 	private RelativeLayout rlPowerOff;
 
-//	/** The ll footer. */
-//	private LinearLayout llFooter;
+	// /** The ll footer. */
+	// private LinearLayout llFooter;
 
 	/** The ll bottom. */
 	private LinearLayout llBottom;
@@ -149,8 +150,8 @@ public class MainControlActivity extends BaseActivity implements
 	/** The tv setting unit. */
 	private TextView tvSettingUnit;
 
-//	/** The tv title off. */
-//	private TextView tvTitleOff;
+	// /** The tv title off. */
+	// private TextView tvTitleOff;
 
 	/** The tv power on. */
 	private TextView tvPowerOn;
@@ -263,21 +264,33 @@ public class MainControlActivity extends BaseActivity implements
 					e.printStackTrace();
 				}
 			case UPDATE_UI:
-				setListenNull(true);
-				updateTemperatureUnit(isCentigrade);
-				updatePowerSwitch((Boolean) statuMap.get(JsonKeys.ON_OFF));
-				updateModeState((String) statuMap.get(JsonKeys.MODE));
-				ubdateSeekBar(Short.parseShort((String) statuMap
-						.get(JsonKeys.SET_TEMP)));
-				updateInnerTemp(Short.parseShort((String) statuMap
-						.get(JsonKeys.ROOM_TEMP)));
-				updateFanSpeed((String) statuMap.get(JsonKeys.FAN_SPEED));
-				updateShakeSwitch((Boolean) statuMap.get(JsonKeys.FAN_SHAKE));
-				updateOnTime(Integer.parseInt((String) statuMap
-						.get(JsonKeys.TIME_ON)));
-				updateOffTime(Integer.parseInt((String) statuMap
-						.get(JsonKeys.TIME_OFF)));
-				setListenNull(false);
+				if (statuMap != null && statuMap.size() > 0) {
+					setListenNull(true);
+					updateTemperatureUnit(isCentigrade);
+					updatePowerSwitch((Boolean) statuMap.get(JsonKeys.ON_OFF));
+					updateModeState((String) statuMap.get(JsonKeys.MODE));
+					String setTemp = (String) statuMap.get(JsonKeys.SET_TEMP);
+					if (!StringUtils.isEmpty(setTemp)) {
+						ubdateSeekBar(Short.parseShort(setTemp));
+					}
+					String roomTemp = (String) statuMap.get(JsonKeys.ROOM_TEMP);
+					if (!StringUtils.isEmpty(roomTemp)) {
+						updateInnerTemp(Short.parseShort(roomTemp));
+					}
+
+					String timeOn = (String) statuMap.get(JsonKeys.TIME_ON);
+					if (!StringUtils.isEmpty(timeOn)) {
+						updateOnTime(Integer.parseInt(timeOn));
+					}
+					String timeOff = (String) statuMap.get(JsonKeys.TIME_OFF);
+					if (!StringUtils.isEmpty(timeOff)) {
+						updateOffTime(Integer.parseInt(timeOff));
+					}
+					updateFanSpeed((String) statuMap.get(JsonKeys.FAN_SPEED));
+					updateShakeSwitch((Boolean) statuMap
+							.get(JsonKeys.FAN_SHAKE));
+					setListenNull(false);
+				}
 				break;
 			case ALARM:
 				if (alarmList != null && alarmList.size() > 0) {
@@ -305,7 +318,7 @@ public class MainControlActivity extends BaseActivity implements
 				}
 
 			case DISCONNECTED:
-
+                mCenter.cDisconnect(mXpgWifiDevice);
 				break;
 			case GET_STATUE:
 				mCenter.cGetStatus(mXpgWifiDevice);
@@ -382,11 +395,12 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private void initViews() {
 		mView = findViewById(R.id.main_layout);
-//		rlControlMainPage = (RelativeLayout) findViewById(R.id.rlControlMainPage);
-//		rlHeader = (RelativeLayout) findViewById(R.id.rlHeader);
+		// rlControlMainPage = (RelativeLayout)
+		// findViewById(R.id.rlControlMainPage);
+		// rlHeader = (RelativeLayout) findViewById(R.id.rlHeader);
 		rlAlarmTips = (RelativeLayout) findViewById(R.id.rlAlarmTips);
 		rlPowerOff = (RelativeLayout) findViewById(R.id.rlPowerOff);
-//		llFooter = (LinearLayout) findViewById(R.id.llFooter);
+		// llFooter = (LinearLayout) findViewById(R.id.llFooter);
 		llBottom = (LinearLayout) findViewById(R.id.llBottom);
 		ivMenu = (ImageView) findViewById(R.id.ivMenu);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);

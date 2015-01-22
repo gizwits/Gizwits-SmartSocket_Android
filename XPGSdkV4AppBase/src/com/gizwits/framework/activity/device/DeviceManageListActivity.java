@@ -13,75 +13,85 @@ import android.widget.ListView;
 
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.framework.activity.onboarding.SearchDeviceActivity;
 import com.gizwits.framework.adapter.ManageListAdapter;
+import com.xpg.common.system.IntentUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
-public class DeviceManageListActivity extends BaseActivity {
-	/**
-	 * The iv TopBar leftBtn.
-	 */
-	private ImageView ivBack;
+public class DeviceManageListActivity extends BaseActivity implements OnClickListener {
+    /**
+     * The iv TopBar leftBtn.
+     */
+    private ImageView ivBack;
 
-	/**
-	 * The tv init date
-	 */
-	private ListView lvDevices;
+    /**
+     * The tv init date
+     */
+    private ListView lvDevices;
 
-	/**
-	 * The Device device list
-	 */
-	private List<XPGWifiDevice> devices;
+    private ImageView ivAdd;
 
-	ManageListAdapter mAdapter;
+    /**
+     * The Device device list
+     */
+    private List<XPGWifiDevice> devices;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_manage_device_list);
+    ManageListAdapter mAdapter;
 
-		initViews();
-		initEvents();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_manage_device_list);
 
-	private void initEvents() {
-		lvDevices.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				XPGWifiDevice device = bindlist.get(position);
-				if (device.isLAN() || device.isOnline()) {
-					Intent intent = new Intent(DeviceManageListActivity.this,
-							DeviceManageDetailActivity.class);
-					intent.putExtra("mac", device.getMacAddress());
-					intent.putExtra("did", device.getDid());
-					startActivity(intent);
-				}
-			}
-		});
-		ivBack.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				onBackPressed();
-				
-			}
-		});
-	}
+        initViews();
+        initEvents();
+    }
 
-	private void initViews() {
+    private void initEvents() {
+        lvDevices.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                XPGWifiDevice device = bindlist.get(position);
+                if (device.isLAN() || device.isOnline()) {
+                    Intent intent = new Intent(DeviceManageListActivity.this,
+                            DeviceManageDetailActivity.class);
+                    intent.putExtra("mac", device.getMacAddress());
+                    intent.putExtra("did", device.getDid());
+                    startActivity(intent);
+                }
+            }
+        });
+        ivBack.setOnClickListener(this);
+        ivAdd.setOnClickListener(this);
+    }
 
-		ivBack = (ImageView) findViewById(R.id.ivBack);
-		lvDevices = (ListView) findViewById(R.id.lvDevices);
-		mAdapter = new ManageListAdapter(DeviceManageListActivity.this,
-				bindlist);
-		lvDevices.setAdapter(mAdapter);
-		
-	}
-	
-	@Override
-	public void onBackPressed() {
-		finish();
-	}
+    private void initViews() {
+        ivAdd = (ImageView) findViewById(R.id.ivAdd);
+        ivBack = (ImageView) findViewById(R.id.ivBack);
+        lvDevices = (ListView) findViewById(R.id.lvDevices);
+        mAdapter = new ManageListAdapter(DeviceManageListActivity.this,
+                bindlist);
+        lvDevices.setAdapter(mAdapter);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ivBack:
+                onBackPressed();
+                break;
+            case R.id.ivAdd:
+                IntentUtils.getInstance().startActivity(DeviceManageListActivity.this,
+                        SearchDeviceActivity.class);
+                break;
+        }
+    }
 }
