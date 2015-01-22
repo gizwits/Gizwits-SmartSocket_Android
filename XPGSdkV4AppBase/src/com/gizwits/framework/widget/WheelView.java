@@ -78,22 +78,22 @@ public class WheelView extends View {
     /**
      * Additional items height (is added to standard text item height)
      */
-    private static final int ADDITIONAL_ITEM_HEIGHT = 80;
+    private   int ADDITIONAL_ITEM_HEIGHT = 80;
 
     /**
      * Text size
      */
-    private static int TEXT_SIZE = 50;
+    private  int TEXT_SIZE = 50;
 
     /**
      * Top and bottom items offset (to hide that)
      */
-    private static final int ITEM_OFFSET = TEXT_SIZE / 5;
+    private  final int ITEM_OFFSET = TEXT_SIZE / 5;
 
     /**
      * Additional width for items layout
      */
-    private static final int ADDITIONAL_ITEMS_SPACE = 10;
+    private  int ADDITIONAL_ITEMS_SPACE = 10;
 
     /**
      * Label offset
@@ -713,7 +713,7 @@ public class WheelView extends View {
             canvas.restore();
         }
 
-        drawCenterRect(canvas);
+//        drawCenterRect(canvas);
 //		drawShadows(canvas);
     }
 
@@ -990,4 +990,17 @@ public class WheelView extends View {
         startScrolling();
     }
 
+	public  void setTEXT_SIZE(int tEXT_SIZE) {
+		TEXT_SIZE = tEXT_SIZE;
+	}
+
+	public void setADDITIONAL_ITEM_HEIGHT(int aDDITIONAL_ITEM_HEIGHT) {
+		ADDITIONAL_ITEM_HEIGHT = aDDITIONAL_ITEM_HEIGHT;
+	}
+
+	public void setADDITIONAL_ITEMS_SPACE(int aDDITIONAL_ITEMS_SPACE) {
+		ADDITIONAL_ITEMS_SPACE = aDDITIONAL_ITEMS_SPACE;
+	}
+    
+    
 }

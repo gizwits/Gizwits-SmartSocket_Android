@@ -20,6 +20,7 @@ package com.gizwits.framework.utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -166,6 +167,12 @@ public class DialogManager {
 	 */
 	public static Dialog getWheelTimingDialog(final Activity ctx,
 			final OnTimingChosenListener l, String titleStr, int index) {
+		
+		DisplayMetrics metric = new DisplayMetrics();
+		ctx.getWindowManager().getDefaultDisplay().getMetrics(metric);
+		int width = metric.widthPixels; 
+		
+		
 		String[] hours = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
 				"11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
 				"21", "22", "23", "24", "关闭" };
@@ -182,6 +189,13 @@ public class DialogManager {
 		Button cancel_btn = (Button) v.findViewById(R.id.cancel_btn);
 		final WheelView wheelveiew = (WheelView) v
 				.findViewById(R.id.wheel_view_timing);
+		
+		if(width<=540){
+			wheelveiew.setTEXT_SIZE(30);
+			wheelveiew.setADDITIONAL_ITEM_HEIGHT(60);
+			wheelveiew.setADDITIONAL_ITEMS_SPACE(5);
+		}
+		
 		wheelveiew.setAdapter(new ArrayWheelAdapter<String>(hours));
 		wheelveiew.setCyclic(true);
 		wheelveiew.setLabel("小时");
