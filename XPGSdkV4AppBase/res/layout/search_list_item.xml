@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="100dp"
     android:background="@android:color/white" >
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
@@ -16,18 +16,22 @@
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/icon"
-        />
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:textColor="@color/text_blue"
+        android:textSize="23sp" />
 
     <ImageView
         android:id="@+id/ivArrow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
+        android:padding="10dp"
         android:src="@drawable/arrow_right_gray" />
 
 </RelativeLayout>

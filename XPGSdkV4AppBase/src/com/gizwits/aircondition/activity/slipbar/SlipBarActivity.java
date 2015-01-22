@@ -36,6 +36,7 @@ import com.gizwits.framework.activity.device.DeviceListActivity;
 import com.gizwits.framework.activity.device.DeviceManageListActivity;
 import com.gizwits.framework.activity.help.AboutActivity;
 import com.gizwits.framework.activity.help.HelpActivity;
+import com.gizwits.framework.utils.StringUtils;
 import com.xpg.common.system.IntentUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
@@ -340,7 +341,16 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.deviceName_tv.setText(device.getProductName());
+            if(StringUtils.isEmpty(device.getRemark()))
+    		{
+    			String macAddress=device.getMacAddress();
+    			int size=macAddress.length();
+    			holder.deviceName_tv.setText(device.getProductName() + macAddress.substring(size-4, size));
+    		}else
+    		{
+    			holder.deviceName_tv.setText(device.getRemark());
+    		}
+            
             if (getChoosedPos() == position) {
                 holder.deviceName_tv.setSelected(true);
                 holder.device_checked_tv.setSelected(true);

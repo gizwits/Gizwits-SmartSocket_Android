@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.gizwits.aircondition.R;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
+import com.gizwits.framework.utils.StringUtils;
 
 public class ManageListAdapter extends BaseAdapter {
 
@@ -23,7 +24,6 @@ public class ManageListAdapter extends BaseAdapter {
 
 	/** The context. */
 	private Context context;
-
 
 	/**
 	 * 设备列表数据适配器构造方法(Wifi查询数据列表).
@@ -73,13 +73,22 @@ public class ManageListAdapter extends BaseAdapter {
 		}
 
 		XPGWifiDevice device = devicelist.get(position);
+		
+		if(StringUtils.isEmpty(device.getRemark()))
+		{
+			String macAddress=device.getMacAddress();
+			int size=macAddress.length();
+			holder.tvName.setText(device.getProductName() + macAddress.substring(size-4, size));
+		}else
+		{
+			holder.tvName.setText(device.getRemark());
+		}
+		
 		if (device.isLAN() || device.isOnline()) {
-			holder.tvName.setText("智能空调" + device.getMacAddress());
 			holder.tvName.setTextColor(context.getResources().getColor(
 					R.color.text_blue));
 			holder.ivArrow.setVisibility(View.VISIBLE);
 		} else {
-			holder.tvName.setText("智能空调" + device.getMacAddress());
 			holder.tvName.setTextColor(context.getResources().getColor(
 					R.color.text_gray));
 			holder.ivArrow.setVisibility(View.GONE);
