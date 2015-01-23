@@ -60,7 +60,8 @@
         <activity android:name="com.gizwits.framework.activity.help.HelpActivity" />
         <activity
             android:name="zxing.CaptureActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity android:name="com.gizwits.aircondition.activity.slipbar.SlipBarActivity" />
         <activity android:name="com.gizwits.aircondition.activity.control.MainControlActivity" />
         <activity android:name="com.gizwits.aircondition.activity.control.AlarmListActicity" />

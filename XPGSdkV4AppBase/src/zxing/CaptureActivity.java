@@ -18,8 +18,12 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.view.View;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
@@ -42,6 +46,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //	private static final float BEEP_VOLUME = 0.10f;
 //	private boolean vibrate;
 	private String product_key, passcode, did;
+	
+	private Button btnCancel;
+	private ImageView ivReturn;
 
 	/**
 	 * ClassName: Enum handler_key. <br/>
@@ -91,6 +98,18 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.zxing_layout);
+		
+		btnCancel=(Button) findViewById(R.id.btn_cancel);
+		ivReturn=(ImageView) findViewById(R.id.iv_return);
+		OnClickListener myClick=new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				CaptureActivity.this.finish();
+			}
+		};
+		btnCancel.setOnClickListener(myClick);
+		ivReturn.setOnClickListener(myClick);
+		
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		hasSurface = false;
