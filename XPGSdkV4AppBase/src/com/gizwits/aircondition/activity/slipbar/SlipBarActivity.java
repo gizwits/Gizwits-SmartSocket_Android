@@ -166,6 +166,11 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         initBindList();
         mAdapter = new DeviceAdapter(this, bindlist);
         lvDevice.setAdapter(mAdapter);
+        for(int i=0;i<bindlist.size();i++)
+        {
+        	if(bindlist.get(i).getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
+        		mAdapter.setChoosedPos(i);
+        }
         progressDialog = new ProgressDialog(SlipBarActivity.this);
         progressDialog.setMessage("设备连接中，请稍候。");
     }
@@ -180,6 +185,10 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+            	if(!mAdapter.getItem(position).isOnline())
+            		return;
+            	
+            	mXpgWifiDevice=mAdapter.getItem(position);
                 mAdapter.setChoosedPos(position);
                 loginDevice(bindlist.get(position));
                 progressDialog.show();
@@ -316,6 +325,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
         public void setChoosedPos(int choosedPos) {
             this.choosedPos = choosedPos;
+            notifyDataSetChanged();
         }
 
         public DeviceAdapter(Context context, List<XPGWifiDevice> objects) {
@@ -365,7 +375,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
             	holder.deviceName_tv.setTextColor(ctx.getResources().getColor(R.color.text_blue));
             else
             	holder.deviceName_tv.setTextColor(ctx.getResources().getColor(R.color.text_gray));
-
+            
             return convertView;
 
         }
