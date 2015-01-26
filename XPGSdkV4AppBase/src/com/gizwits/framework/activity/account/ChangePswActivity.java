@@ -2,6 +2,7 @@ package com.gizwits.framework.activity.account;
 
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -77,11 +78,23 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
                             | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
                             | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    etPswOld.setKeyListener(DigitsKeyListener
+							.getInstance(getResources().getString(
+									R.string.register_name_digits)));
+                    etPswNew.setKeyListener(DigitsKeyListener
+							.getInstance(getResources().getString(
+									R.string.register_name_digits)));
                 } else {
                     etPswOld.setInputType(InputType.TYPE_CLASS_TEXT
                             | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
                             | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    etPswOld.setKeyListener(DigitsKeyListener
+							.getInstance(getResources().getString(
+									R.string.register_name_digits)));
+                    etPswNew.setKeyListener(DigitsKeyListener
+							.getInstance(getResources().getString(
+									R.string.register_name_digits)));
                 }
 
             }
