@@ -80,6 +80,7 @@
         <EditText
             android:id="@+id/etInputPsw"
             style="@style/EditTextTheme"
+            android:digits="@string/register_name_digits"
             android:layout_weight="1"
             android:inputType="textPassword"
             android:background="@android:color/transparent"
