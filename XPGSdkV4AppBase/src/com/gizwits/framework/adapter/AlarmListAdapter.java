@@ -1,8 +1,8 @@
 /**
- * Project Name:Gokit
- * File Name:WifiListAdapter.java
- * Package Name:com.xpg.gokit.adapter
- * Date:2014-11-18 10:05:31
+ * Project Name:XPGSdkV4AppBase
+ * File Name:AlarmListAdapter.java
+ * Package Name:com.gizwits.framework.adapter
+ * Date:2015-1-23 12:17:11
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -36,16 +36,21 @@ import android.widget.TextView;
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.entity.DeviceAlarm;
 
+// TODO: Auto-generated Javadoc
 /**
- * wifi热点列表数据适配器
+ * wifi热点列表数据适配器.
+ *
+ * @author Lien
  */
 public class AlarmListAdapter extends BaseAdapter {
 
 	/** The context. */
 	private Context context;
 
+	/** The inflater. */
 	private LayoutInflater inflater;
 
+	/** The list. */
 	private List<DeviceAlarm> list;
 
 	/**
@@ -63,6 +68,9 @@ public class AlarmListAdapter extends BaseAdapter {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
@@ -84,13 +92,28 @@ public class AlarmListAdapter extends BaseAdapter {
 	
 	
 
+	/**
+	 *  
+	 * ClassName: Class ViewHolder. <br/> 
+	 * <br/>
+	 * date: 2015-1-23 12:17:11 <br/> 
+	 *
+	 * @author Lien
+	 */
 	private static class ViewHolder {
+		
+		/** The tv time. */
 		TextView tvTime;
+		
+		/** The tv desc. */
 		TextView tvDesc;
 	}
 
 
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getCount()
+	 */
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -98,6 +121,9 @@ public class AlarmListAdapter extends BaseAdapter {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getItem(int)
+	 */
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
@@ -105,6 +131,9 @@ public class AlarmListAdapter extends BaseAdapter {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getItemId(int)
+	 */
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub

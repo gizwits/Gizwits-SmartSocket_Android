@@ -1,4 +1,24 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:ForgetPswActivity.java
+ * Package Name:com.gizwits.framework.activity.account
+ * Date:2015-1-27 10:31:53
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.activity.account;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -14,19 +34,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
-import com.gizwits.framework.activity.onboarding.SearchDeviceActivity;
-import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 //TODO: Auto-generated Javadoc
 
@@ -92,11 +106,9 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	 * The tb psw flag.
 	 */
 	private ToggleButton tbPswFlag;
-
-	/**
-	 * The is email.
-	 */
+	
 	private boolean isEmail = false;
+
 
 	/**
 	 * The secondleft.
@@ -263,17 +275,29 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 				});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnGetCode:
-			String phone = etName.getText().toString().trim();
-			if (!StringUtils.isEmpty(phone) && phone.length() == 11) {
-				toogleUI(ui_statu.PHONE);
-				sendVerifyCode(phone);
-			} else {
-				ToastUtils.showShort(this, "请输入正确的手机号码。");
+			String name = etName.getText().toString().trim();
+			if(!StringUtils.isEmpty(name)){
+				if(name.contains("@")){
+					isEmail = true;
+					toogleUI(ui_statu.EMAIL);
+					getEmail(name);
+				}else if(name.length()==11){
+					toogleUI(ui_statu.PHONE);
+					sendVerifyCode(name);
+				}else{
+					ToastUtils.showShort(this, "请输入正确的账号。");
+				}
+			}else{
+				ToastUtils.showShort(this, "请输入正确的账号。");
 			}
+			
 
 			break;
 		case R.id.btnReGetCode:
@@ -317,6 +341,10 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		} else {
 
 		}
+	}
+	
+	private void getEmail(String email){
+		mCenter.cChangePassworfByEmail(email);
 	}
 
 	private void doChangePsw() {
@@ -382,13 +410,18 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 			handler.sendMessage(msg);
 		}
 	}
+	
 
 	@Override
 	protected void didChangeUserPassword(int error, String errorMessage) {
 		if (error == 0) {// 修改成功
 			Message msg = new Message();
 			msg.what = handler_key.TOAST.ordinal();
-			msg.obj = "修改成功";
+			if(isEmail){
+				msg.obj = "重置密码链接已发送您的邮箱，在邮箱中可执行重置密码操作";
+			}else{
+				msg.obj = "修改成功";
+			}
 			handler.sendMessage(msg);
 			handler.sendEmptyMessageDelayed(
 					handler_key.CHANGE_SUCCESS.ordinal(), 2000);
