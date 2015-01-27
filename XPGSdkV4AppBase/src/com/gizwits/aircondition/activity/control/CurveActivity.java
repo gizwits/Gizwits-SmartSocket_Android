@@ -29,6 +29,9 @@ import com.gizwits.framework.activity.BaseActivity;
 /**
  * 
  * ClassName: Class CurveActivity. <br/>
+ * 
+ * 数据曲线图
+ * 
  * <br/>
  * 
  * @author Lien

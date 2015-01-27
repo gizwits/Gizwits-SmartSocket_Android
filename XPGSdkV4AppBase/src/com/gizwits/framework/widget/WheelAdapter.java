@@ -22,6 +22,7 @@ package com.gizwits.framework.widget;
 /**
  *  
  * ClassName: Interface WheelAdapter. <br/> 
+ * wheel按钮适配器
  * <br/>
  * date: 2015-1-27 14:48:28 <br/> 
  *

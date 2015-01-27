@@ -36,6 +36,7 @@ import com.gizwits.framework.widget.WheelView;
 /**
  *  
  * ClassName: Class DialogManager. <br/> 
+ * 对话框管理
  * <br/>
  * date: 2015-1-27 14:47:29 <br/> 
  *

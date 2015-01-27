@@ -27,6 +27,8 @@ import com.xtremeprog.xpgconnect.XPGWifiSDK;
  * 
  * The Class WApplication.
  * 
+ * Application类
+ * 
  * @author Lien
  */
 public class XpgApplication extends Application {

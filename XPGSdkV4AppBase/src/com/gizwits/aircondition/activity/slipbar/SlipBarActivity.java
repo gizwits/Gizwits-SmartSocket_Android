@@ -61,6 +61,8 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 /**
  * Created by Lien on 14/12/21.
  *
+ *	侧滑菜单界面
+ *
  * @author Lien
  */
 public class SlipBarActivity extends BaseActivity implements OnClickListener {

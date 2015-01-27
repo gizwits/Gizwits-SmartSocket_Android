@@ -23,6 +23,7 @@ import java.io.Serializable;
 /**
  *  
  * ClassName: Class DeviceAlarm. <br/> 
+ * 设备警告类
  * <br/>
  * date: 2015-1-27 14:47:15 <br/> 
  *

@@ -40,6 +40,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 /**
  * ClassName: Class AirlinkActivity. <br/>
+ * 配置结果
  * <br/>
  *
  * @author Lien

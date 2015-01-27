@@ -31,6 +31,8 @@ import com.xpg.common.system.IntentUtils;
 /**
  * Created by Lien on 14/12/16.
  * 
+ * 开机图界面
+ * 
  * @author Lien
  */
 public class FlushActivity extends BaseActivity {

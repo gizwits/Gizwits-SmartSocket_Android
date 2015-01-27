@@ -42,6 +42,7 @@ import com.gizwits.aircondition.R;
 /**
  *  
  * ClassName: Class RefreshableListView. <br/> 
+ * 刷新列表
  * <br/>
  * date: 2015-1-27 14:48:23 <br/> 
  *

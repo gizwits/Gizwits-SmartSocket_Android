@@ -34,6 +34,7 @@ import com.xtremeprog.xpgconnect.XPGWifiSDK.XPGWifiConfigureMode;
 
 /**
  * ClassName: Class CmdCenter. <br/>
+ * 控制指令类
  * <br/>
  * date: 2014-12-15 12:09:02 <br/>
  * 

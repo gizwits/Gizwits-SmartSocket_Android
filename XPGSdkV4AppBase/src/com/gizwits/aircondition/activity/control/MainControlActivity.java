@@ -20,13 +20,11 @@ package com.gizwits.aircondition.activity.control;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -65,12 +63,13 @@ import com.gizwits.framework.utils.StringUtils;
 import com.gizwits.framework.utils.DialogManager.OnTimingChosenListener;
 import com.gizwits.framework.widget.CircularSeekBar;
 import com.xpg.common.system.IntentUtils;
-import com.xpg.common.useful.DateUtil;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 // TODO: Auto-generated Javadoc
 /**
  * Created by Lien on 14/12/21.
+ * 
+ * 设备主控界面
  * 
  * @author Lien
  */

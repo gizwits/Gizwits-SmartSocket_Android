@@ -38,6 +38,8 @@ import com.xpg.common.device.DensityUtils;
 /**
  * The Class CircularSeekBar.
  *
+ *	圆形拖动条
+ *
  * @author Lien
  */
 public class CircularSeekBar extends View {

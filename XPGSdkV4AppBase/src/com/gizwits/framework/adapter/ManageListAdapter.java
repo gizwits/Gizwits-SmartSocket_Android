@@ -35,6 +35,7 @@ import com.gizwits.framework.utils.StringUtils;
 /**
  *  
  * ClassName: Class ManageListAdapter. <br/> 
+ * 设备管理列表适配器
  * <br/>
  * date: 2015-1-27 14:46:55 <br/> 
  *

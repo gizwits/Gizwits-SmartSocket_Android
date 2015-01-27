@@ -22,6 +22,8 @@ package com.gizwits.framework.widget;
 /**
  * Wheel scrolled listener interface.
  *
+ *	wheel监听器
+ *
  * @see OnWheelScrollEvent
  */
 public interface OnWheelScrollListener {

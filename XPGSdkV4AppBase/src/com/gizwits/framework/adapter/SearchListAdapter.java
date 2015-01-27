@@ -35,6 +35,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 /**
  *  
  * ClassName: Class SearchListAdapter. <br/> 
+ * 搜索设备列表适配器
  * <br/>
  * date: 2015-1-27 14:46:58 <br/> 
  *

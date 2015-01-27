@@ -18,7 +18,6 @@
 package com.gizwits.aircondition.activity.control;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -38,6 +37,7 @@ import com.gizwits.framework.entity.DeviceAlarm;
 /**
  *  
  * ClassName: Class AlarmListActicity. <br/> 
+ * 显示警告列表的类
  * <br/>
  * date: 2015-1-27 14:43:57 <br/> 
  *

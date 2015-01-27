@@ -47,6 +47,8 @@ import com.gizwits.aircondition.R;
 // TODO: Auto-generated Javadoc
 /**
  * Numeric wheel view.
+ * 
+ * wheel按钮
  *
  * @author Yuri Kanivets
  */

@@ -37,6 +37,7 @@ import java.util.List;
 
 /**
  * ClassName: Class DeviceListAdapter. <br/>
+ * 设备列表适配器
  * <br/>
  * date: 2015-1-22 15:23:42 <br/>
  *

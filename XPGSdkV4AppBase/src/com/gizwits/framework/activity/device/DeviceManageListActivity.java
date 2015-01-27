@@ -39,6 +39,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 /**
  *  
  * ClassName: Class DeviceManageListActivity. <br/> 
+ * 设备管理列表
  * <br/>
  * date: 2015-1-27 14:45:30 <br/> 
  *

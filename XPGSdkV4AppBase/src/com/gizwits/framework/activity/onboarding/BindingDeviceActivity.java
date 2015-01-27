@@ -36,6 +36,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 /**
  *  
  * ClassName: Class BindingDeviceActivity. <br/> 
+ * 绑定设备
  * <br/>
  * date: 2015-1-27 14:45:59 <br/> 
  *

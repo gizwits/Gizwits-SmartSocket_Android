@@ -54,6 +54,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 /**
  * ClassName: Class SearchDeviceActivity. <br/>
+ * 搜索设备
  * <br/>
  * date: 2014-12-3 14:26:53 <br/>
  *

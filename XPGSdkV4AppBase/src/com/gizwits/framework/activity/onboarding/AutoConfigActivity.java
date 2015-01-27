@@ -46,6 +46,7 @@ import com.xpg.ui.utils.ToastUtils;
 /**
  * 
  * ClassName: Class AutoConfigActivity. <br/>
+ * 自动配置界面
  * <br/>
  * date: 2014-12-9 17:30:20 <br/>
  * 

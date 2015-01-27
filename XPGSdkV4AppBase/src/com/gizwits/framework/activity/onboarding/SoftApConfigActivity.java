@@ -51,6 +51,7 @@ import java.util.TimerTask;
 /**
  *  
  * ClassName: Class SoftApConfigActivity. <br/> 
+ * 手动配置设备
  * <br/>
  *
  * @author Lien
