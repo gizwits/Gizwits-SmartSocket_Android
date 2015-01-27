@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.sdk.SettingManager;
+import com.gizwits.framework.utils.StringUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 import java.util.ArrayList;
@@ -321,14 +322,13 @@ public class DeviceListAdapter extends BaseAdapter {
     private List<TypeItem> generateItems() {
         List<TypeItem> items = new ArrayList<TypeItem>();
         items.add(new HeaderTypeItem("在线设备"));
-        if (lanDevices.size() > 0) {
+        if (lanDevices.size() > 0||wanDevices.size() > 0) {
             for (XPGWifiDevice device : lanDevices) {
                 items.add(new DeviceTypeItem(VIEW_TYPE_LAN, device));
             }
-        } else if (wanDevices.size() > 0) {
             for (XPGWifiDevice device : wanDevices) {
                 items.add(new DeviceTypeItem(VIEW_TYPE_WAN, device));
-            }
+            } 
         } else {
             items.add(new EmptyTypeItem(VIEW_TYPE_EMPTY));
         }
@@ -562,10 +562,16 @@ public class DeviceListAdapter extends BaseAdapter {
      */
     private void onBindDeviceItem(DeviceViewHolder viewHolder,
                                   XPGWifiDevice device) {
+    	String DeviceName="";
+    	if(StringUtils.isEmpty(device.getRemark()))
+    		DeviceName=device.getProductName();
+        else
+        	DeviceName=device.getRemark();
+    	viewHolder.name.setText(DeviceName);
+    	
         if (device.isLAN()) {
             if (device.isBind(setManager.getUid())) {
                 viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
-                viewHolder.name.setText(device.getProductName());
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_blue));
                 viewHolder.statue.setText("局域网在线");
@@ -573,7 +579,6 @@ public class DeviceListAdapter extends BaseAdapter {
                 viewHolder.arrow.setImageResource(R.drawable.arrow_right_blue);
             } else {
                 viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
-                viewHolder.name.setText(device.getProductName());
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_gray));
                 viewHolder.statue.setText("未绑定");
@@ -583,7 +588,6 @@ public class DeviceListAdapter extends BaseAdapter {
         } else {
             if (!device.isOnline()) {
                 viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
-                viewHolder.name.setText(device.getProductName());
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_gray));
                 viewHolder.statue.setText("离线");
@@ -591,7 +595,6 @@ public class DeviceListAdapter extends BaseAdapter {
                 viewHolder.arrow.setImageResource(R.drawable.arrow_right_gray);
             } else {
                 viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
-                viewHolder.name.setText(device.getProductName());
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_blue));
                 viewHolder.statue.setText("远程在线");
