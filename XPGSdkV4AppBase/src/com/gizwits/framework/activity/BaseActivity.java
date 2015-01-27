@@ -1,8 +1,8 @@
 /**
  * Project Name:XPGSdkV4AppBase
  * File Name:BaseActivity.java
- * Package Name:com.gizwits.aircondition.activity
- * Date:2014-12-30 23:15:52
+ * Package Name:com.gizwits.framework.activity
+ * Date:2015-1-27 11:32:52
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -22,9 +22,13 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.gizwits.aircondition.R;
 import com.gizwits.framework.sdk.CmdCenter;
 import com.gizwits.framework.sdk.SettingManager;
 import com.gizwits.framework.utils.Historys;
@@ -33,6 +37,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDeviceListener;
 import com.xtremeprog.xpgconnect.XPGWifiSDKListener;
 import com.xtremeprog.xpgconnect.XPGWifiSSID;
 
+// TODO: Auto-generated Javadoc
 /**
  * 所有activity的基类。该基类实现了XPGWifiDeviceListener和XPGWifiSDKListener两个监听器，并提供全局的回调方法。
  * .
@@ -41,16 +46,15 @@ import com.xtremeprog.xpgconnect.XPGWifiSSID;
  */
 public class BaseActivity extends Activity {
 
+	private boolean isExit = false;
+
 	/**
 	 * 设备列表.
 	 */
 	protected static List<XPGWifiDevice> deviceslist = new ArrayList<XPGWifiDevice>();
-	protected static List<XPGWifiDevice> bindlist = new ArrayList<XPGWifiDevice>();
 
-//	/**
-//	 * The is init.
-//	 */
-//	static boolean isInit = false;
+	/** 绑定列表 */
+	protected static List<XPGWifiDevice> bindlist = new ArrayList<XPGWifiDevice>();
 
 	/**
 	 * 指令管理器.
@@ -62,7 +66,15 @@ public class BaseActivity extends Activity {
 	 */
 	protected SettingManager setmanager;
 
+	/** 当前操作的设备 */
 	protected static XPGWifiDevice mXpgWifiDevice;
+
+	/** The handler. */
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			isExit = false;
+		};
+	};
 
 	/**
 	 * XPGWifiDeviceListener
@@ -103,8 +115,6 @@ public class BaseActivity extends Activity {
 
 		@Override
 		public void didBindDevice(int error, String errorMessage, String did) {
-			Log.d("Base扫描结果", "error=" + error + ";errorMessage="
-					+ errorMessage + ";did=" + did);
 			BaseActivity.this.didBindDevice(error, errorMessage, did);
 		}
 
@@ -115,7 +125,6 @@ public class BaseActivity extends Activity {
 
 		@Override
 		public void didChangeUserPassword(int error, String errorMessage) {
-			// Log.d("BaseActivity", "didChangeUserPassword");
 			BaseActivity.this.didChangeUserPassword(error, errorMessage);
 		}
 
@@ -167,20 +176,17 @@ public class BaseActivity extends Activity {
 			BaseActivity.this.didUserLogout(error, errorMessage);
 		}
 
-	};;
+	};
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setmanager = new SettingManager(getApplicationContext());
 		mCenter = CmdCenter.getInstance(getApplicationContext());
-		Historys.put(this);
+		// 每次返回activity都要注册一次sdk监听器，保证sdk状态能正确回调
 		mCenter.getXPGWifiSDK().setListener(sdkListener);
+		// 把activity推入历史栈，退出app后清除历史栈，避免造成内存溢出
+		Historys.put(this);
 	}
 
 	/**
@@ -192,7 +198,6 @@ public class BaseActivity extends Activity {
 	 *            错误信息
 	 */
 	protected void didUserLogout(int error, String errorMessage) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -210,7 +215,6 @@ public class BaseActivity extends Activity {
 	 */
 	protected void didUserLogin(int error, String errorMessage, String uid,
 			String token) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -225,12 +229,11 @@ public class BaseActivity extends Activity {
 	 *            设备注册id
 	 */
 	protected void didUnbindDevice(int error, String errorMessage, String did) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * 设备配置结果回调
+	 * 设备配置结果回调.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -238,12 +241,11 @@ public class BaseActivity extends Activity {
 	 *            设备对象
 	 */
 	protected void didSetDeviceWifi(int error, XPGWifiDevice device) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * 请求手机验证码回调接口
+	 * 请求手机验证码回调接口.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -251,12 +253,11 @@ public class BaseActivity extends Activity {
 	 *            错误信息
 	 */
 	protected void didRequestSendVerifyCode(int error, String errorMessage) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * 注册用户结果回调接口
+	 * 注册用户结果回调接口.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -274,7 +275,7 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 获取ssid列表回调接口
+	 * 获取ssid列表回调接口.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -287,7 +288,7 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 搜索设备回调接口
+	 * 搜索设备回调接口.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -300,7 +301,7 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 更换注册手机号码回调接口
+	 * 更换注册手机号码回调接口.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -313,7 +314,7 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 更换密码回调接口
+	 * 更换密码回调接口.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -326,7 +327,7 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 更换注册邮箱
+	 * 更换注册邮箱.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -334,12 +335,11 @@ public class BaseActivity extends Activity {
 	 *            错误信息
 	 */
 	protected void didChangeUserEmail(int error, String errorMessage) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * 绑定设备结果回调
+	 * 绑定设备结果回调.
 	 * 
 	 * @param error
 	 *            结果代码
@@ -349,14 +349,13 @@ public class BaseActivity extends Activity {
 	 *            设备注册id
 	 */
 	protected void didBindDevice(int error, String errorMessage, String did) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
 	 * 接收指令回调
 	 * <p/>
-	 * sdk接收到模块传入的数据回调该接口
+	 * sdk接收到模块传入的数据回调该接口.
 	 * 
 	 * @param device
 	 *            设备对象
@@ -367,12 +366,11 @@ public class BaseActivity extends Activity {
 	 */
 	protected void didReceiveData(XPGWifiDevice device,
 			ConcurrentHashMap<String, Object> dataMap, int result) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * 登陆设备结果回调接口
+	 * 登陆设备结果回调接口.
 	 * 
 	 * @param device
 	 *            设备对象
@@ -380,23 +378,21 @@ public class BaseActivity extends Activity {
 	 *            状态代码
 	 */
 	protected void didLogin(XPGWifiDevice device, int result) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * 断开连接回调接口
+	 * 断开连接回调接口.
 	 * 
 	 * @param device
 	 *            设备对象
 	 */
 	protected void didDisconnected(XPGWifiDevice device) {
-		// TODO Auto-generated method stub
 
 	}
 
 	/**
-	 * 设备上下线通知
+	 * 设备上下线通知.
 	 * 
 	 * @param device
 	 *            设备对象
@@ -404,7 +400,6 @@ public class BaseActivity extends Activity {
 	 *            上下线状态
 	 */
 	protected void didDeviceOnline(XPGWifiDevice device, boolean isOnline) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -436,32 +431,16 @@ public class BaseActivity extends Activity {
 		return xpgdevice;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onResume()
-	 */
 	public void onResume() {
 		super.onResume();
+		// 每次返回activity都要注册一次sdk监听器，保证sdk状态能正确回调
 		mCenter.getXPGWifiSDK().setListener(sdkListener);
-		Log.i("Base", this.getClass().getSimpleName() + "***sdkListener="
-				+ sdkListener.toString());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.app.Activity#onPause()
-	 */
-	public void onPause() {
-		super.onPause();
-
 	}
 
 	/**
-	 * Gets the online list.
+	 * 初始化绑定设备列表
 	 * 
-	 * @return the online list
+	 * @return 已绑定设备列表
 	 */
 	protected void initBindList() {
 		if (bindlist != null && bindlist.size() > 0)
@@ -470,6 +449,25 @@ public class BaseActivity extends Activity {
 			if (xpgDevice.isBind(setmanager.getUid())) {
 				bindlist.add(xpgDevice);
 			}
+		}
+	}
+
+	/**
+	 * 重复按下返回键退出app方法
+	 */
+	public void exit() {
+		if (!isExit) {
+			isExit = true;
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.tip_exit), Toast.LENGTH_SHORT).show();
+			handler.sendEmptyMessageDelayed(0, 2000);
+		} else {
+
+			Intent intent = new Intent(Intent.ACTION_MAIN);
+			intent.addCategory(Intent.CATEGORY_HOME);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			this.startActivity(intent);
+			Historys.exit();
 		}
 	}
 }

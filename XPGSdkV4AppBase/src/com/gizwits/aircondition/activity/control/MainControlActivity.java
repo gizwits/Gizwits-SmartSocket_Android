@@ -316,7 +316,7 @@ public class MainControlActivity extends BaseActivity implements
 				} else {
 					setTipsLayoutVisiblity(false, 0);
 				}
-
+				break;
 			case DISCONNECTED:
                 mCenter.cDisconnect(mXpgWifiDevice);
 				break;

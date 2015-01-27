@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:SoftApConfigActivity.java
+ * Package Name:com.gizwits.framework.activity.onboarding
+ * Date:2015-1-27 11:19:37
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.activity.onboarding;
 
 import android.content.BroadcastReceiver;
@@ -8,13 +25,17 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ToggleButton;
 
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
@@ -26,25 +47,65 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import java.util.Timer;
 import java.util.TimerTask;
 
+// TODO: Auto-generated Javadoc
+/**
+ *  
+ * ClassName: Class SoftApConfigActivity. <br/> 
+ * <br/>
+ *
+ * @author Lien
+ */
 public class SoftApConfigActivity extends BaseActivity implements OnClickListener {
+    
+    /** The ll connect ap. */
     private LinearLayout llConnectAp;
+    
+    /** The ll insert psw. */
     private LinearLayout llInsertPsw;
+    
+    /** The ll config. */
     private LinearLayout llConfig;
+    
+    /** The ll config success. */
     private LinearLayout llConfigSuccess;
+    
+    /** The ll config failed. */
     private LinearLayout llConfigFailed;
+    
+    /** The et input psw. */
     private EditText etInputPsw;
+    
+    /** The btn next. */
     private Button btnNext;
+    
+    /** The btn ok. */
     private Button btnOK;
+    
+    /** The btn retry. */
     private Button btnRetry;
+    
+    /** The tvpsw. */
     private TextView tvpsw;
+    
+    /** The tv ssid. */
     private TextView tvSsid;
+    
+    /** The tv tick. */
     private TextView tvTick;
+    
+    /** The tb psw flag. */
+    private ToggleButton tbPswFlag;
 
+    /** The str ssid. */
     private String strSsid;
+    
+    /** The str psw. */
     private String strPsw;
 
+    /** The secondleft. */
     int secondleft = 30;
 
+    /** The timer. */
     private Timer timer;
 
 
@@ -57,12 +118,16 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
      */
     private enum handler_key {
 
+        /** The tick time. */
         TICK_TIME,
 
+        /** The change wifi. */
         CHANGE_WIFI,
 
+        /** The config success. */
         CONFIG_SUCCESS,
 
+        /** The config failed. */
         CONFIG_FAILED,
 
     }
@@ -120,11 +185,12 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         }
     };
 
-    /**
-     * 网络状态广播接受器
-     */
+    /** 网络状态广播接受器. */
     ConnectChangeBroadcast mChangeBroadcast = new ConnectChangeBroadcast();
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +200,9 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         initDatas();
     }
 
+    /**
+     * Inits the datas.
+     */
     private void initDatas() {
         if (getIntent() != null) {
             strSsid = getIntent().getStringExtra("ssid");
@@ -141,6 +210,9 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         }
     }
 
+    /**
+     * Inits the views.
+     */
     private void initViews() {
         llConnectAp = (LinearLayout) findViewById(R.id.llConnectAp);
         llInsertPsw = (LinearLayout) findViewById(R.id.llInsertPsw);
@@ -154,6 +226,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         tvpsw = (TextView) findViewById(R.id.tvpsw);
         tvSsid = (TextView) findViewById(R.id.tvSsid);
         tvTick = (TextView) findViewById(R.id.tvTick);
+        tbPswFlag = (ToggleButton) findViewById(R.id.tvAdvanture);
         llConnectAp.setVisibility(View.VISIBLE);
         llInsertPsw.setVisibility(View.GONE);
         llConfig.setVisibility(View.GONE);
@@ -161,12 +234,33 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         llConfigFailed.setVisibility(View.GONE);
     }
 
+    /**
+     * Inits the events.
+     */
     private void initEvents() {
         btnNext.setOnClickListener(this);
         btnOK.setOnClickListener(this);
         btnNext.setOnClickListener(this);
+        tbPswFlag.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+                if (isChecked) {
+                    etInputPsw.setInputType(InputType.TYPE_CLASS_TEXT
+                            | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    etInputPsw.setInputType(InputType.TYPE_CLASS_TEXT
+                            | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+
+			}
+		});
     }
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#onResume()
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -175,6 +269,9 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         registerReceiver(mChangeBroadcast, filter);
     }
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#onPause()
+     */
     public void onPause() {
         super.onPause();
         unregisterReceiver(mChangeBroadcast);
@@ -182,6 +279,9 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
     }
 
 
+    /* (non-Javadoc)
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -199,6 +299,9 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         }
     }
 
+    /**
+     * Start config.
+     */
     private void startConfig() {
         secondleft = 60;
         llConnectAp.setVisibility(View.GONE);
@@ -221,9 +324,14 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
 
     /**
      * 广播监听器，监听wifi连上的广播.
+     *
+     * @author Lien
      */
     public class ConnectChangeBroadcast extends BroadcastReceiver {
 
+        /* (non-Javadoc)
+         * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
+         */
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -234,6 +342,9 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         }
     }
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#didSetDeviceWifi(int, com.xtremeprog.xpgconnect.XPGWifiDevice)
+     */
     @Override
     protected void didSetDeviceWifi(int error, XPGWifiDevice device) {
         if (error == 0) {

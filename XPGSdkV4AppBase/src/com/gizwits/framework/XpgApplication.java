@@ -1,8 +1,8 @@
 /**
  * Project Name:XPGSdkV4AppBase
  * File Name:XpgApplication.java
- * Package Name:com.gizwits.aircondition
- * Date:2014-12-15 14:17:52
+ * Package Name:com.gizwits.framework
+ * Date:2015-1-22 18:16:04
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -23,25 +23,24 @@ import android.util.Log;
 import com.gizwits.framework.config.Configs;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;
 
-// TODO: Auto-generated Javadoc
 /**
- *  
- * ClassName: Class XpgApplication. <br/> 
- * <br/>
- * date: 2014-12-15 14:17:52 <br/> 
- *
+ * 
+ * The Class WApplication.
+ * 
  * @author Lien
  */
 public class XpgApplication extends Application {
-	
+
 	/* (non-Javadoc)
 	 * @see android.app.Application#onCreate()
 	 */
 	public void onCreate() {
 		super.onCreate();
-		
-		XPGWifiSDK.sharedInstance().startWithAppID(getApplicationContext(), Configs.APPID);
-		
-		XPGWifiSDK.sharedInstance().setLogLevel(Configs.LOG_LEVEL,"BassApp.log", true);
+		// 初始化sdk,传入appId,登录机智云官方网站查看产品信息获得 AppID
+		XPGWifiSDK.sharedInstance().startWithAppID(getApplicationContext(),
+				Configs.APPID);
+		// 设定日志打印级别,日志保存文件名，是否在后台打印数据.
+		XPGWifiSDK.sharedInstance().setLogLevel(Configs.LOG_LEVEL,
+				"BassApp.log", Configs.DEBUG);
 	}
 }

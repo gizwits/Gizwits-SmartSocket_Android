@@ -60,7 +60,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
  */
 public class DeviceListActivity extends BaseActivity implements
 		OnClickListener, OnItemClickListener {
-	
+
 	/** The Constant TAG. */
 	private static final String TAG = "DeviceListActivity";
 
@@ -68,7 +68,7 @@ public class DeviceListActivity extends BaseActivity implements
 	 * The iv TopBar leftBtn.
 	 */
 	private ImageView ivLogout;
-	
+
 	/** The iv add. */
 	private ImageView ivAdd;
 
@@ -77,7 +77,7 @@ public class DeviceListActivity extends BaseActivity implements
 	// private List<XPGWifiDevice> deviceList;
 	/** The device list adapter. */
 	private DeviceListAdapter deviceListAdapter;
-	
+
 	/** The progress dialog. */
 	private ProgressDialog progressDialog;
 
@@ -159,8 +159,11 @@ public class DeviceListActivity extends BaseActivity implements
 
 	};
 
-	/* (non-Javadoc)
-	 * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +179,9 @@ public class DeviceListActivity extends BaseActivity implements
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.gizwits.framework.activity.BaseActivity#onResume()
 	 */
 	@Override
@@ -225,7 +230,9 @@ public class DeviceListActivity extends BaseActivity implements
 		lvDevices.setOnItemClickListener(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	@Override
@@ -261,15 +268,19 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
-	/* (non-Javadoc)
-	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget
+	 * .AdapterView, android.view.View, int, long)
 	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		XPGWifiDevice tempDevice = deviceListAdapter
 				.getDeviceByPosition(position);
-		if(tempDevice==null){
+		if (tempDevice == null) {
 			return;
 		}
 		if (tempDevice.isLAN()) {
@@ -280,8 +291,8 @@ public class DeviceListActivity extends BaseActivity implements
 								+ tempDevice.getIPAddress() + ";did="
 								+ tempDevice.getDid() + ";passcode="
 								+ tempDevice.getPasscode());
-                loginDevice(tempDevice);
-                progressDialog.show();
+				loginDevice(tempDevice);
+				progressDialog.show();
 			} else {
 				// TODO 绑定设备
 				Log.i(TAG,
@@ -289,10 +300,11 @@ public class DeviceListActivity extends BaseActivity implements
 								+ tempDevice.getIPAddress() + ";did="
 								+ tempDevice.getDid() + ";passcode="
 								+ tempDevice.getPasscode());
-                Intent intent = new Intent(DeviceListActivity.this, BindingDeviceActivity.class);
-                intent.putExtra("mac", tempDevice.getMacAddress());
-                intent.putExtra("did", tempDevice.getDid());
-                startActivity(intent);
+				Intent intent = new Intent(DeviceListActivity.this,
+						BindingDeviceActivity.class);
+				intent.putExtra("mac", tempDevice.getMacAddress());
+				intent.putExtra("did", tempDevice.getDid());
+				startActivity(intent);
 			}
 		} else {
 			if (!tempDevice.isOnline()) {
@@ -318,8 +330,9 @@ public class DeviceListActivity extends BaseActivity implements
 
 	/**
 	 * Login device.
-	 *
-	 * @param xpgWifiDevice the xpg wifi device
+	 * 
+	 * @param xpgWifiDevice
+	 *            the xpg wifi device
 	 */
 	private void loginDevice(XPGWifiDevice xpgWifiDevice) {
 		mXpgWifiDevice = xpgWifiDevice;
@@ -327,10 +340,11 @@ public class DeviceListActivity extends BaseActivity implements
 		mXpgWifiDevice.login(setmanager.getUid(), setmanager.getToken());
 	}
 
-
-
-	/* (non-Javadoc)
-	 * @see com.gizwits.framework.activity.BaseActivity#didLogin(com.xtremeprog.xpgconnect.XPGWifiDevice, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gizwits.framework.activity.BaseActivity#didLogin(com.xtremeprog.
+	 * xpgconnect.XPGWifiDevice, int)
 	 */
 	@Override
 	protected void didLogin(XPGWifiDevice device, int result) {
@@ -345,7 +359,7 @@ public class DeviceListActivity extends BaseActivity implements
 
 	/**
 	 * Gets the list.
-	 *
+	 * 
 	 * @return the list
 	 */
 	private void getList() {
@@ -354,8 +368,11 @@ public class DeviceListActivity extends BaseActivity implements
 		mCenter.cGetBoundDevices(uid, token);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.gizwits.framework.activity.BaseActivity#didDiscovered(int, java.util.List)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gizwits.framework.activity.BaseActivity#didDiscovered(int,
+	 * java.util.List)
 	 */
 	@Override
 	protected void didDiscovered(int error, List<XPGWifiDevice> deviceList) {
@@ -365,8 +382,11 @@ public class DeviceListActivity extends BaseActivity implements
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.gizwits.framework.activity.BaseActivity#didUserLogin(int, java.lang.String, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gizwits.framework.activity.BaseActivity#didUserLogin(int,
+	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	protected void didUserLogin(int error, String errorMessage, String uid,
@@ -377,31 +397,14 @@ public class DeviceListActivity extends BaseActivity implements
 		}
 	}
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onBackPressed()
-     */
-    @Override
-    public void onBackPressed() {
-        exit();
-    }
-
-    /**
-     * Exit.
-     */
-    public void exit() {
-		if (!isExit) {
-			isExit = true;
-			Toast.makeText(getApplicationContext(),
-					getString(R.string.tip_exit), Toast.LENGTH_SHORT).show();
-			handler.sendEmptyMessageDelayed(handler_key.EXIT.ordinal(), 2000);
-		} else {
-
-			Intent intent = new Intent(Intent.ACTION_MAIN);
-			intent.addCategory(Intent.CATEGORY_HOME);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			this.startActivity(intent);
-			Historys.exit();
-		}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onBackPressed()
+	 */
+	@Override
+	public void onBackPressed() {
+		exit();
 	}
 
 }

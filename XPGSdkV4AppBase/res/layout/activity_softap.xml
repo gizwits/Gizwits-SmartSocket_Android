@@ -119,6 +119,7 @@
                 style="@style/EditTextTheme"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:inputType="textPassword"
                 android:hint="Wi-Fi密码"
                 android:textSize="14sp" />
 

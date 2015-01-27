@@ -31,8 +31,7 @@
         android:id="@+id/etName"
         style="@style/EditTextTheme"
         android:layout_marginTop="30dp"
-        android:inputType="phone"
-        android:hint="手机号" />
+        android:hint="手机号/邮箱" />
 
     <Button
         android:id="@+id/btnGetCode"
