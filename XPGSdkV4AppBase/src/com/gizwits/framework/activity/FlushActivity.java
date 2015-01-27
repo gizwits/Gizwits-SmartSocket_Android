@@ -49,11 +49,14 @@ public class FlushActivity extends BaseActivity {
 			 */
 			@Override
 			public void run() {
-
+				
+				//判断是否有账号登陆
 				if (StringUtils.isEmpty(setmanager.getToken())) {
+					//未有账号登陆
 					IntentUtils.getInstance().startActivity(FlushActivity.this,
 							LoginActivity.class);
 				} else {
+					//已有账号登陆
 					Intent intent = new Intent(FlushActivity.this,
 							DeviceListActivity.class);
 					intent.putExtra("autoLogin", true);

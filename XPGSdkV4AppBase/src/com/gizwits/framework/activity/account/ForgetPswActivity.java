@@ -164,12 +164,12 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		DEFAULT,
 
 		/**
-		 * 手机注册
+		 * 手机注册的用户
 		 */
 		PHONE,
 
 		/**
-		 * email注册
+		 * email注册的用户
 		 */
 		EMAIL,
 	}

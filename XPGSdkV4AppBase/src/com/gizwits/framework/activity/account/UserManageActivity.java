@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +29,6 @@ import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.utils.DialogManager;
 import com.xpg.common.system.IntentUtils;
-import com.xpg.ui.utils.DialogUtils;
 import com.xpg.ui.utils.ToastUtils;
 
 // TODO: Auto-generated Javadoc
@@ -38,7 +36,7 @@ import com.xpg.ui.utils.ToastUtils;
 /**
  * 
  * ClassName: Class UserManageActivity. <br/>
- * 用户管理<br/>
+ * 用户管理，用于用户信息管理<br/>
  * date: 2014-12-09 17:27:10 <br/>
  * 
  * @author StephenC

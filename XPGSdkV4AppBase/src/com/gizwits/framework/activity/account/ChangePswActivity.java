@@ -40,7 +40,7 @@ import com.xpg.ui.utils.ToastUtils;
 
 /**
  * ClassName: Class ChangePswActivity. <br/>
- * 修改密码<br/>
+ * 修改密码，该类主要用于用户通过旧密码修改密码。<br/>
  * date: 2014-12-09 17:27:10 <br/>
  *
  * @author StephenC
@@ -73,7 +73,7 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
      */
     private Button btnConfirm;
 
-    /** The new psw. */
+    /** 用户输入的新密码 */
     private String newPsw;
 
     /* (non-Javadoc)
@@ -174,7 +174,7 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
     }
 
     /**
-     * Change psw.
+     * 处理修改密码动作
      *
      * @param oldPsw the old psw
      * @param newPsw the new psw

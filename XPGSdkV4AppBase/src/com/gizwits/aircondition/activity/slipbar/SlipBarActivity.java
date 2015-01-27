@@ -91,28 +91,28 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
     /** The m cover. */
     private ImageView mCover;
     
-    /** The Constant DURATION_MS. */
+    /** 动画总时长 */
     private static final int DURATION_MS = 400;
     
-    /** The m stop animation. */
+    /** 退出界面动画 */
     private Animation mStopAnimation;
     
-    /** The m shift. */
+    /** 将快照向右移动的偏移量 */
     private int mShift;
     
-    /** The is can back. */
+    /** 动画是否完成标志位 */
     private boolean isCanBack = false;
     
-    /** The m is select. */
+    /** 是否可以开始退出界面动画 */
     private static boolean mIsSelect = false;
     
-    /** The m intent. */
+    /** 意图 */
     private Intent mIntent;
     
-    /** The choose mac. */
+    /** 选中设备的mac地址 */
     private String chooseMac;
     
-    /** The choose did. */
+    /** 选中设备的did */
     private String chooseDid;
     
     /** The progress dialog. */

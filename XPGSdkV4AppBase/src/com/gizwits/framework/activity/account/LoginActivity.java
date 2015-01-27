@@ -18,7 +18,6 @@
 package com.gizwits.framework.activity.account;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,7 +31,6 @@ import android.widget.Toast;
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.activity.device.DeviceListActivity;
-import com.gizwits.framework.utils.Historys;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.NetworkUtils;
 import com.xpg.common.useful.StringUtils;
@@ -41,7 +39,7 @@ import com.xpg.common.useful.StringUtils;
 
 /**
  * ClassName: Class LoginActivity. <br/>
- * 用户登陆<br/>
+ * 用户登陆，该类用于账号登陆<br/>
  * 
  * @author Lien
  */

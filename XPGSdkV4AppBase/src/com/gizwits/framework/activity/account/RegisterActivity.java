@@ -26,7 +26,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
-import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,7 +50,7 @@ import com.xpg.ui.utils.ToastUtils;
 
 /**
  * ClassName: Class RegisterActivity. <br/>
- * 用户注册<br/>
+ * 用户注册，该类用于新用户的注册<br/>
  * 
  * @author Lien
  */
@@ -122,12 +121,12 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private ToggleButton tbPswFlag;
 
 	/**
-	 * The is email.
+	 * 是否邮箱注册标识位
 	 */
 	private boolean isEmail = false;
 
 	/**
-	 * The secondleft.
+	 * 验证码重发倒计时
 	 */
 	int secondleft = 60;
 
@@ -151,17 +150,17 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private enum handler_key {
 
 		/**
-		 * The tick time.
+		 * 倒计时通知
 		 */
 		TICK_TIME,
 
 		/**
-		 * The reg success.
+		 * 注册成功
 		 */
 		REG_SUCCESS,
 
 		/**
-		 * The toast.
+		 * Toast弹出通知
 		 */
 		TOAST,
 
@@ -177,17 +176,17 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private enum ui_statue {
 
 		/**
-		 * The default.
+		 * 默认状态
 		 */
 		DEFAULT,
 
 		/**
-		 * The phone.
+		 * 手机注册
 		 */
 		PHONE,
 
 		/**
-		 * The email.
+		 * email注册
 		 */
 		EMAIL,
 	}
@@ -382,7 +381,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	}
 
 	/**
-	 * Do register.
+	 * 处理注册动作
 	 */
 	private void doRegister() {
 		if (!isEmail) {
@@ -411,7 +410,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 					+ password);
 			dialog.show();
 		} else {
-			// TODO 邮箱注册
 			String mail = etName.getText().toString().trim();
 			String password = etInputPsw.getText().toString();
 			if (!mail.contains("@")) {
@@ -434,7 +432,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	}
 
 	/**
-	 * Send verify code.
+	 * 处理发送验证码动作
 	 * 
 	 * @param phone
 	 *            the phone

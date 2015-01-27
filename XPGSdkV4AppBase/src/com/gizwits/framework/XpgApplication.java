@@ -18,7 +18,6 @@
 package com.gizwits.framework;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.gizwits.framework.config.Configs;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;

@@ -51,10 +51,10 @@ public class AlarmListActicity extends BaseActivity implements OnClickListener {
 	/** The btn call. */
 	private Button btnCall;
 	
-	/** The alarm list. */
+	/** 警告列表 */
 	private ArrayList<DeviceAlarm> alarmList;
 	
-	/** The m adapter. */
+	/** 警告列表适配器 */
 	private AlarmListAdapter mAdapter;
 	
 	/** The iv back. */

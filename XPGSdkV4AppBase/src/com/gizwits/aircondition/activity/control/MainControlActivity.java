@@ -215,19 +215,19 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private enum handler_key {
 
-		/** The update ui. */
+		/** 更新UI界面 */
 		UPDATE_UI,
 
-		/** The alarm. */
+		/** 显示警告*/
 		ALARM,
 
-		/** The disconnected. */
+		/** 设备断开连接 */
 		DISCONNECTED,
 
-		/** The received. */
+		/** 接收到设备的数据 */
 		RECEIVED,
 
-		/** The get statue. */
+		/** 获取设备状态 */
 		GET_STATUE,
 	}
 
@@ -342,16 +342,16 @@ public class MainControlActivity extends BaseActivity implements
 	/** The mode strs. */
 	private String[] modeStrs = { "制冷", "送风", "除湿", "自动", "制热" };
 
-	/** The temperature f. */
+	/** 设定温度*/
 	short temperatureC, temperatureF;
 
-	/** The inner temperature f. */
+	/** 当前温度 */
 	short innerTemperatureC, innerTemperatureF;
 
-	/** The is centigrade. */
+	/** 摄氏度标志位 */
 	private boolean isCentigrade = true;
 
-	/** The is click. */
+	/** 防抖标志位 */
 	private boolean isClick;
 
 	/*
@@ -518,12 +518,15 @@ public class MainControlActivity extends BaseActivity implements
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
+		//设置低风
 		case R.id.rbWindLow:
 			mCenter.cFanSpeed(mXpgWifiDevice, 0);
 			break;
+		//设置中风
 		case R.id.rbWindMin:
 			mCenter.cFanSpeed(mXpgWifiDevice, 1);
 			break;
+		//设置高风
 		case R.id.rbWindHigh:
 			mCenter.cFanSpeed(mXpgWifiDevice, 2);
 			break;
@@ -591,7 +594,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Refresh inner temp.
+	 * 更新当前温度
 	 * 
 	 * @param temperature
 	 *            the temperature
@@ -723,7 +726,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Update fan speed.
+	 * 更新风速状态
 	 * 
 	 * @param speedStr
 	 *            the speed str
@@ -744,7 +747,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Update off time.
+	 * 更新定时关机信息
 	 *
 	 * @param timingOff the timing off
 	 */
@@ -753,7 +756,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Update on time.
+	 * 更新定时开机信息
 	 *
 	 * @param timingOn the timing on
 	 */
@@ -801,7 +804,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Shake on off.
+	 * 更新摆风状态信息
 	 * 
 	 * @param isOn
 	 *            the is on
@@ -881,7 +884,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Input alarm to list.
+	 * 把警告信息存入列表
 	 * 
 	 * @param json
 	 *            the json
@@ -903,7 +906,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Input data to maps.
+	 * 把状态信息存入表
 	 * 
 	 * @param map
 	 *            the map
@@ -940,7 +943,7 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Gets the view.
+	 * 获取当前界面的截图
 	 * 
 	 * @return the view
 	 */
