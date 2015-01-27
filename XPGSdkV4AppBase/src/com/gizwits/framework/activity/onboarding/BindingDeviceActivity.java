@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:BindingDeviceActivity.java
+ * Package Name:com.gizwits.framework.activity.onboarding
+ * Date:2015-1-27 14:45:59
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.activity.onboarding;
 
 import android.os.Bundle;
@@ -15,19 +32,47 @@ import com.gizwits.framework.activity.device.DeviceListActivity;
 import com.xpg.common.system.IntentUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
+// TODO: Auto-generated Javadoc
+/**
+ *  
+ * ClassName: Class BindingDeviceActivity. <br/> 
+ * <br/>
+ * date: 2015-1-27 14:45:59 <br/> 
+ *
+ * @author Lien
+ */
 public class BindingDeviceActivity extends BaseActivity implements
 		OnClickListener {
+	
+	/** The ll start config. */
 	private LinearLayout llStartConfig;
+	
+	/** The ll config failed. */
 	private LinearLayout llConfigFailed;
+	
+	/** The tv press. */
 	private TextView tvPress;
+	
+	/** The btn retry. */
 	private Button btnRetry;
 
+	/** The device. */
 	private XPGWifiDevice device;
 
+	/**
+	 *  
+	 * ClassName: Enum handler_key. <br/> 
+	 * <br/>
+	 * date: 2015-1-27 14:45:59 <br/> 
+	 *
+	 * @author Lien
+	 */
 	private enum handler_key {
 
+		/** The bind success. */
 		BIND_SUCCESS,
 
+		/** The bind failed. */
 		BIND_FAILED,
 
 	}
@@ -59,6 +104,9 @@ public class BindingDeviceActivity extends BaseActivity implements
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,6 +117,9 @@ public class BindingDeviceActivity extends BaseActivity implements
 		bindDevice();
 	}
 
+	/**
+	 * Inits the datas.
+	 */
 	private void initDatas() {
 		if (getIntent() != null) {
 			String mac = getIntent().getStringExtra("mac");
@@ -77,11 +128,17 @@ public class BindingDeviceActivity extends BaseActivity implements
 		}
 	}
 
+	/**
+	 * Inits the events.
+	 */
 	private void initEvents() {
 		tvPress.setOnClickListener(this);
 		btnRetry.setOnClickListener(this);
 	}
 
+	/**
+	 * Inits the views.
+	 */
 	private void initViews() {
 		llConfigFailed = (LinearLayout) findViewById(R.id.llConfigFailed);
 		llStartConfig = (LinearLayout) findViewById(R.id.llStartConfig);
@@ -91,6 +148,9 @@ public class BindingDeviceActivity extends BaseActivity implements
 		llConfigFailed.setVisibility(View.GONE);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -105,11 +165,17 @@ public class BindingDeviceActivity extends BaseActivity implements
 		}
 	}
 
+	/**
+	 * Bind device.
+	 */
 	private void bindDevice() {
 		mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(),
 				device.getDid(), device.getPasscode(), null);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didBindDevice(int, java.lang.String, java.lang.String)
+	 */
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
 		if (error == 0) {

@@ -2,7 +2,7 @@
  * Project Name:XPGSdkV4AppBase
  * File Name:GizwitsErrorMsg.java
  * Package Name:com.gizwits.framework.config
- * Date:2015-1-22 18:16:19
+ * Date:2015-1-27 14:47:07
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -17,10 +17,10 @@
  */
 package com.gizwits.framework.config;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
- * 错误码枚举类
- * 
+ * 错误码枚举类.
+ *
  * @author Lien
  */
 public enum GizwitsErrorMsg {
@@ -85,21 +85,18 @@ public enum GizwitsErrorMsg {
 	/** The E20. */
 	E20(9020, "username or password error!", "用户名或者密码错误");
 
-	/** 错误描述 */
+	/**  错误描述. */
 	private String EngDescript, CHNDescript;
 
-	/** 错误码 */
+	/**  错误码. */
 	private int num;
 
 	/**
-	 * 错误码枚举类构造方法
-	 * 
-	 * @param num
-	 *            错误码
-	 * @param EngDescript
-	 *            错误英文描述
-	 * @param CHNDescript
-	 *            错误中文描述
+	 * 错误码枚举类构造方法.
+	 *
+	 * @param num            错误码
+	 * @param EngDescript            错误英文描述
+	 * @param CHNDescript            错误中文描述
 	 */
 	private GizwitsErrorMsg(int num, String EngDescript, String CHNDescript) {
 		this.num = num;
@@ -108,8 +105,8 @@ public enum GizwitsErrorMsg {
 	}
 
 	/**
-	 * 获取错误码英文描述
-	 * 
+	 * 获取错误码英文描述.
+	 *
 	 * @return 英文描述
 	 */
 	public String getEngDescript() {
@@ -117,8 +114,8 @@ public enum GizwitsErrorMsg {
 	}
 
 	/**
-	 * 获取错误码中文描述
-	 * 
+	 * 获取错误码中文描述.
+	 *
 	 * @return 中文描述
 	 */
 	public String getCHNDescript() {
@@ -126,8 +123,8 @@ public enum GizwitsErrorMsg {
 	}
 
 	/**
-	 * 获取错误码
-	 * 
+	 * 获取错误码.
+	 *
 	 * @return 错误码
 	 */
 	public int getNum() {
@@ -135,10 +132,9 @@ public enum GizwitsErrorMsg {
 	}
 
 	/**
-	 * 根据错误码返回枚举类
-	 * 
-	 * @param num
-	 *            错误码
+	 * 根据错误码返回枚举类.
+	 *
+	 * @param num            错误码
 	 * @return 枚举对象
 	 */
 	public static GizwitsErrorMsg getEqual(int num) {

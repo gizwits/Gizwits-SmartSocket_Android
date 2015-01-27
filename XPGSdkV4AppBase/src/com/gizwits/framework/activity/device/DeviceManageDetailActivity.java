@@ -1,8 +1,8 @@
 /**
  * Project Name:XPGSdkV4AppBase
  * File Name:DeviceManageDetailActivity.java
- * Package Name:com.gizwits.aircondition.activity.device
- * Date:2015-1-12 12:04:07
+ * Package Name:com.gizwits.framework.activity.device
+ * Date:2015-1-27 14:45:23
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -40,7 +40,6 @@ import com.xpg.common.system.IntentUtils;
 import com.xpg.ui.utils.ToastUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
-// TODO: Auto-generated Javadoc
 //TODO: Auto-generated Javadoc
 /**
  * 
@@ -55,6 +54,8 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	/** The iv back. */
 	private ImageView ivBack;
+	
+	/** The iv tick. */
 	private ImageView ivTick;
 
 	/** The tv init date. */
@@ -75,10 +76,13 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	/** The btn delDevice. */
 	private Button btnDelDevice;
 
+	/** The xpg wifi device. */
 	private XPGWifiDevice xpgWifiDevice;
 
+	/** The unbind dialog. */
 	private Dialog unbindDialog;
 
+	/** The progress dialog. */
 	private ProgressDialog progressDialog;
 	
 	private Message msg = new Message();
@@ -92,18 +96,23 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	 */
 	private enum handler_key {
 
+		/** The change success. */
 		CHANGE_SUCCESS,
 
+		/** The change fail. */
 		CHANGE_FAIL,
 
+		/** The delete success. */
 		DELETE_SUCCESS,
 
+		/** The delete fail. */
 		DELETE_FAIL,
 		
 		GET_BOUND,
 
 	}
 
+	/** The handler. */
 	Handler handler = new Handler() {
 
 		@Override
@@ -163,6 +172,9 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * Inits the params.
+	 */
 	private void initParams() {
 		if (getIntent() != null) {
 			String mac = getIntent().getStringExtra("mac");
@@ -240,11 +252,17 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed() {
 		finish();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didBindDevice(int, java.lang.String, java.lang.String)
+	 */
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
 		Log.d("Device扫描结果", "error=" + error + ";errorMessage=" + errorMessage
@@ -260,6 +278,9 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didUnbindDevice(int, java.lang.String, java.lang.String)
+	 */
 	@Override
 	protected void didUnbindDevice(int error, String errorMessage, String did) {
 		if (error == 0) {

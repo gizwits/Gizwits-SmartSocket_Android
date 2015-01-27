@@ -2,7 +2,7 @@
  * Project Name:XPGSdkV4AppBase
  * File Name:ForgetPswActivity.java
  * Package Name:com.gizwits.framework.activity.account
- * Date:2015-1-27 10:31:53
+ * Date:2015-1-27 14:44:57
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -42,6 +42,7 @@ import com.gizwits.framework.activity.BaseActivity;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
+// TODO: Auto-generated Javadoc
 //TODO: Auto-generated Javadoc
 
 /**
@@ -107,6 +108,7 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	 */
 	private ToggleButton tbPswFlag;
 	
+	/** The is email. */
 	private boolean isEmail = false;
 
 
@@ -213,6 +215,9 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -343,10 +348,19 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 	
+	/**
+	 * Gets the email.
+	 *
+	 * @param email the email
+	 * @return the email
+	 */
 	private void getEmail(String email){
 		mCenter.cChangePassworfByEmail(email);
 	}
 
+	/**
+	 * Do change psw.
+	 */
 	private void doChangePsw() {
 
 		String phone = etName.getText().toString().trim();
@@ -395,6 +409,9 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		mCenter.cRequestSendVerifyCode(phone);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didRequestSendVerifyCode(int, java.lang.String)
+	 */
 	@Override
 	protected void didRequestSendVerifyCode(int error, String errorMessage) {
 		Log.i("error message ", error + " " + errorMessage);
@@ -412,6 +429,9 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didChangeUserPassword(int, java.lang.String)
+	 */
 	@Override
 	protected void didChangeUserPassword(int error, String errorMessage) {
 		if (error == 0) {// 修改成功

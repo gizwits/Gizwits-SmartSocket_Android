@@ -2,7 +2,7 @@
  * Project Name:XPGSdkV4AppBase
  * File Name:CurveActivity.java
  * Package Name:com.gizwits.aircondition.activity.control
- * Date:2015-1-8 14:38:41
+ * Date:2015-1-27 14:44:03
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -30,7 +30,6 @@ import com.gizwits.framework.activity.BaseActivity;
  * 
  * ClassName: Class CurveActivity. <br/>
  * <br/>
- * date: 2015-1-8 14:38:41 <br/>
  * 
  * @author Lien
  */
@@ -63,6 +62,9 @@ public class CurveActivity extends BaseActivity {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed() {
 		finish();

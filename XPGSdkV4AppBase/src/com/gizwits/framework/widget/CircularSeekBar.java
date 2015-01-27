@@ -1,7 +1,19 @@
 /**
- * @author Raghav Sood
- * @version 1
- * @date 26 January, 2013
+ * Project Name:XPGSdkV4AppBase
+ * File Name:CircularSeekBar.java
+ * Package Name:com.gizwits.framework.widget
+ * Date:2015-1-27 14:48:07
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.gizwits.framework.widget;
 
@@ -22,24 +34,21 @@ import com.gizwits.aircondition.R;
 import com.xpg.common.device.DensityUtils;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CircularSeekBar.
+ *
+ * @author Lien
  */
 public class CircularSeekBar extends View {
 
-    /**
-     * The context
-     */
+    /** The context. */
     private Context mContext;
 
-    /**
-     * The listener to listen for changes
-     */
+    /** The listener to listen for changes. */
     private OnSeekChangeListener mListener;
 
-    /**
-     * The color of the progress ring
-     */
+    /** The color of the progress ring. */
     private Paint circleColor;
 
     /**
@@ -47,121 +56,73 @@ public class CircularSeekBar extends View {
      */
     private Paint innerColor;
 
-    /**
-     * The progress circle ring background
-     */
+    /** The progress circle ring background. */
     private Paint circleRing;
 
-    /**
-     * The angle of progress
-     */
+    /** The angle of progress. */
     private int angle = 0;
 
-    /**
-     * The start angle (12 O'clock
-     */
+    /** The start angle (12 O'clock. */
     private int startAngle = 270;
 
-    /**
-     * The width of the progress ring
-     */
+    /** The width of the progress ring. */
     private int barWidth = 8;
 
-    /**
-     * The width of the view
-     */
+    /** The width of the view. */
     private int width;
 
-    /**
-     * The height of the view
-     */
+    /** The height of the view. */
     private int height;
 
-    /**
-     * The maximum progress amount
-     */
+    /** The maximum progress amount. */
     private int maxProgress = 100;
 
-    /**
-     * The current progress
-     */
+    /** The current progress. */
     private int progress;
 
-    /**
-     * The progress percent
-     */
+    /** The progress percent. */
     private int progressPercent;
 
-    /**
-     * The radius of the inner circle
-     */
+    /** The radius of the inner circle. */
     private float innerRadius;
 
-    /**
-     * The radius of the outer circle
-     */
+    /** The radius of the outer circle. */
     private float outerRadius;
 
-    /**
-     * The circle's center X coordinate
-     */
+    /** The circle's center X coordinate. */
     private float cx;
 
-    /**
-     * The circle's center Y coordinate
-     */
+    /** The circle's center Y coordinate. */
     private float cy;
 
-    /**
-     * The left bound for the circle RectF
-     */
+    /** The left bound for the circle RectF. */
     private float left;
 
-    /**
-     * The right bound for the circle RectF
-     */
+    /** The right bound for the circle RectF. */
     private float right;
 
-    /**
-     * The top bound for the circle RectF
-     */
+    /** The top bound for the circle RectF. */
     private float top;
 
-    /**
-     * The bottom bound for the circle RectF
-     */
+    /** The bottom bound for the circle RectF. */
     private float bottom;
 
-    /**
-     * The X coordinate for the top left corner of the marking drawable
-     */
+    /** The X coordinate for the top left corner of the marking drawable. */
     private float dx;
 
-    /**
-     * The Y coordinate for the top left corner of the marking drawable
-     */
+    /** The Y coordinate for the top left corner of the marking drawable. */
     private float dy;
 
-    /**
-     * The X coordinate for 12 O'Clock
-     */
+    /** The X coordinate for 12 O'Clock. */
     private float startPointX;
 
-    /**
-     * The Y coordinate for 12 O'Clock
-     */
+    /** The Y coordinate for 12 O'Clock. */
     private float startPointY;
 
-    /**
-     * The X coordinate for the current position of the marker, pre adjustment
-     * to center
-     */
+    /** The X coordinate for the current position of the marker, pre adjustment to center. */
     private float markPointX;
 
-    /**
-     * The Y coordinate for the current position of the marker, pre adjustment
-     * to center
-     */
+    /** The Y coordinate for the current position of the marker, pre adjustment to center. */
     private float markPointY;
 
     /**
@@ -171,9 +132,7 @@ public class CircularSeekBar extends View {
      */
     private float adjustmentFactor = 100;
 
-    /**
-     * The progress mark when the view isn't being progress modified
-     */
+    /** The progress mark when the view isn't being progress modified. */
     private Bitmap progressMark;
 
     /**
@@ -181,9 +140,7 @@ public class CircularSeekBar extends View {
      */
     private Bitmap progressMarkPressed;
 
-    /**
-     * The flag to see if view is pressed
-     */
+    /** The flag to see if view is pressed. */
     private boolean IS_PRESSED = false;
 
     /**
@@ -192,12 +149,28 @@ public class CircularSeekBar extends View {
      */
     private boolean CALLED_FROM_ANGLE = false;
 
+    /** The show seekbar. */
     private boolean SHOW_SEEKBAR = true;
     
+	/**
+	 *  
+	 * ClassName: Enum lockX. <br/> 
+	 * <br/>
+	 * date: 2015-1-27 14:48:08 <br/> 
+	 *
+	 * @author Lien
+	 */
 	enum lockX {
-		UnLock, LockLeft, LockRight;
+		
+		/** The Un lock. */
+		UnLock, 
+ /** The Lock left. */
+ LockLeft, 
+ /** The Lock right. */
+ LockRight;
 	}
 
+	/** The my lock. */
 	private lockX myLock = lockX.LockLeft;
 
     /**
@@ -354,7 +327,7 @@ public class CircularSeekBar extends View {
 
     /**
      * Gets the X coordinate of the arc's end arm's point of intersection with
-     * the circle
+     * the circle.
      *
      * @return the X coordinate
      */
@@ -368,7 +341,7 @@ public class CircularSeekBar extends View {
 
     /**
      * Gets the Y coordinate of the arc's end arm's point of intersection with
-     * the circle
+     * the circle.
      *
      * @return the Y coordinate
      */
@@ -422,12 +395,23 @@ public class CircularSeekBar extends View {
         return mListener;
     }
 
+    /** The m continue listener. */
     private OnSeekContinueChangeListener mContinueListener;
 
+    /**
+     * Sets the seek continue change listener.
+     *
+     * @param listener the new seek continue change listener
+     */
     public void setSeekContinueChangeListener(OnSeekContinueChangeListener listener) {
         mContinueListener = listener;
     }
 
+    /**
+     * Gets the seek continue change listener.
+     *
+     * @return the seek continue change listener
+     */
     public OnSeekContinueChangeListener getSeekContinueChangeListener() {
         return mContinueListener;
     }
@@ -458,6 +442,8 @@ public class CircularSeekBar extends View {
      * <code>setSeekBarChangeListener(OnSeekChangeListener)<code> method. When
      * the onSeekChange event occurs, that object's appropriate
      * method is invoked.
+     *
+     * @see OnSeekChangeEvent
      */
     public interface OnSeekChangeListener {
 
@@ -470,6 +456,17 @@ public class CircularSeekBar extends View {
         public void onProgressChange(CircularSeekBar view, int newProgress);
     }
 
+    /**
+     * The listener interface for receiving onSeekContinueChange events.
+     * The class that is interested in processing a onSeekContinueChange
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addOnSeekContinueChangeListener<code> method. When
+     * the onSeekContinueChange event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see OnSeekContinueChangeEvent
+     */
     public interface OnSeekContinueChangeListener {
 
         /**
@@ -531,12 +528,11 @@ public class CircularSeekBar extends View {
     }
 
     /**
-     * 重新设置进度时调用
+     * 重新设置进度时调用.
      *
-     * @param @param progress
-     * @return void
-     * @throws
      * @author Administrator
+     * @param progress the new m progress
+     * @return void
      * @Title: setMProgress
      * @Description: TODO
      */
@@ -592,6 +588,13 @@ public class CircularSeekBar extends View {
         circleColor.setColor(color);
     }
 
+    /**
+     * Checks if is mark point range.
+     *
+     * @param x the x
+     * @param y the y
+     * @return true, if is mark point range
+     */
     public boolean isMarkPointRange(float x, float y) {
         float range = DensityUtils.dp2px(getContext(), 60);
         if (x > (markPointX - range) && x < (markPointX + range) && y > (markPointY - range)
@@ -715,6 +718,11 @@ public class CircularSeekBar extends View {
         this.adjustmentFactor = adjustmentFactor;
     }
 
+    /**
+     * Sets the inits the mark to xy.
+     *
+     * @param angle the new inits the mark to xy
+     */
     public void setInitMarkToXY(int angle) {
         // double angle = 360+90+45;
         // double dx = 7 + 5 * Math.sin(angle*Math.PI/180);
@@ -725,7 +733,7 @@ public class CircularSeekBar extends View {
     }
 
     /**
-     * To display seekbar
+     * To display seekbar.
      */
     public void ShowSeekBar() {
         SHOW_SEEKBAR = true;
@@ -733,19 +741,30 @@ public class CircularSeekBar extends View {
     }
 
     /**
-     * To hide seekbar
+     * To hide seekbar.
      */
     public void hideSeekBar() {
         SHOW_SEEKBAR = false;
         postInvalidate();
     }
 
+    /** The m scroll view. */
     private ScrollView mScrollView;
 
+    /**
+     * Sets the scroll view in parent.
+     *
+     * @param sv the new scroll view in parent
+     */
     public void setScrollViewInParent(ScrollView sv) {
         mScrollView = sv;
     }
 
+    /**
+     * Sets the parent scroll able.
+     *
+     * @param b the new parent scroll able
+     */
     private void setParentScrollAble(boolean b) {
         if (mScrollView == null)
             return;

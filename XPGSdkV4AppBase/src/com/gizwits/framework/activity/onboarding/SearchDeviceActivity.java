@@ -1,15 +1,15 @@
 /**
  * Project Name:XPGSdkV4AppBase
  * File Name:SearchDeviceActivity.java
- * Package Name:com.gizwits.aircondition.activity.onboarding
- * Date:2014-12-3 15:41:21
+ * Package Name:com.gizwits.framework.activity.onboarding
+ * Date:2015-1-27 14:46:15
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
  * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
@@ -86,6 +86,8 @@ public class SearchDeviceActivity extends BaseActivity implements
      * The device list.
      */
     private List<XPGWifiDevice> deviceList;
+    
+    /** The all device list. */
     private List<XPGWifiDevice> allDeviceList;
 
     /**
@@ -93,15 +95,16 @@ public class SearchDeviceActivity extends BaseActivity implements
      */
     private Dialog noNetworkDialog;
 
+    /** The loading dialog. */
     private ProgressDialog loadingDialog;
 
+    /** The adapter. */
     private SearchListAdapter adapter;
 
-    /**
-     * 网络状态广播接受器
-     */
+    /** 网络状态广播接受器. */
     ConnecteChangeBroadcast mChangeBroadcast = new ConnecteChangeBroadcast();
 
+    /** The is waiting wifi. */
     private boolean isWaitingWifi = false;
 
     /**
@@ -113,10 +116,13 @@ public class SearchDeviceActivity extends BaseActivity implements
      */
     private enum handler_key {
 
+        /** The found success. */
         FOUND_SUCCESS,
 
+        /** The found finish. */
         FOUND_FINISH,
 
+        /** The change success. */
         CHANGE_SUCCESS,
 
     }
@@ -176,6 +182,9 @@ public class SearchDeviceActivity extends BaseActivity implements
     }
 
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#onResume()
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -188,6 +197,9 @@ public class SearchDeviceActivity extends BaseActivity implements
         registerReceiver(mChangeBroadcast, filter);
     }
 
+    /* (non-Javadoc)
+     * @see android.app.Activity#onPause()
+     */
     public void onPause() {
         super.onPause();
         unregisterReceiver(mChangeBroadcast);
@@ -260,6 +272,9 @@ public class SearchDeviceActivity extends BaseActivity implements
 
     }
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#didDiscovered(int, java.util.List)
+     */
     @Override
     protected void didDiscovered(int error, List<XPGWifiDevice> devicesList) {
 //        Log.e("SearchDevice", devicesList.get(0).getPasscode());
@@ -268,6 +283,9 @@ public class SearchDeviceActivity extends BaseActivity implements
         }
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -282,9 +300,14 @@ public class SearchDeviceActivity extends BaseActivity implements
 
     /**
      * 广播监听器，监听wifi连上的广播.
+     *
+     * @author Lien
      */
     public class ConnecteChangeBroadcast extends BroadcastReceiver {
 
+        /* (non-Javadoc)
+         * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
+         */
         @Override
         public void onReceive(Context context, Intent intent) {
 

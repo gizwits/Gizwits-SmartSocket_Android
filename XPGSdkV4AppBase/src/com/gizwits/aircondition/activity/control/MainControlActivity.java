@@ -2,7 +2,7 @@
  * Project Name:XPGSdkV4AppBase
  * File Name:MainControlActivity.java
  * Package Name:com.gizwits.aircondition.activity.control
- * Date:2015-1-12 11:05:42
+ * Date:2015-1-27 14:44:17
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -552,10 +552,9 @@ public class MainControlActivity extends BaseActivity implements
 	}
 
 	/**
-	 * 更新温度单位
-	 * 
-	 * @param centigrade
-	 *            the centigrade
+	 * 更新温度单位.
+	 *
+	 * @param centigrade            the centigrade
 	 */
 	private void updateTemperatureUnit(boolean centigrade) {
 		setmanager.setUnit(centigrade);
@@ -745,10 +744,20 @@ public class MainControlActivity extends BaseActivity implements
 		}
 	}
 
+	/**
+	 * Update off time.
+	 *
+	 * @param timingOff the timing off
+	 */
 	private void updateOffTime(int timingOff) {
 		tvTimeOff.setText(timingOff > 0 ? timingOff + "小时后关机" : "定时关机");
 	}
 
+	/**
+	 * Update on time.
+	 *
+	 * @param timingOn the timing on
+	 */
 	private void updateOnTime(int timingOn) {
 		tvPowerOnStr.setText(timingOn > 0 ? timingOn + "小时后开机" : "定时开机");
 	}

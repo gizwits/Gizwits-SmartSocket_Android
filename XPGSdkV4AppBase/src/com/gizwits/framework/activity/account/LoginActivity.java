@@ -2,7 +2,7 @@
  * Project Name:XPGSdkV4AppBase
  * File Name:LoginActivity.java
  * Package Name:com.gizwits.framework.activity.account
- * Date:2015-1-27 11:22:18
+ * Date:2015-1-27 14:45:03
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -86,19 +86,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	 */
 	private enum handler_key {
 
-		/**
-		 * 登陆成功
-		 */
+		/** 登陆成功. */
 		LOGIN_SUCCESS,
 
-		/**
-		 * 登陆失败
-		 */
+		/** 登陆失败. */
 		LOGIN_FAIL,
 
-		/**
-		 * 登录超时
-		 */
+		/** 登录超时. */
 		LOGIN_TIMEOUT,
 
 	}
@@ -111,6 +105,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			super.handleMessage(msg);
 			handler_key key = handler_key.values()[msg.what];
 			switch (key) {
+			// 登陆成功
 			case LOGIN_SUCCESS:
 				handler.removeMessages(handler_key.LOGIN_TIMEOUT.ordinal());
 				Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT)
@@ -120,12 +115,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 						DeviceListActivity.class);
 				finish();
 				break;
+			// 登陆失败
 			case LOGIN_FAIL:
 				handler.removeMessages(handler_key.LOGIN_TIMEOUT.ordinal());
 				Toast.makeText(LoginActivity.this, msg.obj + "",
 						Toast.LENGTH_SHORT).show();
 				dialog.cancel();
 				break;
+			// 登录超时
 			case LOGIN_TIMEOUT:
 				handler.removeMessages(handler_key.LOGIN_TIMEOUT.ordinal());
 				Toast.makeText(LoginActivity.this, "登陆超时", Toast.LENGTH_SHORT)
@@ -142,6 +139,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	 * com.gizwits.aircondition.activity.BaseActivity#onCreate(android.os.Bundle
 	 * )
 	 */
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -151,7 +151,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	/**
-	 * 初始化交互监听器
+	 * 初始化交互监听器.
 	 */
 	private void initEvents() {
 
@@ -162,7 +162,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	/**
-	 * 初始化空间
+	 * 初始化空间.
 	 */
 	private void initViews() {
 		etName = (EditText) findViewById(R.id.etName);
@@ -180,6 +180,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 
 	/*
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	/* (non-Javadoc)
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	@Override
@@ -203,9 +206,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			dialog.show();
 			final String psw = etPsw.getText().toString().trim();
 			final String name = etName.getText().toString().trim();
-			//调用登陆方法
+			// 调用登陆方法
 			mCenter.cLogin(name, psw);
-			//15秒后登陆超时
+			// 15秒后登陆超时
 			handler.sendEmptyMessageDelayed(
 					handler_key.LOGIN_TIMEOUT.ordinal(), 15000);
 			break;
@@ -224,6 +227,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	 * @see com.gizwits.framework.activity.BaseActivity#didUserLogin(int,
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see com.gizwits.framework.activity.BaseActivity#didUserLogin(int, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	protected void didUserLogin(int error, String errorMessage, String uid,
 			String token) {
@@ -241,6 +247,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed() {
 		exit();

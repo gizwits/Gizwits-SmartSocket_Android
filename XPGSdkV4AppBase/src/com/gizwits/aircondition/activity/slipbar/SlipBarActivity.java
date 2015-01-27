@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:SlipBarActivity.java
+ * Package Name:com.gizwits.aircondition.activity.slipbar
+ * Date:2015-1-27 14:44:46
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.aircondition.activity.slipbar;
 
 import java.util.List;
@@ -40,26 +57,63 @@ import com.gizwits.framework.utils.StringUtils;
 import com.xpg.common.system.IntentUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Lien on 14/12/21.
+ *
+ * @author Lien
  */
 public class SlipBarActivity extends BaseActivity implements OnClickListener {
+    
+    /** The rl device. */
     private RelativeLayout rlDevice;
+    
+    /** The rl account. */
     private RelativeLayout rlAccount;
+    
+    /** The rl help. */
     private RelativeLayout rlHelp;
+    
+    /** The rl about. */
     private RelativeLayout rlAbout;
+    
+    /** The btn device list. */
     private Button btnDeviceList;
+    
+    /** The lv device. */
     private ListView lvDevice;
+    
+    /** The m adapter. */
     private DeviceAdapter mAdapter;
+    
+    /** The m cover. */
     private ImageView mCover;
+    
+    /** The Constant DURATION_MS. */
     private static final int DURATION_MS = 400;
+    
+    /** The m stop animation. */
     private Animation mStopAnimation;
+    
+    /** The m shift. */
     private int mShift;
+    
+    /** The is can back. */
     private boolean isCanBack = false;
+    
+    /** The m is select. */
     private static boolean mIsSelect = false;
+    
+    /** The m intent. */
     private Intent mIntent;
+    
+    /** The choose mac. */
     private String chooseMac;
+    
+    /** The choose did. */
     private String chooseDid;
+    
+    /** The progress dialog. */
     private ProgressDialog progressDialog;
 
     /**
@@ -71,6 +125,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
      */
     private enum handler_key {
 
+        /** The login start. */
         LOGIN_START,
 
         /**
@@ -90,6 +145,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
     }
 
+    /** The handler. */
     Handler handler = new Handler() {
 
         @Override
@@ -116,6 +172,9 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
     };
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +184,9 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         initParam();
     }
 
+    /**
+     * Inits the param.
+     */
     private void initParam() {
         final android.widget.AbsoluteLayout.LayoutParams lp = new android.widget.AbsoluteLayout.LayoutParams(
                 AbsoluteLayout.LayoutParams.FILL_PARENT,
@@ -155,6 +217,9 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         mIntent = getIntent();
     }
 
+    /**
+     * Inits the views.
+     */
     private void initViews() {
         rlDevice = (RelativeLayout) findViewById(R.id.rlDevice);
         rlAccount = (RelativeLayout) findViewById(R.id.rlAccount);
@@ -174,6 +239,9 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         progressDialog.setMessage("设备连接中，请稍候。");
     }
 
+    /**
+     * Inits the events.
+     */
     private void initEvents() {
         rlDevice.setOnClickListener(this);
         rlAccount.setOnClickListener(this);
@@ -205,19 +273,26 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 		mAdapter.notifyDataSetChanged();
 	}
 
-	/**
-     * 返回主界面
+
+    /**
+     * 返回主界面.
      */
     private void backToMain() {
         mCover.startAnimation(mStopAnimation);
     }
 
+    /* (non-Javadoc)
+     * @see android.app.Activity#onBackPressed()
+     */
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
         backToMain();
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -251,6 +326,12 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
     }
 
+    /**
+     * Gets the animation.
+     *
+     * @param offset the offset
+     * @return the animation
+     */
     private Animation getAnimation(int offset) {
         Animation animation = new TranslateAnimation(
                 TranslateAnimation.ABSOLUTE, 0, TranslateAnimation.ABSOLUTE,
@@ -261,24 +342,59 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         return animation;
     }
 
+    /**
+     * The listener interface for receiving baseAnimation events.
+     * The class that is interested in processing a baseAnimation
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addBaseAnimationListener<code> method. When
+     * the baseAnimation event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see BaseAnimationEvent
+     */
     private class BaseAnimationListener implements Animation.AnimationListener {
 
+        /* (non-Javadoc)
+         * @see android.view.animation.Animation.AnimationListener#onAnimationEnd(android.view.animation.Animation)
+         */
         @Override
         public void onAnimationEnd(Animation animation) {
             isCanBack = true;
         }
 
+        /* (non-Javadoc)
+         * @see android.view.animation.Animation.AnimationListener#onAnimationRepeat(android.view.animation.Animation)
+         */
         @Override
         public void onAnimationRepeat(Animation animation) {
         }
 
+        /* (non-Javadoc)
+         * @see android.view.animation.Animation.AnimationListener#onAnimationStart(android.view.animation.Animation)
+         */
         @Override
         public void onAnimationStart(Animation animation) {
             isCanBack = false;
         }
     }
 
+    /**
+     * The listener interface for receiving startAnimation events.
+     * The class that is interested in processing a startAnimation
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addStartAnimationListener<code> method. When
+     * the startAnimation event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see StartAnimationEvent
+     */
     private class StartAnimationListener extends BaseAnimationListener {
+        
+        /* (non-Javadoc)
+         * @see com.gizwits.aircondition.activity.slipbar.SlipBarActivity.BaseAnimationListener#onAnimationEnd(android.view.animation.Animation)
+         */
         @Override
         public void onAnimationEnd(Animation animation) {
             isCanBack = true;
@@ -292,13 +408,31 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
             mCover.setLayoutParams(lp);
         }
 
+        /* (non-Javadoc)
+         * @see com.gizwits.aircondition.activity.slipbar.SlipBarActivity.BaseAnimationListener#onAnimationStart(android.view.animation.Animation)
+         */
         @Override
         public void onAnimationStart(Animation animation) {
             isCanBack = false;
         }
     }
 
+    /**
+     * The listener interface for receiving stopAnimation events.
+     * The class that is interested in processing a stopAnimation
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addStopAnimationListener<code> method. When
+     * the stopAnimation event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see StopAnimationEvent
+     */
     private class StopAnimationListener extends BaseAnimationListener {
+        
+        /* (non-Javadoc)
+         * @see com.gizwits.aircondition.activity.slipbar.SlipBarActivity.BaseAnimationListener#onAnimationEnd(android.view.animation.Animation)
+         */
         @Override
         public void onAnimationEnd(Animation animation) {
             isCanBack = true;
@@ -313,33 +447,68 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
             overridePendingTransition(0, 0);
         }
 
+        /* (non-Javadoc)
+         * @see com.gizwits.aircondition.activity.slipbar.SlipBarActivity.BaseAnimationListener#onAnimationStart(android.view.animation.Animation)
+         */
         @Override
         public void onAnimationStart(Animation animation) {
             isCanBack = false;
         }
     }
 
+    /**
+     *  
+     * ClassName: Class DeviceAdapter. <br/> 
+     * <br/>
+     * date: 2015-1-27 14:44:48 <br/> 
+     *
+     * @author Lien
+     */
     private class DeviceAdapter extends ArrayAdapter<XPGWifiDevice> {
+        
+        /** The inflater. */
         private LayoutInflater inflater;
 
+        /** The choosed pos. */
         private int choosedPos = 0;
+        
+        /** The ctx. */
         private Context ctx;
 
+        /**
+         * Gets the choosed pos.
+         *
+         * @return the choosed pos
+         */
         public int getChoosedPos() {
             return choosedPos;
         }
 
+        /**
+         * Sets the choosed pos.
+         *
+         * @param choosedPos the new choosed pos
+         */
         public void setChoosedPos(int choosedPos) {
             this.choosedPos = choosedPos;
             notifyDataSetChanged();
         }
 
+        /**
+         * Instantiates a new device adapter.
+         *
+         * @param context the context
+         * @param objects the objects
+         */
         public DeviceAdapter(Context context, List<XPGWifiDevice> objects) {
             super(context, 0, objects);
             ctx=context;
             inflater = LayoutInflater.from(context);
         }
 
+        /* (non-Javadoc)
+         * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+         */
         @Override
         public View getView(final int position, View convertView,
                             ViewGroup parent) {
@@ -388,17 +557,37 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
     }
 
+    /**
+     *  
+     * ClassName: Class ViewHolder. <br/> 
+     * <br/>
+     * date: 2015-1-27 14:44:48 <br/> 
+     *
+     * @author Lien
+     */
     private static class ViewHolder {
+        
+        /** The device_checked_tv. */
         ImageView device_checked_tv;
+        
+        /** The device name_tv. */
         TextView deviceName_tv;
     }
 
+    /**
+     * Login device.
+     *
+     * @param xpgWifiDevice the xpg wifi device
+     */
     private void loginDevice(XPGWifiDevice xpgWifiDevice) {
         mXpgWifiDevice = xpgWifiDevice;
         mXpgWifiDevice.setListener(deviceListener);
         mXpgWifiDevice.login(setmanager.getUid(), setmanager.getToken());
     }
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#didLogin(com.xtremeprog.xpgconnect.XPGWifiDevice, int)
+     */
     @Override
     protected void didLogin(XPGWifiDevice device, int result) {
         if (result == 0) {

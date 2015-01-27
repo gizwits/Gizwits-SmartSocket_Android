@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:ManageListAdapter.java
+ * Package Name:com.gizwits.framework.adapter
+ * Date:2015-1-27 14:46:55
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.adapter;
 
 import java.util.List;
@@ -14,8 +31,18 @@ import com.gizwits.aircondition.R;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import com.gizwits.framework.utils.StringUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ *  
+ * ClassName: Class ManageListAdapter. <br/> 
+ * <br/>
+ * date: 2015-1-27 14:46:55 <br/> 
+ *
+ * @author Lien
+ */
 public class ManageListAdapter extends BaseAdapter {
 
+	/** The inflater. */
 	private LayoutInflater inflater;
 
 	/** The wifidevicelist. */
@@ -40,24 +67,36 @@ public class ManageListAdapter extends BaseAdapter {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getCount()
+	 */
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return devicelist.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getItem(int)
+	 */
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
 		return devicelist.get(position);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getItemId(int)
+	 */
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
@@ -96,10 +135,23 @@ public class ManageListAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+	/**
+	 *  
+	 * ClassName: Class ViewHolder. <br/> 
+	 * <br/>
+	 * date: 2015-1-27 14:46:55 <br/> 
+	 *
+	 * @author Lien
+	 */
 	private static class ViewHolder {
 
+		/** The tv name. */
 		TextView tvName;
+		
+		/** The iv type. */
 		ImageView ivType;
+		
+		/** The iv arrow. */
 		ImageView ivArrow;
 	}
 

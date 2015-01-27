@@ -2,7 +2,7 @@
  * Project Name:XPGSdkV4AppBase
  * File Name:SoftApConfigActivity.java
  * Package Name:com.gizwits.framework.activity.onboarding
- * Date:2015-1-27 11:19:37
+ * Date:2015-1-27 14:46:20
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 

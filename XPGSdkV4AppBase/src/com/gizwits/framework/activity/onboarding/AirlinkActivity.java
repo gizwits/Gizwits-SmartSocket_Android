@@ -2,7 +2,7 @@
  * Project Name:XPGSdkV4AppBase
  * File Name:AirlinkActivity.java
  * Package Name:com.gizwits.framework.activity.onboarding
- * Date:2015-1-27 11:19:56
+ * Date:2015-1-27 14:45:48
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
@@ -37,7 +37,6 @@ import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.StringUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
-// TODO: Auto-generated Javadoc
 
 /**
  * ClassName: Class AirlinkActivity. <br/>
@@ -77,13 +76,19 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
      */
     private LinearLayout llConfigFailed;
 
+    /** The tv tick. */
     private TextView tvTick;
 
+    /** The secondleft. */
     int secondleft = 60;
 
+    /** The timer. */
     private Timer timer;
 
+    /** The str s sid. */
     private String strSSid;
+    
+    /** The str psw. */
     private String strPsw;
 
 
@@ -190,6 +195,9 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
         llConfigFailed.setVisibility(View.GONE);
     }
 
+    /**
+     * Inits the data.
+     */
     private void initData() {
         if (getIntent() != null) {
             if (!StringUtils.isEmpty(getIntent().getStringExtra("ssid"))) {
@@ -254,6 +262,9 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
     }
 
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#didSetDeviceWifi(int, com.xtremeprog.xpgconnect.XPGWifiDevice)
+     */
     @Override
     protected void didSetDeviceWifi(int error, XPGWifiDevice device) {
         if (error == 0) {

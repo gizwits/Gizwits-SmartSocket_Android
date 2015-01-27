@@ -1,20 +1,19 @@
-/*
- *  Android Wheel Control.
- *  https://code.google.com/p/android-wheel/
- *  
- *  Copyright 2010 Yuri Kanivets
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:WheelView.java
+ * Package Name:com.gizwits.framework.widget
+ * Date:2015-1-27 14:48:32
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.gizwits.framework.widget;
@@ -45,33 +44,27 @@ import android.widget.Scroller;
 
 import com.gizwits.aircondition.R;
 
+// TODO: Auto-generated Javadoc
 /**
  * Numeric wheel view.
  *
  * @author Yuri Kanivets
  */
 public class WheelView extends View {
-    /**
-     * Scrolling duration
-     */
+    
+    /** Scrolling duration. */
     private static final int SCROLLING_DURATION = 400;
 
-    /**
-     * Minimum delta for scrolling
-     */
+    /** Minimum delta for scrolling. */
     private static final int MIN_DELTA_FOR_SCROLLING = 1;
 
-    /**
-     * Current value & label text color
-     */
+    /** Current value & label text color. */
     private static final int VALUE_TEXT_COLOR = 0xF0000000;
 
-    /**
-     * Items text color
-     */
+    /** Items text color. */
     private static final int ITEMS_TEXT_COLOR = 0xFF000000;
 
-    /** Top and bottom shadows colors */
+    /**  Top and bottom shadows colors. */
 //	private static final int[] SHADOWS_COLORS = new int[] { 0xFF111111,
 //			0x00AAAAAA, 0x00AAAAAA };
 
@@ -80,61 +73,68 @@ public class WheelView extends View {
      */
     private   int ADDITIONAL_ITEM_HEIGHT = 80;
 
-    /**
-     * Text size
-     */
+    /** Text size. */
     private  int TEXT_SIZE = 50;
 
-    /**
-     * Top and bottom items offset (to hide that)
-     */
+    /** Top and bottom items offset (to hide that). */
     private  final int ITEM_OFFSET = TEXT_SIZE / 5;
 
-    /**
-     * Additional width for items layout
-     */
+    /** Additional width for items layout. */
     private  int ADDITIONAL_ITEMS_SPACE = 10;
 
-    /**
-     * Label offset
-     */
+    /** Label offset. */
     private static final int LABEL_OFFSET = 8;
 
-    /**
-     * Left and right padding value
-     */
+    /** Left and right padding value. */
     private static final int PADDING = 10;
 
-    /**
-     * Default count of visible items
-     */
+    /** Default count of visible items. */
     private static final int DEF_VISIBLE_ITEMS = 5;
 
     // Wheel Values
+    /** The adapter. */
     private WheelAdapter adapter = null;
+    
+    /** The current item. */
     private int currentItem = 0;
 
     // Widths
+    /** The items width. */
     private int itemsWidth = 0;
+    
+    /** The label width. */
     private int labelWidth = 0;
 
     // Count of visible items
+    /** The visible items. */
     private int visibleItems = DEF_VISIBLE_ITEMS;
 
     // Item height
+    /** The item height. */
     private int itemHeight = 0;
 
     // Text paints
+    /** The items paint. */
     private TextPaint itemsPaint;
+    
+    /** The value paint. */
     private TextPaint valuePaint;
 
     // Layouts
+    /** The items layout. */
     private StaticLayout itemsLayout;
+    
+    /** The label layout. */
     private StaticLayout labelLayout;
+    
+    /** The value layout. */
     private StaticLayout valueLayout;
 
     // Label & background
+    /** The label. */
     private String label;
+    
+    /** The center drawable. */
     private Drawable centerDrawable;
 
     // Shadows drawables
@@ -142,23 +142,39 @@ public class WheelView extends View {
 //	private GradientDrawable bottomShadow;
 
     // Scrolling
+    /** The is scrolling performed. */
     private boolean isScrollingPerformed;
+    
+    /** The scrolling offset. */
     private int scrollingOffset;
 
     // Scrolling animation
+    /** The gesture detector. */
     private GestureDetector gestureDetector;
+    
+    /** The scroller. */
     private Scroller scroller;
+    
+    /** The last scroll y. */
     private int lastScrollY;
 
     // Cyclic
+    /** The is cyclic. */
     boolean isCyclic = false;
 
     // Listeners
+    /** The changing listeners. */
     private List<OnWheelChangedListener> changingListeners = new LinkedList<OnWheelChangedListener>();
+    
+    /** The scrolling listeners. */
     private List<OnWheelScrollListener> scrollingListeners = new LinkedList<OnWheelScrollListener>();
 
     /**
-     * Constructor
+     * Constructor.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     * @param defStyle the def style
      */
     public WheelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -166,7 +182,10 @@ public class WheelView extends View {
     }
 
     /**
-     * Constructor
+     * Constructor.
+     *
+     * @param context the context
+     * @param attrs the attrs
      */
     public WheelView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -174,7 +193,9 @@ public class WheelView extends View {
     }
 
     /**
-     * Constructor
+     * Constructor.
+     *
+     * @param context the context
      */
     public WheelView(Context context) {
         super(context);
@@ -182,7 +203,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Initializes class data
+     * Initializes class data.
      *
      * @param context the context
      */
@@ -196,7 +217,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Gets wheel adapter
+     * Gets wheel adapter.
      *
      * @return the adapter
      */
@@ -205,7 +226,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Sets wheel adapter
+     * Sets wheel adapter.
      *
      * @param adapter the new wheel adapter
      */
@@ -216,7 +237,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Set the the specified scrolling interpolator
+     * Set the the specified scrolling interpolator.
      *
      * @param interpolator the interpolator
      */
@@ -226,7 +247,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Gets count of visible items
+     * Gets count of visible items.
      *
      * @return the count of visible items
      */
@@ -235,7 +256,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Sets count of visible items
+     * Sets count of visible items.
      *
      * @param count the new count
      */
@@ -245,7 +266,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Gets label
+     * Gets label.
      *
      * @return the label
      */
@@ -254,7 +275,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Sets label
+     * Sets label.
      *
      * @param newLabel the label to set
      */
@@ -267,7 +288,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Adds wheel changing listener
+     * Adds wheel changing listener.
      *
      * @param listener the listener
      */
@@ -276,7 +297,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Removes wheel changing listener
+     * Removes wheel changing listener.
      *
      * @param listener the listener
      */
@@ -285,7 +306,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Notifies changing listeners
+     * Notifies changing listeners.
      *
      * @param oldValue the old wheel value
      * @param newValue the new wheel value
@@ -297,7 +318,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Adds wheel scrolling listener
+     * Adds wheel scrolling listener.
      *
      * @param listener the listener
      */
@@ -306,7 +327,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Removes wheel scrolling listener
+     * Removes wheel scrolling listener.
      *
      * @param listener the listener
      */
@@ -315,7 +336,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Notifies listeners about starting scrolling
+     * Notifies listeners about starting scrolling.
      */
     protected void notifyScrollingListenersAboutStart() {
         for (OnWheelScrollListener listener : scrollingListeners) {
@@ -324,7 +345,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Notifies listeners about ending scrolling
+     * Notifies listeners about ending scrolling.
      */
     protected void notifyScrollingListenersAboutEnd() {
         for (OnWheelScrollListener listener : scrollingListeners) {
@@ -333,7 +354,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Gets current value
+     * Gets current value.
      *
      * @return the current value
      */
@@ -396,7 +417,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Set wheel cyclic flag
+     * Set wheel cyclic flag.
      *
      * @param isCyclic the flag to set
      */
@@ -408,7 +429,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Invalidates layouts
+     * Invalidates layouts.
      */
     private void invalidateLayouts() {
         itemsLayout = null;
@@ -417,7 +438,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Initializes resources
+     * Initializes resources.
      */
     private void initResourcesIfNecessary() {
         if (itemsPaint == null) {
@@ -451,7 +472,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Calculates desired height for layout
+     * Calculates desired height for layout.
      *
      * @param layout the source layout
      * @return the desired layout height
@@ -471,7 +492,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Returns text item by index
+     * Returns text item by index.
      *
      * @param index the item index
      * @return the item or null
@@ -494,9 +515,9 @@ public class WheelView extends View {
     }
 
     /**
-     * Builds text depending on current value
+     * Builds text depending on current value.
      *
-     * @param useCurrentValue
+     * @param useCurrentValue the use current value
      * @return the text
      */
     private String buildText(boolean useCurrentValue) {
@@ -519,7 +540,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Returns the max item length that can be present
+     * Returns the max item length that can be present.
      *
      * @return the max length
      */
@@ -548,7 +569,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Returns height of wheel item
+     * Returns height of wheel item.
      *
      * @return the item height
      */
@@ -564,7 +585,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Calculates control width and creates text layouts
+     * Calculates control width and creates text layouts.
      *
      * @param widthSize the input layout width
      * @param mode      the layout mode
@@ -632,7 +653,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Creates layouts
+     * Creates layouts.
      *
      * @param widthItems width of items layout
      * @param widthLabel width of label layout
@@ -669,6 +690,9 @@ public class WheelView extends View {
         }
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onMeasure(int, int)
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -692,6 +716,9 @@ public class WheelView extends View {
         setMeasuredDimension(width, height);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onDraw(android.graphics.Canvas)
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -731,10 +758,10 @@ public class WheelView extends View {
 //	}
 
     /**
-     * Draws value and label layout
-     *
-     * @param canvas the canvas for drawing
-     */
+ * Draws value and label layout.
+ *
+ * @param canvas the canvas for drawing
+ */
     private void drawValue(Canvas canvas) {
         valuePaint.setColor(VALUE_TEXT_COLOR);
         valuePaint.drawableState = getDrawableState();
@@ -760,7 +787,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Draws items
+     * Draws items.
      *
      * @param canvas the canvas for drawing
      */
@@ -778,7 +805,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Draws rect for current value
+     * Draws rect for current value.
      *
      * @param canvas the canvas for drawing
      */
@@ -789,6 +816,9 @@ public class WheelView extends View {
         centerDrawable.draw(canvas);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onTouchEvent(android.view.MotionEvent)
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         WheelAdapter adapter = getAdapter();
@@ -803,7 +833,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Scrolls the wheel
+     * Scrolls the wheel.
      *
      * @param delta the scrolling value
      */
@@ -848,6 +878,7 @@ public class WheelView extends View {
     }
 
     // gesture listener
+    /** The gesture listener. */
     private SimpleOnGestureListener gestureListener = new SimpleOnGestureListener() {
         public boolean onDown(MotionEvent e) {
             if (isScrollingPerformed) {
@@ -875,7 +906,10 @@ public class WheelView extends View {
     };
 
     // Messages
+    /** The message scroll. */
     private final int MESSAGE_SCROLL = 0;
+    
+    /** The message justify. */
     private final int MESSAGE_JUSTIFY = 1;
 
     /**
@@ -889,7 +923,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Clears messages from queue
+     * Clears messages from queue.
      */
     private void clearMessages() {
         animationHandler.removeMessages(MESSAGE_SCROLL);
@@ -897,6 +931,7 @@ public class WheelView extends View {
     }
 
     // animation handler
+    /** The animation handler. */
     private Handler animationHandler = new Handler() {
         public void handleMessage(Message msg) {
             scroller.computeScrollOffset();
@@ -924,7 +959,7 @@ public class WheelView extends View {
     };
 
     /**
-     * Justifies wheel
+     * Justifies wheel.
      */
     private void justify() {
         if (adapter == null) {
@@ -950,7 +985,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Starts scrolling
+     * Starts scrolling.
      */
     private void startScrolling() {
         if (!isScrollingPerformed) {
@@ -960,7 +995,7 @@ public class WheelView extends View {
     }
 
     /**
-     * Finishes scrolling
+     * Finishes scrolling.
      */
     void finishScrolling() {
         if (isScrollingPerformed) {
@@ -973,7 +1008,7 @@ public class WheelView extends View {
 
 
     /**
-     * Scroll the wheel
+     * Scroll the wheel.
      *
      * @param itemsToScroll items to scroll
      * @param time          scrolling duration
@@ -990,14 +1025,29 @@ public class WheelView extends View {
         startScrolling();
     }
 
+	/**
+	 * Sets the text size.
+	 *
+	 * @param tEXT_SIZE the new text size
+	 */
 	public  void setTEXT_SIZE(int tEXT_SIZE) {
 		TEXT_SIZE = tEXT_SIZE;
 	}
 
+	/**
+	 * Sets the additional item height.
+	 *
+	 * @param aDDITIONAL_ITEM_HEIGHT the new additional item height
+	 */
 	public void setADDITIONAL_ITEM_HEIGHT(int aDDITIONAL_ITEM_HEIGHT) {
 		ADDITIONAL_ITEM_HEIGHT = aDDITIONAL_ITEM_HEIGHT;
 	}
 
+	/**
+	 * Sets the additional items space.
+	 *
+	 * @param aDDITIONAL_ITEMS_SPACE the new additional items space
+	 */
 	public void setADDITIONAL_ITEMS_SPACE(int aDDITIONAL_ITEMS_SPACE) {
 		ADDITIONAL_ITEMS_SPACE = aDDITIONAL_ITEMS_SPACE;
 	}

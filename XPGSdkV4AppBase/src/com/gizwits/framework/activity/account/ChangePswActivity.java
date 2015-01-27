@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:ChangePswActivity.java
+ * Package Name:com.gizwits.framework.activity.account
+ * Date:2015-1-27 14:44:53
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.activity.account;
 
 import android.os.Bundle;
@@ -18,6 +35,7 @@ import com.gizwits.framework.activity.BaseActivity;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
+// TODO: Auto-generated Javadoc
 //TODO: Auto-generated Javadoc
 
 /**
@@ -55,8 +73,12 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
      */
     private Button btnConfirm;
 
+    /** The new psw. */
     private String newPsw;
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +87,9 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
         initEvents();
     }
 
+    /**
+     * Inits the events.
+     */
     private void initEvents() {
         ivBack.setOnClickListener(this);
         btnConfirm.setOnClickListener(this);
@@ -102,6 +127,9 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 
     }
 
+    /**
+     * Inits the views.
+     */
     private void initViews() {
         ivBack = (ImageView) findViewById(R.id.ivBack);
         etPswOld = (EditText) findViewById(R.id.etPswOld);
@@ -110,6 +138,9 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
         btnConfirm = (Button) findViewById(R.id.btnConfirm);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -142,10 +173,19 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 
     }
 
+    /**
+     * Change psw.
+     *
+     * @param oldPsw the old psw
+     * @param newPsw the new psw
+     */
     private void changePsw(String oldPsw, String newPsw) {
         mCenter.cChangeUserPassword(setmanager.getToken(), oldPsw, newPsw);
     }
 
+    /* (non-Javadoc)
+     * @see com.gizwits.framework.activity.BaseActivity#didChangeUserPassword(int, java.lang.String)
+     */
     @Override
     protected void didChangeUserPassword(int error, String errorMessage) {
         if (error == 0) {

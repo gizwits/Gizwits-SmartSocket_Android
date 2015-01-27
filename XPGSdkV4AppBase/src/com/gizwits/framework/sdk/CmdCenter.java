@@ -1,15 +1,15 @@
 /**
  * Project Name:XPGSdkV4AppBase
  * File Name:CmdCenter.java
- * Package Name:com.gizwits.aircondition.sdk
- * Date:2015-1-12 15:19:15
+ * Package Name:com.gizwits.framework.sdk
+ * Date:2015-1-27 14:47:19
  * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
  * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
  * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
@@ -40,6 +40,8 @@ import com.xtremeprog.xpgconnect.XPGWifiSDK.XPGWifiConfigureMode;
  * @author Lien
  */
 public class CmdCenter {
+	
+	/** The Constant TAG. */
 	private static final String TAG = "CmdCenter";
 
 	/**
@@ -125,6 +127,12 @@ public class CmdCenter {
 		xpgWifiGCC.registerUserByPhoneAndCode(phone, password, code);
 	}
 
+	/**
+	 * C register mail user.
+	 *
+	 * @param mailAddr the mail addr
+	 * @param password the password
+	 */
 	public void cRegisterMailUser(String mailAddr, String password) {
 		xpgWifiGCC.registerUserByEmail(mailAddr, password);
 	}
@@ -188,11 +196,10 @@ public class CmdCenter {
 	}
 
 	/**
-	 * 根据邮箱修改密码
-	 * 
-	 * @param email
-	 *            邮箱地址
-	 * */
+	 * 根据邮箱修改密码.
+	 *
+	 * @param email            邮箱地址
+	 */
 	public void cChangePassworfByEmail(String email) {
 		xpgWifiGCC.changeUserPasswordByEmail(email);
 	}
@@ -274,9 +281,10 @@ public class CmdCenter {
 
 	/**
 	 * 发送指令.
-	 * 
-	 * @param xpgWifiDevice
-	 *            the xpg wifi device
+	 *
+	 * @param xpgWifiDevice            the xpg wifi device
+	 * @param key the key
+	 * @param value the value
 	 */
 	public void cWrite(XPGWifiDevice xpgWifiDevice, String key, Object value) {
 
@@ -296,11 +304,8 @@ public class CmdCenter {
 
 	/**
 	 * 获取设备状态.
-	 * 
-	 * @param xpgWifiDevice
-	 *            the xpg wifi device
-	 * @throws JSONException
-	 *             the JSON exception
+	 *
+	 * @param xpgWifiDevice            the xpg wifi device
 	 */
 	public void cGetStatus(XPGWifiDevice xpgWifiDevice) {
 		JSONObject json = new JSONObject();
@@ -363,36 +368,78 @@ public class CmdCenter {
 	// 智能云空调控制相关
 	//
 	// =================================================================
+	/**
+	 * C switch on.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 * @param isOn the is on
+	 */
 	public void cSwitchOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
 		cWrite(xpgWifiDevice, JsonKeys.ON_OFF, isOn);
 		cGetStatus(xpgWifiDevice);
 	}
 
+	/**
+	 * C set shake.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 * @param isOn the is on
+	 */
 	public void cSetShake(XPGWifiDevice xpgWifiDevice, boolean isOn) {
 		cWrite(xpgWifiDevice, JsonKeys.FAN_SHAKE, isOn);
 		cGetStatus(xpgWifiDevice);
 	}
 
+	/**
+	 * C mode.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 * @param mode the mode
+	 */
 	public void cMode(XPGWifiDevice xpgWifiDevice, int mode) {
 		cWrite(xpgWifiDevice, JsonKeys.MODE, mode);
 		cGetStatus(xpgWifiDevice);
 	}
 
+	/**
+	 * C fan speed.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 * @param fanSpeed the fan speed
+	 */
 	public void cFanSpeed(XPGWifiDevice xpgWifiDevice, int fanSpeed) {
 		cWrite(xpgWifiDevice, JsonKeys.FAN_SPEED, fanSpeed);
 		cGetStatus(xpgWifiDevice);
 	}
 
+	/**
+	 * C time on.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 * @param time the time
+	 */
 	public void cTimeOn(XPGWifiDevice xpgWifiDevice, int time) {
 		cWrite(xpgWifiDevice, JsonKeys.TIME_ON, time);
 		cGetStatus(xpgWifiDevice);
 	}
 
+	/**
+	 * C time off.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 * @param time the time
+	 */
 	public void cTimeOff(XPGWifiDevice xpgWifiDevice, int time) {
 		cWrite(xpgWifiDevice, JsonKeys.TIME_OFF, time);
 		cGetStatus(xpgWifiDevice);
 	}
 
+	/**
+	 * C set temp.
+	 *
+	 * @param xpgWifiDevice the xpg wifi device
+	 * @param templature the templature
+	 */
 	public void cSetTemp(XPGWifiDevice xpgWifiDevice, int templature) {
 		cWrite(xpgWifiDevice, JsonKeys.SET_TEMP, templature);
 		cGetStatus(xpgWifiDevice);
