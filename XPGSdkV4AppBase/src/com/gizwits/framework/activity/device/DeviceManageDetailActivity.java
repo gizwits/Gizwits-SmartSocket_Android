@@ -36,7 +36,6 @@ import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.utils.DialogManager;
 import com.gizwits.framework.utils.StringUtils;
-import com.xpg.common.system.IntentUtils;
 import com.xpg.ui.utils.ToastUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
@@ -44,7 +43,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 /**
  * 
  * ClassName: Class DeviceManageDetailActivity. <br/>
- * 设备详细信息<br/>
+ * 设备详细信息，该类主要有以下功能：1、修改当前设备名称；2、删除与当前设备的绑定关系<br/>
  * date: 2014-12-09 17:27:10 <br/>
  * 
  * @author StephenC
@@ -76,15 +75,16 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	/** The btn delDevice. */
 	private Button btnDelDevice;
 
-	/** The xpg wifi device. */
+	/** 当前设备的实例 */
 	private XPGWifiDevice xpgWifiDevice;
 
-	/** The unbind dialog. */
+	/** 确定是否解绑的对话框 */
 	private Dialog unbindDialog;
 
-	/** The progress dialog. */
+	/** 等待中的对话框 */
 	private ProgressDialog progressDialog;
 	
+	/** the msg */
 	private Message msg = new Message();
 
 	/**
@@ -96,18 +96,19 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	 */
 	private enum handler_key {
 
-		/** The change success. */
+		/** 修改名称成功 */
 		CHANGE_SUCCESS,
 
-		/** The change fail. */
+		/** 修改名称失败 */
 		CHANGE_FAIL,
 
-		/** The delete success. */
+		/** 删除绑定关系成功 */
 		DELETE_SUCCESS,
 
-		/** The delete fail. */
+		/** 删除绑定关系失败 */
 		DELETE_FAIL,
 		
+		/** 获取绑定列表 */
 		GET_BOUND,
 
 	}
