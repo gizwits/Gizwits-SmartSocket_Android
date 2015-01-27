@@ -163,7 +163,6 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         lvDevice = (ListView) findViewById(R.id.lvDevice);
         btnDeviceList = (Button) findViewById(R.id.btnDeviceList);
         mCover = (ImageView) findViewById(R.id.slidedout_cover);
-        initBindList();
         mAdapter = new DeviceAdapter(this, bindlist);
         lvDevice.setAdapter(mAdapter);
         for(int i=0;i<bindlist.size();i++)
@@ -198,8 +197,15 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
         mCover.setOnClickListener(this);
         mCover.setImageBitmap(coverBitmap);
     }
+    
+    @Override
+	public void onResume() {
+		super.onResume();
+		initBindList();
+		mAdapter.notifyDataSetChanged();
+	}
 
-    /**
+	/**
      * 返回主界面
      */
     private void backToMain() {

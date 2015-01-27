@@ -86,6 +86,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="4dp"
+        android:maxLength="10"
         android:hint="设备名称"
         android:textColor="@color/background_blue" />
 

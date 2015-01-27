@@ -76,8 +76,17 @@ public class DeviceManageListActivity extends BaseActivity implements OnClickLis
         lvDevices.setAdapter(mAdapter);
 
     }
+    
+    
 
     @Override
+	public void onResume() {
+		super.onResume();
+		initBindList();
+		mAdapter.notifyDataSetChanged();
+	}
+
+	@Override
     public void onBackPressed() {
         finish();
     }
