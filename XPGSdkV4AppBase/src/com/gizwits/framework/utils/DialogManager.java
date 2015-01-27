@@ -117,6 +117,39 @@ public class DialogManager {
 		dialog.setContentView(v);
 		return dialog;
 	}
+	
+	/**
+	 * 确定关机对话框
+	 * 
+	 * @param ctx
+	 * @param contentStr
+	 *            对话框内容
+	 * @param r
+	 *            右按钮监听器
+	 * @return
+	 */
+	public static Dialog getPowerOffDialog(final Activity ctx, OnClickListener r) {
+		final Dialog dialog = new Dialog(ctx, R.style.noBackgroundDialog) {
+		};
+		LayoutInflater layoutInflater = LayoutInflater.from(ctx);
+		View v = layoutInflater.inflate(R.layout.dialog_power_off, null);
+		Button leftBtn = (Button) v.findViewById(R.id.left_btn);
+		Button rightBtn = (Button) v.findViewById(R.id.right_btn);
+		leftBtn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				dismissDialog(ctx, dialog);
+			}
+		});
+		rightBtn.setOnClickListener(r);
+
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.setCancelable(false);
+		dialog.setContentView(v);
+		return dialog;
+	}
 
 	/**
 	 * 设备故障无法使用,拨打客服热线 对话框

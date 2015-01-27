@@ -203,6 +203,9 @@ public class MainControlActivity extends BaseActivity implements
 
 	/** The m fault dialog. */
 	private Dialog mFaultDialog;
+	
+	/** The m PowerOff dialog. */
+	private Dialog mPowerOffDialog;
 
 	/**
 	 * ClassName: Enum handler_key. <br/>
@@ -451,6 +454,14 @@ public class MainControlActivity extends BaseActivity implements
 				tvSettingUnit.setText(isCentigrade ? "℃" : "℉");
 			}
 		});
+		mPowerOffDialog=DialogManager.getPowerOffDialog(this, new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				mCenter.cSwitchOn(mXpgWifiDevice, false);
+				DialogManager.dismissDialog(MainControlActivity.this, mPowerOffDialog);
+			}
+		});
 	}
 
 	/**
@@ -618,7 +629,7 @@ public class MainControlActivity extends BaseActivity implements
 			mCenter.cSwitchOn(mXpgWifiDevice, true);
 			break;
 		case R.id.ivPower:
-			mCenter.cSwitchOn(mXpgWifiDevice, false);
+			mPowerOffDialog.show();
 			break;
 		case R.id.ibLeftArrow:
 			modePos--;
