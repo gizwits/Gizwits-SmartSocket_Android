@@ -16,6 +16,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:padding="10dp"
             android:src="@drawable/logout_icon" />
 
         <TextView
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:padding="10dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/add_icon" />
     </RelativeLayout>
