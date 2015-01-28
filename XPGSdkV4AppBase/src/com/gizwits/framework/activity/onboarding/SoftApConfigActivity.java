@@ -227,7 +227,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         tvpsw = (TextView) findViewById(R.id.tvpsw);
         tvSsid = (TextView) findViewById(R.id.tvSsid);
         tvTick = (TextView) findViewById(R.id.tvTick);
-        tbPswFlag = (ToggleButton) findViewById(R.id.tvAdvanture);
+        tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
         llConnectAp.setVisibility(View.VISIBLE);
         llInsertPsw.setVisibility(View.GONE);
         llConfig.setVisibility(View.GONE);
