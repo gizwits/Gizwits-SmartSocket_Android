@@ -156,20 +156,8 @@ public class SearchDeviceActivity extends BaseActivity implements
                         for (XPGWifiDevice device : allDeviceList) {
                             if (device.isLAN() && !device.isBind(setmanager.getUid())) {
                                 deviceList.add(device);
-                                Log.i("addDevice",
-                    					"addDevice:mac=" + device.getMacAddress() + ";ip="
-                    							+ device.getIPAddress() + ";did="
-                    							+ device.getDid() + ";passcode="
-                    							+ device.getPasscode());
                             }
                         }
-                        for(XPGWifiDevice mDevice:deviceList)
-                        	Log.i("mDevice",
-                					"mDevice=" + mDevice.getMacAddress() + ";ip="
-                							+ mDevice.getIPAddress() + ";did="
-                							+ mDevice.getDid() + ";passcode="
-                							+ mDevice.getPasscode());
-                        	
                         adapter.notifyDataSetChanged();
                         lvDevices.setVisibility(View.VISIBLE);
                         tvTips.setVisibility(View.GONE);
@@ -306,12 +294,6 @@ public class SearchDeviceActivity extends BaseActivity implements
 //        Log.e("SearchDevice", devicesList.get(0).getPasscode());
         if (devicesList.size() > 0) {
             allDeviceList=devicesList;
-            for(XPGWifiDevice tempDevice:allDeviceList)
-            Log.i("didDiscovered",
-					"绑定设备:mac=" + tempDevice.getMacAddress() + ";ip="
-							+ tempDevice.getIPAddress() + ";did="
-							+ tempDevice.getDid() + ";passcode="
-							+ tempDevice.getPasscode());
         }
     }
 
