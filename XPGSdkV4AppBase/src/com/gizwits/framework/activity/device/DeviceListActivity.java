@@ -294,9 +294,9 @@ public class DeviceListActivity extends BaseActivity implements
 				loginDevice(tempDevice);
 				progressDialog.show();
 			} else {
-				// TODO 绑定设备
+				// TODO 未设备
 				Log.i(TAG,
-						"绑定设备:mac=" + tempDevice.getPasscode() + ";ip="
+						"绑定设备:mac=" + tempDevice.getMacAddress() + ";ip="
 								+ tempDevice.getIPAddress() + ";did="
 								+ tempDevice.getDid() + ";passcode="
 								+ tempDevice.getPasscode());

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,11 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 // TODO: Auto-generated Javadoc
 /**
- *  
- * ClassName: Class SearchListAdapter. <br/> 
- * 搜索设备列表适配器
- * <br/>
- * date: 2015-1-27 14:46:58 <br/> 
- *
+ * 
+ * ClassName: Class SearchListAdapter. <br/>
+ * 搜索设备列表适配器 <br/>
+ * date: 2015-1-27 14:46:58 <br/>
+ * 
  * @author Lien
  */
 public class SearchListAdapter extends BaseAdapter {
@@ -52,7 +52,7 @@ public class SearchListAdapter extends BaseAdapter {
 	/** The context. */
 	private Context context;
 
-	/**  check isWifiDevice 0:wifidevice 1:device. */
+	/** check isWifiDevice 0:wifidevice 1:device. */
 	private int i = 0;
 
 	/** The current devices. */
@@ -76,8 +76,9 @@ public class SearchListAdapter extends BaseAdapter {
 
 	/**
 	 * Changedatas.
-	 *
-	 * @param devices the devices
+	 * 
+	 * @param devices
+	 *            the devices
 	 */
 	private void changedatas(List<XPGWifiDevice> devices) {
 		if (currentDevices != null && currentDevices.size() > 0) {
@@ -85,16 +86,19 @@ public class SearchListAdapter extends BaseAdapter {
 		} else {
 			currentDevices = new ArrayList<XPGWifiDevice>();
 		}
-		for (XPGWifiDevice device : devices) {
-
-			if (device.isLAN() && !device.isBind(setManager.getUid())) {
-				currentDevices.add(device);
-			}
-		}
+		currentDevices = devices;
+		// for (XPGWifiDevice device : devices) {
+		//
+		// if (device.isLAN() && !device.isBind(setManager.getUid())) {
+		// currentDevices.add(device);
+		// }
+		// }
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.Adapter#getCount()
 	 */
 	@Override
@@ -103,7 +107,9 @@ public class SearchListAdapter extends BaseAdapter {
 		return currentDevices.size();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.Adapter#getItem(int)
 	 */
 	@Override
@@ -112,7 +118,9 @@ public class SearchListAdapter extends BaseAdapter {
 		return currentDevices.get(position);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.Adapter#getItemId(int)
 	 */
 	@Override
@@ -123,16 +131,20 @@ public class SearchListAdapter extends BaseAdapter {
 
 	/**
 	 * Gets the device.
-	 *
-	 * @param position the position
+	 * 
+	 * @param position
+	 *            the position
 	 * @return the device
 	 */
 	public XPGWifiDevice getDevice(int position) {
 		return currentDevices.get(position);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getView(int, android.view.View,
+	 * android.view.ViewGroup)
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -146,19 +158,18 @@ public class SearchListAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		XPGWifiDevice device = currentDevices.get(position);
-		holder.tvName.setText("智能空调"
+		holder.tvName.setText(device.getProductName()
 				+ device.getMacAddress().substring(
-						device.getMacAddress().length() - 4,
-						device.getMacAddress().length()));
+						device.getMacAddress().length() - 4));
 		return convertView;
 	}
 
 	/**
-	 *  
-	 * ClassName: Class ViewHolder. <br/> 
+	 * 
+	 * ClassName: Class ViewHolder. <br/>
 	 * <br/>
-	 * date: 2015-1-27 14:46:58 <br/> 
-	 *
+	 * date: 2015-1-27 14:46:58 <br/>
+	 * 
 	 * @author Lien
 	 */
 	private static class ViewHolder {

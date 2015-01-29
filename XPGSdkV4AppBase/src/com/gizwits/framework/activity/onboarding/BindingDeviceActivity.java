@@ -17,6 +17,7 @@
  */
 package com.gizwits.framework.activity.onboarding;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -58,7 +59,7 @@ public class BindingDeviceActivity extends BaseActivity implements
 	private Button btnRetry;
 
 	/** The device. */
-	private XPGWifiDevice device;
+	private String did="";
 
 	/**
 	 *  
@@ -93,8 +94,6 @@ public class BindingDeviceActivity extends BaseActivity implements
 			handler_key key = handler_key.values()[msg.what];
 			switch (key) {
 			case BIND_SUCCESS:
-				IntentUtils.getInstance().startActivity(
-						BindingDeviceActivity.this, DeviceListActivity.class);
 				finish();
 				break;
 			case BIND_FAILED:
@@ -123,9 +122,7 @@ public class BindingDeviceActivity extends BaseActivity implements
 	 */
 	private void initDatas() {
 		if (getIntent() != null) {
-			String mac = getIntent().getStringExtra("mac");
-			String did = getIntent().getStringExtra("did");
-			device = findDeviceByMac(mac, did);
+			did = getIntent().getStringExtra("did");
 		}
 	}
 
@@ -147,6 +144,8 @@ public class BindingDeviceActivity extends BaseActivity implements
 		btnRetry = (Button) findViewById(R.id.btnRetry);
 		llStartConfig.setVisibility(View.VISIBLE);
 		llConfigFailed.setVisibility(View.GONE);
+		
+		tvPress.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
 	}
 
 	/* (non-Javadoc)
@@ -171,7 +170,13 @@ public class BindingDeviceActivity extends BaseActivity implements
 	 */
 	private void bindDevice() {
 		mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(),
-				device.getDid(), device.getPasscode(), null);
+				did, null, "");
+	}
+
+	
+	
+	@Override
+	public void onBackPressed() {
 	}
 
 	/* (non-Javadoc)
