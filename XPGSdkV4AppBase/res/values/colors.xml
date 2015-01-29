@@ -3,6 +3,7 @@
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="gray">#a3a3a3</color>
+    <color name="yellow">#ffff00</color>
     
       <color name="contents_text">#ff000000</color>
   <color name="encode_view">#ffffffff</color>

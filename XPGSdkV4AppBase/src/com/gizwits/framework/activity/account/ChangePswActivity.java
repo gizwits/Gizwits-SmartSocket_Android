@@ -155,13 +155,13 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
                     return;
                 }
                 if (StringUtils.isEmpty(newPsw)) {
-                    ToastUtils.showShort(ChangePswActivity.this, "请输入旧的密码");
+                    ToastUtils.showShort(ChangePswActivity.this, "请输入新的密码");
                     return;
                 }
-                if (newPsw.length() < 6) {
-                    Toast.makeText(this, "密码小于6位", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                if (newPsw.length() < 6 || newPsw.length() > 16) {
+    				Toast.makeText(this, "密码长度应为6~16", Toast.LENGTH_SHORT).show();
+    				return;
+    			}
                 if (!oldPsw.equals(setmanager.getPassword())) {
                     ToastUtils.showShort(ChangePswActivity.this, "请输入正确的用户密码");
                     return;

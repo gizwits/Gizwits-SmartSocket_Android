@@ -18,6 +18,7 @@
 package com.gizwits.framework.activity.account;
 
 import android.app.ProgressDialog;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -169,6 +170,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnRegister = (Button) findViewById(R.id.btnRegister);
 
+		tvForgot.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); // 下划线
+		
 		dialog = new ProgressDialog(this);
 		dialog.setMessage("登录中，请稍候...");
 		if (setmanager.getUserName() != null) {

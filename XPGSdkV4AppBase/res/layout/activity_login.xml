@@ -10,7 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/logo2" />
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/logo3" />
 
     <EditText
         android:id="@+id/etName"
@@ -36,9 +38,8 @@
         android:layout_gravity="right"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:drawableLeft="@drawable/login_icon_lock"
         android:text="忘记密码?"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="@color/yellow"
         android:textSize="14sp" />
 
     <Button
@@ -46,9 +47,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/login_button_green"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/login_bt"
         android:text="登陆"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -56,8 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginTop="30dp"
-        android:background="@drawable/login_button_white"
-        android:text="我是新用户"
-        android:textColor="@android:color/white" />
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/login_bt"
+        android:text="注册"
+        android:textColor="@android:color/black" />
 
 </LinearLayout>
