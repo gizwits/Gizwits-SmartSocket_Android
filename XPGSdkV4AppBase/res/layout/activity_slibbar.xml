@@ -43,7 +43,7 @@
                     <TextView
                         style="@style/MenuTextViewGray"
                         android:layout_toRightOf="@+id/icon1"
-                        android:text="设备管理" />
+                        android:text="@string/device_manage" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                     <TextView
                         style="@style/MenuTextViewGray"
                         android:layout_toRightOf="@+id/icon2"
-                        android:text="账号管理" />
+                        android:text="@string/account_manage" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
                     <TextView
                         style="@style/MenuTextViewGray"
                         android:layout_toRightOf="@+id/icon3"
-                        android:text="帮助" />
+                        android:text="@string/help" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -161,7 +161,7 @@
                     <TextView
                         style="@style/MenuTextViewGray"
                         android:layout_toRightOf="@+id/icon4"
-                        android:text="关于" />
+                        android:text="@string/about" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
                     style="@style/ButtonBlue"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="50dp"
-                    android:text="返回设备列表" />
+                    android:text="@string/back_to_device_list" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

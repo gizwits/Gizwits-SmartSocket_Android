@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="已配置的设备"
+            android:text="@string/search_device_already_configure"
             android:textColor="@android:color/darker_gray"
             android:textSize="18sp" />
 
@@ -63,7 +63,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:gravity="center"
-            android:text="你的网络中还没有已配置的设备,如已经配置过,\n请确认手机正连接着与设备相同的wifi."
+            android:text="@string/search_device_tips1"
             android:textColor="@android:color/holo_blue_light"
             android:textSize="14sp" />
     </LinearLayout>
@@ -79,14 +79,14 @@
         <Button
             android:id="@+id/btnAddQR"
             style="@style/ButtonBlue"
-            android:text="二维码扫描添加虚拟设备"
+            android:text="@string/search_device_configure_qr_code"
             android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnAddGokit"
             style="@style/ButtonBlue"
             android:layout_margin="10dp"
-            android:text="我要配置gokit"
+            android:text="@string/search_device_configure"
             android:textSize="14sp" />
     </LinearLayout>
 

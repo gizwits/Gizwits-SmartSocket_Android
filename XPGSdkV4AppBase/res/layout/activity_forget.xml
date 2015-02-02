@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="忘记密码"
+            android:text="@string/forget_password"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>
@@ -31,11 +31,11 @@
         android:id="@+id/etNum"
         style="@style/EditTextTheme"
         android:layout_marginTop="60dp"
-        android:hint="手机号/邮箱" />
+        android:hint="@string/forget_password_hint1" />
 
     <Button
         android:id="@+id/btnGetCode"
         style="@style/ButtonBlue"
-        android:text="获取验证码" />
+        android:text="@string/forget_password_get_verifycode" />
 
 </LinearLayout>

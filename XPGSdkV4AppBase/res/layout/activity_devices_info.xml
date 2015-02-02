@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="设备管理"
+            android:text="@string/device_manage"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
 
@@ -48,28 +48,28 @@
         <TextView
             android:id="@+id/tvDate"
             style="@style/TextViewGray"
-            android:text="生产日期：XXXX.XX.XX"
+            android:text="@string/device_manage_text1"
             android:textColor="#969696" />
 
         <TextView
             android:id="@+id/tvPlace"
             style="@style/TextViewGray"
             android:layout_marginTop="8dp"
-            android:text="生产地点：XXXXX"
+            android:text="@string/device_manage_text2"
             android:textColor="#969696" />
 
         <TextView
             android:id="@+id/tvDeviceType"
             style="@style/TextViewGray"
             android:layout_marginTop="8dp"
-            android:text="设备型号：XXXXX"
+            android:text="@string/device_manage_text3"
             android:textColor="#969696" />
 
         <TextView
             android:id="@+id/tvDeviceCode"
             style="@style/TextViewGray"
             android:layout_marginTop="8dp"
-            android:text="设备序列号：XXXXXXXXXXXXXXXX"
+            android:text="@string/device_manage_text4"
             android:textColor="#969696" />
     </LinearLayout>
 
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="12dp"
-        android:text="名称"
+        android:text="@string/name"
         android:textColor="#9A9A9A"
         android:textSize="16dp" />
 
@@ -89,7 +89,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="4dp"
         android:maxLength="10"
-        android:hint="设备名称"
+        android:hint="@string/device_name"
         android:textColor="@color/background_blue" />
 
     <RelativeLayout
@@ -102,7 +102,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="18dp"
-            android:text="删除空调" />
+            android:text="@string/delete_aircondition" />
     </RelativeLayout>
 
 </LinearLayout>

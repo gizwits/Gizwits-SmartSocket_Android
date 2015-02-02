@@ -29,7 +29,7 @@
         android:id="@+id/etName"
         style="@style/EditTextTheme"
         android:layout_marginTop="30dp"
-        android:hint="邮箱" />
+        android:hint="@string/register_email" />
 
 
 
@@ -47,7 +47,7 @@
             style="@style/EditTextTheme"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="密码" />
+            android:hint="@string/password" />
 
         <ToggleButton
             android:id="@+id/tbPswFlag"
@@ -61,7 +61,7 @@
     <Button
         android:id="@+id/btnSure"
         style="@style/ButtonBlue"
-        android:text="确定" />
+        android:text="@string/confirm" />
 
     <TextView
         android:id="@+id/tvPhoneSwitch"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:text="手机注册"
+        android:text="@string/register_use_mobilephone"
         android:textSize="14sp" />
 
 </LinearLayout>

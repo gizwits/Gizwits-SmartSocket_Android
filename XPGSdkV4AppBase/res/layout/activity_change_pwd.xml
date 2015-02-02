@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="修改密码"
+            android:text="@string/change_password"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>
@@ -35,7 +35,7 @@
         android:layout_marginTop="30dp"
         android:digits="@string/register_name_digits"
         android:background="@drawable/login_input_box"
-        android:hint="旧密码"
+        android:hint="@string/old_password"
         android:inputType="textPassword" />
 
     <EditText
@@ -46,7 +46,7 @@
         android:layout_marginTop="10dp"
         android:digits="@string/register_name_digits"
         android:background="@drawable/login_input_box"
-        android:hint="新密码"
+        android:hint="@string/new_password"
         android:inputType="textPassword" />
 
     <ToggleButton
@@ -63,6 +63,6 @@
         android:id="@+id/btnConfirm"
         style="@style/ButtonBlue"
         android:layout_marginTop="10dp"
-        android:text="确定" />
+        android:text="@string/confirm" />
 
 </LinearLayout>

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="忘记密码"
+            android:text="@string/forget_password"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -32,12 +32,12 @@
         android:id="@+id/etName"
         style="@style/EditTextTheme"
         android:layout_marginTop="30dp"
-        android:hint="手机号/邮箱" />
+        android:hint="@string/forget_password_hint1" />
 
     <Button
         android:id="@+id/btnGetCode"
         style="@style/ButtonBlue"
-        android:text="获取验证码" />
+        android:text="@string/forget_password_get_verifycode" />
 
     <LinearLayout
         android:id="@+id/llInputCode"
@@ -50,14 +50,14 @@
             android:id="@+id/etInputCode"
             style="@style/EditTextTheme"
             android:layout_weight="1"
-            android:hint="验证码" />
+            android:hint="@string/forget_password_verifycode" />
 
         <Button
             android:id="@+id/btnReGetCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_blue_short"
-            android:text="重新获取\n验证码"
+            android:text="@string/forget_password_get_verifycode_again"
             android:textColor="@android:color/background_light"
             android:textSize="14sp" />
     </LinearLayout>
@@ -78,7 +78,7 @@
             android:layout_weight="1"
             android:digits="@string/register_name_digits"
             android:background="@android:color/transparent"
-            android:hint="密码" />
+            android:hint="@string/password" />
 
         <ToggleButton
             android:id="@+id/tbPswFlag"
@@ -92,7 +92,7 @@
     <Button
         android:id="@+id/btnSure"
         style="@style/ButtonBlue"
-        android:text="确定" />
+        android:text="@string/confirm" />
 
 
 </LinearLayout>

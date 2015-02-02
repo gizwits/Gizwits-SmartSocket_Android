@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="帮助"
+            android:text="@string/help"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>
@@ -37,7 +37,7 @@
         android:gravity="left|center_vertical"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="APP使用帮助" />
+        android:text="@string/help_for_app" />
 
     <View
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
         android:gravity="left|center_vertical"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="设备使用帮助" />
+        android:text="@string/help_for_device" />
 
     <View
         android:layout_width="match_parent"

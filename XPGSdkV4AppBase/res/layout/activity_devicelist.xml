@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="设备列表"
+            android:text="@string/device_list"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
 

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="用户管理"
+            android:text="@string/user_manage"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="用户名"
+            android:text="@string/user_name"
             android:textColor="#000000"
             android:textSize="18sp" />
 
@@ -66,7 +66,7 @@
         android:gravity="left|center_vertical"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="修改密码" />
+        android:text="@string/change_password" />
 
     <View
         android:layout_width="match_parent"
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:background="@drawable/button_logout"
-        android:text="注销"
+        android:text="@string/logout"
         android:textColor="@color/white" />
 
 </LinearLayout>

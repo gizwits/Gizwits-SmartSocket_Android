@@ -20,7 +20,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:drawableLeft="@drawable/login_icon_name"
-        android:hint="手机／邮箱" />
+        android:hint="@string/login_name_hint" />
 
     <EditText
         android:id="@+id/etPsw"
@@ -29,7 +29,7 @@
         android:layout_marginRight="50dp"
         android:inputType="textPassword"
         android:drawableLeft="@drawable/login_icon_key"
-        android:hint="密码" />
+        android:hint="@string/password" />
 
     <TextView
         android:id="@+id/tvForgot"
@@ -38,7 +38,7 @@
         android:layout_gravity="right"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:text="忘记密码?"
+        android:text="@string/login_forget_password"
         android:textColor="@color/yellow"
         android:textSize="14sp" />
 
@@ -50,7 +50,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/login_bt"
-        android:text="登陆"
+        android:text="@string/login"
         android:textColor="@android:color/black" />
 
     <Button
@@ -62,7 +62,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/login_bt"
-        android:text="注册"
+        android:text="@string/register"
         android:textColor="@android:color/black" />
 
 </LinearLayout>

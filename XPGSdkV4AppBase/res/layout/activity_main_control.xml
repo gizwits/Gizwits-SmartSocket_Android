@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="移动空调"
+                android:text="@string/main_control_title"
                 android:textColor="@android:color/white"
                 android:textSize="22sp" />
 
@@ -110,7 +110,7 @@
                             android:layout_centerInParent="true"
                             android:drawableTop="@drawable/icon_time"
                             android:gravity="center"
-                            android:text="定时关机"
+                            android:text="@string/main_control_timing_shutdown"
                             android:textColor="#ffffff"
                             android:textSize="12sp" />
                     </RelativeLayout>
@@ -127,7 +127,7 @@
                             android:layout_centerInParent="true"
                             android:drawableTop="@drawable/icon_function"
                             android:gravity="center"
-                            android:text="高级功能"
+                            android:text="@string/main_control_advanced_features"
                             android:textColor="#ffffff"
                             android:textSize="12sp" />
                     </RelativeLayout>
@@ -157,7 +157,7 @@
                             android:drawablePadding="5dp"
                             android:drawableTop="@drawable/icon_curve"
                             android:gravity="center"
-                            android:text="温度曲线"
+                            android:text="@string/main_control_temp_curve"
                             android:textColor="@color/text_gray"
                             android:textSize="12sp" />
 
@@ -170,7 +170,7 @@
                             android:drawablePadding="5dp"
                             android:drawableTop="@drawable/unit_selector"
                             android:gravity="center"
-                            android:text="摄氏"
+                            android:text="@string/main_control_celsius"
                             android:textColor="@drawable/wing_text_selector"
                             android:textSize="12sp" />
 
@@ -183,7 +183,7 @@
                             android:drawableTop="@drawable/icon_curve"
                             android:enabled="false"
                             android:gravity="center"
-                            android:text="温度曲线"
+                            android:text="@string/main_control_temp_curve"
                             android:textColor="@color/text_gray"
                             android:textSize="12sp"
                             android:visibility="invisible" />
@@ -197,7 +197,7 @@
                             android:drawableTop="@drawable/icon_curve"
                             android:enabled="false"
                             android:gravity="center"
-                            android:text="温度曲线"
+                            android:text="@string/main_control_temp_curve"
                             android:textColor="@color/text_gray"
                             android:textSize="12sp"
                             android:visibility="invisible" />
@@ -243,7 +243,7 @@
                             android:layout_centerVertical="true"
                             android:drawableTop="@drawable/icon_model_cool"
                             android:gravity="center"
-                            android:text="制冷"
+                            android:text="@string/main_control_refrigeration"
                             android:textColor="@color/text_blue"
                             android:textSize="15sp" />
 
@@ -285,7 +285,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="室内温度"
+                                    android:text="@string/main_control_indoor_temp"
                                     android:textColor="@color/text_gray"
                                     android:textSize="12sp" />
 
@@ -301,7 +301,7 @@
                                     android:id="@+id/tvInnerUnit"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="°"
+                                    android:text="@string/main_control_degree"
                                     android:textColor="@color/text_gray"
                                     android:textSize="16sp" />
                             </LinearLayout>
@@ -324,7 +324,7 @@
                                     android:id="@+id/tvSettingUnit"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:text="°"
+                                    android:text="@string/main_control_degree"
                                     android:textColor="#797979"
                                     android:textSize="25sp" />
                             </LinearLayout>
@@ -332,7 +332,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="设定温度"
+                                android:text="@string/main_control_set_temp"
                                 android:textColor="@color/text_gray"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -364,7 +364,7 @@
                                 android:button="@null"
                                 android:drawableTop="@drawable/wing_low_selector"
                                 android:gravity="center"
-                                android:text="低风"
+                                android:text="@string/main_control_low_wind"
                                 android:textColor="@drawable/wing_text_selector" />
 
                             <RadioButton
@@ -376,7 +376,7 @@
                                 android:button="@null"
                                 android:drawableTop="@drawable/wing_mid_selector"
                                 android:gravity="center"
-                                android:text="中风"
+                                android:text="@string/main_control_regular_wind"
                                 android:textColor="@drawable/wing_text_selector" />
 
                             <RadioButton
@@ -388,7 +388,7 @@
                                 android:button="@null"
                                 android:drawableTop="@drawable/wing_high_selector"
                                 android:gravity="center"
-                                android:text="高风"
+                                android:text="@string/main_control_high_wind"
                                 android:textColor="@drawable/wing_text_selector" />
                         </RadioGroup>
 
@@ -401,7 +401,7 @@
                             android:button="@null"
                             android:drawableTop="@drawable/wing_shake_selector"
                             android:gravity="center"
-                            android:text="摆风"
+                            android:text="@string/main_control_shake_wind"
                             android:textColor="@drawable/wing_text_selector" />
                     </LinearLayout>
                 </LinearLayout>
@@ -435,7 +435,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="移动空调"
+                android:text="@string/main_control_title"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -448,7 +448,7 @@
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/power_big"
             android:gravity="center"
-            android:text="开机"
+            android:text="@string/main_control_turn_on"
             android:textColor="#ffffff"
             android:textSize="24sp" />
 
@@ -462,7 +462,7 @@
             android:drawableLeft="@drawable/start_time"
             android:drawablePadding="5dp"
             android:gravity="center"
-            android:text="定时开机"
+            android:text="@string/main_control_timing_turn_on"
             android:textColor="#ffffff"
             android:textSize="12sp" />
     </RelativeLayout>
