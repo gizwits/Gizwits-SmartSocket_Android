@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="定时开机"
+        android:text="@string/main_control_timing_turn_on"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="取消"
+            android:text="@string/cancel"
             android:textColor="#00aeff"
             android:textSize="18sp" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="确定"
+            android:text="@string/confirm"
             android:textColor="#00aeff"
             android:textSize="18sp" />
     </LinearLayout>

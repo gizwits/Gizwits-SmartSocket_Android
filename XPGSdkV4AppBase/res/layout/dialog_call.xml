@@ -11,7 +11,7 @@
         android:layout_height="100dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="确定要注销，返回登陆界面吗？"
+        android:text="@string/dialog_call_sure_to_logout"
         android:textColor="@color/text_black"
         android:textSize="18sp" />
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="拨打客服热线"
+            android:text="@string/call_customer_service_hot_line"
             android:textColor="@color/white" />
 
     </LinearLayout>

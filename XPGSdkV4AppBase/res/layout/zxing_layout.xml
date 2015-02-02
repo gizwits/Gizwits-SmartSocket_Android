@@ -43,7 +43,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp"
-            android:text="取消"
+            android:text="@string/cancel"
             android:textSize="14sp" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_above="@id/btn_cancel"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
-            android:text="将二维码放入框内，即刻自动扫描"
+            android:text="@string/qr_code_tips"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
 

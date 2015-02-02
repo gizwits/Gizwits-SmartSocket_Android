@@ -28,7 +28,7 @@
             android:layout_margin="5dp"
             android:layout_toLeftOf="@+id/llArrow"
             android:layout_toRightOf="@+id/icon"
-            android:text="空调"
+            android:text="@string/aircondition"
             android:textColor="@color/text_blue"
             android:textSize="18sp" />
 
@@ -44,7 +44,7 @@
                 android:id="@+id/statue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="远程在线"
+                android:text="@string/remote_online"
                 android:textSize="16sp" />
 
             <ImageView

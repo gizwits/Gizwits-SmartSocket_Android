@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="暂不处理"
+            android:text="@string/not_processing"
             android:textColor="@color/white" />
 
         <Button
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="拨打客服"
+            android:text="@string/call_customer_service"
             android:textColor="@color/white" />
     </LinearLayout>
 
