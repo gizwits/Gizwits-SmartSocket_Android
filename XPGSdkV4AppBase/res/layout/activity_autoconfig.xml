@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="请保持Wi-Fi连接"
+        android:text="@string/autoconfig_keep_wifi"
         android:textColor="@color/text_black"
         android:textSize="20sp" />
 
@@ -39,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Wi-Fi名称:home"
         android:textColor="@color/text_blue"
         android:textSize="16sp" />
 
@@ -58,7 +57,7 @@
             style="@style/EditTextTheme"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="Wi-Fi密码"
+            android:hint="@string/autoconfig_password"
             android:textSize="14sp" />
 
         <ToggleButton
@@ -73,6 +72,6 @@
     <Button
         android:id="@+id/btnNext"
         style="@style/ButtonBlue"
-        android:text="下一步" />
+        android:text="@string/btn_next" />
 
 </LinearLayout>

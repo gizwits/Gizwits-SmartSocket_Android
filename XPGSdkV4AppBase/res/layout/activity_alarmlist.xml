@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="故障信息"
+            android:text="@string/title_alarm_list"
             android:textColor="@android:color/white"
             android:textSize="22sp" />
     </RelativeLayout>
@@ -45,6 +45,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="30dp"
-        android:text="联系客服" />
+        android:text="@string/btn_call" />
 
 </RelativeLayout>

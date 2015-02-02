@@ -45,14 +45,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="请按下设备按键,灯闪即表示设备已进入配置模式,\n点击开始配置"
+            android:text="@string/airlink_tips_start"
             android:textColor="@color/text_blue"
             android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnConfig"
             style="@style/ButtonBlue"
-            android:text="开始配置" />
+            android:text="@string/airlink_btn_start" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="设备连接中，请耐心等待."
+            android:text="@string/airlink_please_wait"
             android:textColor="@color/text_blue"
             android:textSize="16sp" />
 
@@ -104,14 +104,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="配置失败了，让我们看看哪里可能出了错："
+            android:text="@string/airlink_tips_error1"
             android:textColor="@color/text_blue"
             android:textSize="14sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="1.设备是否正常运行？\n2.Wi-Fi网络是否连接顺畅？"
+            android:text="@string/airlink_tips_error2"
             android:textColor="@color/text_black"
             android:textSize="14sp" />
   
@@ -119,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="请拔下设备电源，再重新接通电源，再点击重试"
+            android:text="@string/airlink_tips_error3"
             android:textColor="@color/text_blue"
             android:textSize="14sp" />
 
@@ -127,12 +127,12 @@
             android:layout_marginTop="30dp"
             android:id="@+id/btnRetry"
             style="@style/ButtonBlue"
-            android:text="已经重新拔插电源了，我要重试" />
+            android:text="@string/airlink_btn_retry" />
         <Button
             android:layout_margin="10dp"
             android:id="@+id/btnSoftap"
             style="@style/ButtonBlue"
-            android:text="手动配置" />
+            android:text="@string/airlink_btn_softap" />
     </LinearLayout>
 
 </LinearLayout>
