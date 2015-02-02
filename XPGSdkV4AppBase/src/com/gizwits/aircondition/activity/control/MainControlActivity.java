@@ -869,6 +869,7 @@ public class MainControlActivity extends BaseActivity implements
 			mCenter.cDisconnect(mXpgWifiDevice);
 			mXpgWifiDevice = null;
 		}
+		finish();
 	}
 
 	/*

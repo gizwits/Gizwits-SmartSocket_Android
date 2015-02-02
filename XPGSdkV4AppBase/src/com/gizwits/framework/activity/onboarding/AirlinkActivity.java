@@ -27,6 +27,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -63,6 +64,11 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
     private Button btnSoftap;
 
     /**
+     * The iv back.
+     */
+    private ImageView ivBack;
+    
+    /**
      * The ll start config.
      */
     private LinearLayout llStartConfig;
@@ -91,7 +97,9 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
     
     /** The str psw. */
     private String strPsw;
-
+    
+    /** The UI_STATE now. */
+    private UI_STATE UiStateNow;
 
     /**
      * ClassName: Enum handler_key. <br/>
@@ -147,9 +155,7 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
 
 
                 case CONFIG_FAILED:
-                    llConfigFailed.setVisibility(View.VISIBLE);
-                    llConfiging.setVisibility(View.GONE);
-                    llStartConfig.setVisibility(View.GONE);
+                    showLayout(UI_STATE.Result);
                     break;
 
             }
@@ -178,6 +184,7 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
         btnConfig.setOnClickListener(this);
         btnRetry.setOnClickListener(this);
         btnSoftap.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
     }
 
     /**
@@ -188,12 +195,11 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
         btnRetry = (Button) findViewById(R.id.btnRetry);
         btnSoftap = (Button) findViewById(R.id.btnSoftap);
         tvTick = (TextView) findViewById(R.id.tvTick);
+        ivBack=(ImageView) findViewById(R.id.ivBack);
         llStartConfig = (LinearLayout) findViewById(R.id.llStartConfig);
         llConfiging = (LinearLayout) findViewById(R.id.llConfiging);
         llConfigFailed = (LinearLayout) findViewById(R.id.llConfigFailed);
-        llStartConfig.setVisibility(View.VISIBLE);
-        llConfiging.setVisibility(View.GONE);
-        llConfigFailed.setVisibility(View.GONE);
+        showLayout(UI_STATE.Ready);
     }
 
     /**
@@ -212,6 +218,34 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
         }
     }
 
+    private enum UI_STATE{
+    	Ready,Setting,Result;
+    }
+    
+    private void showLayout(UI_STATE ui){
+    	UiStateNow=ui;
+    	switch(ui){
+    	case Ready:
+    		llStartConfig.setVisibility(View.VISIBLE);
+            llConfiging.setVisibility(View.GONE);
+            llConfigFailed.setVisibility(View.GONE);
+            ivBack.setVisibility(View.VISIBLE);
+    		break;
+    	case Setting:
+    		llStartConfig.setVisibility(View.GONE);
+            llConfiging.setVisibility(View.VISIBLE);
+            llConfigFailed.setVisibility(View.GONE);
+            ivBack.setVisibility(View.GONE);
+    		break;
+    	case Result:
+    		llConfigFailed.setVisibility(View.VISIBLE);
+            llConfiging.setVisibility(View.GONE);
+            llStartConfig.setVisibility(View.GONE);
+            ivBack.setVisibility(View.VISIBLE);
+    		break;
+    	}
+    }
+    
     /*
      * (non-Javadoc)
      *
@@ -225,10 +259,7 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
                 startAirlink();
                 break;
             case R.id.btnRetry:
-                // 重试
-                IntentUtils.getInstance().startActivity(AirlinkActivity.this,
-                        SearchDeviceActivity.class);
-                finish();
+            	onBackPressed();
                 break;
             case R.id.btnSoftap:
                 //spftap配置
@@ -238,7 +269,9 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
                 startActivity(intent);
                 finish();
                 break;
-
+            case R.id.ivBack:
+            	onBackPressed();
+            	break;
         }
 
     }
@@ -248,9 +281,7 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
      */
     private void startAirlink() {
         secondleft = 60;
-        llStartConfig.setVisibility(View.GONE);
-        llConfiging.setVisibility(View.VISIBLE);
-        llConfigFailed.setVisibility(View.GONE);
+        showLayout(UI_STATE.Setting);
         timer = new Timer();
         timer.schedule(new TimerTask() {
 
@@ -262,8 +293,25 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
         mCenter.cSetAirLink(strSSid, strPsw);
     }
 
+    @Override
+	public void onBackPressed() {
+    	switch(UiStateNow){
+    	case Ready:
+    		startActivity(new Intent(AirlinkActivity.this,AutoConfigActivity.class));
+        	finish();
+    		break;
+    	case Setting:
+    		break;
+    	case Result:
+    		startActivity(new Intent(AirlinkActivity.this,SearchDeviceActivity.class));
+        	finish();
+    		break;
+    	
+    	}
+    	
+	}
 
-    /* (non-Javadoc)
+	/* (non-Javadoc)
      * @see com.gizwits.framework.activity.BaseActivity#didSetDeviceWifi(int, com.xtremeprog.xpgconnect.XPGWifiDevice)
      */
     @Override

@@ -26,12 +26,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -88,6 +88,11 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
     /** The tvpsw. */
     private TextView tvpsw;
     
+    /**
+     * The iv back.
+     */
+    private ImageView ivBack;
+    
     /** The tv ssid. */
     private TextView tvSsid;
     
@@ -108,6 +113,9 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
 
     /** The timer. */
     private Timer timer;
+    
+    /** The UI_STATE now. */
+    private UI_STATE UiStateNow;
 
 
     /**
@@ -158,28 +166,13 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
                     break;
 
                 case CHANGE_WIFI:
-                    llConnectAp.setVisibility(View.GONE);
-                    llInsertPsw.setVisibility(View.VISIBLE);
-                    llConfig.setVisibility(View.GONE);
-                    llConfigSuccess.setVisibility(View.GONE);
-                    llConfigFailed.setVisibility(View.GONE);
+                    showLayout(UI_STATE.Setting);
                     break;
-
                 case CONFIG_SUCCESS:
-                    llConnectAp.setVisibility(View.GONE);
-                    llInsertPsw.setVisibility(View.GONE);
-                    llConfig.setVisibility(View.GONE);
-                    llConfigSuccess.setVisibility(View.VISIBLE);
-                    llConfigFailed.setVisibility(View.GONE);
-
+                    showLayout(UI_STATE.ResultSuccess);
                     break;
-
                 case CONFIG_FAILED:
-                    llConnectAp.setVisibility(View.GONE);
-                    llInsertPsw.setVisibility(View.GONE);
-                    llConfig.setVisibility(View.GONE);
-                    llConfigSuccess.setVisibility(View.GONE);
-                    llConfigFailed.setVisibility(View.VISIBLE);
+                    showLayout(UI_STATE.ResultFailed);
                     break;
 
             }
@@ -220,6 +213,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         llConfig = (LinearLayout) findViewById(R.id.llConfiging);
         llConfigSuccess = (LinearLayout) findViewById(R.id.llConfigSuccess);
         llConfigFailed = (LinearLayout) findViewById(R.id.llConfigFailed);
+        ivBack=(ImageView) findViewById(R.id.ivBack);
         etInputPsw = (EditText) findViewById(R.id.etInputPsw);
         btnNext = (Button) findViewById(R.id.btnNext);
         btnOK = (Button) findViewById(R.id.btnOK);
@@ -228,11 +222,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         tvSsid = (TextView) findViewById(R.id.tvSsid);
         tvTick = (TextView) findViewById(R.id.tvTick);
         tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
-        llConnectAp.setVisibility(View.VISIBLE);
-        llInsertPsw.setVisibility(View.GONE);
-        llConfig.setVisibility(View.GONE);
-        llConfigSuccess.setVisibility(View.GONE);
-        llConfigFailed.setVisibility(View.GONE);
+        showLayout(UI_STATE.SoftApReady);
     }
 
     /**
@@ -242,6 +232,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         btnNext.setOnClickListener(this);
         btnOK.setOnClickListener(this);
         btnNext.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
         tbPswFlag.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -294,10 +285,60 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
                 finish();
                 break;
             case R.id.btnRetry:
-                IntentUtils.getInstance().startActivity(SoftApConfigActivity.this, SearchDeviceActivity.class);
-                finish();
-                break;
+            case R.id.ivBack:
+            	onBackPressed();
+            	break;
         }
+    }
+    
+    enum UI_STATE{
+    	SoftApReady,PswInput,Setting,ResultFailed,ResultSuccess;
+    }
+    
+    private void showLayout(UI_STATE ui){
+    	UiStateNow=ui;
+    	switch(ui){
+    	case SoftApReady:
+    		llConnectAp.setVisibility(View.VISIBLE);
+            llInsertPsw.setVisibility(View.GONE);
+            llConfig.setVisibility(View.GONE);
+            llConfigSuccess.setVisibility(View.GONE);
+            llConfigFailed.setVisibility(View.GONE);
+            ivBack.setVisibility(View.VISIBLE);
+    		break;
+    	case PswInput:
+    		llConnectAp.setVisibility(View.GONE);
+            llInsertPsw.setVisibility(View.VISIBLE);
+            llConfig.setVisibility(View.GONE);
+            llConfigSuccess.setVisibility(View.GONE);
+            llConfigFailed.setVisibility(View.GONE);
+            ivBack.setVisibility(View.VISIBLE);
+    		break;
+    	case Setting:
+    		llConnectAp.setVisibility(View.GONE);
+            llInsertPsw.setVisibility(View.GONE);
+            llConfig.setVisibility(View.VISIBLE);
+            llConfigSuccess.setVisibility(View.GONE);
+            llConfigFailed.setVisibility(View.GONE);
+            ivBack.setVisibility(View.GONE);
+    		break;
+    	case ResultFailed:
+    		llConnectAp.setVisibility(View.GONE);
+            llInsertPsw.setVisibility(View.GONE);
+            llConfig.setVisibility(View.GONE);
+            llConfigSuccess.setVisibility(View.GONE);
+            llConfigFailed.setVisibility(View.VISIBLE);
+            ivBack.setVisibility(View.VISIBLE);
+    		break;
+    	case ResultSuccess:
+    		llConnectAp.setVisibility(View.GONE);
+            llInsertPsw.setVisibility(View.GONE);
+            llConfig.setVisibility(View.GONE);
+            llConfigSuccess.setVisibility(View.VISIBLE);
+            llConfigFailed.setVisibility(View.GONE);
+            ivBack.setVisibility(View.VISIBLE);
+    		break;
+    	}
     }
 
     /**
@@ -305,11 +346,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
      */
     private void startConfig() {
         secondleft = 60;
-        llConnectAp.setVisibility(View.GONE);
-        llInsertPsw.setVisibility(View.GONE);
-        llConfig.setVisibility(View.VISIBLE);
-        llConfigSuccess.setVisibility(View.GONE);
-        llConfigFailed.setVisibility(View.GONE);
+        showLayout(UI_STATE.Setting);
         strPsw = etInputPsw.getText().toString();
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -322,8 +359,29 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
         mCenter.cSetSoftAp(strSsid, strPsw);
     }
 
+    @Override
+	public void onBackPressed() {
+    	switch(UiStateNow){
+    	case SoftApReady:
+    		startActivity(new Intent(SoftApConfigActivity.this,SearchDeviceActivity.class));
+    		finish();
+    		break;
+    	case PswInput:
+    		showLayout(UiStateNow.SoftApReady);
+    		break;
+    	case Setting:
+    		break;
+    	case ResultFailed:
+    		startActivity(new Intent(SoftApConfigActivity.this,SearchDeviceActivity.class));
+    		finish();
+    	case ResultSuccess:
+    		finish();
+    		break;
+    	}
+    	
+	}
 
-    /**
+	/**
      * 广播监听器，监听wifi连上的广播.
      *
      * @author Lien

@@ -55,7 +55,8 @@
         <activity android:name="com.gizwits.framework.activity.onboarding.BindingDeviceActivity" />
         <activity android:name="com.gizwits.framework.activity.onboarding.ConfigFailedActivity" />
         <activity android:name="com.gizwits.framework.activity.onboarding.GetPassAndBind" />
-        <activity android:name="com.gizwits.framework.activity.onboarding.SearchDeviceActivity" />
+        <activity android:name="com.gizwits.framework.activity.onboarding.SearchDeviceActivity"
+            android:launchMode="singleTask" />
         <activity android:name="com.gizwits.framework.activity.onboarding.SoftApConfigActivity" />
         <activity android:name="com.gizwits.framework.activity.help.AboutActivity" />
         <activity android:name="com.gizwits.framework.activity.help.HelpActivity" />

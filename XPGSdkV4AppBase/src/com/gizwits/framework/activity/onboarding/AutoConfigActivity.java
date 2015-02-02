@@ -33,6 +33,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -65,6 +66,11 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 
 	/** The btn next. */
 	private Button btnNext;
+	
+	/**
+     * The iv back.
+     */
+    private ImageView ivBack;
 
 	/**  网络状态广播接受器. */
 	ConnecteChangeBroadcast mChangeBroadcast = new ConnecteChangeBroadcast();
@@ -133,7 +139,7 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 		etInputPsw = (EditText) findViewById(R.id.etInputPsw);
 		tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
 		btnNext = (Button) findViewById(R.id.btnNext);
-
+		ivBack=(ImageView) findViewById(R.id.ivBack);
 	}
 
 	/**
@@ -141,6 +147,7 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 	 */
 	private void initEvents() {
 		btnNext.setOnClickListener(this);
+		ivBack.setOnClickListener(this);
 		tbPswFlag.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -167,25 +174,29 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnNext:
-			if (NetworkUtils.isWifiConnected(this)) {
-				// 切换至发送airlink Activity
-				if(!StringUtils.isEmpty(strSsid)){
-					Intent intent = new Intent(AutoConfigActivity.this,AirlinkActivity.class);
-					intent.putExtra("ssid", strSsid);
-					strPsw = etInputPsw.getText().toString().trim();
-					if(!StringUtils.isEmpty(strPsw)){
-						intent.putExtra("psw", strPsw);
-					}else{
-						intent.putExtra("psw", "");
-					}
-					startActivity(intent);
-				}else{
-					ToastUtils.showShort(this, getString(R.string.wifi_first));
-				}
-			} else {
+			if (!NetworkUtils.isWifiConnected(this)){
 				ToastUtils.showShort(this, getString(R.string.wifi_first));
+				break;
 			}
-
+			
+			if(StringUtils.isEmpty(strSsid)){
+				ToastUtils.showShort(this, getString(R.string.wifi_first));
+				break;
+			}
+			
+			Intent intent = new Intent(AutoConfigActivity.this,AirlinkActivity.class);
+			intent.putExtra("ssid", strSsid);
+			strPsw = etInputPsw.getText().toString().trim();
+			if(!StringUtils.isEmpty(strPsw)){
+				intent.putExtra("psw", strPsw);
+			}else{
+				intent.putExtra("psw", "");
+			}
+			startActivity(intent);
+			finish();
+			break;
+		case R.id.ivBack:
+			onBackPressed();
 			break;
 		}
 
@@ -212,6 +223,12 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 		super.onPause();
 		unregisterReceiver(mChangeBroadcast);
 
+	}
+
+	@Override
+	public void onBackPressed() {
+		startActivity(new Intent(AutoConfigActivity.this,SearchDeviceActivity.class));
+		finish();
 	}
 
 	/**

@@ -263,7 +263,6 @@ public class SearchDeviceActivity extends BaseActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAddQR:
-
                 if (NetworkUtils.isNetworkConnected(this)) {
                     // 跳转到二维码扫描activity
                     IntentUtils.getInstance().startActivity(this,
@@ -274,6 +273,7 @@ public class SearchDeviceActivity extends BaseActivity implements
                 if (NetworkUtils.isWifiConnected(this)) {
                     // 跳转到添加airlink activity
                     IntentUtils.getInstance().startActivity(SearchDeviceActivity.this, AutoConfigActivity.class);
+                    finish();
                 } else {
                     isWaitingWifi = true;
                     DialogManager.showDialog(this, noNetworkDialog);
