@@ -166,7 +166,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
                     break;
 
                 case CHANGE_WIFI:
-                    showLayout(UI_STATE.Setting);
+                    showLayout(UI_STATE.PswInput);
                     break;
                 case CONFIG_SUCCESS:
                     showLayout(UI_STATE.ResultSuccess);
