@@ -430,7 +430,6 @@ public class MainControlActivity extends BaseActivity implements
 		sclContent = (ScrollView) findViewById(R.id.sclContent);
 		seekBar = (CircularSeekBar) findViewById(R.id.csbSeekbar);
 		seekBar.postInvalidateDelayed(2000);
-		seekBar.ShowSeekBar();
 		seekBar.setMaxProgress(100);
 		seekBar.setProgress(30);
 		seekBar.setMProgress(0);
@@ -715,11 +714,6 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private void updateModeState(String pos) {
 		modePos = Integer.parseInt(pos);
-		if (modePos == 3) {
-			seekBar.hideSeekBar();
-		} else {
-			seekBar.ShowSeekBar();
-		}
 		tvMode.setCompoundDrawablesWithIntrinsicBounds(0, modeImages[modePos],
 				0, 0);
 		tvMode.setText(modeStrs[modePos]);
