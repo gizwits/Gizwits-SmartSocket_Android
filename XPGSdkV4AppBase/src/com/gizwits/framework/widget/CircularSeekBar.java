@@ -539,6 +539,7 @@ public class CircularSeekBar extends View {
      * @Description: TODO
      */
     public void setMProgress(int progress) {
+    	myLock=lockX.UnLock;
         int newPercent = (progress * 100) / this.maxProgress;
         int newAngle = (newPercent * 360) / 100;
         this.setAngle(newAngle);
