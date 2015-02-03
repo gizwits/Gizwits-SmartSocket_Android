@@ -196,6 +196,9 @@ public class MainControlActivity extends BaseActivity implements
 
 	/** The alarm list. */
 	private ArrayList<DeviceAlarm> alarmList;
+	
+	/** The alarm list has shown. */
+	private ArrayList<String> alarmShowList;
 
 	/** The timing off. */
 	private int timingOn, timingOff;
@@ -295,25 +298,42 @@ public class MainControlActivity extends BaseActivity implements
 				}
 				break;
 			case ALARM:
-				if (alarmList != null && alarmList.size() > 0) {
-					if (mFaultDialog == null) {
-						mFaultDialog = DialogManager.getDeviceErrirDialog(
-								MainControlActivity.this, "设备故障",
-								new OnClickListener() {
-
-									@Override
-									public void onClick(View v) {
-										Intent intent = new Intent(
-												Intent.ACTION_CALL, Uri
-														.parse("tel:10086"));
-										startActivity(intent);
-										mFaultDialog.dismiss();
-										mFaultDialog = null;
-									}
-								});
-
+				// 是否需要弹dialog判断
+				boolean isNeedDialog = false;
+				for (DeviceAlarm alarm : alarmList) {
+					if (!alarmShowList.contains((String) alarm.getDesc())) {
+						alarmShowList.add(alarm.getDesc());
+						isNeedDialog = true;
 					}
-					mFaultDialog.show();
+				}
+
+				alarmShowList.clear();
+
+				for (DeviceAlarm alarm : alarmList) {
+					alarmShowList.add(alarm.getDesc());
+				}
+
+				if (alarmList != null && alarmList.size() > 0) {
+					if (isNeedDialog) {
+						if (mFaultDialog == null) {
+							mFaultDialog = DialogManager.getDeviceErrirDialog(
+									MainControlActivity.this, "设备故障",
+									new OnClickListener() {
+
+										@Override
+										public void onClick(View v) {
+											Intent intent = new Intent(
+													Intent.ACTION_CALL, Uri
+															.parse("tel:10086"));
+											startActivity(intent);
+											mFaultDialog.dismiss();
+											mFaultDialog = null;
+										}
+									});
+
+						}
+						mFaultDialog.show();
+					}
 					setTipsLayoutVisiblity(true, alarmList.size());
 				} else {
 					setTipsLayoutVisiblity(false, 0);
@@ -380,6 +400,7 @@ public class MainControlActivity extends BaseActivity implements
 		super.onResume();
 		mXpgWifiDevice.setListener(deviceListener);
 		isCentigrade = setmanager.getUnit();
+		alarmShowList.clear();
 		handler.sendEmptyMessage(handler_key.GET_STATUE.ordinal());
 	}
 
@@ -389,6 +410,7 @@ public class MainControlActivity extends BaseActivity implements
 	private void initParams() {
 		statuMap = new ConcurrentHashMap<String, Object>();
 		alarmList = new ArrayList<DeviceAlarm>();
+		alarmShowList = new ArrayList<String>();
 		height = llBottom.getHeight();
 	}
 
