@@ -39,6 +39,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AbsoluteLayout;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -244,11 +245,6 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 		mCover = (ImageView) findViewById(R.id.slidedout_cover);
 		mAdapter = new DeviceAdapter(this, bindlist);
 		lvDevice.setAdapter(mAdapter);
-		for (int i = 0; i < bindlist.size(); i++) {
-			if (bindlist.get(i).getDid()
-					.equalsIgnoreCase(mXpgWifiDevice.getDid()))
-				mAdapter.setChoosedPos(i);
-		}
 		progressDialog = new ProgressDialog(SlipBarActivity.this);
 		progressDialog.setCancelable(false);
 		progressDialog.setMessage("设备连接中，请稍候。");
@@ -286,6 +282,12 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 	public void onResume() {
 		super.onResume();
 		initBindList();
+		mAdapter.setChoosedPos(-1);
+		for (int i = 0; i < bindlist.size(); i++) {
+			if (bindlist.get(i).getDid()
+					.equalsIgnoreCase(mXpgWifiDevice.getDid()))
+				mAdapter.setChoosedPos(i);
+		}
 		mAdapter.notifyDataSetChanged();
 	}
 
@@ -547,7 +549,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
 		/** The ctx. */
 		private Context ctx;
-
+		
 		/**
 		 * Gets the choosed pos.
 		 * 
@@ -639,7 +641,6 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 			return convertView;
 
 		}
-
 	}
 
 	/**
