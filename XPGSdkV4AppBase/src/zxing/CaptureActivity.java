@@ -25,9 +25,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.activity.device.DeviceListActivity;
+import com.gizwits.powersocket.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.xpg.common.system.IntentUtils;

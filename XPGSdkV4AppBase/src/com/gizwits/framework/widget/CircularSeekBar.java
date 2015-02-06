@@ -30,7 +30,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
 
-import com.gizwits.aircondition.R;
+import com.gizwits.powersocket.R;
 import com.xpg.common.device.DensityUtils;
 
 

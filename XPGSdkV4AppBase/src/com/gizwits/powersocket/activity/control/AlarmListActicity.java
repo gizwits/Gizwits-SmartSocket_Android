@@ -15,7 +15,7 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gizwits.aircondition.activity.control;
+package com.gizwits.powersocket.activity.control;
 
 import java.util.ArrayList;
 
@@ -28,10 +28,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.adapter.AlarmListAdapter;
 import com.gizwits.framework.entity.DeviceAlarm;
+import com.gizwits.powersocket.R;
 
 // TODO: Auto-generated Javadoc
 /**

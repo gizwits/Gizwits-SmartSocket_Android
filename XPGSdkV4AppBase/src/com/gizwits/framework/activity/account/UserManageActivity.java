@@ -25,9 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.utils.DialogManager;
+import com.gizwits.powersocket.R;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.ui.utils.ToastUtils;
 

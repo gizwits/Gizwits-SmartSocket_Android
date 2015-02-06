@@ -28,10 +28,10 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.sdk.CmdCenter;
 import com.gizwits.framework.sdk.SettingManager;
 import com.gizwits.framework.utils.Historys;
+import com.gizwits.powersocket.R;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import com.xtremeprog.xpgconnect.XPGWifiDeviceListener;
 import com.xtremeprog.xpgconnect.XPGWifiSDKListener;

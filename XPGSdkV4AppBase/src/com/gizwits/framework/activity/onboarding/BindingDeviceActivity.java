@@ -27,9 +27,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.activity.device.DeviceListActivity;
+import com.gizwits.powersocket.R;
 import com.xpg.common.system.IntentUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 

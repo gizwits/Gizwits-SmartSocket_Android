@@ -22,8 +22,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.powersocket.R;
 
 // TODO: Auto-generated Javadoc
 //TODO: Auto-generated Javadoc

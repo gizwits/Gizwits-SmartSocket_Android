@@ -37,8 +37,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.powersocket.R;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 

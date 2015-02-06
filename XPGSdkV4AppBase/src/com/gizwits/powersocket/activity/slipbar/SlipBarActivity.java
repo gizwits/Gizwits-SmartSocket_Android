@@ -15,7 +15,7 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.gizwits.aircondition.activity.slipbar;
+package com.gizwits.powersocket.activity.slipbar;
 
 import java.util.List;
 
@@ -47,8 +47,6 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.gizwits.aircondition.activity.control.MainControlActivity;
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.activity.account.UserManageActivity;
 import com.gizwits.framework.activity.device.DeviceListActivity;
@@ -57,6 +55,8 @@ import com.gizwits.framework.activity.help.AboutActivity;
 import com.gizwits.framework.activity.help.HelpActivity;
 import com.gizwits.framework.utils.DensityUtil;
 import com.gizwits.framework.utils.StringUtils;
+import com.gizwits.powersocket.R;
+import com.gizwits.powersocket.activity.control.MainControlActivity;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.ui.utils.ToastUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;

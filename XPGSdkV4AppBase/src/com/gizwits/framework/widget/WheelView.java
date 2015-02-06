@@ -42,7 +42,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.gizwits.aircondition.R;
+import com.gizwits.powersocket.R;
 
 // TODO: Auto-generated Javadoc
 /**

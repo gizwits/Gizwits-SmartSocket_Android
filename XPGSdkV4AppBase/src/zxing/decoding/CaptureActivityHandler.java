@@ -30,7 +30,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.gizwits.aircondition.R;
+import com.gizwits.powersocket.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 

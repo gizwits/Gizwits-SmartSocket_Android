@@ -23,8 +23,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.powersocket.R;
 
 /**
  * 
