@@ -1,10 +1,18 @@
 <resources>
 
-    <string name="app_name">智能云空调</string>
+    <string name="app_name">智能云插座</string>
     <string name="wifi_first">请先连上Wi-Fi网络</string>
     <string name="wifi_name">Wi-Fi名称</string>
     <string name="tip_exit">再按一次退出程序</string>
     <string name="title_about">关于</string>
+    <string name="appoinment">预约</string>
+    <string name="timing">定时</string>
+    <string name="timing_appointment">定时预约</string>
+    <string name="delay">延时</string>
+    <string name="delay_appointment">延时预约</string>
+    <string name="consumption">用电量：</string>
+    
+    
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="dialog_sure_to_delete">确定要删除设备吗？</string>
     <string name="dialog_sure_to_off">确定要关闭设备吗？</string>
@@ -63,7 +71,7 @@
     <string name="login_forget_password">忘记密码?</string>
     <string name="login">登陆</string>
     <string name="register">注册</string>
-    <string name="main_control_title">移动空调</string>
+    <string name="main_control_title">智能插座</string>
     <string name="main_control_timing_shutdown">定时关机</string>
     <string name="main_control_advanced_features">高级功能</string>
     <string name="main_control_temp_curve">温度曲线</string>

@@ -3,7 +3,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff" >
+    android:background="@color/transparent" >
 
     <!-- id starts with @+id/split_conditioner_control_ -->
 
@@ -11,7 +11,7 @@
         android:id="@+id/rlControlMainPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/transparent"
         android:visibility="visible" >
 
         <RelativeLayout
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentTop="true"
-            android:background="@drawable/top_tall" >
+            android:background="@drawable/top" >
 
             <ImageView
                 android:id="@+id/ivMenu"
@@ -27,9 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
                 android:padding="10dp"
-                android:src="@drawable/icon_menu" />
+                android:src="@drawable/home_icon" />
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -37,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/main_control_title"
-                android:textColor="@android:color/white"
+                android:textColor="@color/background_blue"
                 android:textSize="22sp" />
 
             <ImageView
@@ -46,9 +45,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:padding="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/icon_power" />
+                android:padding="10dp"
+                android:src="@drawable/icon_power"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:id="@+id/rlAlarmTips"
@@ -81,390 +81,116 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rlHeader" >
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rlHeader"
+            android:background="@drawable/bg_main"
+            android:gravity="center_horizontal" >
+
+            <Button
+                android:id="@+id/btnPower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/selector_power" />
 
             <LinearLayout
-                android:id="@+id/llFooter"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:orientation="vertical" >
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/maincontrol_bottom_bg_blue"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:text="@string/consumption"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" >
-
-                        <TextView
-                            android:id="@+id/tvTimeOff"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:drawableTop="@drawable/icon_time"
-                            android:gravity="center"
-                            android:text="@string/main_control_timing_shutdown"
-                            android:textColor="#ffffff"
-                            android:textSize="12sp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" >
-
-                        <TextView
-                            android:id="@+id/tvAdvanture"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:drawableTop="@drawable/icon_function"
-                            android:gravity="center"
-                            android:text="@string/main_control_advanced_features"
-                            android:textColor="#ffffff"
-                            android:textSize="12sp" />
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llBottom"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvConsumption"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#dbf3fc"
-                    android:orientation="vertical"
-                    android:padding="18dp"
-                    android:visibility="gone" >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="22dp"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:id="@+id/tvCurve"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:button="@null"
-                            android:drawablePadding="5dp"
-                            android:drawableTop="@drawable/icon_curve"
-                            android:gravity="center"
-                            android:text="@string/main_control_temp_curve"
-                            android:textColor="@color/text_gray"
-                            android:textSize="12sp" />
-
-                        <CheckedTextView
-                            android:id="@+id/tvUnit"
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="1"
-                            android:button="@null"
-                            android:drawablePadding="5dp"
-                            android:drawableTop="@drawable/unit_selector"
-                            android:gravity="center"
-                            android:text="@string/main_control_celsius"
-                            android:textColor="@drawable/wing_text_selector"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:button="@null"
-                            android:drawablePadding="5dp"
-                            android:drawableTop="@drawable/icon_curve"
-                            android:enabled="false"
-                            android:gravity="center"
-                            android:text="@string/main_control_temp_curve"
-                            android:textColor="@color/text_gray"
-                            android:textSize="12sp"
-                            android:visibility="invisible" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:button="@null"
-                            android:drawablePadding="5dp"
-                            android:drawableTop="@drawable/icon_curve"
-                            android:enabled="false"
-                            android:gravity="center"
-                            android:text="@string/main_control_temp_curve"
-                            android:textColor="@color/text_gray"
-                            android:textSize="12sp"
-                            android:visibility="invisible" />
-                    </LinearLayout>
-                </LinearLayout>
+                    android:paddingLeft="5dp"
+                    android:text="@string/timing"
+                    android:textColor="@color/yellow"
+                    android:textSize="18sp" />
             </LinearLayout>
 
-            <ScrollView
-                android:id="@+id/sclContent"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnAppoinment"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/llFooter"
-                android:layout_alignParentTop="true"
-                android:scrollbars="none" >
+                android:layout_below="@id/btnPower"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/home_button_appoinment"
+                android:gravity="center_horizontal" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/llTiming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnAppoinment"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:src="@drawable/home_appointment2" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/timing"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
 
-                        <ImageButton
-                            android:id="@+id/ibLeftArrow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:background="@null"
-                            android:src="@drawable/icon_left" />
+                <TextView
+                    android:id="@+id/tvTiming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/timing"
+                    android:textColor="@color/text_orange"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tvMode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_centerVertical="true"
-                            android:drawableTop="@drawable/icon_model_cool"
-                            android:gravity="center"
-                            android:text="@string/main_control_refrigeration"
-                            android:textColor="@color/text_blue"
-                            android:textSize="15sp" />
-
-                        <ImageButton
-                            android:id="@+id/ibRightArrow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:background="@null"
-                            android:src="@drawable/icon_right" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="290dp"
-                        android:layout_height="290dp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center" >
-
-                        <com.gizwits.framework.widget.CircularSeekBar
-                            android:id="@+id/csbSeekbar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:rotation="-180" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:gravity="center"
-                            android:orientation="vertical" >
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal" >
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/main_control_indoor_temp"
-                                    android:textColor="@color/text_gray"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:id="@+id/tvInnerTemperature"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="16"
-                                    android:textColor="@color/text_gray"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/tvInnerUnit"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/main_control_degree"
-                                    android:textColor="@color/text_gray"
-                                    android:textSize="16sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="top"
-                                android:orientation="horizontal" >
-
-                                <TextView
-                                    android:id="@+id/tvSettingTemerature"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="19"
-                                    android:textColor="#00aeff"
-                                    android:textSize="94sp" />
-
-                                <TextView
-                                    android:id="@+id/tvSettingUnit"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:text="@string/main_control_degree"
-                                    android:textColor="#797979"
-                                    android:textSize="25sp" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/main_control_set_temp"
-                                android:textColor="@color/text_gray"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="33dp"
-                        android:orientation="horizontal"
-                        android:visibility="visible" >
-
-                        <RadioGroup
-                            android:id="@+id/rgWing"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal" >
-
-                            <RadioButton
-                                android:id="@+id/rbWindLow"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/transparent"
-                                android:button="@null"
-                                android:drawableTop="@drawable/wing_low_selector"
-                                android:gravity="center"
-                                android:text="@string/main_control_low_wind"
-                                android:textColor="@drawable/wing_text_selector" />
-
-                            <RadioButton
-                                android:id="@+id/rbWindMin"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/transparent"
-                                android:button="@null"
-                                android:drawableTop="@drawable/wing_mid_selector"
-                                android:gravity="center"
-                                android:text="@string/main_control_regular_wind"
-                                android:textColor="@drawable/wing_text_selector" />
-
-                            <RadioButton
-                                android:id="@+id/rbWindHigh"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@color/transparent"
-                                android:button="@null"
-                                android:drawableTop="@drawable/wing_high_selector"
-                                android:gravity="center"
-                                android:text="@string/main_control_high_wind"
-                                android:textColor="@drawable/wing_text_selector" />
-                        </RadioGroup>
-
-                        <CheckBox
-                            android:id="@+id/cbWindShake"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@color/transparent"
-                            android:button="@null"
-                            android:drawableTop="@drawable/wing_shake_selector"
-                            android:gravity="center"
-                            android:text="@string/main_control_shake_wind"
-                            android:textColor="@drawable/wing_text_selector" />
-                    </LinearLayout>
-                </LinearLayout>
-            </ScrollView>
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rlPowerOff"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#0f6cea"
-        android:visibility="gone" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true" >
-
-            <ImageView
-                android:id="@+id/ivBack"
+            <LinearLayout
+                android:id="@+id/llDelay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="10dp"
-                android:src="@drawable/return_icon" />
+                android:layout_alignLeft="@id/llTiming"
+                android:layout_below="@id/llTiming"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tvTitleOff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/main_control_title"
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home_appointment1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/delay"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvDelay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/timing"
+                    android:textColor="@color/text_orange"
+                    android:textSize="18sp" />
+            </LinearLayout>
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tvPowerOn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawablePadding="10dp"
-            android:drawableTop="@drawable/power_big"
-            android:gravity="center"
-            android:text="@string/main_control_turn_on"
-            android:textColor="#ffffff"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/tvPowerOnStr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:drawableLeft="@drawable/start_time"
-            android:drawablePadding="5dp"
-            android:gravity="center"
-            android:text="@string/main_control_timing_turn_on"
-            android:textColor="#ffffff"
-            android:textSize="12sp" />
     </RelativeLayout>
 
 </RelativeLayout>

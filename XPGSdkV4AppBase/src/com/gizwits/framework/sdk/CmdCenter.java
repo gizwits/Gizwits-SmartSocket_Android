@@ -375,75 +375,81 @@ public class CmdCenter {
 	 * @param xpgWifiDevice the xpg wifi device
 	 * @param isOn the is on
 	 */
-	public void cSwitchOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
+	public void cPowerOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
 		cWrite(xpgWifiDevice, JsonKeys.ON_OFF, isOn);
 		cGetStatus(xpgWifiDevice);
 	}
-
+	
 	/**
-	 * C set shake.
+	 * C timing on.
 	 *
 	 * @param xpgWifiDevice the xpg wifi device
 	 * @param isOn the is on
 	 */
-	public void cSetShake(XPGWifiDevice xpgWifiDevice, boolean isOn) {
-		cWrite(xpgWifiDevice, JsonKeys.FAN_SHAKE, isOn);
+	public void cTimingOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
+		cWrite(xpgWifiDevice, JsonKeys.TIME_ON_OFF, isOn);
 		cGetStatus(xpgWifiDevice);
 	}
-
+	
 	/**
-	 * C mode.
+	 * C delay on.
 	 *
 	 * @param xpgWifiDevice the xpg wifi device
-	 * @param mode the mode
+	 * @param isOn the is on
 	 */
-	public void cMode(XPGWifiDevice xpgWifiDevice, int mode) {
-		cWrite(xpgWifiDevice, JsonKeys.MODE, mode);
+	public void cDelayOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
+		cWrite(xpgWifiDevice, JsonKeys.COUNT_DOWN_ON_OFF, isOn);
 		cGetStatus(xpgWifiDevice);
 	}
-
+	
 	/**
-	 * C fan speed.
+	 * C timing start.
 	 *
 	 * @param xpgWifiDevice the xpg wifi device
-	 * @param fanSpeed the fan speed
+	 * @param hour
+	 * @param min
 	 */
-	public void cFanSpeed(XPGWifiDevice xpgWifiDevice, int fanSpeed) {
-		cWrite(xpgWifiDevice, JsonKeys.FAN_SPEED, fanSpeed);
+	public void cTimingStart(XPGWifiDevice xpgWifiDevice, int hour,int min) {
+		int minTotal=hour*60+min;
+		cWrite(xpgWifiDevice, JsonKeys.TIME_ON_MINUTE, minTotal);
 		cGetStatus(xpgWifiDevice);
 	}
-
+	
 	/**
-	 * C time on.
+	 * C timing end.
 	 *
 	 * @param xpgWifiDevice the xpg wifi device
-	 * @param time the time
+	 * @param hour
+	 * @param min
 	 */
-	public void cTimeOn(XPGWifiDevice xpgWifiDevice, int time) {
-		cWrite(xpgWifiDevice, JsonKeys.TIME_ON, time);
+	public void cTimingEnd(XPGWifiDevice xpgWifiDevice, int hour,int min) {
+		int minTotal=hour*60+min;
+		cWrite(xpgWifiDevice, JsonKeys.TIME_OFF_MINUTE, minTotal);
 		cGetStatus(xpgWifiDevice);
 	}
-
+	
 	/**
-	 * C time off.
+	 * C delay time.
 	 *
 	 * @param xpgWifiDevice the xpg wifi device
-	 * @param time the time
+	 * @param hour
+	 * @param min
 	 */
-	public void cTimeOff(XPGWifiDevice xpgWifiDevice, int time) {
-		cWrite(xpgWifiDevice, JsonKeys.TIME_OFF, time);
+	public void cDelayTime(XPGWifiDevice xpgWifiDevice, int hour,int min) {
+		int minTotal=hour*60+min;
+		cWrite(xpgWifiDevice, JsonKeys.COUNT_DOWN_MINUTE, minTotal);
 		cGetStatus(xpgWifiDevice);
 	}
-
+	
 	/**
-	 * C set temp.
+	 * C week repeat.
 	 *
 	 * @param xpgWifiDevice the xpg wifi device
-	 * @param templature the templature
+	 * @param hour
+	 * @param min
 	 */
-	public void cSetTemp(XPGWifiDevice xpgWifiDevice, int templature) {
-		cWrite(xpgWifiDevice, JsonKeys.SET_TEMP, templature);
+	public void cWeekRepeat(XPGWifiDevice xpgWifiDevice, int repeat) {
+		cWrite(xpgWifiDevice, JsonKeys.WEEK_REPEAT, repeat);
 		cGetStatus(xpgWifiDevice);
 	}
-
 }

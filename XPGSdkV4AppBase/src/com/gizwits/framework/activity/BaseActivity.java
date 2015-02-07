@@ -68,6 +68,13 @@ public class BaseActivity extends Activity {
 
 	/** 当前操作的设备 */
 	protected static XPGWifiDevice mXpgWifiDevice;
+	
+	/** The device data map. */
+	protected static ConcurrentHashMap<String, Object> deviceDataMap;
+
+	/** The statu map. */
+	protected static ConcurrentHashMap<String, Object> statuMap;
+
 
 	/** The handler. */
 	private Handler handler = new Handler() {

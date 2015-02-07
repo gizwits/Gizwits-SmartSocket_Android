@@ -67,8 +67,8 @@
         <activity android:name="com.gizwits.powersocket.activity.slipbar.SlipBarActivity" />
         <activity android:name="com.gizwits.powersocket.activity.control.MainControlActivity"
             android:launchMode="singleTask" />
+        <activity android:name="com.gizwits.powersocket.activity.control.AppointmentActivity" />
         <activity android:name="com.gizwits.powersocket.activity.control.AlarmListActicity" />
-        <activity android:name="com.gizwits.powersocket.activity.control.CurveActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/top" >
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/icon_return" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/appoinment"
+            android:textColor="@color/background_blue"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llAppointmentMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tvTiming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:paddingLeft="15dp"
+                android:text="@string/timing_appointment"
+                android:textColor="@drawable/text_selector"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tvTimingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:text="@string/timing_appointment"
+                android:textColor="@color/text_orange"
+                android:textSize="22sp" />
+
+            <ToggleButton
+                android:id="@+id/tbTimingFlag"
+                android:layout_width="75dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/toggle_selector2"
+                android:textOff=""
+                android:textOn="" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tvDelay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:paddingLeft="15dp"
+                android:text="@string/delay_appointment"
+                android:textColor="@drawable/text_selector"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tvDelayTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:text="@string/delay_appointment"
+                android:textColor="@color/text_orange"
+                android:textSize="22sp" />
+
+            <ToggleButton
+                android:id="@+id/tbDelayFlag"
+                android:layout_width="75dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/toggle_selector2"
+                android:textOff=""
+                android:textOn="" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_gray" />
+    </LinearLayout>
+
+</LinearLayout>
