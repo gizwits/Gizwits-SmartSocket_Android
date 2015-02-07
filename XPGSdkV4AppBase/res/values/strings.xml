@@ -11,6 +11,8 @@
     <string name="delay">延时</string>
     <string name="delay_appointment">延时预约</string>
     <string name="consumption">用电量：</string>
+    <string name="start_time">开启时间</string>
+    <string name="end_time">关闭时间</string>
     
     
     <string name="pull_to_refresh">下拉刷新</string>

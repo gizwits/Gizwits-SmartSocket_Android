@@ -3,6 +3,7 @@ package com.gizwits.powersocket.activity.control;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.config.JsonKeys;
 import com.gizwits.framework.utils.StringUtils;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -30,6 +32,7 @@ public class AppointmentActivity extends BaseActivity implements OnClickListener
 	private ToggleButton tbTiming;
 	private ToggleButton tbDelay;
 	private ImageView ivBack;
+	private GridView gvDateSelect;
 
 	/**
 	 * ClassName: Enum handler_key. <br/>
@@ -107,6 +110,7 @@ public class AppointmentActivity extends BaseActivity implements OnClickListener
 	}
 
 	private void initView() {
+		gvDateSelect=(GridView) findViewById(R.id.gvDateSelect);
 		tvTiming = (TextView) findViewById(R.id.tvTiming);
 		tvDelay = (TextView) findViewById(R.id.tvDelay);
 		tvTimingTime = (TextView) findViewById(R.id.tvTimingTime);
