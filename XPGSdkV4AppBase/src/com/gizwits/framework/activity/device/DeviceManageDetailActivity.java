@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.adapter.ManageDetailsAdapter;
+import com.gizwits.framework.config.DeviceDetails;
 import com.gizwits.framework.utils.DialogManager;
 import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
@@ -71,17 +72,8 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	private RelativeLayout rlDetailsChoosing;
 	
 	private RelativeLayout rlDetails;
-//	/** The tv init date. */
-//	private TextView tvDate;
-//
-//	/** The tv init place. */
-//	private TextView tvPlace;;
-//
-//	/** The tv device type. */
-//	private TextView tvDeviceType;
-//
-//	/** The tv device code. */
-//	private TextView tvDeviceCode;
+	
+	private ImageView ivDetails;
 
 	/** The et device name. */
 	private EditText etName;
@@ -170,6 +162,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 				break;
 			case GET_Details:
 				rlDetailsChoosing.setVisibility(View.GONE);
+				ivDetails.setImageResource(DeviceDetails.findByNum(msg.arg1).getResList());
 				break;
 			}
 		}
@@ -212,6 +205,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	private void initViews() {
 		ivBack = (ImageView) findViewById(R.id.ivBack);
 		ivTick = (ImageView) findViewById(R.id.ivTick);
+		ivDetails=(ImageView) findViewById(R.id.ivDetails);
 		rlDetailsChoosing=(RelativeLayout) findViewById(R.id.rlDetailsChoosing);
 		rlDetails=(RelativeLayout) findViewById(R.id.rlDetails);
 		gvDetails=(GridView) findViewById(R.id.gvDetails);
@@ -225,7 +219,8 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 					long arg3) {
 				mManageDetailsAdapter.setSelected(arg2);
 				mManageDetailsAdapter.notifyDataSetChanged();
-				handler.sendEmptyMessageDelayed(handler_key.GET_Details.ordinal(), 380);
+				Message msg=handler.obtainMessage(handler_key.GET_Details.ordinal(), arg2, 0);
+				handler.sendMessageDelayed(msg, 380);
 			}
 		});
 //		tvDate = (TextView) findViewById(R.id.tvDate);

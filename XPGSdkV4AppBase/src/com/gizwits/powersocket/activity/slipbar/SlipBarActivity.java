@@ -76,15 +76,15 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 
 	/** The rl account. */
 	private RelativeLayout rlAccount;
+	
+	/** The rl deviceList. */
+	private RelativeLayout rlDeviceList;
 
 	/** The rl help. */
 	private RelativeLayout rlHelp;
 
 	/** The rl about. */
 	private RelativeLayout rlAbout;
-
-	/** The btn device list. */
-	private Button btnDeviceList;
 
 	/** The lv device. */
 	private ListView lvDevice;
@@ -240,8 +240,8 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 		rlAccount = (RelativeLayout) findViewById(R.id.rlAccount);
 		rlHelp = (RelativeLayout) findViewById(R.id.rlHelp);
 		rlAbout = (RelativeLayout) findViewById(R.id.rlAbout);
+		rlDeviceList=(RelativeLayout) findViewById(R.id.rlDeviceList);
 		lvDevice = (ListView) findViewById(R.id.lvDevice);
-		btnDeviceList = (Button) findViewById(R.id.btnDeviceList);
 		mCover = (ImageView) findViewById(R.id.slidedout_cover);
 		mAdapter = new DeviceAdapter(this, bindlist);
 		lvDevice.setAdapter(mAdapter);
@@ -258,7 +258,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 		rlAccount.setOnClickListener(this);
 		rlHelp.setOnClickListener(this);
 		rlAbout.setOnClickListener(this);
-		btnDeviceList.setOnClickListener(this);
+		rlDeviceList.setOnClickListener(this);
 		lvDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -343,7 +343,7 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 				backToMain();
 			}
 			break;
-		case R.id.btnDeviceList:
+		case R.id.rlDeviceList:
 			mCenter.cDisconnect(mXpgWifiDevice);
 			DisconnectOtherDevice();
 			IntentUtils.getInstance().startActivity(SlipBarActivity.this,

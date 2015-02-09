@@ -1,5 +1,6 @@
 package com.gizwits.framework.adapter;
 
+import com.gizwits.framework.config.DeviceDetails;
 import com.gizwits.powersocket.R;
 
 import android.content.Context;
@@ -18,17 +19,6 @@ public class ManageDetailsAdapter extends BaseAdapter{
 	/** The context. */
 	private Context context;
 	
-	private String[] name={"电视","插座","空调","冰箱","洗衣机","DVD","音响","厨具","风扇"};
-	
-	private int [] resSelected={R.drawable.head_icon1_down,R.drawable.head_icon2_down
-			,R.drawable.head_icon3_down,R.drawable.head_icon4_down,R.drawable.head_icon5_down
-			,R.drawable.head_icon6_down,R.drawable.head_icon7_down,R.drawable.head_icon8_down
-			,R.drawable.head_icon9_down};
-	
-	private int [] res={R.drawable.head_icon1,R.drawable.head_icon2,R.drawable.head_icon3
-			,R.drawable.head_icon4,R.drawable.head_icon5,R.drawable.head_icon6,R.drawable.head_icon7
-			,R.drawable.head_icon8,R.drawable.head_icon9};
-	
 	private int Selected=0;
 	
 	public ManageDetailsAdapter(Context c){
@@ -38,7 +28,7 @@ public class ManageDetailsAdapter extends BaseAdapter{
 	
 	@Override
 	public int getCount() {
-		return name.length;
+		return 9;
 	}
 
 	@Override
@@ -63,16 +53,16 @@ public class ManageDetailsAdapter extends BaseAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		
+		DeviceDetails mDetails=DeviceDetails.findByNum(position);
 		if(position==Selected){
 			holder.ivDetails.setBackgroundColor(context.getResources().getColor(R.color.background_blue));
-			holder.ivDetails.setImageResource(resSelected[position]);
+			holder.ivDetails.setImageResource(mDetails.getResSelected());
 		}else{
 			holder.ivDetails.setBackgroundColor(context.getResources().getColor(R.color.white));
-			holder.ivDetails.setImageResource(res[position]);
+			holder.ivDetails.setImageResource(mDetails.getRes());
 		}
 		
-		holder.tvDetails.setText(name[position]);
+		holder.tvDetails.setText(mDetails.getName());
 		
 		return convertView;
 	}
