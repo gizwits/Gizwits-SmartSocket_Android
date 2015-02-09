@@ -16,14 +16,14 @@
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/return_icon" />
+            android:src="@drawable/icon_return" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/change_password"
-            android:textColor="@android:color/white"
+            android:textColor="@color/text_blue"
             android:textSize="22sp" />
     </RelativeLayout>
 

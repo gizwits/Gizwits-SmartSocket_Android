@@ -27,12 +27,17 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gizwits.framework.activity.BaseActivity;
+import com.gizwits.framework.adapter.ManageDetailsAdapter;
 import com.gizwits.framework.utils.DialogManager;
 import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
@@ -56,18 +61,27 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	
 	/** The iv tick. */
 	private ImageView ivTick;
+	
+	/** The gv gvDetails. */
+	private GridView gvDetails;
 
-	/** The tv init date. */
-	private TextView tvDate;
-
-	/** The tv init place. */
-	private TextView tvPlace;;
-
-	/** The tv device type. */
-	private TextView tvDeviceType;
-
-	/** The tv device code. */
-	private TextView tvDeviceCode;
+	/** The adapter ManageDetailsAdapter. */
+	private ManageDetailsAdapter mManageDetailsAdapter;
+	
+	private RelativeLayout rlDetailsChoosing;
+	
+	private RelativeLayout rlDetails;
+//	/** The tv init date. */
+//	private TextView tvDate;
+//
+//	/** The tv init place. */
+//	private TextView tvPlace;;
+//
+//	/** The tv device type. */
+//	private TextView tvDeviceType;
+//
+//	/** The tv device code. */
+//	private TextView tvDeviceCode;
 
 	/** The et device name. */
 	private EditText etName;
@@ -110,6 +124,9 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 		
 		/** 获取绑定列表 */
 		GET_BOUND,
+		
+		/** 获取设备图片 */
+		GET_Details,
 
 	}
 
@@ -150,6 +167,9 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 				String uid = setmanager.getUid();
 				String token = setmanager.getToken();
 				mCenter.cGetBoundDevices(uid, token);
+				break;
+			case GET_Details:
+				rlDetailsChoosing.setVisibility(View.GONE);
 				break;
 			}
 		}
@@ -192,10 +212,26 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	private void initViews() {
 		ivBack = (ImageView) findViewById(R.id.ivBack);
 		ivTick = (ImageView) findViewById(R.id.ivTick);
-		tvDate = (TextView) findViewById(R.id.tvDate);
-		tvPlace = (TextView) findViewById(R.id.tvPlace);
-		tvDeviceType = (TextView) findViewById(R.id.tvDeviceType);
-		tvDeviceCode = (TextView) findViewById(R.id.tvDeviceCode);
+		rlDetailsChoosing=(RelativeLayout) findViewById(R.id.rlDetailsChoosing);
+		rlDetails=(RelativeLayout) findViewById(R.id.rlDetails);
+		gvDetails=(GridView) findViewById(R.id.gvDetails);
+		gvDetails.setSelector(R.color.transparent);
+		mManageDetailsAdapter=new ManageDetailsAdapter(this);
+		gvDetails.setAdapter(mManageDetailsAdapter);
+		gvDetails.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				mManageDetailsAdapter.setSelected(arg2);
+				mManageDetailsAdapter.notifyDataSetChanged();
+				handler.sendEmptyMessageDelayed(handler_key.GET_Details.ordinal(), 380);
+			}
+		});
+//		tvDate = (TextView) findViewById(R.id.tvDate);
+//		tvPlace = (TextView) findViewById(R.id.tvPlace);
+//		tvDeviceType = (TextView) findViewById(R.id.tvDeviceType);
+//		tvDeviceCode = (TextView) findViewById(R.id.tvDeviceCode);
 		etName = (EditText) findViewById(R.id.etName);
 		btnDelDevice = (Button) findViewById(R.id.btnDelDevice);
 		unbindDialog = DialogManager.getUnbindDialog(this, this);
@@ -213,6 +249,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 		btnDelDevice.setOnClickListener(this);
 		ivBack.setOnClickListener(this);
 		ivTick.setOnClickListener(this);
+		rlDetails.setOnClickListener(this);
 	}
 
 	/*
@@ -249,6 +286,9 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 			mCenter.cUnbindDevice(setmanager.getUid(), setmanager.getToken(),
 					xpgWifiDevice.getDid(), xpgWifiDevice.getPasscode());
 			break;
+		case R.id.rlDetails:
+			rlDetailsChoosing.setVisibility(View.VISIBLE);
+			break;
 		}
 
 	}
@@ -258,6 +298,9 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	 */
 	@Override
 	public void onBackPressed() {
+		if(rlDetailsChoosing.getVisibility()==View.VISIBLE)
+			rlDetailsChoosing.setVisibility(View.GONE);
+		else
 		finish();
 	}
 

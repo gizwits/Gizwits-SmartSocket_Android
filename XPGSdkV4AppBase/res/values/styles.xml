@@ -35,7 +35,7 @@
     <style name="TopLayout">
          <item name="android:layout_height">60dp</item>
          <item name="android:layout_width">fill_parent</item>
-         <item name="android:background">@drawable/top_tall</item>
+         <item name="android:background">@drawable/top</item>
          <item name="android:orientation">horizontal</item>
         
     </style>

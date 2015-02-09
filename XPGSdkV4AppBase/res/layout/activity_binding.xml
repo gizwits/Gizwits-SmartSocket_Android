@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:visibility="invisible"
             android:padding="10dp"
-            android:src="@drawable/return_icon" />
+            android:src="@drawable/icon_return" />
 
         <ImageView
             android:id="@+id/ivStep"

@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:padding="10dp"
-            android:src="@drawable/return_icon" />
+            android:src="@drawable/icon_return" />
 
         <TextView
             android:id="@+id/ivStep"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/forget_password"
-            android:textColor="@android:color/white"
+            android:textColor="@color/text_blue"
             android:textSize="18sp" />
     </RelativeLayout>
 

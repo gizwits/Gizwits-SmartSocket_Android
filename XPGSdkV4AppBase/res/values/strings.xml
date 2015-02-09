@@ -15,6 +15,16 @@
     <string name="end_time">关闭时间</string>
     <string name="repeat">重复</string>
     
+    <string name="tv">电视</string>
+    <string name="socket">插座</string>
+    <string name="aircondition">空调</string>
+    <string name="fridge">冰箱</string>
+    <string name="wash">洗衣机</string>
+    <string name="dvd">DVD</string>
+    <string name="sound">音响</string>
+    <string name="kitchen">厨具</string>
+    <string name="fan">风扇</string>
+    
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="dialog_sure_to_delete">确定要删除设备吗？</string>
     <string name="dialog_sure_to_off">确定要关闭设备吗？</string>
@@ -53,11 +63,12 @@
 	<string name="password">密码</string>
 	<string name="curve_text1">室内温度曲线</string>
 	<string name="device_list">设备列表</string>
-	<string name="device_manage">设备管理</string>
+	<string name="device_manage">插座管理</string>
 	<string name="device_manage_text1">生产日期：XXXX.XX.XX</string>
 	<string name="device_manage_text2">生产地点：XXXXX</string>
 	<string name="device_manage_text3">设备型号：XXXXX</string>
 	<string name="device_manage_text4">设备序列号：XXXXXXXXXXXXXXXX</string>
+	<string name="device_details_text">型号：tp3321             生产日前：2013/01/01\n产地：中国             生产批次：338867A5</string>
 	<string name="device_name">设备名称</string>
 	<string name="name">名称</string>
 	<string name="delete_aircondition">删除空调</string>
@@ -118,7 +129,6 @@
 	
 	<string name="no_device">没有设备</string>
 	<string name="device_online">在线设备</string>
-	<string name="aircondition">空调</string>
 	<string name="remote_online">在线设备</string>
 	<string name="not_processing">暂不处理</string>
 	<string name="call_customer_service">拨打客服</string>

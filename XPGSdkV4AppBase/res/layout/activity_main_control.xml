@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:padding="10dp"
+                android:paddingLeft="10dp"
                 android:src="@drawable/home_icon" />
 
             <TextView

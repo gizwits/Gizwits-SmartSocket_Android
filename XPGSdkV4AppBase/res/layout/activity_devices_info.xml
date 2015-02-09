@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
     <RelativeLayout
         android:id="@+id/rlTop"
@@ -14,16 +13,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/return_icon" />
+            android:padding="10dp"
+            android:src="@drawable/icon_return" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/device_manage"
-            android:textColor="@android:color/white"
+            android:textColor="@color/text_blue"
             android:textSize="22sp" />
 
         <ImageView
@@ -32,77 +31,91 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/confirm_icon" />
+            android:padding="10dp"
+            android:src="@drawable/slib_tick" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#EFEFEF"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingLeft="20dp" >
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTop"
+        android:background="@color/background_gray"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/rlDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:background="@color/white" >
+
+            <ImageView
+                android:id="@+id/ivDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:src="@drawable/details_icon2" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivDetails"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="5dp"
+                android:paddingLeft="150dp"
+                android:src="@drawable/icon_edit" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/etName"
+            style="@style/EditTextTheme"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:hint="@string/name"
+            android:maxLength="10"
+            android:textColor="@color/background_blue" />
 
         <TextView
-            android:id="@+id/tvDate"
-            style="@style/TextViewGray"
-            android:text="@string/device_manage_text1"
-            android:textColor="#969696" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/device_details_text"
+            android:textColor="@color/text_gray" />
 
-        <TextView
-            android:id="@+id/tvPlace"
-            style="@style/TextViewGray"
-            android:layout_marginTop="8dp"
-            android:text="@string/device_manage_text2"
-            android:textColor="#969696" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-        <TextView
-            android:id="@+id/tvDeviceType"
-            style="@style/TextViewGray"
-            android:layout_marginTop="8dp"
-            android:text="@string/device_manage_text3"
-            android:textColor="#969696" />
-
-        <TextView
-            android:id="@+id/tvDeviceCode"
-            style="@style/TextViewGray"
-            android:layout_marginTop="8dp"
-            android:text="@string/device_manage_text4"
-            android:textColor="#969696" />
+            <Button
+                android:id="@+id/btnDelDevice"
+                style="@style/ButtonBlue"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="18dp"
+                android:text="@string/delete_aircondition" />
+        </RelativeLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/name"
-        android:textColor="#9A9A9A"
-        android:textSize="16dp" />
-
-    <EditText
-        android:id="@+id/etName"
-        style="@style/EditTextTheme"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="4dp"
-        android:maxLength="10"
-        android:hint="@string/device_name"
-        android:textColor="@color/background_blue" />
-
     <RelativeLayout
+        android:id="@+id/rlDetailsChoosing"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/background_gray"
+        android:layout_below="@id/rlTop" >
 
-        <Button
-            android:id="@+id/btnDelDevice"
-            style="@style/ButtonBlue"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="18dp"
-            android:text="@string/delete_aircondition" />
+        <GridView
+            android:id="@+id/gvDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/text_gray"
+            android:numColumns="3"
+            android:verticalSpacing="2dp" />
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
