@@ -18,13 +18,9 @@
 package com.gizwits.powersocket.activity.control;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -32,39 +28,24 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.config.JsonKeys;
 import com.gizwits.framework.entity.DeviceAlarm;
-import com.gizwits.framework.utils.DialogManager;
-import com.gizwits.framework.utils.StringUtils;
-import com.gizwits.framework.utils.DialogManager.OnTimingChosenListener;
-import com.gizwits.framework.widget.CircularSeekBar;
+import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
 import com.gizwits.powersocket.activity.slipbar.SlipBarActivity;
-import com.xpg.common.system.IntentUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 // TODO: Auto-generated Javadoc
@@ -83,7 +64,7 @@ public class MainControlActivity extends BaseActivity implements
 	// private XPGWifiDevice device;
 	/** The seek bar. */
 	// private CircularSeekBar seekBar;
-
+	
 	/** The scl content. */
 	private ScrollView sclContent;
 
@@ -182,7 +163,6 @@ public class MainControlActivity extends BaseActivity implements
 						Log.i("info", (String) deviceDataMap.get("data"));
 						inputDataToMaps(statuMap,
 								(String) deviceDataMap.get("data"));
-
 					}
 					// alarmList.clear();
 					// if (deviceDataMap.get("alters") != null) {
@@ -510,7 +490,7 @@ public class MainControlActivity extends BaseActivity implements
 	protected void didReceiveData(XPGWifiDevice device,
 			ConcurrentHashMap<String, Object> dataMap, int result) {
 		Log.e(TAG, "didReceiveData");
-		this.deviceDataMap = dataMap;
+		deviceDataMap = dataMap;
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
 
@@ -539,43 +519,6 @@ public class MainControlActivity extends BaseActivity implements
 	@Override
 	protected void didDisconnected(XPGWifiDevice device) {
 		super.didDisconnected(device);
-	}
-
-	/**
-	 * 把状态信息存入表
-	 * 
-	 * @param map
-	 *            the map
-	 * @param json
-	 *            the json
-	 * @throws JSONException
-	 *             the JSON exception
-	 */
-	private void inputDataToMaps(ConcurrentHashMap<String, Object> map,
-			String json) throws JSONException {
-		Log.i("revjson", json);
-		JSONObject receive = new JSONObject(json);
-		Iterator actions = receive.keys();
-		while (actions.hasNext()) {
-
-			String action = actions.next().toString();
-			Log.i("revjson", "action=" + action);
-			// 忽略特殊部分
-			if (action.equals("cmd") || action.equals("qos")
-					|| action.equals("seq") || action.equals("version")) {
-				continue;
-			}
-			JSONObject params = receive.getJSONObject(action);
-			Log.i("revjson", "params=" + params);
-			Iterator it_params = params.keys();
-			while (it_params.hasNext()) {
-				String param = it_params.next().toString();
-				Object value = params.get(param);
-				map.put(param, value);
-				Log.i(TAG, "Key:" + param + ";value" + value);
-			}
-		}
-		handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
 	}
 
 	/**

@@ -28,7 +28,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.gizwits.framework.widget.ArrayWheelAdapter;
+import com.gizwits.framework.widget.NumericWheelAdapter;
 import com.gizwits.framework.widget.WheelView;
 import com.gizwits.powersocket.R;
 
@@ -192,7 +192,84 @@ public class DialogManager {
 	}
 
 	/**
-	 * 定时开关机对话框.
+	 * 定时对话框.
+	 *
+	 * @param ctx the ctx
+	 * @param l the l
+	 * @param titleStr the title str
+	 * @param index the index
+	 * @return the wheel timing dialog
+	 */
+	public static Dialog get2WheelTimingDialog(final Activity ctx,
+			final On2TimingChosenListener l, String titleStr, int indexOne,int indexTwo) {
+		
+		DisplayMetrics metric = new DisplayMetrics();
+		ctx.getWindowManager().getDefaultDisplay().getMetrics(metric);
+		int width = metric.widthPixels; 
+		
+		final Dialog dialog = new Dialog(ctx, R.style.noBackgroundDialog) {
+		};
+		LayoutInflater layoutInflater = LayoutInflater.from(ctx);
+		View v = layoutInflater.inflate(
+				R.layout.dialog_2choose_timing_conditioner, null);
+		TextView title = (TextView) v.findViewById(R.id.wifiSSID_tv);
+		title.setText(titleStr);
+		Button confi_btn = (Button) v.findViewById(R.id.confi_btn);
+		Button cancel_btn = (Button) v.findViewById(R.id.cancel_btn);
+		cancel_btn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				dismissDialog(ctx, dialog);
+			}
+		});
+		
+		final WheelView wheelveiew = (WheelView) v
+				.findViewById(R.id.wheel_view_timing);
+		final WheelView wheelveiewMin = (WheelView) v
+				.findViewById(R.id.wheel_view_timing_min);
+		
+		if(width<=540){
+			wheelveiew.setTEXT_SIZE(30);
+			wheelveiew.setADDITIONAL_ITEM_HEIGHT(60);
+			wheelveiew.setADDITIONAL_ITEMS_SPACE(5);
+			
+			wheelveiewMin.setTEXT_SIZE(30);
+			wheelveiewMin.setADDITIONAL_ITEM_HEIGHT(60);
+			wheelveiewMin.setADDITIONAL_ITEMS_SPACE(5);
+		}
+		
+		wheelveiew.setAdapter(new NumericWheelAdapter(0,23));
+		wheelveiew.setCyclic(true);
+		wheelveiew.setLabel(":");
+		// 初始化时显示的数据
+		wheelveiew.setCurrentItem(indexOne);
+		
+		wheelveiewMin.setAdapter(new NumericWheelAdapter(0,59,"%02d"));
+		wheelveiewMin.setCyclic(true);
+		// 初始化时显示的数据
+		wheelveiewMin.setCurrentItem(indexTwo);
+		
+		confi_btn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				int indexHour = wheelveiew.getCurrentItem();
+				int indexMin = wheelveiewMin.getCurrentItem();
+				l.timingChosen(indexHour,indexMin);
+				dismissDialog(ctx, dialog);
+			}
+		});
+		
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.setCancelable(false);
+		dialog.setContentView(v);
+		return dialog;
+	}
+
+	/**
+	 * 延时对话框.
 	 *
 	 * @param ctx the ctx
 	 * @param l the l
@@ -207,12 +284,6 @@ public class DialogManager {
 		ctx.getWindowManager().getDefaultDisplay().getMetrics(metric);
 		int width = metric.widthPixels; 
 		
-		
-		String[] hours = { "  1", "  2", "  3", "  4", "  5", "  6", "  7", "  8", "  9", "  10",
-				"  11", "  12", "  13", "  14", "  15", "  16", "  17", "  18", "  19", "  20",
-				"  21", "  22", "  23", "  24", "关闭" };
-		final int[] hour = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-				16, 17, 18, 19, 20, 21, 22, 23, 24, 0 };
 		final Dialog dialog = new Dialog(ctx, R.style.noBackgroundDialog) {
 		};
 		LayoutInflater layoutInflater = LayoutInflater.from(ctx);
@@ -231,9 +302,9 @@ public class DialogManager {
 			wheelveiew.setADDITIONAL_ITEMS_SPACE(5);
 		}
 		
-		wheelveiew.setAdapter(new ArrayWheelAdapter<String>(hours));
+		wheelveiew.setAdapter(new NumericWheelAdapter(0,23));
 		wheelveiew.setCyclic(true);
-		wheelveiew.setLabel("小时");
+		wheelveiew.setLabel("h后");
 		// 初始化时显示的数据
 		wheelveiew.setCurrentItem(index);
 		cancel_btn.setOnClickListener(new View.OnClickListener() {
@@ -248,7 +319,7 @@ public class DialogManager {
 			@Override
 			public void onClick(View arg0) {
 				int index = wheelveiew.getCurrentItem();
-				l.timingChosen(hour[index]);
+				l.timingChosen(index);
 				dismissDialog(ctx, dialog);
 			}
 		});
@@ -259,7 +330,7 @@ public class DialogManager {
 		dialog.setContentView(v);
 		return dialog;
 	}
-
+	
 	/**
 	 * Show dialog.
 	 *
@@ -285,6 +356,25 @@ public class DialogManager {
 			dialog.dismiss();
 	}
 
+	/**
+	 * wheel view dialog.
+	 *
+	 * @see OnTimingChosenEvent
+	 */
+
+	public interface On2TimingChosenListener {
+		
+		/**
+		 * Timing hour chosen.
+		 *
+		 * @param HourTime the hour time
+		 * 
+		 * @param HourTime the hour time
+		 */
+		public void timingChosen(int HourTime,int MinTime);
+		
+	}
+	
 	/**
 	 * wheel view dialog.
 	 *

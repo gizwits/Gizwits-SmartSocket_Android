@@ -1,5 +1,7 @@
 package com.xpg.common.useful;
 
+import java.util.ArrayList;
+
 /**
  * <P>
  * byte数组操作类，包含byte数组的输出，格式化，转换等方法。
@@ -26,7 +28,7 @@ public class ByteUtils {
 		}
 		return ret;
 	}
-
+	
 	/**
 	 * 将两个ASCII字符合成一个字节； 如："EF" to 0xEF
 	 * 

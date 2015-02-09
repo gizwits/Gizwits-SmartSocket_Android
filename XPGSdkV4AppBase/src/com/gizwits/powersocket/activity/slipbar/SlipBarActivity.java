@@ -54,7 +54,7 @@ import com.gizwits.framework.activity.device.DeviceManageListActivity;
 import com.gizwits.framework.activity.help.AboutActivity;
 import com.gizwits.framework.activity.help.HelpActivity;
 import com.gizwits.framework.utils.DensityUtil;
-import com.gizwits.framework.utils.StringUtils;
+import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
 import com.gizwits.powersocket.activity.control.MainControlActivity;
 import com.xpg.common.system.IntentUtils;

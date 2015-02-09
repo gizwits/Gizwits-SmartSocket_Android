@@ -22,14 +22,28 @@
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical"
         android:layout_weight="1" >
 
-        <com.gizwits.framework.widget.WheelView
-            android:id="@+id/wheel_view_timing"
-            android:layout_width="150dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal" />
+            android:layout_centerVertical="true"
+            android:orientation="horizontal" >
+
+            <com.gizwits.framework.widget.WheelView
+                android:id="@+id/wheel_view_timing"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" />
+
+            <com.gizwits.framework.widget.WheelView
+                android:id="@+id/wheel_view_timing_min"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
     </RelativeLayout>
 
     <TextView

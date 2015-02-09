@@ -1,24 +1,28 @@
 package com.gizwits.framework.adapter;
 
+import java.util.ArrayList;
+
 import com.gizwits.framework.utils.DensityUtil;
 import com.gizwits.powersocket.R;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class WeekRepeatAdapter extends BaseAdapter {
 	private Context mContext;
 	private String[] mList = { "一", "二", "三", "四", "五", "六", "日" };
+	private ArrayList<Boolean> mSelectList;
 
-	public WeekRepeatAdapter(Context ctx) {
+	public WeekRepeatAdapter(Context ctx, ArrayList<Boolean> select) {
 		this.mContext = ctx;
-
+		this.mSelectList = select;
 	}
 
 	/*
@@ -60,22 +64,57 @@ public class WeekRepeatAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		int line = DensityUtil.dip2px(mContext, 50);
-		int px = line * getCount();
-		parent.setLayoutParams(new android.widget.RelativeLayout.LayoutParams(
-				px, line));
+		// int px = line * getCount();
+		// parent.setLayoutParams(new
+		// android.widget.RelativeLayout.LayoutParams(
+		// px, line));
 
-		Button mButton;
+		TextView mTextView;
 		if (convertView == null) {
-			mButton = new Button(mContext);
-			LayoutParams mLayoutParams=new LayoutParams(line,line);
-			mButton.setLayoutParams(mLayoutParams);
-			convertView = inflater.inflate(R.layout.search_list_item, null);
-			convertView.setTag(mButton);
+			mTextView = new Button(mContext);
+			convertView = mTextView;
+			LayoutParams mLayoutParams = new LayoutParams(
+					LayoutParams.WRAP_CONTENT, line);
+			mTextView.setGravity(Gravity.CENTER);
+			mTextView.setLayoutParams(mLayoutParams);
+			convertView.setTag(mTextView);
 		} else {
-			mButton = (Button) convertView.getTag();
+			mTextView = (Button) convertView.getTag();
 		}
 
-		return null;
+		mTextView.setText(mList[position]);
+		
+		int backGroundRes = 0;
+		boolean isSelected=mSelectList.get(position);
+		int textColor=0;
+		if (position == 0) {
+			if(!isSelected){
+				backGroundRes=R.drawable.date_select_left;
+			}else{
+				backGroundRes=R.drawable.date_select_left2;
+			}
+		} else if (position == 6) {
+			if(!isSelected){
+				backGroundRes=R.drawable.date_select_right;
+			}else{
+				backGroundRes=R.drawable.date_select_right2;
+			}
+		} else {
+			if(!isSelected){
+				backGroundRes=R.drawable.date_select_mid;
+			}else{
+				backGroundRes=R.drawable.date_select_mid2;
+			}
+		}
+		mTextView.setBackgroundResource(backGroundRes);
+		
+		if(isSelected){
+			textColor=R.color.white;
+		}else{
+			textColor=R.color.text_blue;
+		}
+		mTextView.setTextColor(textColor);
+		return mTextView;
 	}
 
 }

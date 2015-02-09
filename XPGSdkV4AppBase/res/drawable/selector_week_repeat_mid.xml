@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item android:drawable="@drawable/date_select_mid" android:state_selected="false"></item>
+    <item android:drawable="@drawable/date_select_mid2" android:state_selected="true"
+        android:state_pressed="true"></item>
+    
+
+</selector>

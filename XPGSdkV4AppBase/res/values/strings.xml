@@ -13,7 +13,7 @@
     <string name="consumption">用电量：</string>
     <string name="start_time">开启时间</string>
     <string name="end_time">关闭时间</string>
-    
+    <string name="repeat">重复</string>
     
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="dialog_sure_to_delete">确定要删除设备吗？</string>

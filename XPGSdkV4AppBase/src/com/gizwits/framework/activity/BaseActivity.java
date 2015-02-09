@@ -18,8 +18,12 @@
 package com.gizwits.framework.activity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -47,6 +51,8 @@ import com.xtremeprog.xpgconnect.XPGWifiSSID;
 public class BaseActivity extends Activity {
 
 	private boolean isExit = false;
+	
+	private static final String TAG="BaseActivity";
 
 	/**
 	 * 设备列表.
@@ -56,6 +62,12 @@ public class BaseActivity extends Activity {
 	/** 绑定列表 */
 	protected static List<XPGWifiDevice> bindlist = new ArrayList<XPGWifiDevice>();
 
+	/** The device data map. */
+	protected static ConcurrentHashMap<String, Object> deviceDataMap;
+
+	/** The statu map. */
+	protected static ConcurrentHashMap<String, Object> statuMap;
+	
 	/**
 	 * 指令管理器.
 	 */
@@ -69,13 +81,6 @@ public class BaseActivity extends Activity {
 	/** 当前操作的设备 */
 	protected static XPGWifiDevice mXpgWifiDevice;
 	
-	/** The device data map. */
-	protected static ConcurrentHashMap<String, Object> deviceDataMap;
-
-	/** The statu map. */
-	protected static ConcurrentHashMap<String, Object> statuMap;
-
-
 	/** The handler. */
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -475,6 +480,42 @@ public class BaseActivity extends Activity {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			this.startActivity(intent);
 			Historys.exit();
+		}
+	}
+	
+	/**
+	 * 把状态信息存入表
+	 * 
+	 * @param map
+	 *            the map
+	 * @param json
+	 *            the json
+	 * @throws JSONException
+	 *             the JSON exception
+	 */
+	protected void inputDataToMaps(ConcurrentHashMap<String, Object> map,
+			String json) throws JSONException {
+		Log.i("revjson", json);
+		JSONObject receive = new JSONObject(json);
+		Iterator actions = receive.keys();
+		while (actions.hasNext()) {
+
+			String action = actions.next().toString();
+			Log.i("revjson", "action=" + action);
+			// 忽略特殊部分
+			if (action.equals("cmd") || action.equals("qos")
+					|| action.equals("seq") || action.equals("version")) {
+				continue;
+			}
+			JSONObject params = receive.getJSONObject(action);
+			Log.i("revjson", "params=" + params);
+			Iterator it_params = params.keys();
+			while (it_params.hasNext()) {
+				String param = it_params.next().toString();
+				Object value = params.get(param);
+				map.put(param, value);
+				Log.i(TAG, "Key:" + param + ";value" + value);
+			}
 		}
 	}
 }

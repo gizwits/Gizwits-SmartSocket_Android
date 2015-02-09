@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
-import com.gizwits.framework.utils.StringUtils;
+import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
 
 // TODO: Auto-generated Javadoc

@@ -23,7 +23,7 @@ import android.os.Handler;
 
 import com.gizwits.framework.activity.account.LoginActivity;
 import com.gizwits.framework.activity.device.DeviceListActivity;
-import com.gizwits.framework.utils.StringUtils;
+import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
 import com.xpg.common.system.IntentUtils;
 
