@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="XPGWiFiSDK">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/XPGSdkV4AppBase/libs/XPGWiFiSDK.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
