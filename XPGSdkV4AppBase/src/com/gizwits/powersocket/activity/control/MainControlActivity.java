@@ -393,7 +393,7 @@ public class MainControlActivity extends BaseActivity implements
 		if (isTurnOn) {
 			llTiming.setVisibility(View.VISIBLE);
 		} else {
-			llTiming.setVisibility(View.GONE);
+			llTiming.setVisibility(View.INVISIBLE);
 		}
 		int minOn = on % 60;
 		int hourOn = on / 60;
@@ -417,7 +417,7 @@ public class MainControlActivity extends BaseActivity implements
 		if (isTurnOn) {
 			llDelay.setVisibility(View.VISIBLE);
 		} else {
-			llDelay.setVisibility(View.GONE);
+			llDelay.setVisibility(View.INVISIBLE);
 		}
 		int min = on % 60;
 		int hour = on / 60;

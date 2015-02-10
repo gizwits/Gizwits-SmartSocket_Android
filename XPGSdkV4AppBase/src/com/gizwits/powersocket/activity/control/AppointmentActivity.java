@@ -19,11 +19,8 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -66,6 +63,8 @@ public class AppointmentActivity extends BaseActivity implements
 	private int hourEnd;
 	private int minEnd;
 	private int hourDelay;
+	private boolean isLock = false;
+	private int Lock_Time = 2000;
 
 	/**
 	 * ClassName: Enum handler_key. <br/>
@@ -79,17 +78,11 @@ public class AppointmentActivity extends BaseActivity implements
 		/** 更新UI界面 */
 		UPDATE_UI,
 
-		/** 显示警告 */
-		ALARM,
-
-		/** 设备断开连接 */
-		DISCONNECTED,
+		/** 解锁 */
+		UNLOCK,
 
 		/** 接收到设备的数据 */
 		RECEIVED,
-
-		/** 获取设备状态 */
-		GET_STATUE,
 	}
 
 	private enum UI_STATE {
@@ -117,6 +110,9 @@ public class AppointmentActivity extends BaseActivity implements
 				}
 				break;
 			case UPDATE_UI:
+				if (isLock)
+					break;
+
 				if (statuMap != null && statuMap.size() > 0) {
 					// 定时更新
 					boolean isTurnOn = (Boolean) statuMap
@@ -147,11 +143,9 @@ public class AppointmentActivity extends BaseActivity implements
 					mWeekRepeatAdapter.notifyDataSetChanged();
 				}
 				break;
-			case ALARM:
-				break;
-			case DISCONNECTED:
-				break;
-			case GET_STATUE:
+			case UNLOCK:
+				isLock = false;
+				handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
 				break;
 			}
 		}
@@ -196,11 +190,14 @@ public class AppointmentActivity extends BaseActivity implements
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Log.e("OnItemClickListener",position+"");
+						isLock=true;
+						handler.removeMessages(handler_key.UNLOCK.ordinal());
 						boolean isSelected = mSelectList.get(position);
 						mSelectList.set(position, !isSelected);
 						mWeekRepeatAdapter.notifyDataSetInvalidated();
-						mCenter.cWeekRepeat(mXpgWifiDevice,bytes2Integer(mSelectList));
+						mCenter.cWeekRepeat(mXpgWifiDevice,
+								bytes2Integer(mSelectList));
+						handler.sendEmptyMessageDelayed(handler_key.UNLOCK.ordinal(), Lock_Time);
 					}
 				});
 		showUiState(UI_STATE.MENU);
@@ -269,18 +266,20 @@ public class AppointmentActivity extends BaseActivity implements
 		case R.id.tvDelayTime:
 			DialogManager.getWheelTimingDialog(this,
 					new onDelayTimingChosenListener(),
-					getResources().getString(R.string.delay_appointment), hourDelay)
-					.show();
+					getResources().getString(R.string.delay_appointment),
+					hourDelay).show();
 			break;
 		case R.id.rlStartTimeSetting:
 			DialogManager.get2WheelTimingDialog(this,
 					new onStartTimingChosenListener(),
-					getResources().getString(R.string.start_time), hourStart, minStart).show();
+					getResources().getString(R.string.start_time), hourStart,
+					minStart).show();
 			break;
 		case R.id.rlEndTimeSetting:
 			DialogManager.get2WheelTimingDialog(this,
 					new onEndTimingChosenListener(),
-					getResources().getString(R.string.end_time), hourEnd, minEnd).show();
+					getResources().getString(R.string.end_time), hourEnd,
+					minEnd).show();
 			break;
 		}
 	}
@@ -322,18 +321,30 @@ public class AppointmentActivity extends BaseActivity implements
 			tvTiming.setSelected(false);
 			tbTiming.setChecked(false);
 		}
-		int minOn = startTime % 60;
-		int hourOn = startTime / 60;
-		int minOff = endTime % 60;
-		int hourOff = endTime / 60;
-		hourStart=hourOn;
-		minStart=minOn;
-		hourEnd=hourOff;
-		minEnd=minOff;
-		tvTimingTime.setText(String.format("%02d:%02d至%02d:%02d", hourOn,
-				minOn, hourOff, minOff));
-		tvTimingStart.setText(String.format("%d:%02d", hourOn, minOn));
-		tvTimingEnd.setText(String.format("%d:%02d", hourOff, minOff));
+		int minOn = 0;
+		int minOff = 0;
+		int hourOff = 0;
+		int hourOn = 0;
+
+		if (startTime != -1) {
+			minOn = startTime % 60;
+			hourOn = startTime / 60;
+			hourStart = hourOn;
+			minStart = minOn;
+			tvTimingStart.setText(String.format("%d:%02d", hourOn, minOn));
+		}
+
+		if (endTime != -1) {
+			minOff = endTime % 60;
+			hourOff = endTime / 60;
+			hourEnd = hourOff;
+			minEnd = minOff;
+			tvTimingEnd.setText(String.format("%d:%02d", hourOff, minOff));
+		}
+
+		if (startTime != -1 && endTime != -1)
+			tvTimingTime.setText(String.format("%02d:%02d至%02d:%02d", hourOn,
+					minOn, hourOff, minOff));
 	}
 
 	/**
@@ -358,7 +369,7 @@ public class AppointmentActivity extends BaseActivity implements
 		}
 		// int min = delayTime % 60;
 		int hour = delayTime / 60;
-		hourDelay=hour;
+		hourDelay = hour;
 		tvDelayTime.setText(String.format("%dh后", hour));
 	}
 
@@ -376,23 +387,27 @@ public class AppointmentActivity extends BaseActivity implements
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
 
-	private int bytes2Integer(ArrayList<Boolean> mList){
-		int result=0;
-		for(int i=0;i<8;i++){
-			if(mList.get(i)){
-				result+=(Math.pow(2, i));
+	private int bytes2Integer(ArrayList<Boolean> mList) {
+		int result = 0;
+		for (int i = 0; i < 8; i++) {
+			if (mList.get(i)) {
+				result += (Math.pow(2, i));
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	private class onStartTimingChosenListener implements
 			On2TimingChosenListener {
 
 		@Override
 		public void timingChosen(int HourTime, int MinTime) {
+			isLock=true;
+			handler.removeMessages(handler_key.UNLOCK.ordinal());
 			mCenter.cTimingStart(mXpgWifiDevice, HourTime, MinTime);
+			setTimingTime(true, HourTime*60+MinTime,-1);
+			handler.sendEmptyMessageDelayed(handler_key.UNLOCK.ordinal(), Lock_Time);
 		}
 
 	}
@@ -401,7 +416,11 @@ public class AppointmentActivity extends BaseActivity implements
 
 		@Override
 		public void timingChosen(int HourTime, int MinTime) {
+			isLock=true;
+			handler.removeMessages(handler_key.UNLOCK.ordinal());
 			mCenter.cTimingEnd(mXpgWifiDevice, HourTime, MinTime);
+			setTimingTime(true,-1,HourTime*60+MinTime);
+			handler.sendEmptyMessageDelayed(handler_key.UNLOCK.ordinal(), Lock_Time);
 		}
 
 	}
@@ -410,7 +429,12 @@ public class AppointmentActivity extends BaseActivity implements
 
 		@Override
 		public void timingChosen(int time) {
+			isLock=true;
+			handler.removeMessages(handler_key.UNLOCK.ordinal());
 			mCenter.cDelayTime(mXpgWifiDevice, time, 0);
+			setDelayTime(true, time*60);
+			handler.sendEmptyMessageDelayed(handler_key.UNLOCK.ordinal(), Lock_Time);
+			
 		}
 
 	}

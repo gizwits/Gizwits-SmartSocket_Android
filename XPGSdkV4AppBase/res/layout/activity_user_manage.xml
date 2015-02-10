@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/white" >
 
     <RelativeLayout
         android:id="@+id/rlTop"
@@ -32,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:paddingLeft="30dp"
+        android:background="@color/white"
         android:paddingRight="43dp" >
 
         <TextView

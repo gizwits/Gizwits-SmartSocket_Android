@@ -17,6 +17,9 @@
  */
 package com.gizwits.framework.sdk;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -377,7 +380,7 @@ public class CmdCenter {
 	 */
 	public void cPowerOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
 		cWrite(xpgWifiDevice, JsonKeys.ON_OFF, isOn);
-		cGetStatus(xpgWifiDevice);
+		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
 	
 	/**
@@ -388,7 +391,7 @@ public class CmdCenter {
 	 */
 	public void cTimingOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
 		cWrite(xpgWifiDevice, JsonKeys.TIME_ON_OFF, isOn);
-		cGetStatus(xpgWifiDevice);
+		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
 	
 	/**
@@ -399,7 +402,7 @@ public class CmdCenter {
 	 */
 	public void cDelayOn(XPGWifiDevice xpgWifiDevice, boolean isOn) {
 		cWrite(xpgWifiDevice, JsonKeys.COUNT_DOWN_ON_OFF, isOn);
-		cGetStatus(xpgWifiDevice);
+		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
 	
 	/**
@@ -411,8 +414,9 @@ public class CmdCenter {
 	 */
 	public void cTimingStart(XPGWifiDevice xpgWifiDevice, int hour,int min) {
 		int minTotal=hour*60+min;
+		Log.e("cTimingStart","minTotal="+minTotal);
 		cWrite(xpgWifiDevice, JsonKeys.TIME_ON_MINUTE, minTotal);
-		cGetStatus(xpgWifiDevice);
+		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
 	
 	/**
@@ -424,8 +428,9 @@ public class CmdCenter {
 	 */
 	public void cTimingEnd(XPGWifiDevice xpgWifiDevice, int hour,int min) {
 		int minTotal=hour*60+min;
+		Log.e("cTimingEnd","minTotal="+minTotal);
 		cWrite(xpgWifiDevice, JsonKeys.TIME_OFF_MINUTE, minTotal);
-		cGetStatus(xpgWifiDevice);
+		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
 	
 	/**
@@ -438,7 +443,7 @@ public class CmdCenter {
 	public void cDelayTime(XPGWifiDevice xpgWifiDevice, int hour,int min) {
 		int minTotal=hour*60+min;
 		cWrite(xpgWifiDevice, JsonKeys.COUNT_DOWN_MINUTE, minTotal);
-		cGetStatus(xpgWifiDevice);
+		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
 	
 	/**
@@ -450,6 +455,22 @@ public class CmdCenter {
 	 */
 	public void cWeekRepeat(XPGWifiDevice xpgWifiDevice, int repeat) {
 		cWrite(xpgWifiDevice, JsonKeys.WEEK_REPEAT, repeat);
-		cGetStatus(xpgWifiDevice);
+		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
+	
+	
+	private class timer extends TimerTask{
+		XPGWifiDevice xpgWifiDevice;
+		public timer(XPGWifiDevice device){
+			this.xpgWifiDevice=device;
+		}
+		
+		@Override
+		public void run() {
+			cGetStatus(xpgWifiDevice);
+			
+		}
+	}
+
+	
 }
