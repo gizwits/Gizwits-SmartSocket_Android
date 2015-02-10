@@ -21,8 +21,6 @@ import com.gizwits.framework.config.DeviceDetails;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.Settings.Secure;
-import android.util.Log;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -199,18 +197,42 @@ public class SettingManager {
 		return spf.getBoolean(UNIT, true);
 	}
 	
+	/**
+	 * Gets the res.
+	 *
+	 * @param Mac 设备的Mac地址
+	 * @param Did 设备的Did地址
+	 * 
+	 * @return int 设备对应的图片资源
+	 */
 	public int getResbyMacAndDid(String Mac,String Did){
 		int num=0;
 		num=spf.getInt(Mac+Did,0);
 		return DeviceDetails.findByNum(num).getResList();
 	}
 	
+	/**
+	 * Gets the num of the res.
+	 *
+	 * @param Mac 设备的Mac地址
+	 * @param Did 设备的Did地址
+	 * 
+	 * @return int 设备对应的图片资源的枚举类的序号
+	 */
 	public int getNumbyMacAndDid(String Mac,String Did){
 		int num=0;
 		num=spf.getInt(Mac+Did,0);
 		return num;
 	}
 	
+	/**
+	 * Sets the num of the res.
+	 *
+	 * @param Mac 设备的Mac地址
+	 * @param Did 设备的Did地址
+	 * @param num 图片资源的序列号
+	 * 
+	 */
 	public void setResByMacAndDid(String Mac,String Did,int num){
 		spf.edit().putInt(Mac+Did,num).commit();
 	}

@@ -28,7 +28,6 @@ import android.util.Log;
 
 import com.gizwits.framework.config.Configs;
 import com.gizwits.framework.config.JsonKeys;
-import com.xpg.common.useful.StringUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import com.xtremeprog.xpgconnect.XPGWifiSDK;
 import com.xtremeprog.xpgconnect.XPGWifiSDK.XPGWifiConfigureMode;
@@ -458,7 +457,9 @@ public class CmdCenter {
 		new Timer().schedule(new timer(xpgWifiDevice), 1000);
 	}
 	
-	
+	/**
+	 * TimerTask to Getstatus.
+	 */
 	private class timer extends TimerTask{
 		XPGWifiDevice xpgWifiDevice;
 		public timer(XPGWifiDevice device){
