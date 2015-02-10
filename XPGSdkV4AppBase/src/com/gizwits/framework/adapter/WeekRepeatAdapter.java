@@ -11,6 +11,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+/**
+ * Created by Sunny on 15/2/10.
+ * 
+ * 日期选择适配器
+ * 
+ * @author Sunny
+ */
 public class WeekRepeatAdapter extends BaseAdapter {
 	/** The String. */
 	private String[] mList = { "一", "二", "三", "四", "五", "六", "日" };

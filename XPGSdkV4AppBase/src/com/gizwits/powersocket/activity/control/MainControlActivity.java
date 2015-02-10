@@ -17,13 +17,11 @@
  */
 package com.gizwits.powersocket.activity.control;
 
-import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.json.JSONException;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -37,12 +35,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.config.JsonKeys;
-import com.gizwits.framework.entity.DeviceAlarm;
 import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
 import com.gizwits.powersocket.activity.slipbar.SlipBarActivity;
@@ -61,64 +57,34 @@ public class MainControlActivity extends BaseActivity implements
 
 	/** The tag. */
 	private final String TAG = "MainControlActivity";
-	// private XPGWifiDevice device;
-	/** The seek bar. */
-	// private CircularSeekBar seekBar;
 	
-	/** The scl content. */
-	private ScrollView sclContent;
-
 	/** The m view. */
 	private static View mView;
-
-	/** The ll bottom. */
-	private LinearLayout llBottom;
 
 	/** The iv menu. */
 	private ImageView ivMenu;
 
-	/** The tv title. */
-	private TextView tvTitle;
-
-	/** The iv power. */
-	private ImageView ivPower;
-
-	/** The iv back. */
-	private ImageView ivBack;
-
-	/** The is show. */
-	private boolean isShow;
-
-	/** The mode pos. */
-	private int modePos;
-
-	/** The height. */
-	private int height;
-
-	/** The alarm list. */
-	private ArrayList<DeviceAlarm> alarmList;
-
-	/** The alarm list has shown. */
-	private ArrayList<String> alarmShowList;
-
-	/** The timing off. */
-	private int timingOn, timingOff;
-
-	/** The m fault dialog. */
-	private Dialog mFaultDialog;
-
-	/** The m PowerOff dialog. */
-	private Dialog mPowerOffDialog;
-	// ==================================================================
+	/** The tv Consumption. */
 	private TextView tvConsumption;
+	
+	/** The tv Timing. */
 	private TextView tvTiming;
+	
+	/** The tv Delay. */
 	private TextView tvDelay;
+	
+	/** The btn Power. */
 	private Button btnPower;
+	
+	/** The btn Appoinment. */
 	private Button btnAppoinment;
+	
+	/** The linearLayout Timing. */
 	private LinearLayout llTiming;
+	
+	/** The linearLayout Delay. */
 	private LinearLayout llDelay;
 
-	// ==================================================================
 	/**
 	 * ClassName: Enum handler_key. <br/>
 	 * <br/>
@@ -164,17 +130,6 @@ public class MainControlActivity extends BaseActivity implements
 						inputDataToMaps(statuMap,
 								(String) deviceDataMap.get("data"));
 					}
-					// alarmList.clear();
-					// if (deviceDataMap.get("alters") != null) {
-					// Log.i("info", (String) deviceDataMap.get("alters"));
-					// // 返回主线程处理报警数据刷新
-					// inputAlarmToList((String) deviceDataMap.get("alters"));
-					// }
-					// if (deviceDataMap.get("faults") != null) {
-					// Log.i("info", (String) deviceDataMap.get("faults"));
-					// // 返回主线程处理错误数据刷新
-					// inputAlarmToList((String) deviceDataMap.get("faults"));
-					// }
 					// 返回主线程处理P0数据刷新
 					handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
 					handler.sendEmptyMessage(handler_key.ALARM.ordinal());
@@ -212,46 +167,6 @@ public class MainControlActivity extends BaseActivity implements
 				}
 				break;
 			case ALARM:
-				// // 是否需要弹dialog判断
-				// boolean isNeedDialog = false;
-				// for (DeviceAlarm alarm : alarmList) {
-				// if (!alarmShowList.contains((String) alarm.getDesc())) {
-				// alarmShowList.add(alarm.getDesc());
-				// isNeedDialog = true;
-				// }
-				// }
-				//
-				// alarmShowList.clear();
-				//
-				// for (DeviceAlarm alarm : alarmList) {
-				// alarmShowList.add(alarm.getDesc());
-				// }
-				//
-				// if (alarmList != null && alarmList.size() > 0) {
-				// if (isNeedDialog) {
-				// if (mFaultDialog == null) {
-				// mFaultDialog = DialogManager.getDeviceErrirDialog(
-				// MainControlActivity.this, "设备故障",
-				// new OnClickListener() {
-				//
-				// @Override
-				// public void onClick(View v) {
-				// Intent intent = new Intent(
-				// Intent.ACTION_CALL, Uri
-				// .parse("tel:10086"));
-				// startActivity(intent);
-				// mFaultDialog.dismiss();
-				// mFaultDialog = null;
-				// }
-				// });
-				//
-				// }
-				// mFaultDialog.show();
-				// }
-				// setTipsLayoutVisiblity(true, alarmList.size());
-				// } else {
-				// setTipsLayoutVisiblity(false, 0);
-				// }
 				break;
 			case DISCONNECTED:
 				mCenter.cDisconnect(mXpgWifiDevice);
@@ -262,28 +177,6 @@ public class MainControlActivity extends BaseActivity implements
 			}
 		}
 	};
-
-	// 0.制冷, 1.送风, 2.除湿, 3.自动,4.制热
-	/** The mode images. */
-	private int[] modeImages = { R.drawable.icon_model_cool,
-			R.drawable.icon_model_wind, R.drawable.icon_model_water,
-			R.drawable.icon_model_auto, R.drawable.icon_model_hot };
-
-	// 0.制冷, 1.送风, 2.除湿, 3.自动,4.制热
-	/** The mode req. */
-	private short[] modeReq = { 0, 1, 2, 3, 4 };
-
-	/** The mode strs. */
-	private String[] modeStrs = { "制冷", "送风", "除湿", "自动", "制热" };
-
-	/** 设定温度 */
-	short temperatureC, temperatureF;
-
-	/** 当前温度 */
-	short innerTemperatureC, innerTemperatureF;
-
-	/** 摄氏度标志位 */
-	private boolean isCentigrade = true;
 
 	/** 防抖标志位 */
 	private boolean isClick;
@@ -323,9 +216,6 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private void initParams() {
 		statuMap = new ConcurrentHashMap<String, Object>();
-		// alarmList = new ArrayList<DeviceAlarm>();
-		// alarmShowList = new ArrayList<String>();
-		// height = llBottom.getHeight();
 	}
 
 	/**
@@ -444,39 +334,10 @@ public class MainControlActivity extends BaseActivity implements
 				overridePendingTransition(0, 0);
 			}
 			break;
-		case R.id.rlAlarmTips:
-		case R.id.tvTitle:
-			if (alarmList != null && alarmList.size() > 0) {
-				Intent intent = new Intent(MainControlActivity.this,
-						AlarmListActicity.class);
-				intent.putExtra("alarm_list", alarmList);
-				startActivity(intent);
-			}
-			break;
 		case R.id.btnAppoinment:
 			startActivity(new Intent(MainControlActivity.this,AppointmentActivity.class));
 			break;
-		// case R.id.tvUnit:
-		// isCentigrade = !isCentigrade;
-		// updateTemperatureUnit(isCentigrade);
-		// llBottom.setVisibility(View.GONE);
-		// isShow = false;
-		// break;
-		// case R.id.tvCurve:
-		// IntentUtils.getInstance().startActivity(MainControlActivity.this,
-		// CurveActivity.class);
-		// break;
 		}
-	}
-
-	/**
-	 * 发送命令.
-	 * 
-	 * @param pos
-	 *            the pos
-	 */
-	private void sendModeReq(int pos) {
-		// mCenter.cMode(mXpgWifiDevice, modeReq[pos]);
 	}
 
 	/*

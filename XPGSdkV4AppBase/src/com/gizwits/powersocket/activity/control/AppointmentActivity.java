@@ -31,39 +31,89 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+/**
+ * Created by Sunny on 15/2/10.
+ * 
+ * 设备预约界面
+ * 
+ * @author Sunny
+ */
 public class AppointmentActivity extends BaseActivity implements
 		OnClickListener, OnCheckedChangeListener {
 
-	// /** The device data map. */
-	// private ConcurrentHashMap<String, Object> deviceDataMap;
-	//
-	// /** The statu map. */
-	// private ConcurrentHashMap<String, Object> statuMap;
-
+	/** The tv Timing. */
 	private TextView tvTiming;
+	
+	/** The tv Delay. */
 	private TextView tvDelay;
+	
+	/** The tv TimingTime. */
 	private TextView tvTimingTime;
+	
+	/** The tv DelayTime. */
 	private TextView tvDelayTime;
+	
+	/** The tv TimingStart. */
 	private TextView tvTimingStart;
+	
+	/** The tv TimingEnd. */
 	private TextView tvTimingEnd;
+	
+	/** The tv Title. */
 	private TextView tvTitle;
+	
+	/** The tb Timing. */
 	private ToggleButton tbTiming;
+	
+	/** The tb Delay. */
 	private ToggleButton tbDelay;
+	
+	/** The LinearLayout AppointmentMenu. */
 	private LinearLayout llAppointmentMenu;
+	
+	/** The LinearLayout SetAppointment. */
 	private LinearLayout llSetAppointment;
+	
+	/** The RelativeLayout StartTimeSetting. */
 	private RelativeLayout rlStartTimeSetting;
+	
+	/** The RelativeLayout EndTimeSetting. */
 	private RelativeLayout rlEndTimeSetting;
+	
+	/** The ImageView Back. */
 	private ImageView ivBack;
+	
+	/** The GridView DateSelect. */
 	private GridView gvDateSelect;
+	
+	/** The WeekRepeatAdapter. */
 	private WeekRepeatAdapter mWeekRepeatAdapter;
+	
+	/** The  ArrayList<Boolean>. */
 	private ArrayList<Boolean> mSelectList;
+	
+	/** The  ui state now. */
 	private UI_STATE uiNow;
+	
+	/** 开启时间的小时数. */
 	private int hourStart;
+	
+	/** 开启时间的分钟数. */
 	private int minStart;
+	
+	/** 关闭时间的小时数. */
 	private int hourEnd;
+	
+	/** 关闭时间的分钟数. */
 	private int minEnd;
+	
+	/** 延时时间的小时数. */
 	private int hourDelay;
+	
+	/** 界面更新锁. */
 	private boolean isLock = false;
+	
+	/** 界面更新锁解锁时间. */
 	private int Lock_Time = 2000;
 
 	/**
@@ -85,8 +135,17 @@ public class AppointmentActivity extends BaseActivity implements
 		RECEIVED,
 	}
 
+	/** 
+	 * 
+	 * 界面当前状态枚举类
+	 *  
+	 *  */
 	private enum UI_STATE {
-		MENU, SET_APPOINTMENT;
+		/** 预约主菜单 */
+		MENU, 
+		
+		/** 设置预约界面 */
+		SET_APPOINTMENT;
 	}
 
 	/**
@@ -151,6 +210,13 @@ public class AppointmentActivity extends BaseActivity implements
 		}
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#onCreate(android.os.Bundle
+	 * )
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -159,6 +225,9 @@ public class AppointmentActivity extends BaseActivity implements
 		initEvent();
 	}
 
+	/**
+	 * Inits the views.
+	 */
 	private void initView() {
 		gvDateSelect = (GridView) findViewById(R.id.gvDateSelect);
 		tvTiming = (TextView) findViewById(R.id.tvTiming);
@@ -203,6 +272,9 @@ public class AppointmentActivity extends BaseActivity implements
 		showUiState(UI_STATE.MENU);
 	}
 
+	/**
+	 * Inits the events.
+	 */
 	private void initEvent() {
 		tvTiming.setOnClickListener(this);
 		tvDelay.setOnClickListener(this);
@@ -216,6 +288,11 @@ public class AppointmentActivity extends BaseActivity implements
 		tbDelay.setOnCheckedChangeListener(this);
 	}
 
+	/** 
+	 * 
+	 * 界面切换处理器
+	 *  
+	 *  */
 	private void showUiState(UI_STATE ui) {
 		uiNow = ui;
 		switch (ui) {
@@ -232,6 +309,13 @@ public class AppointmentActivity extends BaseActivity implements
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#onBackPressed(android.os.Bundle
+	 * )
+	 */
 	@Override
 	public void onBackPressed() {
 		switch (uiNow) {
@@ -245,6 +329,13 @@ public class AppointmentActivity extends BaseActivity implements
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#onResume(android.os.Bundle
+	 * )
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -252,6 +343,13 @@ public class AppointmentActivity extends BaseActivity implements
 		handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#onClick(android.os.Bundle
+	 * )
+	 */
 	@Override
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
@@ -284,6 +382,13 @@ public class AppointmentActivity extends BaseActivity implements
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.aircondition.activity.BaseActivity#onCheckedChanged(android.os.Bundle
+	 * )
+	 */
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean isCheck) {
 		switch (arg0.getId()) {
@@ -387,6 +492,16 @@ public class AppointmentActivity extends BaseActivity implements
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
 
+	/** 
+	 * byte数组转换成int
+	 * 
+	 * @param mList
+	 * 			byte数组
+	 * 
+	 * @return result
+	 * 			结果
+	 * 
+	 * */
 	private int bytes2Integer(ArrayList<Boolean> mList) {
 		int result = 0;
 		for (int i = 0; i < 8; i++) {
@@ -398,6 +513,7 @@ public class AppointmentActivity extends BaseActivity implements
 		return result;
 	}
 
+	/** 开启时间滑轮监听器. */
 	private class onStartTimingChosenListener implements
 			On2TimingChosenListener {
 
@@ -412,6 +528,7 @@ public class AppointmentActivity extends BaseActivity implements
 
 	}
 
+	/** 关闭时间滑轮监听器. */
 	private class onEndTimingChosenListener implements On2TimingChosenListener {
 
 		@Override
@@ -425,6 +542,7 @@ public class AppointmentActivity extends BaseActivity implements
 
 	}
 
+	/** 延时时间滑轮监听器. */
 	private class onDelayTimingChosenListener implements OnTimingChosenListener {
 
 		@Override
