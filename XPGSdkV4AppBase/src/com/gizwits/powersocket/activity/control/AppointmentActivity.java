@@ -19,8 +19,11 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -193,9 +196,11 @@ public class AppointmentActivity extends BaseActivity implements
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
+						Log.e("OnItemClickListener",position+"");
 						boolean isSelected = mSelectList.get(position);
 						mSelectList.set(position, !isSelected);
 						mWeekRepeatAdapter.notifyDataSetInvalidated();
+						mCenter.cWeekRepeat(mXpgWifiDevice,bytes2Integer(mSelectList));
 					}
 				});
 		showUiState(UI_STATE.MENU);
@@ -371,6 +376,17 @@ public class AppointmentActivity extends BaseActivity implements
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
 
+	private int bytes2Integer(ArrayList<Boolean> mList){
+		int result=0;
+		for(int i=0;i<8;i++){
+			if(mList.get(i)){
+				result+=(Math.pow(2, i));
+			}
+		}
+		
+		return result;
+	}
+	
 	private class onStartTimingChosenListener implements
 			On2TimingChosenListener {
 
@@ -398,5 +414,4 @@ public class AppointmentActivity extends BaseActivity implements
 		}
 
 	}
-
 }

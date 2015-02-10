@@ -8,6 +8,7 @@ import com.gizwits.powersocket.R;
 import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
@@ -19,10 +20,13 @@ public class WeekRepeatAdapter extends BaseAdapter {
 	private Context mContext;
 	private String[] mList = { "一", "二", "三", "四", "五", "六", "日" };
 	private ArrayList<Boolean> mSelectList;
+	/** The inflater. */
+	private LayoutInflater inflater;
 
 	public WeekRepeatAdapter(Context ctx, ArrayList<Boolean> select) {
 		this.mContext = ctx;
 		this.mSelectList = select;
+		this.inflater = LayoutInflater.from(ctx);
 	}
 
 	/*
@@ -63,25 +67,12 @@ public class WeekRepeatAdapter extends BaseAdapter {
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		int line = DensityUtil.dip2px(mContext, 50);
-		// int px = line * getCount();
-		// parent.setLayoutParams(new
-		// android.widget.RelativeLayout.LayoutParams(
-		// px, line));
-
 		TextView mTextView;
 		if (convertView == null) {
-			mTextView = new Button(mContext);
-			convertView = mTextView;
-			LayoutParams mLayoutParams = new LayoutParams(
-					LayoutParams.WRAP_CONTENT, line);
-			mTextView.setGravity(Gravity.CENTER);
-			mTextView.setLayoutParams(mLayoutParams);
-			convertView.setTag(mTextView);
-		} else {
-			mTextView = (Button) convertView.getTag();
+			convertView =  inflater.inflate(R.layout.item_date_selected, null);
 		}
-
+		
+		mTextView=(TextView) convertView.findViewById(R.id.tvDate);
 		mTextView.setText(mList[position]);
 		
 		int backGroundRes = 0;
@@ -114,7 +105,7 @@ public class WeekRepeatAdapter extends BaseAdapter {
 			textColor=R.color.text_blue;
 		}
 		mTextView.setTextColor(textColor);
-		return mTextView;
+		return convertView;
 	}
 
 }
