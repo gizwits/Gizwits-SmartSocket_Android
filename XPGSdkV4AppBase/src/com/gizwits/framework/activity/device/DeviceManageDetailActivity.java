@@ -34,12 +34,10 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.adapter.ManageDetailsAdapter;
 import com.gizwits.framework.config.DeviceDetails;
-import com.gizwits.framework.sdk.SettingManager;
 import com.gizwits.framework.utils.DialogManager;
 import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
@@ -70,13 +68,16 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	/** The adapter ManageDetailsAdapter. */
 	private ManageDetailsAdapter mManageDetailsAdapter;
 
+	/** The RelativeLayout rlDetailsChoosing. */
 	private RelativeLayout rlDetailsChoosing;
 
+	/** The RelativeLayout rlDetails. */
 	private RelativeLayout rlDetails;
 
+	/** The ImageView ivDetails. */
 	private ImageView ivDetails;
 
-	/** The et device name. */
+	/** The et device Name. */
 	private EditText etName;
 
 	/** The btn delDevice. */
@@ -236,10 +237,6 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 				handler.sendMessageDelayed(msg, 380);
 			}
 		});
-		// tvDate = (TextView) findViewById(R.id.tvDate);
-		// tvPlace = (TextView) findViewById(R.id.tvPlace);
-		// tvDeviceType = (TextView) findViewById(R.id.tvDeviceType);
-		// tvDeviceCode = (TextView) findViewById(R.id.tvDeviceCode);
 		etName = (EditText) findViewById(R.id.etName);
 		btnDelDevice = (Button) findViewById(R.id.btnDelDevice);
 		unbindDialog = DialogManager.getUnbindDialog(this, this);
@@ -354,6 +351,11 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gizwits.framework.activity.BaseActivity#didDiscovered()
+	 */
 	@Override
 	protected void didDiscovered(int error, List<XPGWifiDevice> deviceList) {
 		Log.d("onDiscovered", "Device count:" + deviceList.size());

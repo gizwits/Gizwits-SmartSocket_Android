@@ -2,29 +2,34 @@ package com.gizwits.framework.adapter;
 
 import java.util.ArrayList;
 
-import com.gizwits.framework.utils.DensityUtil;
 import com.gizwits.powersocket.R;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class WeekRepeatAdapter extends BaseAdapter {
-	private Context mContext;
+	/** The String. */
 	private String[] mList = { "一", "二", "三", "四", "五", "六", "日" };
+	
+	/** The ArrayList boolean Selected. */
 	private ArrayList<Boolean> mSelectList;
+	
 	/** The inflater. */
 	private LayoutInflater inflater;
 
+	/**
+	 * 日期选择适配器构造方法.
+	 * 
+	 * @param ctx
+	 *            上下文环境
+	 * @param list
+	 *            设备列表
+	 */
 	public WeekRepeatAdapter(Context ctx, ArrayList<Boolean> select) {
-		this.mContext = ctx;
 		this.mSelectList = select;
 		this.inflater = LayoutInflater.from(ctx);
 	}
@@ -75,6 +80,7 @@ public class WeekRepeatAdapter extends BaseAdapter {
 		mTextView=(TextView) convertView.findViewById(R.id.tvDate);
 		mTextView.setText(mList[position]);
 		
+		//背景资源选择
 		int backGroundRes = 0;
 		boolean isSelected=mSelectList.get(position);
 		int textColor=0;
@@ -99,6 +105,7 @@ public class WeekRepeatAdapter extends BaseAdapter {
 		}
 		mTextView.setBackgroundResource(backGroundRes);
 		
+		//字体颜色选择
 		if(isSelected){
 			textColor=R.color.white;
 		}else{
