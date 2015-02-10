@@ -25,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gizwits.framework.config.DeviceDetails;
 import com.gizwits.framework.sdk.SettingManager;
 import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
@@ -600,17 +601,19 @@ public class DeviceListAdapter extends BaseAdapter {
         else
         	DeviceName=device.getRemark();
     	viewHolder.name.setText(DeviceName);
+    	viewHolder.icon.setImageResource(
+    			setManager.getResbyMacAndDid(device.getMacAddress(), device.getDid()));
     	
         if (device.isLAN()) {
             if (device.isBind(setManager.getUid())) {
-                viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
+//                viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_blue));
                 viewHolder.statue.setText("局域网在线");
                 viewHolder.arrow.setVisibility(View.VISIBLE);
                 viewHolder.arrow.setImageResource(R.drawable.arrow_right_blue);
             } else {
-                viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
+//                viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_gray));
                 viewHolder.statue.setText("未绑定");
@@ -619,14 +622,14 @@ public class DeviceListAdapter extends BaseAdapter {
             }
         } else {
             if (!device.isOnline()) {
-                viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
+//                viewHolder.icon.setImageResource(R.drawable.device_icon_gray);
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_gray));
                 viewHolder.statue.setText("离线");
                 viewHolder.arrow.setVisibility(View.GONE);
                 viewHolder.arrow.setImageResource(R.drawable.arrow_right_gray);
             } else {
-                viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
+//                viewHolder.icon.setImageResource(R.drawable.device_icon_blue);
                 viewHolder.name.setTextColor(context.getResources().getColor(
                         R.color.text_blue));
                 viewHolder.statue.setText("远程在线");

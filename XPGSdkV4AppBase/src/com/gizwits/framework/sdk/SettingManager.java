@@ -17,6 +17,8 @@
  */
 package com.gizwits.framework.sdk;
 
+import com.gizwits.framework.config.DeviceDetails;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings.Secure;
@@ -195,5 +197,15 @@ public class SettingManager {
 	 */
 	public boolean getUnit() {
 		return spf.getBoolean(UNIT, true);
+	}
+	
+	public int getResbyMacAndDid(String Mac,String Did){
+		int num=0;
+		num=spf.getInt(Mac+Did,0);
+		return DeviceDetails.findByNum(num).getResList();
+	}
+	
+	public void setResByMacAndDid(String Mac,String Did,int num){
+		spf.edit().putInt(Mac+Did,num).commit();
 	}
 }
