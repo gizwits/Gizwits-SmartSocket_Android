@@ -205,6 +205,12 @@ public class SettingManager {
 		return DeviceDetails.findByNum(num).getResList();
 	}
 	
+	public int getNumbyMacAndDid(String Mac,String Did){
+		int num=0;
+		num=spf.getInt(Mac+Did,0);
+		return num;
+	}
+	
 	public void setResByMacAndDid(String Mac,String Did,int num){
 		spf.edit().putInt(Mac+Did,num).commit();
 	}

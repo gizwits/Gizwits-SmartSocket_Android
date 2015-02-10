@@ -39,6 +39,7 @@ import android.widget.TextView;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.adapter.ManageDetailsAdapter;
 import com.gizwits.framework.config.DeviceDetails;
+import com.gizwits.framework.sdk.SettingManager;
 import com.gizwits.framework.utils.DialogManager;
 import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
@@ -59,20 +60,20 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	/** The iv back. */
 	private ImageView ivBack;
-	
+
 	/** The iv tick. */
 	private ImageView ivTick;
-	
+
 	/** The gv gvDetails. */
 	private GridView gvDetails;
 
 	/** The adapter ManageDetailsAdapter. */
 	private ManageDetailsAdapter mManageDetailsAdapter;
-	
+
 	private RelativeLayout rlDetailsChoosing;
-	
+
 	private RelativeLayout rlDetails;
-	
+
 	private ImageView ivDetails;
 
 	/** The et device name. */
@@ -89,7 +90,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	/** 等待中的对话框 */
 	private ProgressDialog progressDialog;
-	
+
 	/** the msg */
 	private Message msg = new Message();
 
@@ -113,10 +114,10 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 		/** 删除绑定关系失败 */
 		DELETE_FAIL,
-		
+
 		/** 获取绑定列表 */
 		GET_BOUND,
-		
+
 		/** 获取设备图片 */
 		GET_Details,
 
@@ -129,32 +130,36 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			handler_key key = handler_key.values()[msg.what];
-			
+
 			switch (key) {
 			case CHANGE_SUCCESS:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
+						progressDialog);
 				ToastUtils.showShort(DeviceManageDetailActivity.this, "修改成功！");
 				finish();
 				break;
 
 			case CHANGE_FAIL:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
+						progressDialog);
 				ToastUtils.showShort(DeviceManageDetailActivity.this, "修改失败:"
 						+ msg.obj.toString());
 				break;
 
 			case DELETE_SUCCESS:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
+						progressDialog);
 				ToastUtils.showShort(DeviceManageDetailActivity.this, "删除成功！");
 				finish();
 				break;
 
 			case DELETE_FAIL:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
+						progressDialog);
 				ToastUtils.showShort(DeviceManageDetailActivity.this, "删除失败:"
 						+ msg.obj.toString());
 				break;
-				
+
 			case GET_BOUND:
 				String uid = setmanager.getUid();
 				String token = setmanager.getToken();
@@ -162,7 +167,10 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 				break;
 			case GET_Details:
 				rlDetailsChoosing.setVisibility(View.GONE);
-				ivDetails.setImageResource(DeviceDetails.findByNum(msg.arg1).getResList());
+				ivDetails.setImageResource(DeviceDetails
+						.findByNum(msg.arg1 + 1).getResList());
+				setmanager.setResByMacAndDid(xpgWifiDevice.getMacAddress(),
+						xpgWifiDevice.getDid(), msg.arg1+1);
 				break;
 			}
 		}
@@ -205,12 +213,16 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	private void initViews() {
 		ivBack = (ImageView) findViewById(R.id.ivBack);
 		ivTick = (ImageView) findViewById(R.id.ivTick);
-		ivDetails=(ImageView) findViewById(R.id.ivDetails);
-		rlDetailsChoosing=(RelativeLayout) findViewById(R.id.rlDetailsChoosing);
-		rlDetails=(RelativeLayout) findViewById(R.id.rlDetails);
-		gvDetails=(GridView) findViewById(R.id.gvDetails);
+		ivDetails = (ImageView) findViewById(R.id.ivDetails);
+		ivDetails.setImageResource(setmanager.getResbyMacAndDid(
+				xpgWifiDevice.getMacAddress(), xpgWifiDevice.getDid()));
+		rlDetailsChoosing = (RelativeLayout) findViewById(R.id.rlDetailsChoosing);
+		rlDetails = (RelativeLayout) findViewById(R.id.rlDetails);
+		gvDetails = (GridView) findViewById(R.id.gvDetails);
 		gvDetails.setSelector(R.color.transparent);
-		mManageDetailsAdapter=new ManageDetailsAdapter(this);
+		mManageDetailsAdapter = new ManageDetailsAdapter(this);
+		mManageDetailsAdapter.setSelected(setmanager.getNumbyMacAndDid(
+				xpgWifiDevice.getMacAddress(), xpgWifiDevice.getDid()) - 1);
 		gvDetails.setAdapter(mManageDetailsAdapter);
 		gvDetails.setOnItemClickListener(new OnItemClickListener() {
 
@@ -219,14 +231,15 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 					long arg3) {
 				mManageDetailsAdapter.setSelected(arg2);
 				mManageDetailsAdapter.notifyDataSetChanged();
-				Message msg=handler.obtainMessage(handler_key.GET_Details.ordinal(), arg2, 0);
+				Message msg = handler.obtainMessage(
+						handler_key.GET_Details.ordinal(), arg2, 0);
 				handler.sendMessageDelayed(msg, 380);
 			}
 		});
-//		tvDate = (TextView) findViewById(R.id.tvDate);
-//		tvPlace = (TextView) findViewById(R.id.tvPlace);
-//		tvDeviceType = (TextView) findViewById(R.id.tvDeviceType);
-//		tvDeviceCode = (TextView) findViewById(R.id.tvDeviceCode);
+		// tvDate = (TextView) findViewById(R.id.tvDate);
+		// tvPlace = (TextView) findViewById(R.id.tvPlace);
+		// tvDeviceType = (TextView) findViewById(R.id.tvDeviceType);
+		// tvDeviceCode = (TextView) findViewById(R.id.tvDeviceCode);
 		etName = (EditText) findViewById(R.id.etName);
 		btnDelDevice = (Button) findViewById(R.id.btnDelDevice);
 		unbindDialog = DialogManager.getUnbindDialog(this, this);
@@ -288,61 +301,67 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onBackPressed()
 	 */
 	@Override
 	public void onBackPressed() {
-		if(rlDetailsChoosing.getVisibility()==View.VISIBLE)
+		if (rlDetailsChoosing.getVisibility() == View.VISIBLE)
 			rlDetailsChoosing.setVisibility(View.GONE);
 		else
-		finish();
+			finish();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.gizwits.framework.activity.BaseActivity#didBindDevice(int, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gizwits.framework.activity.BaseActivity#didBindDevice(int,
+	 * java.lang.String, java.lang.String)
 	 */
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
 		Log.d("Device扫描结果", "error=" + error + ";errorMessage=" + errorMessage
 				+ ";did=" + did);
 		if (error == 0) {
-			msg.what=handler_key.CHANGE_SUCCESS.ordinal();
+			msg.what = handler_key.CHANGE_SUCCESS.ordinal();
 			handler.sendEmptyMessage(handler_key.GET_BOUND.ordinal());
 		} else {
 			msg.what = handler_key.CHANGE_FAIL.ordinal();
 			msg.obj = errorMessage;
 			handler.sendMessage(msg);
 		}
-		
+
 	}
 
-	/* (non-Javadoc)
-	 * @see com.gizwits.framework.activity.BaseActivity#didUnbindDevice(int, java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.gizwits.framework.activity.BaseActivity#didUnbindDevice(int,
+	 * java.lang.String, java.lang.String)
 	 */
 	@Override
 	protected void didUnbindDevice(int error, String errorMessage, String did) {
 		if (error == 0) {
-			msg.what=handler_key.DELETE_SUCCESS.ordinal();
+			msg.what = handler_key.DELETE_SUCCESS.ordinal();
 			handler.sendEmptyMessage(handler_key.GET_BOUND.ordinal());
 		} else {
 			msg.what = handler_key.DELETE_FAIL.ordinal();
 			msg.obj = errorMessage;
 			handler.sendMessage(msg);
 		}
-		
+
 	}
 
 	@Override
 	protected void didDiscovered(int error, List<XPGWifiDevice> deviceList) {
 		Log.d("onDiscovered", "Device count:" + deviceList.size());
-		deviceslist=deviceList;
-		if(msg!=null)
-		{
+		deviceslist = deviceList;
+		if (msg != null) {
 			handler.sendMessageDelayed(msg, 1500);
-			msg=null;
+			msg = null;
 		}
 	}
-	
-	
+
 }

@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 import com.xpg.common.useful.StringUtils;
+import com.gizwits.framework.sdk.SettingManager;
 import com.gizwits.powersocket.R;
 
 // TODO: Auto-generated Javadoc
@@ -52,6 +53,11 @@ public class ManageListAdapter extends BaseAdapter {
 
 	/** The context. */
 	private Context context;
+	
+	/**
+	 * SharePreference处理类.
+	 */
+	protected SettingManager setmanager;
 
 	/**
 	 * 设备列表数据适配器构造方法(Wifi查询数据列表).
@@ -65,6 +71,7 @@ public class ManageListAdapter extends BaseAdapter {
 		this.devicelist = list;
 		this.context = c;
 		this.inflater = LayoutInflater.from(context);
+		this.setmanager=new SettingManager(c);
 	}
 
 
@@ -133,6 +140,9 @@ public class ManageListAdapter extends BaseAdapter {
 					R.color.text_gray));
 			holder.ivArrow.setVisibility(View.GONE);
 		}
+		
+		holder.ivType.setImageResource(setmanager.getResbyMacAndDid(
+				device.getMacAddress(), device.getDid()));
 		return convertView;
 	}
 

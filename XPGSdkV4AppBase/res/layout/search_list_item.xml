@@ -10,7 +10,8 @@
         android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/device" />
 
     <TextView
@@ -20,7 +21,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/icon"
         android:gravity="center_vertical"
-        android:paddingLeft="15dp"
+        android:paddingLeft="5dp"
         android:textColor="@color/text_blue"
         android:textSize="23sp" />
 

@@ -53,7 +53,7 @@ public class ManageDetailsAdapter extends BaseAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		DeviceDetails mDetails=DeviceDetails.findByNum(position);
+		DeviceDetails mDetails=DeviceDetails.findByNum(position+1);
 		if(position==Selected){
 			holder.ivDetails.setBackgroundColor(context.getResources().getColor(R.color.background_blue));
 			holder.ivDetails.setImageResource(mDetails.getResSelected());
