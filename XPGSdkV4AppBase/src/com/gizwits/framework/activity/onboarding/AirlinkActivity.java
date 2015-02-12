@@ -281,6 +281,7 @@ public class AirlinkActivity extends BaseActivity implements OnClickListener {
      */
     private void startAirlink() {
         secondleft = 60;
+        tvTick.setText(secondleft + "");
         showLayout(UI_STATE.Setting);
         timer = new Timer();
         timer.schedule(new TimerTask() {
