@@ -346,6 +346,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
      */
     private void startConfig() {
         secondleft = 60;
+        tvTick.setText(secondleft + "");
         showLayout(UI_STATE.Setting);
         strPsw = etInputPsw.getText().toString();
         timer = new Timer();
