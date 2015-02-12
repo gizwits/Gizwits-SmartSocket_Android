@@ -168,6 +168,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 				break;
 			case GET_Details:
 				rlDetailsChoosing.setVisibility(View.GONE);
+				ivTick.setVisibility(View.VISIBLE);
 				ivDetails.setImageResource(DeviceDetails
 						.findByNum(msg.arg1 + 1).getResList());
 				setmanager.setResByMacAndDid(xpgWifiDevice.getMacAddress(),
@@ -293,6 +294,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 			break;
 		case R.id.rlDetails:
 			rlDetailsChoosing.setVisibility(View.VISIBLE);
+			ivTick.setVisibility(View.GONE);
 			break;
 		}
 
