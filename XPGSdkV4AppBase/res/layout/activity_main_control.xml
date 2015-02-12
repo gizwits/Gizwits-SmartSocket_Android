@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/transparent" >
+    android:layout_height="match_parent"
+    android:background="@color/background_blue" >
 
     <!-- id starts with @+id/split_conditioner_control_ -->
 
@@ -83,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
+            android:background="@color/background_blue"
             android:layout_below="@+id/rlHeader" >
 
             <RelativeLayout
