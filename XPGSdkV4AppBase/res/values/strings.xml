@@ -67,7 +67,7 @@
 	<string name="device_details_text">型号：tp3321             生产日前：2013/01/01\n产地：中国             生产批次：338867A5</string>
 	<string name="device_name">设备名称</string>
 	<string name="name">名称</string>
-	<string name="delete_aircondition">删除空调</string>
+	<string name="delete">删除</string>
 	<string name="forget_password">忘记密码</string>
 	<string name="forget_password_hint1">手机号/邮箱</string>
 	<string name="forget_password_get_verifycode">获取验证码</string>
