@@ -229,6 +229,7 @@ public class SoftApConfigActivity extends BaseActivity implements OnClickListene
      * Inits the events.
      */
     private void initEvents() {
+    	btnRetry.setOnClickListener(this);
         btnNext.setOnClickListener(this);
         btnOK.setOnClickListener(this);
         btnNext.setOnClickListener(this);
