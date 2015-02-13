@@ -202,7 +202,13 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setCancelable(false);
 		if (xpgWifiDevice != null) {
-			etName.setText(xpgWifiDevice.getRemark());
+			if(StringUtils.isEmpty(xpgWifiDevice.getRemark())){
+				String macAddress=xpgWifiDevice.getMacAddress();
+				int size=macAddress.length();
+				etName.setText(xpgWifiDevice.getProductName() + macAddress.substring(size-4, size));
+			}else{
+				etName.setText(xpgWifiDevice.getRemark());
+			}
 		}
 	}
 
