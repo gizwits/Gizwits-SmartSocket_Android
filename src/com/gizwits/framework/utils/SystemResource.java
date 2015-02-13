@@ -21,8 +21,6 @@ import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.xpg.common.useful.StringUtils;
-
 import android.content.Context;
 import android.graphics.BitmapFactory;
 

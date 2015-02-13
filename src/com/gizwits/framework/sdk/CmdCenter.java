@@ -473,5 +473,4 @@ public class CmdCenter {
 		}
 	}
 
-	
 }
