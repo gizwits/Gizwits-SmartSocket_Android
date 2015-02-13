@@ -331,7 +331,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.tvPhoneSwitch:
 			if (isEmail) {
-				toogleUI(ui_statue.PHONE);
+				toogleUI(ui_statue.DEFAULT);
 				isEmail = false;
 			} else {
 				toogleUI(ui_statue.EMAIL);
