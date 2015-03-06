@@ -42,6 +42,7 @@
 	<string name="confirm">确定</string>
 	<string name="cancel">取消</string>
 	<string name="password">密码</string>
+	<string name="setting_password">设置密码</string>
 	<string name="curve_text1">室内温度曲线</string>
 	<string name="device_list">设备列表</string>
 	<string name="device_manage">设备管理</string>
@@ -55,6 +56,8 @@
 	<string name="forget_password">忘记密码</string>
 	<string name="forget_password_hint1">手机号/邮箱</string>
 	<string name="forget_password_get_verifycode">获取验证码</string>
+	<string name="forget_password_get_verifycode2">获取验\n证码</string>
+	<string name="forget_password_get_verifycode3">秒后\n重新获取</string>
 	<string name="forget_password_verifycode">验证码</string>
 	<string name="forget_password_get_verifycode_again">重新获取\n验证码</string>
     <string name="help">帮助</string>
@@ -117,4 +120,7 @@
 	<string name="dialog_call_sure_to_logout">确定要注销，返回登陆界面吗？</string>
 	<string name="call_customer_service_hot_line">拨打客服热线</string>
 	<string name="qr_code_tips">将二维码放入框内，即刻自动扫描</string>
+	
+	<string name="reset_by_phone">通过手机重置密码</string>
+	<string name="reset_by_email">通过邮箱重置密码</string>
 </resources>

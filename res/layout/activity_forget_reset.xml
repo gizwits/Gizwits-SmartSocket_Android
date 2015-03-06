@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/rlTop"
-        style="@style/TopLayout">
+        style="@style/TopLayout" >
 
         <ImageView
             android:id="@+id/ivBack"
@@ -28,71 +28,169 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/etName"
-        style="@style/EditTextTheme"
-        android:layout_marginTop="30dp"
-        android:hint="@string/forget_password_hint1" />
-
-    <Button
-        android:id="@+id/btnGetCode"
-        style="@style/ButtonBlue"
-        android:text="@string/forget_password_get_verifycode" />
-
     <LinearLayout
-        android:id="@+id/llInputCode"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/etInputCode"
-            style="@style/EditTextTheme"
-            android:layout_weight="1"
-            android:hint="@string/forget_password_verifycode" />
+        android:id="@+id/llInputMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTop"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <Button
-            android:id="@+id/btnReGetCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_blue_short"
-            android:text="@string/forget_password_get_verifycode_again"
-            android:textColor="@android:color/background_light"
-            android:textSize="14sp" />
+            android:id="@+id/btnPhoneReset"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="#FFFFFF"
+            android:drawableRight="@drawable/arrow_right_gray"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="@string/reset_by_phone"
+            android:textColor="@color/text_gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <Button
+            android:id="@+id/btnEmailReset"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="#FFFFFF"
+            android:drawableRight="@drawable/arrow_right_gray"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="@string/reset_by_email"
+            android:textColor="@color/text_gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llInputPsw"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/login_input_box"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:id="@+id/llInputPhone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTop"
+        android:orientation="vertical"
+        android:visibility="visible" >
 
         <EditText
-            android:inputType="textPassword"
-            android:id="@+id/etInputPsw"
+            android:id="@+id/etName"
             style="@style/EditTextTheme"
-            android:layout_weight="1"
-            android:digits="@string/register_name_digits"
-            android:background="@android:color/transparent"
-            android:hint="@string/password" />
+            android:layout_marginTop="30dp"
+            android:hint="@string/register_phone_num"
+            android:paddingLeft="10dp" />
 
-        <ToggleButton
-            android:id="@+id/tbPswFlag"
-            android:layout_width="50dp"
-            android:layout_height="24dp"
-            android:background="@drawable/toggle_selector"
-            android:textOff=""
-            android:textOn="" />
+        <Button
+            android:id="@+id/btnGetCode"
+            style="@style/ButtonBlue"
+            android:text="@string/forget_password_get_verifycode"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/llInputCode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/etInputCode"
+                style="@style/EditTextTheme"
+                android:layout_weight="1"
+                android:hint="@string/forget_password_verifycode"
+                android:paddingLeft="10dp" />
+
+            <Button
+                android:id="@+id/btnReGetCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_blue_short"
+                android:text="@string/forget_password_get_verifycode2"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llInputPsw"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/login_input_box"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/etInputPsw"
+                style="@style/EditTextTheme"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:digits="@string/register_name_digits"
+                android:hint="@string/setting_password"
+                android:inputType="textPassword" />
+
+            <ToggleButton
+                android:id="@+id/tbPswFlag"
+                android:layout_width="50dp"
+                android:layout_height="24dp"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn="" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSure"
+            style="@style/ButtonBlue"
+            android:text="@string/confirm" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSure"
-        style="@style/ButtonBlue"
-        android:text="@string/confirm" />
+    <RelativeLayout
+        android:id="@+id/rlInputEmail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTop"
+        android:visibility="gone" >
 
+        <Button
+            android:id="@+id/btnSureEmail"
+            style="@style/ButtonBlue"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/confirm" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etInputEmail"
+            style="@style/EditTextTheme"
+            android:layout_above="@id/btnSureEmail"
+            android:layout_margin="10dp"
+            android:background="@drawable/login_input_box"
+            android:hint="@string/register_email"
+            android:inputType="text"
+            android:paddingLeft="10dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlDialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTop"
+        android:background="@color/transparent_half"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tvDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            android:padding="20dp"
+            android:text="已发送至您的邮箱，\n请登录邮箱查收！" />
+    </RelativeLayout>
+
+</RelativeLayout>
