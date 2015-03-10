@@ -1,204 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.gizwits.framework.widget.SlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_blue" >
 
-    <!-- id starts with @+id/split_conditioner_control_ -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
 
-    <RelativeLayout
-        android:id="@+id/rlControlMainPage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:visibility="visible" >
+        <include layout="@layout/activity_slibbar" />
+        <!-- id starts with @+id/split_conditioner_control_ -->
 
         <RelativeLayout
-            android:id="@+id/rlHeader"
+            android:id="@+id/rlControlMainPage"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/top" >
-
-            <ImageView
-                android:id="@+id/ivMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:paddingLeft="10dp"
-                android:src="@drawable/home_icon" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/main_control_title"
-                android:textColor="@color/background_blue"
-                android:textSize="22sp" />
-
-            <ImageView
-                android:id="@+id/ivPower"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:src="@drawable/icon_power"
-                android:visibility="gone" />
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:visibility="visible" >
 
             <RelativeLayout
-                android:id="@+id/rlAlarmTips"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/tvTitle"
-                android:gravity="center"
-                android:visibility="gone" >
+                android:id="@+id/rlHeader"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/top" >
 
                 <ImageView
+                    android:id="@+id/ivMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/fault_tips" />
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/home_icon" />
 
                 <TextView
-                    android:id="@+id/tvAlarmTipsCount"
+                    android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:text="@string/main_control_title"
+                    android:textColor="@color/background_blue"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/ivPower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textColor="#006cff"
-                    android:textSize="18sp" />
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/icon_power"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/rlAlarmTips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tvTitle"
+                    android:gravity="center"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/fault_tips" />
+
+                    <TextView
+                        android:id="@+id/tvAlarmTipsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="#006cff"
+                        android:textSize="18sp" />
+                </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:background="@color/background_blue"
-            android:layout_below="@+id/rlHeader" >
-
-            <RelativeLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rlHeader"
                 android:background="@color/background_blue"
-                android:gravity="center_horizontal" >
+                android:scrollbars="none" >
 
-                <Button
-                    android:id="@+id/btnPower"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/selector_power" />
+                    android:background="@color/background_blue"
+                    android:gravity="center_horizontal" >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp" >
-
-                    <TextView
+                    <Button
+                        android:id="@+id/btnPower"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/consumption"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/selector_power" />
 
-                    <TextView
-                        android:id="@+id/tvConsumption"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:text="@string/timing"
-                        android:textColor="@color/yellow"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="30dp" >
 
-                <Button
-                    android:id="@+id/btnAppoinment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/btnPower"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/home_button_appoinment"
-                    android:gravity="center_horizontal" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/consumption"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp" />
 
-                <LinearLayout
-                    android:id="@+id/llTiming"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/btnAppoinment"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
+                        <TextView
+                            android:id="@+id/tvConsumption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/timing"
+                            android:textColor="@color/yellow"
+                            android:textSize="18sp" />
+                    </LinearLayout>
 
-                    <ImageView
+                    <Button
+                        android:id="@+id/btnAppoinment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/home_appointment2" />
+                        android:layout_below="@id/btnPower"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/home_button_appoinment"
+                        android:gravity="center_horizontal" />
 
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/llTiming"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:text="@string/timing"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        android:layout_below="@id/btnAppoinment"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:id="@+id/tvTiming"
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/home_appointment2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/timing"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvTiming"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/timing"
+                            android:textColor="@color/yellow"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llDelay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:text="@string/timing"
-                        android:textColor="@color/yellow"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                        android:layout_alignLeft="@id/llTiming"
+                        android:layout_below="@id/llTiming"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingBottom="20dp" >
 
-                <LinearLayout
-                    android:id="@+id/llDelay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/llTiming"
-                    android:layout_below="@id/llTiming"
-                    android:layout_centerHorizontal="true"
-                    android:paddingBottom="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/home_appointment1" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/home_appointment1" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/delay"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:text="@string/delay"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        <TextView
+                            android:id="@+id/tvDelay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/timing"
+                            android:textColor="@color/yellow"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvDelay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:text="@string/timing"
-                        android:textColor="@color/yellow"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </RelativeLayout>
-        </ScrollView>
-    </RelativeLayout>
-
-</RelativeLayout>
+</com.gizwits.framework.widget.SlidingMenu>

@@ -359,6 +359,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			btnGetCode.setVisibility(View.VISIBLE);
 			etName.setHint("手机号");
 			etName.setText("");
+			etName.setInputType(InputType.TYPE_CLASS_NUMBER);
 			tvPhoneSwitch.setText("邮箱注册");
 			tvTips.setVisibility(View.GONE);
 		} else if (statue == ui_statue.PHONE) {

@@ -9,8 +9,7 @@
         android:id="@+id/slideout_placeholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingRight="60dp" >
+        android:orientation="vertical" >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -28,8 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:background="@color/background_light_gray"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:onClick="onClickSlipBar" >
 
                     <ImageView
                         android:id="@+id/icon1"
@@ -72,7 +70,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/background_light_gray"
-                    android:gravity="center_vertical"
+                    android:onClick="onClickSlipBar"
                     android:orientation="horizontal" >
 
                     <ImageView
@@ -109,7 +107,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/background_light_gray"
-                    android:gravity="center_vertical"
+                    android:onClick="onClickSlipBar"
                     android:orientation="horizontal" >
 
                     <ImageView
@@ -146,7 +144,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/background_light_gray"
-                    android:gravity="center_vertical"
+                    android:onClick="onClickSlipBar"
                     android:orientation="horizontal" >
 
                     <ImageView
@@ -190,6 +188,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/background_light_gray"
                     android:gravity="center_vertical"
+                    android:onClick="onClickSlipBar"
                     android:orientation="horizontal" >
 
                     <ImageView
@@ -206,7 +205,6 @@
                         android:layout_toRightOf="@+id/icon5"
                         android:text="@string/back_to_device_list" />
                 </RelativeLayout>
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -215,6 +213,7 @@
         android:id="@+id/slidedout_cover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:visibility="gone" />
 
 </AbsoluteLayout>

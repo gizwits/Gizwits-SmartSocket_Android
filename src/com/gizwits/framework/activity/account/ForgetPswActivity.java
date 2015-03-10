@@ -21,9 +21,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.ProgressDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
+import android.text.Html.ImageGetter;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -34,6 +37,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -51,10 +56,10 @@ import com.xpg.ui.utils.ToastUtils;
  */
 public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	/**
-	 * The tv phone switch.
+	 * The tv dialog.
 	 */
-	// private TextView tvPhoneSwitch;
-
+	 private TextView tvDialog;
+	
 	/**
 	 * The et name.
 	 */
@@ -71,6 +76,11 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	private EditText etInputPsw;
 
 	/**
+	 * The et input email.
+	 */
+	private EditText etInputEmail;
+
+	/**
 	 * The btn get code.
 	 */
 	private Button btnGetCode;
@@ -81,19 +91,44 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	private Button btnReGetCode;
 
 	/**
+	 * The btn sureEmail.
+	 */
+	private Button btnSureEmail;
+
+	/**
+	 * The btn phoneReset.
+	 */
+	private Button btnPhoneReset;
+
+	/**
+	 * The btn emailReset.
+	 */
+	private Button btnEmailReset;
+
+	/**
+	 * The ll input menu.
+	 */
+	private LinearLayout llInputMenu;
+
+	/**
+	 * The ll input phone.
+	 */
+	private LinearLayout llInputPhone;
+
+	/**
+	 * The rl input email.
+	 */
+	private RelativeLayout rlInputEmail;
+	
+	/**
+	 * The rl dialog.
+	 */
+	private RelativeLayout rlDialog;
+
+	/**
 	 * The btn sure.
 	 */
 	private Button btnSure;
-
-	/**
-	 * The ll input code.
-	 */
-	private LinearLayout llInputCode;
-
-	/**
-	 * The ll input psw.
-	 */
-	private LinearLayout llInputPsw;
 
 	/**
 	 * The iv back.
@@ -105,8 +140,10 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	 */
 	private ToggleButton tbPswFlag;
 
-	/** 是否邮箱注册标识位 */
-	private boolean isEmail = false;
+	/**
+	 * The ui_statu statuNow.
+	 */
+	private ui_statu statuNow;
 
 	/**
 	 * The secondleft.
@@ -159,17 +196,17 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	private enum ui_statu {
 
 		/**
-		 * 默认状态
+		 * 主菜单
 		 */
 		DEFAULT,
 
 		/**
-		 * 手机注册的用户
+		 * 通过手机重置密码
 		 */
 		PHONE,
 
 		/**
-		 * email注册的用户
+		 * 通过邮箱重置密码
 		 */
 		EMAIL,
 	}
@@ -188,11 +225,11 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 				if (secondleft <= 0) {
 					timer.cancel();
 					btnReGetCode.setEnabled(true);
-					btnReGetCode.setText("重新获取验证码");
+					btnReGetCode.setText(R.string.forget_password_get_verifycode2);
 					btnReGetCode
 							.setBackgroundResource(R.drawable.button_blue_short);
 				} else {
-					btnReGetCode.setText(secondleft + "秒后\n重新获取");
+					btnReGetCode.setText(secondleft +""+getResources().getText(R.string.forget_password_get_verifycode3));
 
 				}
 				break;
@@ -202,7 +239,8 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 				break;
 
 			case TOAST:
-				ToastUtils.showShort(ForgetPswActivity.this, (String) msg.obj);
+				tvDialog.setText((String) msg.obj);
+				rlDialog.setVisibility(View.VISIBLE);
 				dialog.cancel();
 				break;
 			}
@@ -227,14 +265,21 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	 * Inits the views.
 	 */
 	private void initViews() {
+		tvDialog=(TextView) findViewById(R.id.tvDialog);
 		etName = (EditText) findViewById(R.id.etName);
 		etInputCode = (EditText) findViewById(R.id.etInputCode);
 		etInputPsw = (EditText) findViewById(R.id.etInputPsw);
+		etInputEmail = (EditText) findViewById(R.id.etInputEmail);
 		btnGetCode = (Button) findViewById(R.id.btnGetCode);
 		btnReGetCode = (Button) findViewById(R.id.btnReGetCode);
 		btnSure = (Button) findViewById(R.id.btnSure);
-		llInputCode = (LinearLayout) findViewById(R.id.llInputCode);
-		llInputPsw = (LinearLayout) findViewById(R.id.llInputPsw);
+		btnSureEmail = (Button) findViewById(R.id.btnSureEmail);
+		btnPhoneReset = (Button) findViewById(R.id.btnPhoneReset);
+		btnEmailReset = (Button) findViewById(R.id.btnEmailReset);
+		llInputMenu = (LinearLayout) findViewById(R.id.llInputMenu);
+		llInputPhone = (LinearLayout) findViewById(R.id.llInputPhone);
+		rlInputEmail = (RelativeLayout) findViewById(R.id.rlInputEmail);
+		rlDialog=(RelativeLayout) findViewById(R.id.rlDialog);
 		ivBack = (ImageView) findViewById(R.id.ivBack);
 		tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
 		toogleUI(ui_statu.DEFAULT);
@@ -246,9 +291,13 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	 * Inits the events.
 	 */
 	private void initEvents() {
+		rlDialog.setOnClickListener(this);
 		btnGetCode.setOnClickListener(this);
 		btnReGetCode.setOnClickListener(this);
+		btnSureEmail.setOnClickListener(this);
 		btnSure.setOnClickListener(this);
+		btnPhoneReset.setOnClickListener(this);
+		btnEmailReset.setOnClickListener(this);
 		// tvPhoneSwitch.setOnClickListener(this);
 		ivBack.setOnClickListener(this);
 		tbPswFlag
@@ -284,41 +333,62 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.btnGetCode:
-			String name = etName.getText().toString().trim();
-			if (!StringUtils.isEmpty(name)) {
-				if (name.contains("@")) {
-					isEmail = true;
-					toogleUI(ui_statu.EMAIL);
-					getEmail(name);
-				} else if (name.length() == 11) {
-					toogleUI(ui_statu.PHONE);
-					sendVerifyCode(name);
-				} else {
-					ToastUtils.showShort(this, "请输入正确的账号。");
-				}
-			} else {
-				ToastUtils.showShort(this, "请输入正确的账号。");
-			}
-
-			break;
+		// case R.id.btnGetCode:
+		// String name = etName.getText().toString().trim();
+		// if(StringUtils.isEmpty(name)||name.length() != 11)
+		// ToastUtils.showShort(this, "请输入正确的账号。");
+		//
+		// sendVerifyCode(name);
+		// break;
 		case R.id.btnReGetCode:
 			String phone2 = etName.getText().toString().trim();
-			if (!StringUtils.isEmpty(phone2) && phone2.length() == 11) {
-				toogleUI(ui_statu.PHONE);
-				sendVerifyCode(phone2);
-			} else {
+			if (StringUtils.isEmpty(phone2) || phone2.length() != 11){
 				ToastUtils.showShort(this, "请输入正确的手机号码。");
+				return;
 			}
+
+			sendVerifyCode(phone2);
 			break;
 		case R.id.btnSure:
 			doChangePsw();
 			break;
-		case R.id.tvPhoneSwitch:
-			ToastUtils.showShort(this, "该功能暂未实现，敬请期待。^_^");
-			break;
 		case R.id.ivBack:
 			onBackPressed();
+			break;
+		case R.id.btnSureEmail:
+			String email = etInputEmail.getText().toString().trim();
+			if (StringUtils.isEmpty(email) || !email.contains("@")){
+				ToastUtils.showShort(this, "请输入正确的账号。");
+				return;
+			}
+
+			getEmail(email);
+			break;
+		case R.id.btnPhoneReset:
+			toogleUI(ui_statu.PHONE);
+			break;
+		case R.id.btnEmailReset:
+			toogleUI(ui_statu.EMAIL);
+			break;
+		case R.id.rlDialog:
+			rlDialog.setVisibility(View.GONE);
+			break;
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if(rlDialog.getVisibility()==View.VISIBLE){
+			rlDialog.setVisibility(View.GONE);
+			return;
+		}
+		switch (statuNow) {
+		case DEFAULT:
+			finish();
+			break;
+		case PHONE:
+		case EMAIL:
+			toogleUI(ui_statu.DEFAULT);
 			break;
 		}
 	}
@@ -330,18 +400,27 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	 *            the statu
 	 */
 	private void toogleUI(ui_statu statu) {
-		if (statu == ui_statu.DEFAULT) {
-			llInputCode.setVisibility(View.GONE);
-			llInputPsw.setVisibility(View.GONE);
-			btnSure.setVisibility(View.GONE);
-			btnGetCode.setVisibility(View.VISIBLE);
-		} else if (statu == ui_statu.PHONE) {
-			llInputCode.setVisibility(View.VISIBLE);
-			llInputPsw.setVisibility(View.VISIBLE);
-			btnSure.setVisibility(View.VISIBLE);
-			btnGetCode.setVisibility(View.GONE);
-		} else {
-
+		statuNow = statu;
+		switch (statu) {
+		case DEFAULT:
+			llInputMenu.setVisibility(View.VISIBLE);
+			llInputPhone.setVisibility(View.GONE);
+			rlInputEmail.setVisibility(View.GONE);
+			etInputCode.setText("");
+			etInputEmail.setText("");
+			etInputPsw.setText("");
+			etName.setText("");
+			break;
+		case PHONE:
+			llInputMenu.setVisibility(View.GONE);
+			llInputPhone.setVisibility(View.VISIBLE);
+			rlInputEmail.setVisibility(View.GONE);
+			break;
+		case EMAIL:
+			llInputMenu.setVisibility(View.GONE);
+			llInputPhone.setVisibility(View.GONE);
+			rlInputEmail.setVisibility(View.VISIBLE);
+			break;
 		}
 	}
 
@@ -354,6 +433,7 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 	 */
 	private void getEmail(String email) {
 		mCenter.cChangePassworfByEmail(email);
+		dialog.show();
 	}
 
 	/**
@@ -400,11 +480,11 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void run() {
-				//倒计时通知
+				// 倒计时通知
 				handler.sendEmptyMessage(handler_key.TICK_TIME.ordinal());
 			}
 		}, 1000, 1000);
-		//发送请求验证码指令
+		// 发送请求验证码指令
 		mCenter.cRequestSendVerifyCode(phone);
 	}
 
@@ -443,10 +523,13 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		if (error == 0) {// 修改成功
 			Message msg = new Message();
 			msg.what = handler_key.TOAST.ordinal();
-			if (isEmail) {
-				msg.obj = "重置密码链接已发送您的邮箱，在邮箱中可执行重置密码操作";
+			if (statuNow == ui_statu.EMAIL) {
+				Drawable img = getResources().getDrawable(R.drawable.slib_tick);
+				img.setBounds(0, 0, img.getMinimumWidth(), img.getMinimumHeight());
+				tvDialog.setCompoundDrawables(img, null, null, null);
+				msg.obj = "已发送至您的邮箱，\n请登录邮箱查收！";
 			} else {
-				msg.obj = "修改成功";
+				msg.obj = "设置成功";
 			}
 			handler.sendMessage(msg);
 			handler.sendEmptyMessageDelayed(
