@@ -449,11 +449,6 @@ public class MainControlActivity extends BaseActivity implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		mXpgWifiDevice.setListener(deviceListener);
-		isCentigrade = setmanager.getUnit();
-		alarmShowList.clear();
-		handler.sendEmptyMessage(handler_key.GET_STATUE.ordinal());
-
 		initBindList();
 		mAdapter.setChoosedPos(-1);
 		for (int i = 0; i < bindlist.size(); i++) {
@@ -462,6 +457,11 @@ public class MainControlActivity extends BaseActivity implements
 				mAdapter.setChoosedPos(i);
 		}
 		mAdapter.notifyDataSetChanged();
+		
+		mXpgWifiDevice.setListener(deviceListener);
+		isCentigrade = setmanager.getUnit();
+		alarmShowList.clear();
+		handler.sendEmptyMessage(handler_key.GET_STATUE.ordinal());
 	}
 
 	/**
