@@ -587,10 +587,6 @@ public class MainControlActivity extends BaseActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				for (XPGWifiDevice device : bindlist)
-					Log.e("details", "mac=" + device.getMacAddress()
-							+ ",isConnected=" + device.isConnected());
-
 				if (!mAdapter.getItem(position).isOnline())
 					return;
 
@@ -601,8 +597,6 @@ public class MainControlActivity extends BaseActivity implements
 
 				mAdapter.setChoosedPos(position);
 				mXpgWifiDevice = bindlist.get(position);
-				Log.e("login", "mac=" + bindlist.get(position).getMacAddress()
-						+ ",+position=" + position);
 				loginDevice(mXpgWifiDevice);
 			}
 		});
@@ -849,7 +843,6 @@ public class MainControlActivity extends BaseActivity implements
 	 *            the xpg wifi device
 	 */
 	private void loginDevice(XPGWifiDevice xpgWifiDevice) {
-		Log.e("loginDevice", xpgWifiDevice.getRemark());
 		mXpgWifiDevice = xpgWifiDevice;
 		mXpgWifiDevice.setListener(deviceListener);
 		DisconnectOtherDevice();
@@ -872,7 +865,6 @@ public class MainControlActivity extends BaseActivity implements
 			return;
 
 		if (result == 0) {
-			Log.e("haha", device.getRemark());
 			handler.sendEmptyMessage(handler_key.LOGIN_SUCCESS.ordinal());
 		} else {
 			handler.sendEmptyMessage(handler_key.LOGIN_FAIL.ordinal());
@@ -1045,7 +1037,6 @@ public class MainControlActivity extends BaseActivity implements
 	@Override
 	protected void didReceiveData(XPGWifiDevice device,
 			ConcurrentHashMap<String, Object> dataMap, int result) {
-		Log.e(TAG, "didReceiveData"+device.getRemark());
 		this.deviceDataMap = dataMap;
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
