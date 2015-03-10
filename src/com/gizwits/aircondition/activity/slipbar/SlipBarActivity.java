@@ -273,9 +273,9 @@ public class SlipBarActivity extends BaseActivity implements OnClickListener {
 				loginDevice(bindlist.get(position));
 			}
 		});
-		Bitmap coverBitmap = MainControlActivity.getView();
+//		Bitmap coverBitmap = MainControlActivity.getView();
 		mCover.setOnClickListener(this);
-		mCover.setImageBitmap(coverBitmap);
+//		mCover.setImageBitmap(coverBitmap);
 	}
 
 	@Override

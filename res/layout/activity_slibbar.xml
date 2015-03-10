@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingRight="60dp" >
+         >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -29,7 +29,8 @@
                     android:layout_marginTop="50dp"
                     android:gravity="center_vertical"
                     android:background="@color/background_light_gray"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:onClick="onClickSlipBar" >
 
                     <ImageView
                         android:id="@+id/icon1"
@@ -73,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:background="@color/background_light_gray"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:onClick="onClickSlipBar" >
 
                     <ImageView
                         android:id="@+id/icon2"
@@ -110,7 +112,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:background="@color/background_light_gray"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:onClick="onClickSlipBar" >
 
                     <ImageView
                         android:id="@+id/icon3"
@@ -147,7 +150,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:background="@color/background_light_gray"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:onClick="onClickSlipBar" >
 
                     <ImageView
                         android:id="@+id/icon4"
@@ -183,13 +187,15 @@
                     style="@style/ButtonBlue"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="50dp"
-                    android:text="@string/back_to_device_list" />
+                    android:text="@string/back_to_device_list"
+                    android:onClick="onClickSlipBar" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/slidedout_cover"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY" />
