@@ -31,7 +31,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.gizwits.aircondition.R;
 import com.gizwits.aircondition.activity.control.MainControlActivity;
@@ -41,7 +40,6 @@ import com.gizwits.framework.activity.onboarding.BindingDeviceActivity;
 import com.gizwits.framework.activity.onboarding.SearchDeviceActivity;
 import com.gizwits.framework.adapter.DeviceListAdapter;
 import com.gizwits.framework.utils.DialogManager;
-import com.gizwits.framework.utils.Historys;
 import com.gizwits.framework.widget.RefreshableListView;
 import com.gizwits.framework.widget.RefreshableListView.OnRefreshListener;
 import com.xpg.common.system.IntentUtils;

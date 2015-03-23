@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
     <RelativeLayout
         android:id="@+id/rlTop"
@@ -14,8 +13,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
             android:layout_marginLeft="10dp"
+            android:padding="10dp"
             android:src="@drawable/return_icon" />
 
         <TextView
@@ -27,42 +26,71 @@
             android:textSize="22sp" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/etPswOld"
-        style="@style/EditTextTheme"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
-        android:digits="@string/register_name_digits"
-        android:background="@drawable/login_input_box"
-        android:hint="@string/old_password"
-        android:inputType="textPassword" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTop"
+        android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/etPswNew"
-        style="@style/EditTextTheme"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
-        android:digits="@string/register_name_digits"
-        android:background="@drawable/login_input_box"
-        android:hint="@string/new_password"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/etPswOld"
+            style="@style/EditTextTheme"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/login_input_box"
+            android:digits="@string/register_name_digits"
+            android:hint="@string/old_password"
+            android:inputType="textPassword" />
 
-    <ToggleButton
-        android:id="@+id/tbPswFlag"
-        android:layout_width="50dp"
-        android:layout_height="24dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/toggle_selector"
-        android:textOff=""
-        android:textOn="" />
+        <EditText
+            android:id="@+id/etPswNew"
+            style="@style/EditTextTheme"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/login_input_box"
+            android:digits="@string/register_name_digits"
+            android:hint="@string/new_password"
+            android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/btnConfirm"
-        style="@style/ButtonBlue"
-        android:layout_marginTop="10dp"
-        android:text="@string/confirm" />
+        <ToggleButton
+            android:id="@+id/tbPswFlag"
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/toggle_selector"
+            android:textOff=""
+            android:textOn="" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnConfirm"
+            style="@style/ButtonBlue"
+            android:layout_marginTop="10dp"
+            android:text="@string/confirm" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTop"
+        android:background="@color/transparent_half"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            android:textSize="15sp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="38dp"
+            android:paddingRight="38dp"
+            android:paddingTop="15dp"
+            android:text="@string/change_success" />
+    </RelativeLayout>
+
+</RelativeLayout>

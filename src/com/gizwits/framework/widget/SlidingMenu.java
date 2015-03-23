@@ -1,3 +1,20 @@
+/**
+ * Project Name:XPGSdkV4AppBase
+ * File Name:SlidingMenu.java
+ * Package Name:com.gizwits.framework.widget
+ * Date:2015-3-20 14:48:07
+ * Copyright (c) 2014~2015 Xtreme Programming Group, Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package com.gizwits.framework.widget;
 
 import com.gizwits.framework.utils.DensityUtil;
@@ -6,51 +23,83 @@ import com.nineoldandroids.view.ViewHelper;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
+/**
+ * The Class SlidingMenu.
+ * 
+ * 侧拉菜单
+ * 
+ * @author Sunny
+ */
 public class SlidingMenu extends HorizontalScrollView {
 	/**
 	 * 屏幕宽度
 	 */
 	private int mScreenWidth;
+
 	/**
 	 * dp
 	 */
 	private int mMenuRightPadding;
 
+	/**
+	 * dip
+	 */
 	private final int num = 60;
 
 	/**
 	 * 菜单的宽度
 	 */
 	private int mMenuWidth;
+
+	/**
+	 * 菜单的半宽度
+	 */
 	private int mHalfMenuWidth;
 
+	/**
+	 * 菜单打开标志位
+	 */
 	private boolean isOpen;
 
+	/**
+	 * 初始化标志位
+	 */
 	private boolean once;
 
+	/**
+	 * 侧拉菜单控件
+	 */
 	private ViewGroup mMenu;
 
+	/**
+	 * 构造函数
+	 */
+	public SlidingMenu(Context context) {
+		this(context, null, 0);
+	}
+
+	/**
+	 * 构造函数
+	 */
 	public SlidingMenu(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 
 	}
 
+	/**
+	 * 构造函数
+	 */
 	public SlidingMenu(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		mScreenWidth = getScreenWidth(context);
 
-		mMenuRightPadding = DensityUtil.dip2px(context, num);// 默认为10DP
-	}
-
-	public SlidingMenu(Context context) {
-		this(context, null, 0);
+		mMenuRightPadding = DensityUtil.dip2px(context, num);
 	}
 
 	@Override
@@ -70,6 +119,7 @@ public class SlidingMenu extends HorizontalScrollView {
 				mContent.getLayoutParams().width = mScreenWidth;
 			}
 		}
+		updateState();
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
 	}
@@ -84,8 +134,30 @@ public class SlidingMenu extends HorizontalScrollView {
 		}
 	}
 
+	/**
+	 * 更新当前状态
+	 */
+	private void updateState() {
+		if (isOpen) {
+			this.scrollTo(0, 0);
+		} else {
+			this.scrollTo(mMenuWidth, 0);
+		}
+	}
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		if (isOpen&&ev.getX() > mMenuWidth) {
+				toggle();
+		}
+		return super.onInterceptTouchEvent(ev);
+	}
+
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
+		if (!isOpen)
+			return true;
+
 		int action = ev.getAction();
 		switch (action) {
 		// Up时，进行判断，如果显示区域大于菜单宽度一半则完全显示，否则隐藏
@@ -109,8 +181,9 @@ public class SlidingMenu extends HorizontalScrollView {
 	public void openMenu() {
 		if (isOpen)
 			return;
+
 		this.smoothScrollTo(0, 0);
-		isOpen = true;
+		this.isOpen = true;
 	}
 
 	/**
@@ -119,7 +192,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	public void closeMenu() {
 		if (isOpen) {
 			this.smoothScrollTo(mMenuWidth, 0);
-			isOpen = false;
+			this.isOpen = false;
 		}
 	}
 
@@ -143,7 +216,7 @@ public class SlidingMenu extends HorizontalScrollView {
 	}
 
 	public boolean isOpen() {
-		return isOpen;
+		return this.isOpen;
 	}
 
 	/**

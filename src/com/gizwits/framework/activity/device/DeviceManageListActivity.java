@@ -85,13 +85,11 @@ public class DeviceManageListActivity extends BaseActivity implements OnClickLis
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 XPGWifiDevice device = bindlist.get(position);
-                if (device.isLAN() || device.isOnline()) {
                     Intent intent = new Intent(DeviceManageListActivity.this,
                             DeviceManageDetailActivity.class);
                     intent.putExtra("mac", device.getMacAddress());
                     intent.putExtra("did", device.getDid());
                     startActivity(intent);
-                }
             }
         });
         ivBack.setOnClickListener(this);

@@ -127,11 +127,9 @@ public class ManageListAdapter extends BaseAdapter {
 		if (device.isLAN() || device.isOnline()) {
 			holder.tvName.setTextColor(context.getResources().getColor(
 					R.color.text_blue));
-			holder.ivArrow.setVisibility(View.VISIBLE);
 		} else {
 			holder.tvName.setTextColor(context.getResources().getColor(
 					R.color.text_gray));
-			holder.ivArrow.setVisibility(View.GONE);
 		}
 		return convertView;
 	}
