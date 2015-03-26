@@ -27,6 +27,9 @@ import com.xtremeprog.xpgconnect.XPGWifiSDK.XPGWifiLogLevel;
  */
 public class Configs {
 	
+	/**  日志保存文件名. */
+	public static final int DEVICE_NAME_KEEP_LENGTH = 8;
+	
 	/**  设定是否为debug版本. */
 	public static final boolean DEBUG = true;
 	

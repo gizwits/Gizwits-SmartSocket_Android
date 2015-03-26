@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.gizwits.aircondition.R;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
+import com.gizwits.framework.config.Configs;
 import com.gizwits.framework.utils.StringUtils;
 
 // TODO: Auto-generated Javadoc
@@ -114,15 +115,18 @@ public class ManageListAdapter extends BaseAdapter {
 
 		XPGWifiDevice device = devicelist.get(position);
 		
+		String name="";
 		if(StringUtils.isEmpty(device.getRemark()))
 		{
 			String macAddress=device.getMacAddress();
 			int size=macAddress.length();
-			holder.tvName.setText(device.getProductName() + macAddress.substring(size-4, size));
+			name=device.getProductName() + macAddress.substring(size-4, size);
 		}else
 		{
-			holder.tvName.setText(device.getRemark());
+			name=device.getRemark();
 		}
+		name=StringUtils.getStrFomat(name,Configs.DEVICE_NAME_KEEP_LENGTH, true);
+		holder.tvName.setText(name);
 		
 		if (device.isLAN() || device.isOnline()) {
 			holder.tvName.setTextColor(context.getResources().getColor(

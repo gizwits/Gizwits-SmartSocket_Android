@@ -3,14 +3,16 @@ package com.gizwits.framework.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gizwits.aircondition.R;
+import com.gizwits.framework.config.Configs;
 import com.gizwits.framework.utils.DensityUtil;
 import com.gizwits.framework.utils.StringUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
@@ -23,7 +25,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
  * 
  * @author Lien
  */
-public class MenuDeviceAdapter extends ArrayAdapter<XPGWifiDevice>{
+public class MenuDeviceAdapter extends BaseAdapter {
 
 	/** The inflater. */
 	private LayoutInflater inflater;
@@ -33,7 +35,10 @@ public class MenuDeviceAdapter extends ArrayAdapter<XPGWifiDevice>{
 
 	/** The ctx. */
 	private Context ctx;
-	
+
+	/** The wifidevicelist. */
+	private List<XPGWifiDevice> devicelist ;
+
 	/**
 	 * Gets the choosed pos.
 	 * 
@@ -63,9 +68,9 @@ public class MenuDeviceAdapter extends ArrayAdapter<XPGWifiDevice>{
 	 *            the objects
 	 */
 	public MenuDeviceAdapter(Context context, List<XPGWifiDevice> objects) {
-		super(context, 0, objects);
 		ctx = context;
 		inflater = LayoutInflater.from(context);
+		devicelist=objects;
 	}
 
 	/*
@@ -75,12 +80,10 @@ public class MenuDeviceAdapter extends ArrayAdapter<XPGWifiDevice>{
 	 * android.view.ViewGroup)
 	 */
 	@Override
-	public View getView(final int position, View convertView,
-			ViewGroup parent) {
-		int px=DensityUtil.dip2px(ctx, getCount()*50);
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		int px = DensityUtil.dip2px(ctx, getCount() * 50);
 		parent.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
-				android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
-				px));
+				android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, px));
 
 		ViewHolder holder = null;
 		XPGWifiDevice device = getItem(position);
@@ -96,21 +99,26 @@ public class MenuDeviceAdapter extends ArrayAdapter<XPGWifiDevice>{
 			holder = (ViewHolder) convertView.getTag();
 		}
 
+		String name="";
 		if (StringUtils.isEmpty(device.getRemark())) {
 			String macAddress = device.getMacAddress();
 			int size = macAddress.length();
-			holder.deviceName_tv.setText(device.getProductName()
-					+ macAddress.substring(size - 4, size));
+			name=device.getProductName()
+					+ macAddress.substring(size - 4, size);
 		} else {
-			holder.deviceName_tv.setText(device.getRemark());
+			name=device.getRemark();
 		}
+		name=StringUtils.getStrFomat(name, Configs.DEVICE_NAME_KEEP_LENGTH, true);
+		holder.deviceName_tv.setText(name);
 
 		if (getChoosedPos() == position) {
 			holder.deviceName_tv.setSelected(true);
-			holder.device_checked_tv.setSelected(true);
+			holder.device_checked_tv.setVisibility(View.VISIBLE);
+			;
 		} else {
 			holder.deviceName_tv.setSelected(false);
-			holder.device_checked_tv.setSelected(false);
+			holder.device_checked_tv.setVisibility(View.INVISIBLE);
+			;
 		}
 
 		if (device.isOnline())
@@ -123,7 +131,7 @@ public class MenuDeviceAdapter extends ArrayAdapter<XPGWifiDevice>{
 		return convertView;
 
 	}
-	
+
 	/**
 	 * 
 	 * ClassName: Class ViewHolder. <br/>
@@ -139,5 +147,20 @@ public class MenuDeviceAdapter extends ArrayAdapter<XPGWifiDevice>{
 
 		/** The device name_tv. */
 		TextView deviceName_tv;
+	}
+
+	@Override
+	public int getCount() {
+		return devicelist.size();
+	}
+
+	@Override
+	public XPGWifiDevice getItem(int position) {
+		return devicelist.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return 0;
 	}
 }
