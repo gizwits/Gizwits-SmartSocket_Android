@@ -65,6 +65,7 @@
                     android:id="@+id/lvDevice"
                     android:layout_width="fill_parent"
                     android:scrollbars="none"
+                    android:listSelector="@color/transparent"
                     android:layout_height="wrap_content"
                     android:cacheColorHint="#00000000" />
 
