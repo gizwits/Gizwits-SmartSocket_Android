@@ -29,6 +29,7 @@
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="dialog_sure_to_delete">确定要删除设备吗？</string>
     <string name="dialog_sure_to_off">确定要关闭设备吗？</string>
+    <string name="dialog_sure_psw_change">账号新密码即将生效，\n是否确认修改？</string>
     <string name="dialog_btn_back">返回</string>
     <string name="dialog_btn_logout">注销</string>
     <string name="dialog_btn_delete">删除</string>
@@ -114,6 +115,8 @@
 	<string name="user_manage">用户管理</string>
 	<string name="user_name">用户名</string>
 	<string name="logout">注销</string>
+	<string name="change_success">修改成功</string>
+	<string name="change_fail">修改失败</string>
 	
 	<string name="no_device">没有设备</string>
 	<string name="device_online">在线设备</string>

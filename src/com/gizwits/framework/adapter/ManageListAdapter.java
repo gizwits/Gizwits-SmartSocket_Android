@@ -28,9 +28,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
-import com.xpg.common.useful.StringUtils;
 import com.gizwits.framework.sdk.SettingManager;
+import com.gizwits.framework.utils.StringUtils;
 import com.gizwits.powersocket.R;
+import com.gizwits.framework.config.Configs;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -121,24 +122,25 @@ public class ManageListAdapter extends BaseAdapter {
 
 		XPGWifiDevice device = devicelist.get(position);
 		
+		String name="";
 		if(StringUtils.isEmpty(device.getRemark()))
 		{
 			String macAddress=device.getMacAddress();
 			int size=macAddress.length();
-			holder.tvName.setText(device.getProductName() + macAddress.substring(size-4, size));
+			name=device.getProductName() + macAddress.substring(size-4, size);
 		}else
 		{
-			holder.tvName.setText(device.getRemark());
+			name=device.getRemark();
 		}
+		name=StringUtils.getStrFomat(name,Configs.DEVICE_NAME_KEEP_LENGTH, true);
+		holder.tvName.setText(name);
 		
 		if (device.isLAN() || device.isOnline()) {
 			holder.tvName.setTextColor(context.getResources().getColor(
 					R.color.text_blue));
-			holder.ivArrow.setVisibility(View.VISIBLE);
 		} else {
 			holder.tvName.setTextColor(context.getResources().getColor(
 					R.color.text_gray));
-			holder.ivArrow.setVisibility(View.GONE);
 		}
 		
 		holder.ivType.setImageResource(setmanager.getResbyMacAndDid(

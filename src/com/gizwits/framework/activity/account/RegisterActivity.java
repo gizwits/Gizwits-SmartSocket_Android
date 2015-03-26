@@ -21,6 +21,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -217,8 +218,14 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			case REG_SUCCESS:
 				ToastUtils.showShort(RegisterActivity.this, (String) msg.obj);
 				dialog.cancel();
-				IntentUtils.getInstance().startActivity(RegisterActivity.this,
+				Bundle mBundle=new Bundle();
+				mBundle.putBoolean("isRegister", true);
+				Intent mIntent = new Intent();
+				mIntent.putExtras(mBundle);
+				mIntent.setClass(RegisterActivity.this,
 						SearchDeviceActivity.class);
+				startActivity(mIntent);
+				finish();
 				break;
 
 			case TOAST:

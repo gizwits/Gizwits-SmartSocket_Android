@@ -17,7 +17,10 @@
  */
 package com.gizwits.framework.activity.account;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.view.View;
@@ -27,11 +30,14 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.powersocket.R;
+import com.gizwits.framework.utils.DialogManager;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
@@ -42,159 +48,263 @@ import com.xpg.ui.utils.ToastUtils;
  * ClassName: Class ChangePswActivity. <br/>
  * 修改密码，该类主要用于用户通过旧密码修改密码。<br/>
  * date: 2014-12-09 17:27:10 <br/>
- *
+ * 
  * @author StephenC
  */
 public class ChangePswActivity extends BaseActivity implements OnClickListener {
 
-    /**
-     * The iv TopBar leftBtn.
-     */
-    private ImageView ivBack;
+	/**
+	 * The iv TopBar leftBtn.
+	 */
+	private ImageView ivBack;
 
+	/**
+	 * The et user name.
+	 */
+	private EditText etPswOld;
 
-    /**
-     * The et user name.
-     */
-    private EditText etPswOld;
+	/**
+	 * The rl result.
+	 */
+	private RelativeLayout rlResult;
 
-    /**
-     * The et Input Password.
-     */
-    private EditText etPswNew;
+	/**
+	 * The tv result.
+	 */
+	private TextView tvResult;
 
-    /**
-     * The tb show passwrod.
-     */
-    private ToggleButton tbPswFlag;
+	/**
+	 * The et Input Password.
+	 */
+	private EditText etPswNew;
 
-    /**
-     * The btn confirm the word.
-     */
-    private Button btnConfirm;
+	/**
+	 * The tb show passwrod.
+	 */
+	private ToggleButton tbPswFlag;
 
-    /** 用户输入的新密码 */
-    private String newPsw;
+	/**
+	 * The btn confirm the word.
+	 */
+	private Button btnConfirm;
 
-    /* (non-Javadoc)
-     * @see com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_pwd);
-        initViews();
-        initEvents();
-    }
+	/**
+	 * The dialog mDialog.
+	 */
+	private Dialog mDialog;
 
-    /**
-     * Inits the events.
-     */
-    private void initEvents() {
-        ivBack.setOnClickListener(this);
-        btnConfirm.setOnClickListener(this);
-        tbPswFlag.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	/** 用户输入的新密码 */
+	private String newPsw;
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                                         boolean isChecked) {
-                if (isChecked) {
-                    etPswOld.setInputType(InputType.TYPE_CLASS_TEXT
-                            | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
-                            | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    etPswOld.setKeyListener(DigitsKeyListener
+	/** 用户输入的旧密码 */
+	private String oldPsw;
+
+	/**
+	 * ClassName: Enum handler_key. <br/>
+	 * <br/>
+	 * date: 2015-3-23 14:00:00 <br/>
+	 * 
+	 * @author Sunny
+	 */
+	private enum handler_key {
+
+		/**
+		 * 关闭
+		 */
+		CLOSE,
+
+		/**
+		 * 修改成功
+		 */
+		CHANGE_SUCCESS,
+
+		/**
+		 * 修改失败
+		 */
+		CHANGE_FAIL,
+
+	}
+
+	/**
+	 * The handler.
+	 */
+	Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			handler_key key = handler_key.values()[msg.what];
+			switch (key) {
+
+			case CLOSE:
+				ChangePswActivity.this.finish();
+				break;
+
+			case CHANGE_SUCCESS:
+				setmanager.setPassword(newPsw);
+				tvResult.setText(R.string.change_success);
+				rlResult.setVisibility(View.VISIBLE);
+				handler.sendEmptyMessageDelayed(handler_key.CLOSE.ordinal(),
+						1000);
+				break;
+
+			case CHANGE_FAIL:
+				tvResult.setText(R.string.change_fail);
+				rlResult.setVisibility(View.VISIBLE);
+				break;
+			}
+		}
+	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.framework.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_change_pwd);
+		initViews();
+		initEvents();
+	}
+
+	/**
+	 * Inits the events.
+	 */
+	private void initEvents() {
+		ivBack.setOnClickListener(this);
+		btnConfirm.setOnClickListener(this);
+		rlResult.setOnClickListener(this);
+		tbPswFlag.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				if (isChecked) {
+					etPswOld.setInputType(InputType.TYPE_CLASS_TEXT
+							| InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+					etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
+							| InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+					etPswOld.setKeyListener(DigitsKeyListener
 							.getInstance(getResources().getString(
 									R.string.register_name_digits)));
-                    etPswNew.setKeyListener(DigitsKeyListener
+					etPswNew.setKeyListener(DigitsKeyListener
 							.getInstance(getResources().getString(
 									R.string.register_name_digits)));
-                } else {
-                    etPswOld.setInputType(InputType.TYPE_CLASS_TEXT
-                            | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
-                            | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    etPswOld.setKeyListener(DigitsKeyListener
+				} else {
+					etPswOld.setInputType(InputType.TYPE_CLASS_TEXT
+							| InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
+							| InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					etPswOld.setKeyListener(DigitsKeyListener
 							.getInstance(getResources().getString(
 									R.string.register_name_digits)));
-                    etPswNew.setKeyListener(DigitsKeyListener
+					etPswNew.setKeyListener(DigitsKeyListener
 							.getInstance(getResources().getString(
 									R.string.register_name_digits)));
-                }
+				}
 
-            }
-        });
+			}
+		});
 
-    }
+	}
 
-    /**
-     * Inits the views.
-     */
-    private void initViews() {
-        ivBack = (ImageView) findViewById(R.id.ivBack);
-        etPswOld = (EditText) findViewById(R.id.etPswOld);
-        etPswNew = (EditText) findViewById(R.id.etPswNew);
-        tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
-        btnConfirm = (Button) findViewById(R.id.btnConfirm);
-    }
+	/**
+	 * Inits the views.
+	 */
+	private void initViews() {
+		ivBack = (ImageView) findViewById(R.id.ivBack);
+		etPswOld = (EditText) findViewById(R.id.etPswOld);
+		etPswNew = (EditText) findViewById(R.id.etPswNew);
+		tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
+		btnConfirm = (Button) findViewById(R.id.btnConfirm);
+		tvResult = (TextView) findViewById(R.id.tvResult);
+		rlResult = (RelativeLayout) findViewById(R.id.rlResult);
 
-    /* (non-Javadoc)
-     * @see android.view.View.OnClickListener#onClick(android.view.View)
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                onBackPressed();
-                break;
-            case R.id.btnConfirm:
-                String oldPsw = etPswOld.getText().toString();
-                newPsw = etPswNew.getText().toString();
-                if (StringUtils.isEmpty(oldPsw)) {
-                    ToastUtils.showShort(ChangePswActivity.this, "请输入旧的密码");
-                    return;
-                }
-                if (StringUtils.isEmpty(newPsw)) {
-                    ToastUtils.showShort(ChangePswActivity.this, "请输入新的密码");
-                    return;
-                }
-                if (newPsw.length() < 6 || newPsw.length() > 16) {
-    				Toast.makeText(this, "密码长度应为6~16", Toast.LENGTH_SHORT).show();
-    				return;
-    			}
-                if (!oldPsw.equals(setmanager.getPassword())) {
-                    ToastUtils.showShort(ChangePswActivity.this, "请输入正确的用户密码");
-                    return;
-                }
+		mDialog = DialogManager.getPswChangeDialog(this, new OnClickListener() {
 
-                changePsw(oldPsw, newPsw);
-                break;
-        }
+			@Override
+			public void onClick(View v) {
+				changePsw(oldPsw, newPsw);
+				DialogManager.dismissDialog(ChangePswActivity.this, mDialog);
+			}
+		});
+	}
 
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
+	@Override
+	public void onClick(View v) {
+		if (v.getId() != R.id.ivBack
+				&& rlResult.getVisibility() == View.VISIBLE) {
+			rlResult.setVisibility(View.GONE);
+			return;
+		}
 
-    /**
-     * 处理修改密码动作
-     *
-     * @param oldPsw the old psw
-     * @param newPsw the new psw
-     */
-    private void changePsw(String oldPsw, String newPsw) {
-        mCenter.cChangeUserPassword(setmanager.getToken(), oldPsw, newPsw);
-    }
+		switch (v.getId()) {
+		case R.id.ivBack:
+			onBackPressed();
+			break;
+		case R.id.btnConfirm:
+			oldPsw = etPswOld.getText().toString();
+			newPsw = etPswNew.getText().toString();
+			if (StringUtils.isEmpty(oldPsw)) {
+				ToastUtils.showShort(ChangePswActivity.this, "请输入旧的密码");
+				return;
+			}
+			if (StringUtils.isEmpty(newPsw)) {
+				ToastUtils.showShort(ChangePswActivity.this, "请输入新的密码");
+				return;
+			}
+			if (newPsw.length() < 6 || newPsw.length() > 16) {
+				Toast.makeText(this, "密码长度应为6~16", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			// if (!oldPsw.equals(setmanager.getPassword())) {
+			// ToastUtils.showShort(ChangePswActivity.this, "请输入正确的用户密码");
+			// return;
+			// }
 
-    /* (non-Javadoc)
-     * @see com.gizwits.framework.activity.BaseActivity#didChangeUserPassword(int, java.lang.String)
-     */
-    @Override
-    protected void didChangeUserPassword(int error, String errorMessage) {
-        if (error == 0) {
-            ToastUtils.showShort(ChangePswActivity.this, "修改成功");
-            setmanager.setPassword(newPsw);
-            finish();
-        } else {
-            ToastUtils.showShort(ChangePswActivity.this, "修改失败");
-        }
-    }
+			mDialog.show();
+			break;
+		}
+
+	}
+
+	/**
+	 * 处理修改密码动作
+	 * 
+	 * @param oldPsw
+	 *            the old psw
+	 * @param newPsw
+	 *            the new psw
+	 */
+	private void changePsw(String oldPsw, String newPsw) {
+		mCenter.cChangeUserPassword(setmanager.getToken(), oldPsw, newPsw);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gizwits.framework.activity.BaseActivity#didChangeUserPassword(int,
+	 * java.lang.String)
+	 */
+	@Override
+	protected void didChangeUserPassword(int error, String errorMessage) {
+		if (error == 0) {
+			handler.sendEmptyMessage(handler_key.CHANGE_SUCCESS.ordinal());
+		} else {
+			handler.sendEmptyMessage(handler_key.CHANGE_FAIL.ordinal());
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		finish();
+	}
 
 }

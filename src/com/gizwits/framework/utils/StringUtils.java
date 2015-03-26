@@ -159,5 +159,32 @@ public class StringUtils {
 		keyWord = keyWord.replace("/)", ")");
 		return keyWord;
 	}
+	
+	/**
+	 * 保留字符数
+	 * 
+	 * @param str
+	 *            原始字符串
+	 * @param length
+	 *            保留字符数
+	 * @param isPoints
+	 *            是否加省略号
+	 * @return 格式化后的日期
+	 */
+	public static String getStrFomat(String str, int length, boolean isPoints) {
+		String result = "";
+
+		if (str.length() > length) {
+			result=str.substring(0, length);
+			if (isPoints) {
+				result = result + "...";
+			}
+		} else {
+			result = str;
+		}
+
+		return result;
+
+	}
 
 }

@@ -85,13 +85,11 @@ public class DeviceManageListActivity extends BaseActivity implements OnClickLis
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 XPGWifiDevice device = bindlist.get(position);
-                if (device.isLAN() || device.isOnline()) {
                     Intent intent = new Intent(DeviceManageListActivity.this,
                             DeviceManageDetailActivity.class);
                     intent.putExtra("mac", device.getMacAddress());
                     intent.putExtra("did", device.getDid());
                     startActivity(intent);
-                }
             }
         });
         ivBack.setOnClickListener(this);
@@ -125,7 +123,17 @@ public class DeviceManageListActivity extends BaseActivity implements OnClickLis
 
 	@Override
     public void onBackPressed() {
-        finish();
+		boolean isNoOnLineDevice = true;
+		for (XPGWifiDevice xpgDevice : bindlist) {
+			if (xpgDevice.isOnline())
+				isNoOnLineDevice = false;
+		}
+
+		if (isNoOnLineDevice) {
+			IntentUtils.getInstance().startActivity(DeviceManageListActivity.this,DeviceListActivity.class);
+		} else {
+			finish();
+		}
     }
 
     /* (non-Javadoc)
