@@ -123,7 +123,17 @@ public class DeviceManageListActivity extends BaseActivity implements OnClickLis
 
 	@Override
     public void onBackPressed() {
-        finish();
+		boolean isNoOnLineDevice = true;
+		for (XPGWifiDevice xpgDevice : bindlist) {
+			if (xpgDevice.isOnline())
+				isNoOnLineDevice = false;
+		}
+
+		if (isNoOnLineDevice) {
+			IntentUtils.getInstance().startActivity(DeviceManageListActivity.this,DeviceListActivity.class);
+		} else {
+			finish();
+		}
     }
 
     /* (non-Javadoc)
