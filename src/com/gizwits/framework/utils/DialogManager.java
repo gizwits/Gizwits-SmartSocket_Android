@@ -93,6 +93,30 @@ public class DialogManager {
 	}
 	
 	/**
+	 * 连接断开对话框.
+	 * 
+	 * @param ctx
+	 *            the ctx
+	 * @param r
+	 *            钮监听器
+	 * @return the logout dialog
+	 */
+	public static Dialog getDisconnectDialog(final Activity ctx, OnClickListener r) {
+		final Dialog dialog = new Dialog(ctx, R.style.noBackgroundDialog) {
+		};
+		LayoutInflater layoutInflater = LayoutInflater.from(ctx);
+		View v = layoutInflater.inflate(R.layout.dialog_disconnect, null);
+		Button btnConfirm = (Button) v.findViewById(R.id.btn_confirm);
+		btnConfirm.setOnClickListener(r);
+
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.setCancelable(false);
+		dialog.setContentView(v);
+		return dialog;
+	}
+	
+	/**
 	 * 删除对话框.
 	 *
 	 * @param ctx the ctx

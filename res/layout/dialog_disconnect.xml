@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fault_tips_box_oneline"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/dialog_disconnect"
+        android:textColor="@color/text_black"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom|center"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/dialog_btn_confirm"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

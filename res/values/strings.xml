@@ -37,6 +37,7 @@
     <string name="dialog_btn_confirm">确定</string>
     <string name="dialog_nonet_msg">手机还未连上Wi-Fi，请连接上您希望设备接入的Wi-Fi（如您家里的Wi-Fi），连接后请返回APP，将自动跳转到下一步</string>
     <string name="dialog_logout_msg">确定要注销，返回登陆界面吗？</string>
+    <string name="dialog_disconnect">连接已断开</string>
     <string name="register_name_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
     <string name="airlink_tips_start">请按下设备按键,灯闪即表示设备已进入配置模式,\n点击开始配置</string>
     <string name="airlink_btn_start">开始配置</string>
