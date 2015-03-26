@@ -61,6 +61,7 @@
                 <ListView
                     android:id="@+id/lvDevice"
                     android:layout_width="fill_parent"
+                    android:listSelector="@color/transparent"
                     android:layout_height="wrap_content"
                     android:cacheColorHint="#00000000"
                     android:scrollbars="none" />
