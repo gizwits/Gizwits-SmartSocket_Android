@@ -31,7 +31,6 @@ import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.activity.device.DeviceListActivity;
 import com.xpg.common.system.IntentUtils;
-import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -94,6 +93,8 @@ public class BindingDeviceActivity extends BaseActivity implements
 			handler_key key = handler_key.values()[msg.what];
 			switch (key) {
 			case BIND_SUCCESS:
+				IntentUtils.getInstance().startActivity(BindingDeviceActivity.this,
+						DeviceListActivity.class);
 				finish();
 				break;
 			case BIND_FAILED:
@@ -158,9 +159,7 @@ public class BindingDeviceActivity extends BaseActivity implements
 			handler.sendEmptyMessage(handler_key.BIND_FAILED.ordinal());
 			break;
 		case R.id.btnRetry:
-			IntentUtils.getInstance().startActivity(BindingDeviceActivity.this,
-					SearchDeviceActivity.class);
-			finish();
+			goBack();
 			break;
 		}
 	}
@@ -173,6 +172,11 @@ public class BindingDeviceActivity extends BaseActivity implements
 				did, null, "");
 	}
 
+	private void goBack(){
+		IntentUtils.getInstance().startActivity(BindingDeviceActivity.this,
+				SearchDeviceActivity.class);
+		finish();
+	}
 	
 	
 	@Override
