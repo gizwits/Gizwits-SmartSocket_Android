@@ -190,6 +190,8 @@ public class BindingDeviceActivity extends BaseActivity implements
 	protected void didBindDevice(int error, String errorMessage, String did) {
 		if (error == 0) {
 			handler.sendEmptyMessage(handler_key.BIND_SUCCESS.ordinal());
+		}else{
+			handler.sendEmptyMessage(handler_key.BIND_FAILED.ordinal());
 		}
 	}
 }

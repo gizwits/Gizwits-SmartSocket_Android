@@ -481,6 +481,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			msg.what = handler_key.REG_SUCCESS.ordinal();
 			msg.obj = "注册成功";
 			handler.sendMessage(msg);
+			setmanager.setUserName(etName.getText().toString().trim());
+			setmanager.setPassword(etInputPsw.getText().toString().trim());
 			setmanager.setUid(uid);
 			setmanager.setToken(token);
 

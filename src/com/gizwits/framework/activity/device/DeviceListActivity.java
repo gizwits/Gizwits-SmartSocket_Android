@@ -271,6 +271,10 @@ public class DeviceListActivity extends BaseActivity implements
 							@Override
 							public void onClick(View v) {
 								setmanager.setToken("");
+								setmanager.setUserName("");
+								setmanager.setPassword("");
+								setmanager.setUid("");
+								
 								DialogManager.dismissDialog(
 										DeviceListActivity.this, dialog);
 								ToastUtils.showShort(DeviceListActivity.this,
