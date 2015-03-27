@@ -137,7 +137,7 @@ public class DeviceListAdapter extends BaseAdapter {
         wanDevices = new ArrayList<XPGWifiDevice>();
         offlineDevices = new ArrayList<XPGWifiDevice>();
         unBindDevices = new ArrayList<XPGWifiDevice>();
-        changeDatas(devices);
+        changeDatas(new ArrayList<XPGWifiDevice>());
     }
 
     /**
