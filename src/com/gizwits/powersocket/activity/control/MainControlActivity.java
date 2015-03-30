@@ -51,7 +51,6 @@ import com.gizwits.framework.widget.SlidingMenu;
 import com.gizwits.framework.widget.SlidingMenu.SlidingMenuListener;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.StringUtils;
-import com.xpg.ui.utils.ToastUtils;
 import com.gizwits.powersocket.R;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
@@ -98,9 +97,6 @@ public class MainControlActivity extends BaseActivity implements
 
 	/** The m PowerOff dialog. */
 	private Dialog mPowerOffDialog;
-
-	/** The progress dialog. */
-	private ProgressDialog progressDialogConnecting;
 
 	/** The progress dialog. */
 	private ProgressDialog progressDialogRefreshing;
@@ -236,8 +232,6 @@ public class MainControlActivity extends BaseActivity implements
 			case DISCONNECTED:
 				if (!mView.isOpen()) {
 					DialogManager.dismissDialog(MainControlActivity.this,
-							progressDialogConnecting);
-					DialogManager.dismissDialog(MainControlActivity.this,
 							progressDialogRefreshing);
 					DialogManager.dismissDialog(MainControlActivity.this,
 							mPowerOffDialog);
@@ -253,23 +247,15 @@ public class MainControlActivity extends BaseActivity implements
 				break;
 			case LOGIN_SUCCESS:
 				handler.removeMessages(handler_key.LOGIN_TIMEOUT.ordinal());
-				DialogManager.dismissDialog(MainControlActivity.this,
-						progressDialogConnecting);
-				if (mView.isOpen()) {
-					mView.toggle();
-				}
+				refreshMainControl();
 				break;
 			case LOGIN_FAIL:
 				handler.removeMessages(handler_key.LOGIN_TIMEOUT.ordinal());
-				DialogManager.dismissDialog(MainControlActivity.this,
-						progressDialogConnecting);
-				ToastUtils.showShort(MainControlActivity.this, "设备连接失败");
+				handler.sendEmptyMessage(handler_key.DISCONNECTED.ordinal());
 				break;
 			case LOGIN_TIMEOUT:
 				isTimeOut = true;
-				DialogManager.dismissDialog(MainControlActivity.this,
-						progressDialogConnecting);
-				ToastUtils.showShort(MainControlActivity.this, "设备连接超时");
+				handler.sendEmptyMessage(handler_key.DISCONNECTED.ordinal());
 				break;
 			}
 		}
@@ -317,13 +303,21 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private void refreshMenu() {
 		initBindList();
-		mAdapter.setChoosedPos(0);
+		mAdapter.setChoosedPos(-1);
 		for (int i = 0; i < bindlist.size(); i++) {
 			if (bindlist.get(i).getDid()
 					.equalsIgnoreCase(mXpgWifiDevice.getDid()))
 				mAdapter.setChoosedPos(i);
 		}
+		
+		//当前绑定列表没有当前操作设备
+		if(mAdapter.getChoosedPos()==-1){
+		mAdapter.setChoosedPos(0);
+		mXpgWifiDevice=mAdapter.getItem(0);
+		}
+		
 		mAdapter.notifyDataSetChanged();
+		
 		int px = DensityUtil.dip2px(this, mAdapter.getCount() * 50);
 		lvDevice.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
 				android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, px));
@@ -371,10 +365,6 @@ public class MainControlActivity extends BaseActivity implements
 		lvDevice = (ListView) findViewById(R.id.lvDevice);
 		lvDevice.setAdapter(mAdapter);
 
-		progressDialogConnecting = new ProgressDialog(MainControlActivity.this);
-		progressDialogConnecting.setMessage("设备连接中，请稍候。");
-		progressDialogConnecting.setCancelable(false);
-
 		progressDialogRefreshing = new ProgressDialog(MainControlActivity.this);
 		progressDialogRefreshing.setMessage("正在更新状态,请稍后。");
 		progressDialogRefreshing.setCancelable(false);
@@ -407,15 +397,15 @@ public class MainControlActivity extends BaseActivity implements
 					int position, long id) {
 				if (!mAdapter.getItem(position).isOnline())
 					return;
-
-				if (mAdapter.getChoosedPos() == position) {
-					mView.toggle();
-					return;
+				
+				
+				if (mAdapter.getChoosedPos() != position) {
+					mAdapter.setChoosedPos(position);
+					mXpgWifiDevice = bindlist.get(position);
 				}
 
-				mAdapter.setChoosedPos(position);
-				mXpgWifiDevice = bindlist.get(position);
-				backToMain();
+				
+				mView.toggle();
 			}
 		});
 		mView.setSlidingMenuListener(this);
@@ -555,9 +545,7 @@ public class MainControlActivity extends BaseActivity implements
 	private void loginDevice(XPGWifiDevice xpgWifiDevice) {
 		mXpgWifiDevice = xpgWifiDevice;
 		mXpgWifiDevice.setListener(deviceListener);
-		DisconnectOtherDevice();
 		mXpgWifiDevice.login(setmanager.getUid(), setmanager.getToken());
-		DialogManager.showDialog(this, progressDialogConnecting);
 		isTimeOut = false;
 		handler.sendEmptyMessageDelayed(handler_key.LOGIN_TIMEOUT.ordinal(),
 				LoginTimeOut);
@@ -610,7 +598,11 @@ public class MainControlActivity extends BaseActivity implements
 	@Override
 	protected void didReceiveData(XPGWifiDevice device,
 			ConcurrentHashMap<String, Object> dataMap, int result) {
-		Log.e(TAG, "didReceiveData");
+		Log.e("didReceiveData", "did="+device.getDid());
+		
+		if(!device.getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
+			return;
+		
 		deviceDataMap = dataMap;
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
@@ -642,9 +634,10 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	@Override
 	protected void didDisconnected(XPGWifiDevice device) {
-		if (device.getDid().equals(mXpgWifiDevice.getDid())) {
-			handler.sendEmptyMessage(handler_key.DISCONNECTED.ordinal());
-		}
+		if (!device.getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
+			return;
+			
+		handler.sendEmptyMessage(handler_key.DISCONNECTED.ordinal());
 	}
 
 	/**
@@ -653,11 +646,12 @@ public class MainControlActivity extends BaseActivity implements
 	 * @return void
 	 */
 	private void backToMain() {
-		if (mXpgWifiDevice.isConnected()) {
-			refreshMainControl();
-		} else {
+		if (!mXpgWifiDevice.isConnected()) {
 			loginDevice(mXpgWifiDevice);
-		}
+			DialogManager.showDialog(this, progressDialogRefreshing);
+		} 
+		
+		refreshMainControl();
 	}
 
 	@Override
