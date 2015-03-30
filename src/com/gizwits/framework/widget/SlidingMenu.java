@@ -21,6 +21,8 @@ import com.gizwits.framework.utils.DensityUtil;
 import com.nineoldandroids.view.ViewHelper;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -189,7 +191,7 @@ public class SlidingMenu extends HorizontalScrollView {
 
 		this.smoothScrollTo(0, 0);
 		this.isOpen = true;
-		
+
 		if (mListener != null)
 			mListener.OpenFinish();
 	}
@@ -243,6 +245,23 @@ public class SlidingMenu extends HorizontalScrollView {
 		DisplayMetrics outMetrics = new DisplayMetrics();
 		wm.getDefaultDisplay().getMetrics(outMetrics);
 		return outMetrics.widthPixels;
+	}
+
+	@Override
+	protected Parcelable onSaveInstanceState() {
+		Parcelable p = super.onSaveInstanceState();
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("isOpen", isOpen);
+		bundle.putParcelable("android_state", p);
+		return bundle;
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Parcelable state) {
+		Bundle bundle = (Bundle) state;
+		isOpen=bundle.getBoolean("isOpen");
+		updateState();
+		super.onRestoreInstanceState(bundle.getParcelable("android_state"));
 	}
 
 	public void setSlidingMenuListener(SlidingMenuListener mListener) {
