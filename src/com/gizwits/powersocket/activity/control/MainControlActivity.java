@@ -646,6 +646,8 @@ public class MainControlActivity extends BaseActivity implements
 	 * @return void
 	 */
 	private void backToMain() {
+		mXpgWifiDevice=mAdapter.getItem(mAdapter.getChoosedPos());
+		
 		if (!mXpgWifiDevice.isConnected()) {
 			loginDevice(mXpgWifiDevice);
 			DialogManager.showDialog(this, progressDialogRefreshing);
