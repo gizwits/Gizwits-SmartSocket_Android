@@ -21,8 +21,8 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputFilter;
 import android.text.InputType;
-import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,6 +38,7 @@ import android.widget.ToggleButton;
 import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.utils.DialogManager;
+import com.gizwits.framework.widget.MyInputFilter;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
@@ -184,23 +185,11 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 							| InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 					etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
 							| InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-					etPswOld.setKeyListener(DigitsKeyListener
-							.getInstance(getResources().getString(
-									R.string.register_name_digits)));
-					etPswNew.setKeyListener(DigitsKeyListener
-							.getInstance(getResources().getString(
-									R.string.register_name_digits)));
 				} else {
 					etPswOld.setInputType(InputType.TYPE_CLASS_TEXT
 							| InputType.TYPE_TEXT_VARIATION_PASSWORD);
 					etPswNew.setInputType(InputType.TYPE_CLASS_TEXT
 							| InputType.TYPE_TEXT_VARIATION_PASSWORD);
-					etPswOld.setKeyListener(DigitsKeyListener
-							.getInstance(getResources().getString(
-									R.string.register_name_digits)));
-					etPswNew.setKeyListener(DigitsKeyListener
-							.getInstance(getResources().getString(
-									R.string.register_name_digits)));
 				}
 
 			}
@@ -220,6 +209,10 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 		tvResult = (TextView) findViewById(R.id.tvResult);
 		rlResult = (RelativeLayout) findViewById(R.id.rlResult);
 
+		MyInputFilter filter= new MyInputFilter();
+		etPswOld.setFilters(new InputFilter[] { filter });
+		etPswNew.setFilters(new InputFilter[] { filter });
+		
 		mDialog = DialogManager.getPswChangeDialog(this, new OnClickListener() {
 
 			@Override
