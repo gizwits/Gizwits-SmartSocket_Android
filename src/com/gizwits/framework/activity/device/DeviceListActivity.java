@@ -17,6 +17,7 @@
  */
 package com.gizwits.framework.activity.device;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Dialog;
@@ -197,6 +198,8 @@ public class DeviceListActivity extends BaseActivity implements
 	@Override
 	public void onResume() {
 		super.onResume();
+		deviceListAdapter.changeDatas(new ArrayList<XPGWifiDevice>());
+		
 		if (getIntent().getBooleanExtra("isbind", false)) {
 
 			mCenter.cBindDevice(setmanager.getUid(), setmanager.getToken(),
@@ -317,7 +320,6 @@ public class DeviceListActivity extends BaseActivity implements
 								+ tempDevice.getDid() + ";passcode="
 								+ tempDevice.getPasscode());
 				loginDevice(tempDevice);
-				DialogManager.showDialog(DeviceListActivity.this, progressDialog);
 			} else {
 				// TODO 未设备
 				Log.i(TAG,
@@ -347,7 +349,6 @@ public class DeviceListActivity extends BaseActivity implements
 								+ tempDevice.getDid() + ";passcode="
 								+ tempDevice.getPasscode());
 				loginDevice(tempDevice);
-				DialogManager.showDialog(DeviceListActivity.this, progressDialog);
 			}
 		}
 
@@ -360,10 +361,15 @@ public class DeviceListActivity extends BaseActivity implements
 	 *            the xpg wifi device
 	 */
 	private void loginDevice(XPGWifiDevice xpgWifiDevice) {
-		handler.sendEmptyMessageDelayed(handler_key.LOGIN_TIMEOUT.ordinal(), LoginDeviceTimeOut);
+		DialogManager.showDialog(DeviceListActivity.this, progressDialog);
 		mXpgWifiDevice = xpgWifiDevice;
 		mXpgWifiDevice.setListener(deviceListener);
-		mXpgWifiDevice.login(setmanager.getUid(), setmanager.getToken());
+		if(mXpgWifiDevice.isConnected()){
+			handler.sendEmptyMessage(handler_key.LOGIN_SUCCESS.ordinal());
+		}else{
+			handler.sendEmptyMessageDelayed(handler_key.LOGIN_TIMEOUT.ordinal(), LoginDeviceTimeOut);
+			mXpgWifiDevice.login(setmanager.getUid(), setmanager.getToken());
+		}
 	}
 
 	/*

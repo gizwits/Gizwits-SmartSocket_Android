@@ -25,10 +25,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
-import android.text.Html.ImageGetter;
+import android.text.InputFilter;
 import android.text.InputType;
-import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,6 +42,7 @@ import android.widget.ToggleButton;
 
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.powersocket.R;
+import com.gizwits.framework.widget.MyInputFilter;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
@@ -285,6 +284,9 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		toogleUI(ui_statu.DEFAULT);
 		dialog = new ProgressDialog(this);
 		dialog.setMessage("处理中，请稍候...");
+		
+		MyInputFilter filter= new MyInputFilter();
+		etInputPsw.setFilters(new InputFilter[] { filter });
 	}
 
 	/**
@@ -310,15 +312,9 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 							etInputPsw
 									.setInputType(InputType.TYPE_CLASS_TEXT
 											| InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-							etInputPsw.setKeyListener(DigitsKeyListener
-									.getInstance(getResources().getString(
-											R.string.register_name_digits)));
 						} else {
 							etInputPsw.setInputType(InputType.TYPE_CLASS_TEXT
 									| InputType.TYPE_TEXT_VARIATION_PASSWORD);
-							etInputPsw.setKeyListener(DigitsKeyListener
-									.getInstance(getResources().getString(
-											R.string.register_name_digits)));
 						}
 					}
 
