@@ -62,7 +62,7 @@ com.gizwits.framework.XpgApplication                 -机智云设备开源APP�
 
 com.xpg.XXX                                          -机智云通用开发API
 
-zxing                                                -第三方开源滚轮控件
+zxing                                                -第三方二维码扫描控件
 
 使用流程
 
