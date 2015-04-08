@@ -76,7 +76,6 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="30dp"
             android:hint="@string/name"
-            android:maxLength="10"
             android:textColor="@color/background_blue" />
 
         <TextView
