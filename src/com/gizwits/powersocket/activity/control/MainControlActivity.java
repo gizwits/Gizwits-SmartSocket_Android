@@ -619,7 +619,7 @@ public class MainControlActivity extends BaseActivity implements
 		} else {
 			if (mXpgWifiDevice != null && mXpgWifiDevice.isConnected()) {
 				mCenter.cDisconnect(mXpgWifiDevice);
-				mXpgWifiDevice = null;
+				DisconnectOtherDevice();
 			}
 			finish();
 		}
