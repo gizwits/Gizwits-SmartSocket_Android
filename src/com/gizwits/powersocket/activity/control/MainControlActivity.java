@@ -197,6 +197,9 @@ public class MainControlActivity extends BaseActivity implements
 					break;
 				
 				if (statuMap != null && statuMap.size() > 0) {
+					handler.removeMessages(handler_key.GET_STATUE_TIMEOUT
+							.ordinal());
+					
 					// 开关更新
 					updatePower((Boolean) statuMap.get(JsonKeys.ON_OFF));
 					// 能耗更新
@@ -260,9 +263,6 @@ public class MainControlActivity extends BaseActivity implements
 			}
 		}
 	};
-
-	/** 防抖标志位 */
-	private boolean isClick;
 
 	/*
 	 * (non-Javadoc)
@@ -448,11 +448,11 @@ public class MainControlActivity extends BaseActivity implements
 	 * @false 隐藏
 	 */
 	private void setTiming(boolean isTurnOn, int on, int off) {
-		if (isTurnOn) {
-			llTiming.setVisibility(View.VISIBLE);
-		} else {
-			llTiming.setVisibility(View.INVISIBLE);
-		}
+//		if (isTurnOn) {
+//			llTiming.setVisibility(View.VISIBLE);
+//		} else {
+//			llTiming.setVisibility(View.INVISIBLE);
+//		}
 		int minOn = on % 60;
 		int hourOn = on / 60;
 		int minOff = off % 60;
@@ -472,11 +472,11 @@ public class MainControlActivity extends BaseActivity implements
 	 * @false 隐藏
 	 */
 	private void setDelay(boolean isTurnOn, int on) {
-		if (isTurnOn) {
-			llDelay.setVisibility(View.VISIBLE);
-		} else {
-			llDelay.setVisibility(View.INVISIBLE);
-		}
+//		if (isTurnOn) {
+//			llDelay.setVisibility(View.VISIBLE);
+//		} else {
+//			llDelay.setVisibility(View.INVISIBLE);
+//		}
 		int min = on % 60;
 		int hour = on / 60;
 		tvDelay.setText(String.format("%02d:%02d", hour, min));

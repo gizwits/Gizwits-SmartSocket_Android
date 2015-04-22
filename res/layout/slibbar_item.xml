@@ -20,6 +20,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/selector_tick" />
+        android:src="@drawable/slib_tick" />
 
 </RelativeLayout>

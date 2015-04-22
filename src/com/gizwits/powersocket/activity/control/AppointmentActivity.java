@@ -110,6 +110,9 @@ public class AppointmentActivity extends BaseActivity implements
 	/** 延时时间的小时数. */
 	private int hourDelay;
 	
+	/** 延时时间的分钟数. */
+	private int minDelay;
+	
 	/** 界面更新锁. */
 	private boolean isLock = false;
 	
@@ -362,10 +365,10 @@ public class AppointmentActivity extends BaseActivity implements
 			break;
 		case R.id.tvDelay:
 		case R.id.tvDelayTime:
-			DialogManager.getWheelTimingDialog(this,
+			DialogManager.get2WheelTimingDialog(this,
 					new onDelayTimingChosenListener(),
-					getResources().getString(R.string.delay_appointment),
-					hourDelay).show();
+					getResources().getString(R.string.delay_appointment), hourDelay,
+					minDelay).show();
 			break;
 		case R.id.rlStartTimeSetting:
 			DialogManager.get2WheelTimingDialog(this,
@@ -418,11 +421,11 @@ public class AppointmentActivity extends BaseActivity implements
 	 */
 	private void setTimingTime(boolean isTurnOn, int startTime, int endTime) {
 		if (isTurnOn) {
-			tvTimingTime.setVisibility(View.VISIBLE);
+//			tvTimingTime.setVisibility(View.VISIBLE);
 			tvTiming.setSelected(true);
 			tbTiming.setChecked(true);
 		} else {
-			tvTimingTime.setVisibility(View.GONE);
+//			tvTimingTime.setVisibility(View.GONE);
 			tvTiming.setSelected(false);
 			tbTiming.setChecked(false);
 		}
@@ -464,18 +467,19 @@ public class AppointmentActivity extends BaseActivity implements
 	 */
 	private void setDelayTime(boolean isTurnOn, int delayTime) {
 		if (isTurnOn) {
-			tvDelayTime.setVisibility(View.VISIBLE);
+//			tvDelayTime.setVisibility(View.VISIBLE);
 			tvDelay.setSelected(true);
 			tbDelay.setChecked(true);
 		} else {
-			tvDelayTime.setVisibility(View.GONE);
+//			tvDelayTime.setVisibility(View.GONE);
 			tvDelay.setSelected(false);
 			tbDelay.setChecked(false);
 		}
-		// int min = delayTime % 60;
+		int min = delayTime % 60;
 		int hour = delayTime / 60;
 		hourDelay = hour;
-		tvDelayTime.setText(String.format("%dh后", hour));
+		minDelay=min;
+		tvDelayTime.setText(String.format("%02d:%02d", hour,min));
 	}
 
 	/*
@@ -543,14 +547,14 @@ public class AppointmentActivity extends BaseActivity implements
 	}
 
 	/** 延时时间滑轮监听器. */
-	private class onDelayTimingChosenListener implements OnTimingChosenListener {
+	private class onDelayTimingChosenListener implements On2TimingChosenListener {
 
 		@Override
-		public void timingChosen(int time) {
+		public void timingChosen(int HourTime, int MinTime) {
 			isLock=true;
 			handler.removeMessages(handler_key.UNLOCK.ordinal());
-			mCenter.cDelayTime(mXpgWifiDevice, time, 0);
-			setDelayTime(true, time*60);
+			mCenter.cDelayTime(mXpgWifiDevice, HourTime, MinTime);
+			setDelayTime(true, HourTime*60+MinTime);
 			handler.sendEmptyMessageDelayed(handler_key.UNLOCK.ordinal(), Lock_Time);
 			
 		}
