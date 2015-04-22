@@ -35,6 +35,7 @@ import com.gizwits.framework.activity.device.DeviceListActivity;
 import com.xpg.common.system.IntentUtils;
 import com.xpg.common.useful.NetworkUtils;
 import com.xpg.common.useful.StringUtils;
+import com.xpg.ui.utils.ToastUtils;
 
 // TODO: Auto-generated Javadoc
 
@@ -195,6 +196,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					ForgetPswActivity.class);
 			break;
 		case R.id.btnLogin:
+			if (!NetworkUtils.isWifiConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			// 登陆
 			if (StringUtils.isEmpty(etName.getText().toString())) {
 				Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();

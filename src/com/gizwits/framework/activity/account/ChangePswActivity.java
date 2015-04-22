@@ -39,6 +39,7 @@ import com.gizwits.aircondition.R;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.utils.DialogManager;
 import com.gizwits.framework.widget.MyInputFilter;
+import com.xpg.common.useful.NetworkUtils;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
@@ -217,6 +218,9 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
+				if (!NetworkUtils.isWifiConnected(ChangePswActivity.this)) {
+					ToastUtils.showShort(ChangePswActivity.this, "网络未连接");return;
+				}
 				changePsw(oldPsw, newPsw);
 				DialogManager.dismissDialog(ChangePswActivity.this, mDialog);
 			}
@@ -241,6 +245,9 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 			onBackPressed();
 			break;
 		case R.id.btnConfirm:
+			if (!NetworkUtils.isWifiConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			oldPsw = etPswOld.getText().toString();
 			newPsw = etPswNew.getText().toString();
 			if (StringUtils.isEmpty(oldPsw)) {
