@@ -37,9 +37,13 @@
     <EditText
         android:id="@+id/etName"
         style="@style/EditTextTheme"
-        android:paddingLeft="15dp"
         android:layout_marginTop="30dp"
-        android:hint="@string/register_phone_num" />
+        android:ems="10"
+        android:hint="@string/register_phone_num"
+        android:paddingLeft="15dp" >
+
+        <requestFocus />
+    </EditText>
 
     <Button
         android:id="@+id/btnGetCode"
