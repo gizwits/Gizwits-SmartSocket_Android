@@ -257,7 +257,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 			}
 			break;
 		case R.id.right_btn:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			isChange = false;

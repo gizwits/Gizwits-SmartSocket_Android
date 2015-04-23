@@ -218,7 +218,7 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				if (!NetworkUtils.isWifiConnected(ChangePswActivity.this)) {
+				if (!NetworkUtils.isNetworkConnected(ChangePswActivity.this)) {
 					ToastUtils.showShort(ChangePswActivity.this, "网络未连接");return;
 				}
 				changePsw(oldPsw, newPsw);
@@ -245,7 +245,7 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener {
 			onBackPressed();
 			break;
 		case R.id.btnConfirm:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			oldPsw = etPswOld.getText().toString();

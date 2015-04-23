@@ -313,7 +313,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnGetCode:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			String phone = etName.getText().toString().trim();
@@ -326,7 +326,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 			break;
 		case R.id.btnReGetCode:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			String phone2 = etName.getText().toString().trim();
@@ -338,7 +338,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			}
 			break;
 		case R.id.btnSure:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			doRegister();

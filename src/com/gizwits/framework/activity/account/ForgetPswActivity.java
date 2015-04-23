@@ -338,7 +338,7 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		// sendVerifyCode(name);
 		// break;
 		case R.id.btnReGetCode:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			String phone2 = etName.getText().toString().trim();
@@ -350,7 +350,7 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 			sendVerifyCode(phone2);
 			break;
 		case R.id.btnSure:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			doChangePsw();
@@ -359,7 +359,7 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 			onBackPressed();
 			break;
 		case R.id.btnSureEmail:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			String email = etInputEmail.getText().toString().trim();

@@ -196,7 +196,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					ForgetPswActivity.class);
 			break;
 		case R.id.btnLogin:
-			if (!NetworkUtils.isWifiConnected(this)) {
+			if (!NetworkUtils.isNetworkConnected(this)) {
 				ToastUtils.showShort(this, "网络未连接");return;
 			}
 			// 登陆
