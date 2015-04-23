@@ -43,6 +43,7 @@ import android.widget.ToggleButton;
 import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.powersocket.R;
 import com.gizwits.framework.widget.MyInputFilter;
+import com.xpg.common.useful.NetworkUtils;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
@@ -337,6 +338,9 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 		// sendVerifyCode(name);
 		// break;
 		case R.id.btnReGetCode:
+			if (!NetworkUtils.isNetworkConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			String phone2 = etName.getText().toString().trim();
 			if (StringUtils.isEmpty(phone2) || phone2.length() != 11){
 				ToastUtils.showShort(this, "请输入正确的手机号码。");
@@ -346,12 +350,18 @@ public class ForgetPswActivity extends BaseActivity implements OnClickListener {
 			sendVerifyCode(phone2);
 			break;
 		case R.id.btnSure:
+			if (!NetworkUtils.isNetworkConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			doChangePsw();
 			break;
 		case R.id.ivBack:
 			onBackPressed();
 			break;
 		case R.id.btnSureEmail:
+			if (!NetworkUtils.isNetworkConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			String email = etInputEmail.getText().toString().trim();
 			if (StringUtils.isEmpty(email) || !email.contains("@")){
 				ToastUtils.showShort(this, "请输入正确的账号。");

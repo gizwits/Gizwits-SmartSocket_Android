@@ -44,6 +44,7 @@ import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.activity.onboarding.SearchDeviceActivity;
 import com.gizwits.powersocket.R;
 import com.gizwits.framework.widget.MyInputFilter;
+import com.xpg.common.useful.NetworkUtils;
 import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 
@@ -312,6 +313,9 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnGetCode:
+			if (!NetworkUtils.isNetworkConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			String phone = etName.getText().toString().trim();
 			if (!StringUtils.isEmpty(phone) && phone.length() == 11) {
 				toogleUI(ui_statue.PHONE);
@@ -322,6 +326,9 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 			break;
 		case R.id.btnReGetCode:
+			if (!NetworkUtils.isNetworkConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			String phone2 = etName.getText().toString().trim();
 			if (!StringUtils.isEmpty(phone2) && phone2.length() == 11) {
 				toogleUI(ui_statue.PHONE);
@@ -331,6 +338,9 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			}
 			break;
 		case R.id.btnSure:
+			if (!NetworkUtils.isNetworkConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			doRegister();
 			break;
 		case R.id.tvPhoneSwitch:

@@ -39,8 +39,9 @@ import com.gizwits.framework.activity.BaseActivity;
 import com.gizwits.framework.adapter.ManageDetailsAdapter;
 import com.gizwits.framework.config.DeviceDetails;
 import com.gizwits.framework.utils.DialogManager;
-import com.xpg.common.useful.StringUtils;
 import com.gizwits.powersocket.R;
+import com.xpg.common.useful.NetworkUtils;
+import com.xpg.common.useful.StringUtils;
 import com.xpg.ui.utils.ToastUtils;
 import com.xtremeprog.xpgconnect.XPGWifiDevice;
 
@@ -92,8 +93,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	/** 等待中的对话框 */
 	private ProgressDialog progressDialog;
 
-	/** the msg */
-	private Message msg = new Message();
+	private boolean isChange = true;
 
 	/**
 	 * ClassName: Enum handler_key. <br/>
@@ -281,7 +281,11 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 			break;
 		case R.id.ivTick:
+			if (!NetworkUtils.isWifiConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
 			if (!StringUtils.isEmpty(etName.getText().toString())) {
+				isChange = true;
 				progressDialog.setMessage("修改中，请稍候...");
 				DialogManager.showDialog(this, progressDialog);
 				mCenter.cUpdateRemark(setmanager.getUid(), setmanager
@@ -293,6 +297,10 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 			}
 			break;
 		case R.id.right_btn:
+			if (!NetworkUtils.isNetworkConnected(this)) {
+				ToastUtils.showShort(this, "网络未连接");return;
+			}
+			isChange = false;
 			DialogManager.dismissDialog(this, unbindDialog);
 			progressDialog.setMessage("删除中，请稍候...");
 			DialogManager.showDialog(this, progressDialog);
@@ -330,9 +338,10 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	protected void didBindDevice(int error, String errorMessage, String did) {
 		Log.d("Device扫描结果", "error=" + error + ";errorMessage=" + errorMessage
 				+ ";did=" + did);
+		Message msg = new Message();
 		if (error == 0) {
-			msg.what = handler_key.CHANGE_SUCCESS.ordinal();
-			handler.sendEmptyMessage(handler_key.GET_BOUND.ordinal());
+			msg.what=handler_key.GET_BOUND.ordinal();
+			handler.sendMessage(msg);
 		} else {
 			msg.what = handler_key.CHANGE_FAIL.ordinal();
 			msg.obj = errorMessage;
@@ -349,9 +358,10 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	 */
 	@Override
 	protected void didUnbindDevice(int error, String errorMessage, String did) {
+		Message msg = new Message();
 		if (error == 0) {
-			msg.what = handler_key.DELETE_SUCCESS.ordinal();
-			handler.sendEmptyMessage(handler_key.GET_BOUND.ordinal());
+			msg.what=handler_key.GET_BOUND.ordinal();
+			handler.sendMessage(msg);
 		} else {
 			msg.what = handler_key.DELETE_FAIL.ordinal();
 			msg.obj = errorMessage;
@@ -369,7 +379,11 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	protected void didDiscovered(int error, List<XPGWifiDevice> deviceList) {
 		Log.d("onDiscovered", "Device count:" + deviceList.size());
 		deviceslist = deviceList;
-		if (msg != null) {
+		
+		Message msg = new Message();
+		if(msg!=null)
+		{
+			msg.what=isChange ? handler_key.CHANGE_SUCCESS.ordinal() : handler_key.DELETE_SUCCESS.ordinal();
 			handler.sendMessageDelayed(msg, 1500);
 			msg = null;
 		}
