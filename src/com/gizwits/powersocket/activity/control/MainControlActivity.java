@@ -20,7 +20,7 @@ package com.gizwits.powersocket.activity.control;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.json.JSONException;
-
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -47,6 +47,7 @@ import com.gizwits.framework.adapter.MenuDeviceAdapter;
 import com.gizwits.framework.config.JsonKeys;
 import com.gizwits.framework.utils.DensityUtil;
 import com.gizwits.framework.utils.DialogManager;
+import com.gizwits.framework.widget.AboutVersionActivity;
 import com.gizwits.framework.widget.SlidingMenu;
 import com.gizwits.framework.widget.SlidingMenu.SlidingMenuListener;
 import com.xpg.common.system.IntentUtils;
@@ -62,8 +63,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
  * 
  * @author Lien
  */
-public class MainControlActivity extends BaseActivity implements
-		OnClickListener ,SlidingMenuListener{
+public class MainControlActivity extends BaseActivity implements OnClickListener, SlidingMenuListener {
 
 	/** The tag. */
 	private final String TAG = "MainControlActivity";
@@ -103,7 +103,7 @@ public class MainControlActivity extends BaseActivity implements
 
 	/** The disconnect dialog. */
 	private Dialog mDisconnectDialog;
-	
+
 	/** 获取状态超时时间 */
 	private int GetStatueTimeOut = 30000;
 
@@ -168,78 +168,68 @@ public class MainControlActivity extends BaseActivity implements
 	/**
 	 * The handler.
 	 */
+	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			handler_key key = handler_key.values()[msg.what];
 			switch (key) {
+
 			case RECEIVED:
-				for (String myKey : deviceDataMap.keySet()) {
-					Log.e("Map",
-							"key=" + myKey + ",value="
-									+ deviceDataMap.get(myKey));
-				}
-				try {
-					if (deviceDataMap.get("data") != null) {
-						Log.i("info", (String) deviceDataMap.get("data"));
-						inputDataToMaps(statuMap,
-								(String) deviceDataMap.get("data"));
+				if (deviceDataMap==null) {
+					return;
+				} else {
+					for (String myKey : deviceDataMap.keySet()) {
+						Log.e("Map", "key=" + myKey + ",value=" + deviceDataMap.get(myKey));
 					}
-					// 返回主线程处理P0数据刷新
-					handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
-					handler.sendEmptyMessage(handler_key.ALARM.ordinal());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					try {
+						if (deviceDataMap.get("data") != null) {
+							Log.i("info", (String) deviceDataMap.get("data"));
+							inputDataToMaps(statuMap, (String) deviceDataMap.get("data"));
+						}
+						// 返回主线程处理P0数据刷新
+						handler.sendEmptyMessage(handler_key.UPDATE_UI.ordinal());
+						handler.sendEmptyMessage(handler_key.ALARM.ordinal());
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 				}
+
 			case UPDATE_UI:
 				if (mView.isOpen())
 					break;
-				
+
 				if (statuMap != null && statuMap.size() > 0) {
-					handler.removeMessages(handler_key.GET_STATUE_TIMEOUT
-							.ordinal());
-					
+					handler.removeMessages(handler_key.GET_STATUE_TIMEOUT.ordinal());
+
 					// 开关更新
 					updatePower((Boolean) statuMap.get(JsonKeys.ON_OFF));
 					// 能耗更新
-					String consumption = (String) statuMap
-							.get(JsonKeys.POWER_CONSUMPTION);
+					String consumption = (String) statuMap.get(JsonKeys.POWER_CONSUMPTION);
 					if (!StringUtils.isEmpty(consumption))
 						setConsumption(Integer.parseInt(consumption));
 					// 定时更新
-					boolean isTurnOn = (Boolean) statuMap
-							.get(JsonKeys.TIME_ON_OFF);
-					String minOn = (String) statuMap
-							.get(JsonKeys.TIME_ON_MINUTE);
-					String minOff = (String) statuMap
-							.get(JsonKeys.TIME_OFF_MINUTE);
-					if (!StringUtils.isEmpty(minOn)
-							&& !StringUtils.isEmpty(minOff))
-						setTiming(isTurnOn, Integer.parseInt(minOn),
-								Integer.parseInt(minOff));
+					boolean isTurnOn = (Boolean) statuMap.get(JsonKeys.TIME_ON_OFF);
+					String minOn = (String) statuMap.get(JsonKeys.TIME_ON_MINUTE);
+					String minOff = (String) statuMap.get(JsonKeys.TIME_OFF_MINUTE);
+					if (!StringUtils.isEmpty(minOn) && !StringUtils.isEmpty(minOff))
+						setTiming(isTurnOn, Integer.parseInt(minOn), Integer.parseInt(minOff));
 					// 延时更新
-					isTurnOn = (Boolean) statuMap
-							.get(JsonKeys.COUNT_DOWN_ON_OFF);
-					String min = (String) statuMap
-							.get(JsonKeys.COUNT_DOWN_MINUTE);
+					isTurnOn = (Boolean) statuMap.get(JsonKeys.COUNT_DOWN_ON_OFF);
+					String min = (String) statuMap.get(JsonKeys.COUNT_DOWN_MINUTE);
 					if (!StringUtils.isEmpty(min))
 						setDelay(isTurnOn, Integer.parseInt(min));
-					
-					DialogManager.dismissDialog(MainControlActivity.this,
-							progressDialogRefreshing);
+
+					DialogManager.dismissDialog(MainControlActivity.this, progressDialogRefreshing);
 				}
 				break;
 			case ALARM:
 				break;
 			case DISCONNECTED:
 				if (!mView.isOpen()) {
-					DialogManager.dismissDialog(MainControlActivity.this,
-							progressDialogRefreshing);
-					DialogManager.dismissDialog(MainControlActivity.this,
-							mPowerOffDialog);
-					DialogManager.showDialog(MainControlActivity.this,
-							mDisconnectDialog);
+					DialogManager.dismissDialog(MainControlActivity.this, progressDialogRefreshing);
+					DialogManager.dismissDialog(MainControlActivity.this, mPowerOffDialog);
+					DialogManager.showDialog(MainControlActivity.this, mDisconnectDialog);
 				}
 				break;
 			case GET_STATUE:
@@ -259,6 +249,8 @@ public class MainControlActivity extends BaseActivity implements
 			case LOGIN_TIMEOUT:
 				isTimeOut = true;
 				handler.sendEmptyMessage(handler_key.DISCONNECTED.ordinal());
+				break;
+			default:
 				break;
 			}
 		}
@@ -295,7 +287,7 @@ public class MainControlActivity extends BaseActivity implements
 		}
 		super.onResume();
 	}
-	
+
 	/**
 	 * 更新菜单界面.
 	 * 
@@ -305,19 +297,18 @@ public class MainControlActivity extends BaseActivity implements
 		initBindList();
 		mAdapter.setChoosedPos(-1);
 		for (int i = 0; i < bindlist.size(); i++) {
-			if (bindlist.get(i).getDid()
-					.equalsIgnoreCase(mXpgWifiDevice.getDid()))
+			if (bindlist.get(i).getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
 				mAdapter.setChoosedPos(i);
 		}
-		
-		//当前绑定列表没有当前操作设备
-		if(mAdapter.getChoosedPos()==-1){
-		mAdapter.setChoosedPos(0);
-		mXpgWifiDevice=mAdapter.getItem(0);
+
+		// 当前绑定列表没有当前操作设备
+		if (mAdapter.getChoosedPos() == -1) {
+			mAdapter.setChoosedPos(0);
+			mXpgWifiDevice = mAdapter.getItem(0);
 		}
-		
+
 		mAdapter.notifyDataSetChanged();
-		
+
 		int px = DensityUtil.dip2px(this, mAdapter.getCount() * 50);
 		lvDevice.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
 				android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, px));
@@ -331,8 +322,7 @@ public class MainControlActivity extends BaseActivity implements
 	private void refreshMainControl() {
 		mXpgWifiDevice.setListener(deviceListener);
 		DialogManager.showDialog(this, progressDialogRefreshing);
-		handler.sendEmptyMessageDelayed(
-				handler_key.GET_STATUE_TIMEOUT.ordinal(), GetStatueTimeOut);
+		handler.sendEmptyMessageDelayed(handler_key.GET_STATUE_TIMEOUT.ordinal(), GetStatueTimeOut);
 		handler.sendEmptyMessage(handler_key.GET_STATUE.ordinal());
 	}
 
@@ -341,7 +331,7 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private void initParams() {
 		statuMap = new ConcurrentHashMap<String, Object>();
-		
+
 		refreshMenu();
 		refreshMainControl();
 	}
@@ -369,18 +359,14 @@ public class MainControlActivity extends BaseActivity implements
 		progressDialogRefreshing.setMessage("正在更新状态,请稍后。");
 		progressDialogRefreshing.setCancelable(false);
 
-		mDisconnectDialog = DialogManager.getDisconnectDialog(this,
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						DialogManager.dismissDialog(MainControlActivity.this,
-								mDisconnectDialog);
-						IntentUtils.getInstance().startActivity(
-								MainControlActivity.this,
-								DeviceListActivity.class);
-						finish();
-					}
-				});
+		mDisconnectDialog = DialogManager.getDisconnectDialog(this, new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				DialogManager.dismissDialog(MainControlActivity.this, mDisconnectDialog);
+				IntentUtils.getInstance().startActivity(MainControlActivity.this, DeviceListActivity.class);
+				finish();
+			}
+		});
 	}
 
 	/**
@@ -393,18 +379,15 @@ public class MainControlActivity extends BaseActivity implements
 
 		lvDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if (!mAdapter.getItem(position).isOnline())
 					return;
-				
-				
+
 				if (mAdapter.getChoosedPos() != position) {
 					mAdapter.setChoosedPos(position);
 					mXpgWifiDevice = bindlist.get(position);
 				}
 
-				
 				mView.toggle();
 			}
 		});
@@ -448,17 +431,16 @@ public class MainControlActivity extends BaseActivity implements
 	 * @false 隐藏
 	 */
 	private void setTiming(boolean isTurnOn, int on, int off) {
-//		if (isTurnOn) {
-//			llTiming.setVisibility(View.VISIBLE);
-//		} else {
-//			llTiming.setVisibility(View.INVISIBLE);
-//		}
+		// if (isTurnOn) {
+		// llTiming.setVisibility(View.VISIBLE);
+		// } else {
+		// llTiming.setVisibility(View.INVISIBLE);
+		// }
 		int minOn = on % 60;
 		int hourOn = on / 60;
 		int minOff = off % 60;
 		int hourOff = off / 60;
-		tvTiming.setText(String.format("%02d:%02d-%02d:%02d", hourOn, minOn,
-				hourOff, minOff));
+		tvTiming.setText(String.format("%02d:%02d-%02d:%02d", hourOn, minOn, hourOff, minOff));
 	}
 
 	/**
@@ -472,11 +454,11 @@ public class MainControlActivity extends BaseActivity implements
 	 * @false 隐藏
 	 */
 	private void setDelay(boolean isTurnOn, int on) {
-//		if (isTurnOn) {
-//			llDelay.setVisibility(View.VISIBLE);
-//		} else {
-//			llDelay.setVisibility(View.INVISIBLE);
-//		}
+		// if (isTurnOn) {
+		// llDelay.setVisibility(View.VISIBLE);
+		// } else {
+		// llDelay.setVisibility(View.INVISIBLE);
+		// }
 		int min = on % 60;
 		int hour = on / 60;
 		tvDelay.setText(String.format("%02d:%02d", hour, min));
@@ -492,7 +474,7 @@ public class MainControlActivity extends BaseActivity implements
 		if (mView.isOpen()) {
 			return;
 		}
-		
+
 		switch (v.getId()) {
 		case R.id.btnPower:
 			mCenter.cPowerOn(mXpgWifiDevice, !btnPower.isSelected());
@@ -502,8 +484,7 @@ public class MainControlActivity extends BaseActivity implements
 			mView.toggle();
 			break;
 		case R.id.btnAppoinment:
-			startActivity(new Intent(MainControlActivity.this,
-					AppointmentActivity.class));
+			startActivity(new Intent(MainControlActivity.this, AppointmentActivity.class));
 			break;
 		}
 	}
@@ -511,26 +492,24 @@ public class MainControlActivity extends BaseActivity implements
 	public void onClickSlipBar(View view) {
 		switch (view.getId()) {
 		case R.id.rlDevice:
-			IntentUtils.getInstance().startActivity(MainControlActivity.this,
-					DeviceManageListActivity.class);
+			IntentUtils.getInstance().startActivity(MainControlActivity.this, DeviceManageListActivity.class);
 			break;
 		case R.id.rlAbout:
-			IntentUtils.getInstance().startActivity(MainControlActivity.this,
-					AboutActivity.class);
+			IntentUtils.getInstance().startActivity(MainControlActivity.this, AboutActivity.class);
+			break;
+		case R.id.rlAbout_Demo:
+			IntentUtils.getInstance().startActivity(MainControlActivity.this, AboutVersionActivity.class);
 			break;
 		case R.id.rlAccount:
-			IntentUtils.getInstance().startActivity(MainControlActivity.this,
-					UserManageActivity.class);
+			IntentUtils.getInstance().startActivity(MainControlActivity.this, UserManageActivity.class);
 			break;
 		case R.id.rlHelp:
-			IntentUtils.getInstance().startActivity(MainControlActivity.this,
-					HelpActivity.class);
+			IntentUtils.getInstance().startActivity(MainControlActivity.this, HelpActivity.class);
 			break;
 		case R.id.rlDeviceList:
 			mCenter.cDisconnect(mXpgWifiDevice);
 			DisconnectOtherDevice();
-			IntentUtils.getInstance().startActivity(MainControlActivity.this,
-					DeviceListActivity.class);
+			IntentUtils.getInstance().startActivity(MainControlActivity.this, DeviceListActivity.class);
 			finish();
 			break;
 		}
@@ -547,8 +526,7 @@ public class MainControlActivity extends BaseActivity implements
 		mXpgWifiDevice.setListener(deviceListener);
 		mXpgWifiDevice.login(setmanager.getUid(), setmanager.getToken());
 		isTimeOut = false;
-		handler.sendEmptyMessageDelayed(handler_key.LOGIN_TIMEOUT.ordinal(),
-				LoginTimeOut);
+		handler.sendEmptyMessageDelayed(handler_key.LOGIN_TIMEOUT.ordinal(), LoginTimeOut);
 	}
 
 	/*
@@ -581,9 +559,7 @@ public class MainControlActivity extends BaseActivity implements
 	 */
 	private void DisconnectOtherDevice() {
 		for (XPGWifiDevice theDevice : bindlist) {
-			if (theDevice.isConnected()
-					&& !theDevice.getDid().equalsIgnoreCase(
-							mXpgWifiDevice.getDid()))
+			if (theDevice.isConnected() && !theDevice.getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
 				mCenter.cDisconnect(theDevice);
 		}
 	}
@@ -591,18 +567,17 @@ public class MainControlActivity extends BaseActivity implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.gizwits.aircondition.activity.BaseActivity#didReceiveData(com.xtremeprog
-	 * .xpgconnect.XPGWifiDevice, java.util.concurrent.ConcurrentHashMap, int)
+	 * @see com.gizwits.aircondition.activity.BaseActivity#didReceiveData(com.
+	 * xtremeprog .xpgconnect.XPGWifiDevice,
+	 * java.util.concurrent.ConcurrentHashMap, int)
 	 */
 	@Override
-	protected void didReceiveData(XPGWifiDevice device,
-			ConcurrentHashMap<String, Object> dataMap, int result) {
-		Log.e("didReceiveData", "did="+device.getDid());
-		
-		if(!device.getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
+	protected void didReceiveData(XPGWifiDevice device, ConcurrentHashMap<String, Object> dataMap, int result) {
+		Log.e("didReceiveData", "did=" + device.getDid());
+
+		if (!device.getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
 			return;
-		
+
 		deviceDataMap = dataMap;
 		handler.sendEmptyMessage(handler_key.RECEIVED.ordinal());
 	}
@@ -628,15 +603,14 @@ public class MainControlActivity extends BaseActivity implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.gizwits.aircondition.activity.BaseActivity#didDisconnected(com.xtremeprog
-	 * .xpgconnect.XPGWifiDevice)
+	 * @see com.gizwits.aircondition.activity.BaseActivity#didDisconnected(com.
+	 * xtremeprog .xpgconnect.XPGWifiDevice)
 	 */
 	@Override
 	protected void didDisconnected(XPGWifiDevice device) {
 		if (!device.getDid().equalsIgnoreCase(mXpgWifiDevice.getDid()))
 			return;
-			
+
 		handler.sendEmptyMessage(handler_key.DISCONNECTED.ordinal());
 	}
 
@@ -646,24 +620,24 @@ public class MainControlActivity extends BaseActivity implements
 	 * @return void
 	 */
 	private void backToMain() {
-		mXpgWifiDevice=mAdapter.getItem(mAdapter.getChoosedPos());
-		
+		mXpgWifiDevice = mAdapter.getItem(mAdapter.getChoosedPos());
+
 		if (!mXpgWifiDevice.isConnected()) {
 			loginDevice(mXpgWifiDevice);
 			DialogManager.showDialog(this, progressDialogRefreshing);
-		} 
-		
+		}
+
 		refreshMainControl();
 	}
 
 	@Override
 	public void OpenFinish() {
-		
+
 	}
 
 	@Override
 	public void CloseFinish() {
-		backToMain();		
+		backToMain();
 	}
 
 }

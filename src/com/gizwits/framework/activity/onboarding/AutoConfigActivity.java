@@ -29,11 +29,14 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -55,6 +58,8 @@ import com.xpg.ui.utils.ToastUtils;
  */
 public class AutoConfigActivity extends BaseActivity implements OnClickListener {
 
+	
+	
 	/** The tv ssid. */
 	private TextView tvSsid;
 
@@ -67,6 +72,9 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 	/** The btn next. */
 	private Button btnNext;
 	
+	/** The sp mode*/
+	private Spinner sp_mode;
+	private static int mode_temp;
 	/**
      * The iv back.
      */
@@ -135,6 +143,8 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 	 * Inits the views.
 	 */
 	private void initViews() {
+		sp_mode=(Spinner) findViewById(R.id.sp_mode);
+		//
 		tvSsid = (TextView) findViewById(R.id.tvSsid);
 		etInputPsw = (EditText) findViewById(R.id.etInputPsw);
 		tbPswFlag = (ToggleButton) findViewById(R.id.tbPswFlag);
@@ -163,6 +173,19 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 
 			}
 		});
+		sp_mode.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				mode_temp=position;
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				
+			}
+		});
 	}
 
 	/*
@@ -186,6 +209,7 @@ public class AutoConfigActivity extends BaseActivity implements OnClickListener 
 			
 			Intent intent = new Intent(AutoConfigActivity.this,AirlinkActivity.class);
 			intent.putExtra("ssid", strSsid);
+			intent.putExtra("Temp", mode_temp);
 			strPsw = etInputPsw.getText().toString().trim();
 			if(!StringUtils.isEmpty(strPsw)){
 				intent.putExtra("psw", strPsw);

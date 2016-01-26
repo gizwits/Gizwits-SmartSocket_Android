@@ -94,6 +94,45 @@
             android:visibility="gone" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/etInputCaptchaCode_farget"
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:hint="@string/forget_password_verifycode" />
+
+            <ImageView
+                android:id="@+id/ivGetCaptchaCode_farget"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="3"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/CaptchaCode_Loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnReGetCaptchaCode_farget"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:background="@drawable/button_blue_short"
+                android:text="@string/forget_password_get_captchacode"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/llInputCode"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

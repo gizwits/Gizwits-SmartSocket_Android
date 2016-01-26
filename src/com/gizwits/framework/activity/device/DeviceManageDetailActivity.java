@@ -54,8 +54,7 @@ import com.xtremeprog.xpgconnect.XPGWifiDevice;
  * 
  * @author StephenC
  */
-public class DeviceManageDetailActivity extends BaseActivity implements
-		OnClickListener {
+public class DeviceManageDetailActivity extends BaseActivity implements OnClickListener {
 
 	/** The iv back. */
 	private ImageView ivBack;
@@ -134,31 +133,25 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 
 			switch (key) {
 			case CHANGE_SUCCESS:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
-						progressDialog);
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
 				ToastUtils.showShort(DeviceManageDetailActivity.this, "修改成功！");
 				finish();
 				break;
 
 			case CHANGE_FAIL:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
-						progressDialog);
-				ToastUtils.showShort(DeviceManageDetailActivity.this, "修改失败:"
-						+ msg.obj.toString());
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
+				ToastUtils.showShort(DeviceManageDetailActivity.this, "修改失败:" + msg.obj.toString());
 				break;
 
 			case DELETE_SUCCESS:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
-						progressDialog);
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
 				ToastUtils.showShort(DeviceManageDetailActivity.this, "删除成功！");
 				finish();
 				break;
 
 			case DELETE_FAIL:
-				DialogManager.dismissDialog(DeviceManageDetailActivity.this,
-						progressDialog);
-				ToastUtils.showShort(DeviceManageDetailActivity.this, "删除失败:"
-						+ msg.obj.toString());
+				DialogManager.dismissDialog(DeviceManageDetailActivity.this, progressDialog);
+				ToastUtils.showShort(DeviceManageDetailActivity.this, "删除失败:" + msg.obj.toString());
 				break;
 
 			case GET_BOUND:
@@ -169,10 +162,9 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 			case GET_Details:
 				rlDetailsChoosing.setVisibility(View.GONE);
 				ivTick.setVisibility(View.VISIBLE);
-				ivDetails.setImageResource(DeviceDetails
-						.findByNum(msg.arg1 + 1).getResList());
-				setmanager.setResByMacAndDid(xpgWifiDevice.getMacAddress(),
-						xpgWifiDevice.getDid(), msg.arg1+1);
+				int icon = msg.arg1 + 1;
+				ivDetails.setImageResource(DeviceDetails.findByNum(icon).getResList());
+				setmanager.setResByMacAndDid(xpgWifiDevice.getMacAddress(), xpgWifiDevice.getDid(), icon);
 				break;
 			}
 		}
@@ -216,25 +208,22 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 		ivBack = (ImageView) findViewById(R.id.ivBack);
 		ivTick = (ImageView) findViewById(R.id.ivTick);
 		ivDetails = (ImageView) findViewById(R.id.ivDetails);
-		ivDetails.setImageResource(setmanager.getResbyMacAndDid(
-				xpgWifiDevice.getMacAddress(), xpgWifiDevice.getDid()));
+		ivDetails.setImageResource(setmanager.getResbyMacAndDid(xpgWifiDevice.getMacAddress(), xpgWifiDevice.getDid()));
 		rlDetailsChoosing = (RelativeLayout) findViewById(R.id.rlDetailsChoosing);
 		rlDetails = (RelativeLayout) findViewById(R.id.rlDetails);
 		gvDetails = (GridView) findViewById(R.id.gvDetails);
 		gvDetails.setSelector(R.color.transparent);
 		mManageDetailsAdapter = new ManageDetailsAdapter(this);
-		mManageDetailsAdapter.setSelected(setmanager.getNumbyMacAndDid(
-				xpgWifiDevice.getMacAddress(), xpgWifiDevice.getDid()) - 1);
+		mManageDetailsAdapter
+				.setSelected(setmanager.getNumbyMacAndDid(xpgWifiDevice.getMacAddress(), xpgWifiDevice.getDid()) - 1);
 		gvDetails.setAdapter(mManageDetailsAdapter);
 		gvDetails.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				mManageDetailsAdapter.setSelected(arg2);
 				mManageDetailsAdapter.notifyDataSetChanged();
-				Message msg = handler.obtainMessage(
-						handler_key.GET_Details.ordinal(), arg2, 0);
+				Message msg = handler.obtainMessage(handler_key.GET_Details.ordinal(), arg2, 0);
 				handler.sendMessageDelayed(msg, 380);
 			}
 		});
@@ -244,14 +233,14 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setCancelable(false);
 		if (xpgWifiDevice != null) {
-			if(StringUtils.isEmpty(xpgWifiDevice.getRemark())){
-				String macAddress=xpgWifiDevice.getMacAddress();
-				int size=macAddress.length();
-				etName.setText(xpgWifiDevice.getProductName() + macAddress.substring(size-4, size));
-			}else{
+			if (StringUtils.isEmpty(xpgWifiDevice.getRemark())) {
+				String macAddress = xpgWifiDevice.getMacAddress();
+				int size = macAddress.length();
+				etName.setText(xpgWifiDevice.getProductName() + macAddress.substring(size - 4, size));
+			} else {
 				etName.setText(xpgWifiDevice.getRemark());
 			}
-			
+
 		}
 	}
 
@@ -282,30 +271,30 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 			break;
 		case R.id.ivTick:
 			if (!NetworkUtils.isNetworkConnected(this)) {
-				ToastUtils.showShort(this, "网络未连接");return;
+				ToastUtils.showShort(this, "网络未连接");
+				return;
 			}
 			if (!StringUtils.isEmpty(etName.getText().toString())) {
 				isChange = true;
 				progressDialog.setMessage("修改中，请稍候...");
 				DialogManager.showDialog(this, progressDialog);
-				mCenter.cUpdateRemark(setmanager.getUid(), setmanager
-						.getToken(), xpgWifiDevice.getDid(), xpgWifiDevice
-						.getPasscode(), etName.getText().toString());
+				mCenter.cUpdateRemark(setmanager.getUid(), setmanager.getToken(), xpgWifiDevice.getDid(),
+						xpgWifiDevice.getPasscode(), etName.getText().toString());
 			} else {
-				ToastUtils.showShort(DeviceManageDetailActivity.this,
-						"请输入一个设备名称");
+				ToastUtils.showShort(DeviceManageDetailActivity.this, "请输入一个设备名称");
 			}
 			break;
 		case R.id.right_btn:
 			if (!NetworkUtils.isNetworkConnected(this)) {
-				ToastUtils.showShort(this, "网络未连接");return;
+				ToastUtils.showShort(this, "网络未连接");
+				return;
 			}
 			isChange = false;
 			DialogManager.dismissDialog(this, unbindDialog);
 			progressDialog.setMessage("删除中，请稍候...");
 			DialogManager.showDialog(this, progressDialog);
-			mCenter.cUnbindDevice(setmanager.getUid(), setmanager.getToken(),
-					xpgWifiDevice.getDid(), xpgWifiDevice.getPasscode());
+			mCenter.cUnbindDevice(setmanager.getUid(), setmanager.getToken(), xpgWifiDevice.getDid(),
+					xpgWifiDevice.getPasscode());
 			break;
 		case R.id.rlDetails:
 			rlDetailsChoosing.setVisibility(View.VISIBLE);
@@ -336,11 +325,10 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	 */
 	@Override
 	protected void didBindDevice(int error, String errorMessage, String did) {
-		Log.d("Device扫描结果", "error=" + error + ";errorMessage=" + errorMessage
-				+ ";did=" + did);
+		Log.d("Device扫描结果", "error=" + error + ";errorMessage=" + errorMessage + ";did=" + did);
 		Message msg = new Message();
 		if (error == 0) {
-			msg.what=handler_key.GET_BOUND.ordinal();
+			msg.what = handler_key.GET_BOUND.ordinal();
 			handler.sendMessage(msg);
 		} else {
 			msg.what = handler_key.CHANGE_FAIL.ordinal();
@@ -360,7 +348,7 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	protected void didUnbindDevice(int error, String errorMessage, String did) {
 		Message msg = new Message();
 		if (error == 0) {
-			msg.what=handler_key.GET_BOUND.ordinal();
+			msg.what = handler_key.GET_BOUND.ordinal();
 			handler.sendMessage(msg);
 		} else {
 			msg.what = handler_key.DELETE_FAIL.ordinal();
@@ -379,11 +367,10 @@ public class DeviceManageDetailActivity extends BaseActivity implements
 	protected void didDiscovered(int error, List<XPGWifiDevice> deviceList) {
 		Log.d("onDiscovered", "Device count:" + deviceList.size());
 		deviceslist = deviceList;
-		
+
 		Message msg = new Message();
-		if(msg!=null)
-		{
-			msg.what=isChange ? handler_key.CHANGE_SUCCESS.ordinal() : handler_key.DELETE_SUCCESS.ordinal();
+		if (msg != null) {
+			msg.what = isChange ? handler_key.CHANGE_SUCCESS.ordinal() : handler_key.DELETE_SUCCESS.ordinal();
 			handler.sendMessageDelayed(msg, 1500);
 			msg = null;
 		}
