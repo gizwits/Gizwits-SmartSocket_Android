@@ -27,12 +27,12 @@
 
     <TextView
         android:id="@+id/tvTips"
-        android:gravity="center"
-        android:layout_margin="10dp"
-        android:textColor="@color/text_blue"
-        android:text="@string/register_tips1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="@string/register_tips1"
+        android:textColor="@color/text_blue" />
 
     <EditText
         android:id="@+id/etName"
@@ -44,6 +44,46 @@
 
         <requestFocus />
     </EditText>
+
+    <LinearLayout
+        android:id="@+id/CaptchaCode_Linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etInputCaptchaCode"
+            style="@style/EditTextTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="@string/forget_password_verifycode" />
+
+        <ImageView
+            android:id="@+id/ivGetCaptchaCode"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="3"
+            android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/CaptchaCode_Loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnReGetCaptchaCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_blue_short"
+            android:text="@string/forget_password_get_captchacode"
+            android:textColor="@android:color/background_light"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnGetCode"
@@ -85,11 +125,11 @@
         <EditText
             android:id="@+id/etInputPsw"
             style="@style/EditTextTheme"
-            android:digits="@string/register_name_digits"
             android:layout_weight="1"
-            android:inputType="textPassword"
             android:background="@android:color/transparent"
-            android:hint="@string/password" />
+            android:digits="@string/register_name_digits"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
 
         <ToggleButton
             android:id="@+id/tbPswFlag"

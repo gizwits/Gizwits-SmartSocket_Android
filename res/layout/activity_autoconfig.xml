@@ -43,6 +43,27 @@
         android:textSize="16sp" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/WIFI_MODE"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/sp_mode"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:entries="@array/MODE"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/llInputPsw"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -52,12 +73,12 @@
         android:orientation="horizontal" >
 
         <EditText
-            android:inputType="textPassword"
             android:id="@+id/etInputPsw"
             style="@style/EditTextTheme"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:hint="@string/autoconfig_password"
+            android:inputType="textPassword"
             android:textSize="14sp" />
 
         <ToggleButton

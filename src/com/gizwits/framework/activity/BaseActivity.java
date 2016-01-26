@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -57,8 +57,8 @@ import com.xtremeprog.xpgconnect.XPGWifiSSID;
 public class BaseActivity extends Activity {
 
 	private boolean isExit = false;
-	
-	private static final String TAG="BaseActivity";
+
+	private static final String TAG = "BaseActivity";
 
 	/**
 	 * 设备列表.
@@ -73,7 +73,7 @@ public class BaseActivity extends Activity {
 
 	/** The statu map. */
 	protected static ConcurrentHashMap<String, Object> statuMap;
-	
+
 	/**
 	 * 指令管理器.
 	 */
@@ -82,12 +82,13 @@ public class BaseActivity extends Activity {
 	/**
 	 * SharePreference处理类.
 	 */
-	protected SettingManager setmanager;
+	public static SettingManager setmanager;
 
 	/** 当前操作的设备 */
 	protected static XPGWifiDevice mXpgWifiDevice;
-	
+
 	/** The handler. */
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			isExit = false;
@@ -117,8 +118,7 @@ public class BaseActivity extends Activity {
 		}
 
 		@Override
-		public void didReceiveData(XPGWifiDevice device,
-				ConcurrentHashMap<String, Object> dataMap, int result) {
+		public void didReceiveData(XPGWifiDevice device, ConcurrentHashMap<String, Object> dataMap, int result) {
 			BaseActivity.this.didReceiveData(device, dataMap, result);
 		}
 
@@ -163,15 +163,15 @@ public class BaseActivity extends Activity {
 		}
 
 		@Override
-		public void didRegisterUser(int error, String errorMessage, String uid,
-				String token) {
+		public void didRegisterUser(int error, String errorMessage, String uid, String token) {
 			BaseActivity.this.didRegisterUser(error, errorMessage, uid, token);
 		}
 
-		@Override
-		public void didRequestSendVerifyCode(int error, String errorMessage) {
-			BaseActivity.this.didRequestSendVerifyCode(error, errorMessage);
-		}
+		/*
+		 * @Override public void didRequestSendVerifyCode(int error, String
+		 * errorMessage) { BaseActivity.this.didRequestSendVerifyCode(error,
+		 * errorMessage); }
+		 */
 
 		@Override
 		public void didSetDeviceWifi(int error, XPGWifiDevice device) {
@@ -184,14 +184,22 @@ public class BaseActivity extends Activity {
 		}
 
 		@Override
-		public void didUserLogin(int error, String errorMessage, String uid,
-				String token) {
+		public void didUserLogin(int error, String errorMessage, String uid, String token) {
 			BaseActivity.this.didUserLogin(error, errorMessage, uid, token);
 		}
 
 		@Override
 		public void didUserLogout(int error, String errorMessage) {
 			BaseActivity.this.didUserLogout(error, errorMessage);
+		}
+
+		public void didGetCaptchaCode(int result, java.lang.String errorMessage, java.lang.String token,
+				java.lang.String captchaId, java.lang.String captchaURL) {
+			BaseActivity.this.didGetCaptchaCode(result, errorMessage, token, captchaId, captchaURL);
+		}
+
+		public void didRequestSendPhoneSMSCode(int result, java.lang.String errorMessage) {
+			BaseActivity.this.didRequestSendPhoneSMSCode(result, errorMessage);
 		}
 
 	};
@@ -231,8 +239,7 @@ public class BaseActivity extends Activity {
 	 * @param token
 	 *            授权令牌
 	 */
-	protected void didUserLogin(int error, String errorMessage, String uid,
-			String token) {
+	protected void didUserLogin(int error, String errorMessage, String uid, String token) {
 
 	}
 
@@ -270,7 +277,33 @@ public class BaseActivity extends Activity {
 	 * @param errorMessage
 	 *            错误信息
 	 */
-	protected void didRequestSendVerifyCode(int error, String errorMessage) {
+	/*
+	 * protected void didRequestSendVerifyCode(int error, String errorMessage) {
+	 * 
+	 * }
+	 */
+	/**
+	 * 图片验证码
+	 * 
+	 * @param result
+	 * @param errorMessage
+	 * @param token
+	 * @param captchaId
+	 * @param captchaURL
+	 */
+	protected void didGetCaptchaCode(int result, java.lang.String errorMessage, java.lang.String token,
+			java.lang.String captchaId, java.lang.String captcthishaURL) {
+		// Log.e("AppTest", "图片验证码回调" + result + ", " + errorMessage + ", "
+		// + token + ", " + captchaId + ", " + captcthishaURL);
+	}
+
+	/**
+	 * 发送短信验证码回调
+	 * 
+	 * @param result
+	 * @param errorMessage
+	 */
+	protected void didRequestSendPhoneSMSCode(int result, java.lang.String errorMessage) {
 
 	}
 
@@ -286,8 +319,7 @@ public class BaseActivity extends Activity {
 	 * @param token
 	 *            the 授权令牌
 	 */
-	protected void didRegisterUser(int error, String errorMessage, String uid,
-			String token) {
+	protected void didRegisterUser(int error, String errorMessage, String uid, String token) {
 		// TODO Auto-generated method stub
 
 	}
@@ -382,8 +414,7 @@ public class BaseActivity extends Activity {
 	 * @param result
 	 *            状态代码
 	 */
-	protected void didReceiveData(XPGWifiDevice device,
-			ConcurrentHashMap<String, Object> dataMap, int result) {
+	protected void didReceiveData(XPGWifiDevice device, ConcurrentHashMap<String, Object> dataMap, int result) {
 
 	}
 
@@ -437,8 +468,7 @@ public class BaseActivity extends Activity {
 			XPGWifiDevice device = deviceslist.get(i);
 			if (device != null) {
 				Log.i("deivcemac", device.getMacAddress());
-				if (device != null && device.getMacAddress().equals(mac)
-						&& device.getDid().equals(did)) {
+				if (device != null && device.getMacAddress().equals(mac) && device.getDid().equals(did)) {
 					xpgdevice = device;
 					break;
 				}
@@ -476,8 +506,7 @@ public class BaseActivity extends Activity {
 	public void exit() {
 		if (!isExit) {
 			isExit = true;
-			Toast.makeText(getApplicationContext(),
-					getString(R.string.tip_exit), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.tip_exit), Toast.LENGTH_SHORT).show();
 			handler.sendEmptyMessageDelayed(0, 2000);
 		} else {
 
@@ -488,7 +517,7 @@ public class BaseActivity extends Activity {
 			Historys.exit();
 		}
 	}
-	
+
 	/**
 	 * 把状态信息存入表
 	 * 
@@ -499,8 +528,7 @@ public class BaseActivity extends Activity {
 	 * @throws JSONException
 	 *             the JSON exception
 	 */
-	protected void inputDataToMaps(ConcurrentHashMap<String, Object> map,
-			String json) throws JSONException {
+	protected void inputDataToMaps(ConcurrentHashMap<String, Object> map, String json) throws JSONException {
 		Log.i("revjson", json);
 		JSONObject receive = new JSONObject(json);
 		Iterator actions = receive.keys();
@@ -509,8 +537,7 @@ public class BaseActivity extends Activity {
 			String action = actions.next().toString();
 			Log.i("revjson", "action=" + action);
 			// 忽略特殊部分
-			if (action.equals("cmd") || action.equals("qos")
-					|| action.equals("seq") || action.equals("version")) {
+			if (action.equals("cmd") || action.equals("qos") || action.equals("seq") || action.equals("version")) {
 				continue;
 			}
 			JSONObject params = receive.getJSONObject(action);
@@ -524,56 +551,53 @@ public class BaseActivity extends Activity {
 			}
 		}
 	}
-	
-	@Override  
-    public boolean dispatchTouchEvent(MotionEvent ev) {  
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {  
-  
-            // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹求或者实体案件会移动焦点）  
-            View v = getCurrentFocus();  
-  
-            if (isShouldHideInput(v, ev)) {  
-                hideSoftInput(v.getWindowToken());  
-            }  
-        }  
-        return super.dispatchTouchEvent(ev);  
-    } 
-	
-	 /** 
-     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时没必要隐藏 
-     *  
-     * @param v 
-     * @param event 
-     * @return 
-     */  
-    private boolean isShouldHideInput(View v, MotionEvent event) {  
-        if (v != null && (v instanceof EditText)) {  
-            int[] l = { 0, 0 };  
-            v.getLocationInWindow(l);  
-            int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left  
-                    + v.getWidth();  
-            if (event.getX() > left && event.getX() < right  
-                    && event.getY() > top && event.getY() < bottom) {  
-                // 点击EditText的事件，忽略它。  
-                return false;  
-            } else {  
-                return true;  
-            }  
-        }  
-        // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditView上，和用户用轨迹球选择其他的焦点  
-        return false;  
-    }  
-  
-    /** 
-     * 多种隐藏软件盘方法的其中一种 
-     *  
-     * @param token 
-     */  
-    private void hideSoftInput(IBinder token) {  
-        if (token != null) {  
-            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
-            im.hideSoftInputFromWindow(token,  
-                    InputMethodManager.HIDE_NOT_ALWAYS);  
-        }  
-    } 
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+
+			// 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹求或者实体案件会移动焦点）
+			View v = getCurrentFocus();
+
+			if (isShouldHideInput(v, ev)) {
+				hideSoftInput(v.getWindowToken());
+			}
+		}
+		return super.dispatchTouchEvent(ev);
+	}
+
+	/**
+	 * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时没必要隐藏
+	 * 
+	 * @param v
+	 * @param event
+	 * @return
+	 */
+	private boolean isShouldHideInput(View v, MotionEvent event) {
+		if (v != null && (v instanceof EditText)) {
+			int[] l = { 0, 0 };
+			v.getLocationInWindow(l);
+			int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left + v.getWidth();
+			if (event.getX() > left && event.getX() < right && event.getY() > top && event.getY() < bottom) {
+				// 点击EditText的事件，忽略它。
+				return false;
+			} else {
+				return true;
+			}
+		}
+		// 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditView上，和用户用轨迹球选择其他的焦点
+		return false;
+	}
+
+	/**
+	 * 多种隐藏软件盘方法的其中一种
+	 * 
+	 * @param token
+	 */
+	private void hideSoftInput(IBinder token) {
+		if (token != null) {
+			InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
+		}
+	}
 }
